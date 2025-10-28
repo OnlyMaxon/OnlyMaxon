@@ -1,5 +1,5 @@
-## Hi there 👋
-
+## Code, scale, dominate.
+Max is a full‑stack + DevOps engineer, a natural team player, and a founder who blends technical expertise with drive and personality.
 <!--
 **OnlyMaxon/OnlyMaxon** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
