@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  📍 Warsaw, Poland · 🎓 Warsaw University of Technology · 🌐 EN / PL / RU / AZ / TR
+  🌍 Available worldwide · 🌐 EN / PL / RU / AZ / TR
 </p>
 
 ---
