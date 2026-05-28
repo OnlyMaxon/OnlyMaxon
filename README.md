@@ -32,7 +32,7 @@ Booking system with availability calendar, host dashboard, tiered listings, paym
 `React` · `TypeScript` · `Firebase` · `Vite` · `Capacitor`
 
 **🌍 yOdin** — Social platform for international students
-Launched in partnership with Warsaw University of Technology. Behavior-based matching across nationalities.
+Built directly in-house at Akademia Vistula, working on-site with the development team. Behavior-based matching across nationalities.
 `React Native` · `Expo` · `Firebase`
 
 **📦 [nextcargo.eu](https://nextcargo.eu)** — Cargo & delivery platform

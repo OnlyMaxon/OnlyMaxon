@@ -510,14 +510,17 @@
 
     /* ── RESPONSIVE ───────────────────────── */
     @media (max-width: 960px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
       .hero-sub { max-width: 100%; }
       .hero-btns { justify-content: center; }
       .hero-stats { justify-content: center; }
-      .hero-visual { display: none; }
+      .hero-visual { order: -1; }
+      .photo-wrap { width: 260px; height: 320px; }
+      .fc-1 { display: none; }
+      .fc-2 { display: none; }
       .projects-grid { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: 1fr; }
-      .proc-photo { display: none; }
+      .proc-photo { height: 300px; }
       .stack-grid { grid-template-columns: 1fr; }
       .footer-inner { flex-direction: column; gap: 10px; text-align: center; }
     }
@@ -661,7 +664,7 @@
         </div>
         <div class="proj-body">
           <div class="proj-name">yOdin <span class="badge-dev">In dev</span></div>
-          <p class="proj-desc">Social platform for international students at Warsaw University of Technology. Behavior-based matching across nationalities.</p>
+          <p class="proj-desc">Social platform for international students, built in-house at Akademia Vistula — working on-site with the development team. Behavior-based matching across nationalities.</p>
           <div class="proj-tags">
             <span class="tag">React Native</span>
             <span class="tag">Expo</span>
