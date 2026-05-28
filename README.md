@@ -1,8 +1,8 @@
 <h1 align="center">Jalil Orujli</h1>
 
 <p align="center">
-  <b>I build complete products for founders and startups.</b><br/>
-  From idea to launched app — solo, end-to-end.
+  <b>I build and ship products, end-to-end.</b><br/>
+  From idea to launched app — solo, fast, no hand-holding.
 </p>
 
 <p align="center">
