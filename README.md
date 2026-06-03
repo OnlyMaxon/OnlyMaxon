@@ -1,74 +1,39 @@
-<h1 align="center">Jalil Orujli</h1>
+<div align="center">
 
-<p align="center">
-  <b>I build and ship products, end-to-end.</b><br/>
-  From idea to launched app — solo, fast, no hand-holding.
-</p>
+![Profile Views](https://komarev.com/ghpvc/?username=OnlyMaxon&color=4F7FFF&style=flat-square&label=Profile+Views)
 
-<p align="center">
-  <a href="https://onlymaxon.github.io">Website</a> ·
-  <a href="https://linkedin.com/in/jorujli7250">LinkedIn</a> ·
-  <a href="mailto:calilorucli42@gmail.com">Email</a>
-</p>
+# Hi there, I'm Jalil 👋
 
-<p align="center">
-  🌍 Available worldwide · 🌐 EN / PL / RU / AZ / TR
-</p>
+**I build and ship products, end-to-end.**
 
----
+Mobile apps · Web platforms · Marketplaces · From idea to production
 
-### What I do
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/jorujli7250)
+[![Instagram](https://img.shields.io/badge/Instagram-E1306C?style=flat-square&logo=instagram&logoColor=white)](https://www.instagram.com/0nlyMaxon)
+[![Website](https://img.shields.io/badge/Website-4F7FFF?style=flat-square&logo=googlechrome&logoColor=white)](https://onlymaxon.github.io)
+[![Email](https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:calilorucli42@gmail.com)
 
-I help founders turn ideas into working products. Mobile apps, web platforms, marketplaces, booking systems — built from scratch, shipped to real users.
-
-Currently available for **new projects and ongoing collaborations**.
+</div>
 
 ---
 
-### Live products I've built
+### 🛠 Tech Stack
 
-**🏠 [birklik.az](https://birklik.az)** — Rental marketplace for Azerbaijan
-Booking system with availability calendar, host dashboard, tiered listings, payments.
-`React` · `TypeScript` · `Firebase` · `Vite` · `Capacitor`
-
-**🌍 yOdin** — Social platform for international students
-Built directly in-house at Akademia Vistula, working on-site with the development team. Behavior-based matching across nationalities.
-`React Native` · `Expo` · `Firebase`
-
-**📦 [nextcargo.eu](https://nextcargo.eu)** — Cargo & delivery platform
-Full client cabinet, real-time support chat, shipment tracking.
-`Full-stack` · `Production deployment`
+[![Skills](https://skillicons.dev/icons?i=react,ts,js,nodejs,nextjs,flutter,firebase,postgres,docker,vercel,python,vite&theme=dark)](https://skillicons.dev)
 
 ---
 
-### How I work
+### 📊 Stats
 
-→ **End-to-end ownership** — architecture, code, deployment, you don't manage me
-→ **Ship fast** — MVPs in 3-6 weeks, not 6 months
-→ **Build in public** — weekly updates, no hidden progress
-→ **Solo founder mindset** — I think about your product, not just the code
+<div align="center">
 
----
+[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=OnlyMaxon&show_icons=true&theme=tokyonight&hide_border=true&count_private=true)](https://github.com/OnlyMaxon)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=OnlyMaxon&theme=tokyonight&hide_border=true&layout=compact)](https://github.com/OnlyMaxon)
 
-### Tech I build with
-
-**Mobile:** React Native · Expo · Flutter
-**Web:** React · TypeScript · Next.js · Node.js
-**Backend & Infra:** Firebase · PostgreSQL · Docker · Cloudflare · Vercel
-**Other:** Python · Stripe · Maps integrations · Real-time chat
+</div>
 
 ---
 
-### Need a product built?
-
-Tell me what you're building. First call is free.
-
-📧 **calilorucli42@gmail.com**
-🌐 **[onlymaxon.github.io](https://onlymaxon.github.io)**
-💼 **[LinkedIn](https://linkedin.com/in/jorujli7250)**
-
----
-
-<p align="center">
-  <i>Currently building <a href="https://birklik.az">birklik.az</a> and yOdin while taking on client work.</i>
-</p>
+<div align="center">
+  <i>🟢 Available for new projects · First call is free</i>
+</div>
