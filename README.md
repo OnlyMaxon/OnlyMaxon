@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="https://onlymaxon.github.io">Website</a> ·
+  <a href="[https://onlymaxon.github.io](https://onlymaxon.github.io/OnlyMaxon/)">Website</a> ·
   <a href="https://linkedin.com/in/jorujli7250">LinkedIn</a> ·
   <a href="mailto:calilorucli42@gmail.com">Email</a>
 </p>
@@ -64,7 +64,7 @@ Full client cabinet, real-time support chat, shipment tracking.
 Tell me what you're building. First call is free.
 
 📧 **calilorucli42@gmail.com**
-🌐 **[onlymaxon.github.io](https://onlymaxon.github.io)**
+🌐 **[onlymaxon.github.io]([https://onlymaxon.github.io](https://onlymaxon.github.io/OnlyMaxon/))**
 💼 **[LinkedIn](https://linkedin.com/in/jorujli7250)**
 
 ---
