@@ -510,11 +510,12 @@
 
     /* ── 3D PARTICLES + TILT ──────────────── */
     #particles {
-      position: absolute; inset: 0;
+      position: fixed; inset: 0;
       width: 100%; height: 100%;
       z-index: 0; pointer-events: none;
     }
     #hero .container { position: relative; z-index: 2; }
+    footer { position: relative; z-index: 1; }
 
     .tilt {
       transform-style: preserve-3d;
@@ -554,6 +555,9 @@
 </head>
 <body>
 
+<!-- ─── GLOBAL 3D PARTICLE BACKGROUND ──────── -->
+<canvas id="particles"></canvas>
+
 <!-- ─── NAV ─────────────────────────────── -->
 <nav id="nav">
   <div class="container">
@@ -571,7 +575,6 @@
 
 <!-- ─── HERO ─────────────────────────────── -->
 <section id="hero">
-  <canvas id="particles"></canvas>
   <div class="hero-bg">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
@@ -929,64 +932,132 @@
   }
 </script>
 
-<!-- ── Three.js particle field ── -->
+<!-- ── Three.js 3D globe + cursor magnet ── -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function () {
   const canvas = document.getElementById('particles');
   if (!canvas || !window.THREE) return;
 
-  const scene  = new THREE.Scene();
-  const hero   = document.getElementById('hero');
-  let W = hero.clientWidth, H = hero.clientHeight;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W = window.innerWidth, H = window.innerHeight;
 
-  const camera = new THREE.PerspectiveCamera(70, W / H, 1, 1000);
-  camera.position.z = 360;
+  const scene  = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(70, W / H, 1, 2000);
+  camera.position.z = 420;
+  const FOV_T = Math.tan((70 * Math.PI / 180) / 2);
 
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(W, H);
 
-  // particles
-  const COUNT = window.innerWidth < 768 ? 90 : 180;
+  // ── sphere of particles (Fibonacci distribution) ──
+  const mobile = window.innerWidth < 768;
+  const COUNT  = mobile ? 160 : 320;
+  const R      = mobile ? 170 : 230;
+
+  const base = new Float32Array(COUNT * 3); // resting sphere positions
+  const disp = new Float32Array(COUNT * 3); // cursor-push displacement
+  const gold = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < COUNT; i++) {
+    const y = 1 - (i / (COUNT - 1)) * 2;
+    const rad = Math.sqrt(1 - y * y);
+    const th = gold * i;
+    base[i*3]   = Math.cos(th) * rad * R;
+    base[i*3+1] = y * R;
+    base[i*3+2] = Math.sin(th) * rad * R;
+  }
+
   const geo = new THREE.BufferGeometry();
   const pos = new Float32Array(COUNT * 3);
-  const vel = [];
-  for (let i = 0; i < COUNT; i++) {
-    pos[i*3]   = (Math.random() - 0.5) * 700;
-    pos[i*3+1] = (Math.random() - 0.5) * 460;
-    pos[i*3+2] = (Math.random() - 0.5) * 360;
-    vel.push({ x: (Math.random()-0.5)*0.18, y: (Math.random()-0.5)*0.18 });
-  }
   geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
 
   const dot = new THREE.PointsMaterial({
-    color: 0x4F7FFF, size: 3, transparent: true, opacity: 0.85,
+    color: 0x6690FF, size: 3.2, transparent: true, opacity: 0.9,
     blending: THREE.AdditiveBlending, depthWrite: false
   });
-  const points = new THREE.Points(geo, dot);
-  scene.add(points);
+  scene.add(new THREE.Points(geo, dot));
 
-  // connecting lines
+  // connecting lines (wireframe globe feel)
   const lineMat = new THREE.LineBasicMaterial({
-    color: 0x4F7FFF, transparent: true, opacity: 0.12,
+    color: 0x4F7FFF, transparent: true, opacity: 0.14,
     blending: THREE.AdditiveBlending
   });
   const lineGeo = new THREE.BufferGeometry();
-  const lineSeg = new THREE.LineSegments(lineGeo, lineMat);
-  scene.add(lineSeg);
+  scene.add(new THREE.LineSegments(lineGeo, lineMat));
 
-  // mouse parallax
-  let mx = 0, my = 0, tx = 0, ty = 0;
-  window.addEventListener('mousemove', (e) => {
-    mx = (e.clientX / window.innerWidth - 0.5);
-    my = (e.clientY / window.innerHeight - 0.5);
+  // ── cursor tracking (world-space at z=0 plane) ──
+  let mWorldX = 1e6, mWorldY = 1e6, active = false;
+  function setMouse(cx, cy) {
+    const ndcX = (cx / W) * 2 - 1;
+    const ndcY = -((cy / H) * 2 - 1);
+    const halfH = FOV_T * camera.position.z;
+    const halfW = halfH * (W / H);
+    mWorldX = ndcX * halfW;
+    mWorldY = ndcY * halfH;
+    active = true;
+  }
+  window.addEventListener('mousemove', e => setMouse(e.clientX, e.clientY));
+  window.addEventListener('mouseout', () => { active = false; });
+
+  // parallax tilt of the whole globe
+  let tx = 0, ty = 0, gx = 0, gy = 0;
+  window.addEventListener('mousemove', e => {
+    gx = (e.clientX / W - 0.5);
+    gy = (e.clientY / H - 0.5);
   });
 
-  function buildLines() {
+  const PUSH_R  = 95;          // radius of cursor influence
+  const PUSH_R2 = PUSH_R * PUSH_R;
+  let angle = 0;
+
+  function frame() {
+    requestAnimationFrame(frame);
+
+    angle += reduce ? 0 : 0.0016;          // auto-rotate
+    tx += (gx - tx) * 0.05;
+    ty += (gy - ty) * 0.05;
+
+    const ry = angle + tx * 0.6;           // yaw
+    const rx = ty * 0.5;                    // pitch
+    const cy = Math.cos(ry), sy = Math.sin(ry);
+    const cx = Math.cos(rx), sx = Math.sin(rx);
+
     const p = geo.attributes.position.array;
+    for (let i = 0; i < COUNT; i++) {
+      let X = base[i*3], Y = base[i*3+1], Z = base[i*3+2];
+      // rotate Y axis
+      let x1 =  X * cy + Z * sy;
+      let z1 = -X * sy + Z * cy;
+      // rotate X axis
+      let y1 =  Y * cx - z1 * sx;
+      let z2 =  Y * sx + z1 * cx;
+
+      // cursor repulsion in screen plane
+      if (active) {
+        const dx = x1 - mWorldX, dy = y1 - mWorldY;
+        const d2 = dx*dx + dy*dy;
+        if (d2 < PUSH_R2 && d2 > 0.01) {
+          const d = Math.sqrt(d2);
+          const f = (1 - d / PUSH_R) * 26;
+          disp[i*3]   += (dx / d) * f;
+          disp[i*3+1] += (dy / d) * f;
+        }
+      }
+      // ease displacement back to 0
+      disp[i*3]   *= 0.88;
+      disp[i*3+1] *= 0.88;
+      disp[i*3+2] *= 0.88;
+
+      p[i*3]   = x1 + disp[i*3];
+      p[i*3+1] = y1 + disp[i*3+1];
+      p[i*3+2] = z2 + disp[i*3+2];
+    }
+    geo.attributes.position.needsUpdate = true;
+
+    // rebuild neighbor lines
     const verts = [];
-    const MAXD = 95, MAXD2 = MAXD * MAXD;
+    const MAXD = 78, MAXD2 = MAXD * MAXD;
     for (let i = 0; i < COUNT; i++) {
       for (let j = i + 1; j < COUNT; j++) {
         const dx = p[i*3]-p[j*3], dy = p[i*3+1]-p[j*3+1], dz = p[i*3+2]-p[j*3+2];
@@ -996,33 +1067,13 @@
       }
     }
     lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
-  }
-
-  function animate() {
-    requestAnimationFrame(animate);
-    const p = geo.attributes.position.array;
-    for (let i = 0; i < COUNT; i++) {
-      p[i*3]   += vel[i].x;
-      p[i*3+1] += vel[i].y;
-      if (p[i*3]   >  350 || p[i*3]   < -350) vel[i].x *= -1;
-      if (p[i*3+1] >  230 || p[i*3+1] < -230) vel[i].y *= -1;
-    }
-    geo.attributes.position.needsUpdate = true;
-    buildLines();
-
-    tx += (mx - tx) * 0.04;
-    ty += (my - ty) * 0.04;
-    points.rotation.y  = tx * 0.5;
-    points.rotation.x  = ty * 0.5;
-    lineSeg.rotation.y = tx * 0.5;
-    lineSeg.rotation.x = ty * 0.5;
 
     renderer.render(scene, camera);
   }
-  animate();
+  frame();
 
   window.addEventListener('resize', () => {
-    W = hero.clientWidth; H = hero.clientHeight;
+    W = window.innerWidth; H = window.innerHeight;
     camera.aspect = W / H; camera.updateProjectionMatrix();
     renderer.setSize(W, H);
   });
