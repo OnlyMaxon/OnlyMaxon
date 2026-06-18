@@ -34,7 +34,9 @@
       font-family: 'Inter', system-ui, sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
+      position: relative;
     }
+    #line-head { transition: opacity 0.4s ease; }
 
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
@@ -508,12 +510,13 @@
     .d3 { transition-delay: 0.3s; }
     .d4 { transition-delay: 0.4s; }
 
-    /* ── 3D PARTICLES + TILT ──────────────── */
-    #particles {
-      position: fixed; inset: 0;
+    /* ── SCROLL-DRAWN 3D LINE + TILT ──────── */
+    #scroll-line-wrap {
+      position: absolute; top: 0; left: 0;
       width: 100%; height: 100%;
-      z-index: 0; pointer-events: none;
+      z-index: 0; pointer-events: none; overflow: hidden;
     }
+    #scroll-line { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
     #hero .container { position: relative; z-index: 2; }
     footer { position: relative; z-index: 1; }
 
@@ -555,8 +558,26 @@
 </head>
 <body>
 
-<!-- ─── GLOBAL 3D PARTICLE BACKGROUND ──────── -->
-<canvas id="particles"></canvas>
+<!-- ─── SCROLL-DRAWN 3D LINE ──────────────── -->
+<div id="scroll-line-wrap" aria-hidden="true">
+  <svg id="scroll-line" preserveAspectRatio="xMidYMin meet" fill="none">
+    <defs>
+      <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0"   stop-color="#22D3EE"/>
+        <stop offset="0.5" stop-color="#4F7FFF"/>
+        <stop offset="1"   stop-color="#A855F7"/>
+      </linearGradient>
+      <filter id="lineGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <path id="line-track" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+    <path id="line-draw"  stroke="url(#lineGrad)" stroke-width="2.5"
+          stroke-linecap="round" filter="url(#lineGlow)"/>
+    <circle id="line-head" r="6" fill="#22D3EE" filter="url(#lineGlow)"/>
+  </svg>
+</div>
 
 <!-- ─── NAV ─────────────────────────────── -->
 <nav id="nav">
@@ -635,7 +656,7 @@
         <div class="photo-wrap tilt">
           <div class="photo-glow"></div>
           <div class="photo-frame">
-            <img src="images/photo1.jpg" alt="Jalil Orujli">
+            <img src="images/photo1.png" alt="Jalil Orujli">
           </div>
           <div class="float-card fc-1">
             <div class="fc-label">Currently building</div>
@@ -932,151 +953,80 @@
   }
 </script>
 
-<!-- ── Three.js 3D globe + cursor magnet ── -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- ── Scroll-drawn 3D line (no library) ── -->
 <script>
 (function () {
-  const canvas = document.getElementById('particles');
-  if (!canvas || !window.THREE) return;
+  const wrap  = document.getElementById('scroll-line-wrap');
+  const svg   = document.getElementById('scroll-line');
+  const track = document.getElementById('line-track');
+  const draw  = document.getElementById('line-draw');
+  const head  = document.getElementById('line-head');
+  if (!svg) return;
 
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let W = window.innerWidth, H = window.innerHeight;
+  let len = 0;
 
-  const scene  = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(70, W / H, 1, 2000);
-  camera.position.z = 420;
-  const FOV_T = Math.tan((70 * Math.PI / 180) / 2);
+  function build() {
+    const W = window.innerWidth;
+    const H = document.documentElement.scrollHeight;
 
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(W, H);
+    wrap.style.height = H + 'px';
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('width', W);
+    svg.setAttribute('height', H);
 
-  // ── sphere of particles (Fibonacci distribution) ──
-  const mobile = window.innerWidth < 768;
-  const COUNT  = mobile ? 160 : 320;
-  const R      = mobile ? 170 : 230;
+    // winding spine that weaves down the whole page (the "branch")
+    const cx    = W * 0.5;
+    const amp   = Math.min(W * 0.34, 360);   // how far it weaves
+    const waves = H / 620;                     // number of bends
+    const steps = Math.max(60, Math.round(H / 16));
 
-  const base = new Float32Array(COUNT * 3); // resting sphere positions
-  const disp = new Float32Array(COUNT * 3); // cursor-push displacement
-  const gold = Math.PI * (3 - Math.sqrt(5));
-  for (let i = 0; i < COUNT; i++) {
-    const y = 1 - (i / (COUNT - 1)) * 2;
-    const rad = Math.sqrt(1 - y * y);
-    const th = gold * i;
-    base[i*3]   = Math.cos(th) * rad * R;
-    base[i*3+1] = y * R;
-    base[i*3+2] = Math.sin(th) * rad * R;
-  }
-
-  const geo = new THREE.BufferGeometry();
-  const pos = new Float32Array(COUNT * 3);
-  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-
-  const dot = new THREE.PointsMaterial({
-    color: 0x6690FF, size: 3.2, transparent: true, opacity: 0.9,
-    blending: THREE.AdditiveBlending, depthWrite: false
-  });
-  scene.add(new THREE.Points(geo, dot));
-
-  // connecting lines (wireframe globe feel)
-  const lineMat = new THREE.LineBasicMaterial({
-    color: 0x4F7FFF, transparent: true, opacity: 0.14,
-    blending: THREE.AdditiveBlending
-  });
-  const lineGeo = new THREE.BufferGeometry();
-  scene.add(new THREE.LineSegments(lineGeo, lineMat));
-
-  // ── cursor tracking (world-space at z=0 plane) ──
-  let mWorldX = 1e6, mWorldY = 1e6, active = false;
-  function setMouse(cx, cy) {
-    const ndcX = (cx / W) * 2 - 1;
-    const ndcY = -((cy / H) * 2 - 1);
-    const halfH = FOV_T * camera.position.z;
-    const halfW = halfH * (W / H);
-    mWorldX = ndcX * halfW;
-    mWorldY = ndcY * halfH;
-    active = true;
-  }
-  window.addEventListener('mousemove', e => setMouse(e.clientX, e.clientY));
-  window.addEventListener('mouseout', () => { active = false; });
-
-  // parallax tilt of the whole globe
-  let tx = 0, ty = 0, gx = 0, gy = 0;
-  window.addEventListener('mousemove', e => {
-    gx = (e.clientX / W - 0.5);
-    gy = (e.clientY / H - 0.5);
-  });
-
-  const PUSH_R  = 95;          // radius of cursor influence
-  const PUSH_R2 = PUSH_R * PUSH_R;
-  let angle = 0;
-
-  function frame() {
-    requestAnimationFrame(frame);
-
-    angle += reduce ? 0 : 0.0016;          // auto-rotate
-    tx += (gx - tx) * 0.05;
-    ty += (gy - ty) * 0.05;
-
-    const ry = angle + tx * 0.6;           // yaw
-    const rx = ty * 0.5;                    // pitch
-    const cy = Math.cos(ry), sy = Math.sin(ry);
-    const cx = Math.cos(rx), sx = Math.sin(rx);
-
-    const p = geo.attributes.position.array;
-    for (let i = 0; i < COUNT; i++) {
-      let X = base[i*3], Y = base[i*3+1], Z = base[i*3+2];
-      // rotate Y axis
-      let x1 =  X * cy + Z * sy;
-      let z1 = -X * sy + Z * cy;
-      // rotate X axis
-      let y1 =  Y * cx - z1 * sx;
-      let z2 =  Y * sx + z1 * cx;
-
-      // cursor repulsion in screen plane
-      if (active) {
-        const dx = x1 - mWorldX, dy = y1 - mWorldY;
-        const d2 = dx*dx + dy*dy;
-        if (d2 < PUSH_R2 && d2 > 0.01) {
-          const d = Math.sqrt(d2);
-          const f = (1 - d / PUSH_R) * 26;
-          disp[i*3]   += (dx / d) * f;
-          disp[i*3+1] += (dy / d) * f;
-        }
-      }
-      // ease displacement back to 0
-      disp[i*3]   *= 0.88;
-      disp[i*3+1] *= 0.88;
-      disp[i*3+2] *= 0.88;
-
-      p[i*3]   = x1 + disp[i*3];
-      p[i*3+1] = y1 + disp[i*3+1];
-      p[i*3+2] = z2 + disp[i*3+2];
+    let d = '';
+    for (let i = 0; i <= steps; i++) {
+      const t = i / steps;
+      const y = t * H;
+      // perspective feel: weave tightens slightly toward the top
+      const x = cx + Math.sin(t * Math.PI * 2 * waves) * amp * (0.55 + 0.45 * t);
+      d += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
     }
-    geo.attributes.position.needsUpdate = true;
+    track.setAttribute('d', d);
+    draw.setAttribute('d', d);
 
-    // rebuild neighbor lines
-    const verts = [];
-    const MAXD = 78, MAXD2 = MAXD * MAXD;
-    for (let i = 0; i < COUNT; i++) {
-      for (let j = i + 1; j < COUNT; j++) {
-        const dx = p[i*3]-p[j*3], dy = p[i*3+1]-p[j*3+1], dz = p[i*3+2]-p[j*3+2];
-        if (dx*dx + dy*dy + dz*dz < MAXD2) {
-          verts.push(p[i*3],p[i*3+1],p[i*3+2], p[j*3],p[j*3+1],p[j*3+2]);
-        }
-      }
-    }
-    lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
-
-    renderer.render(scene, camera);
+    len = draw.getTotalLength();
+    draw.style.strokeDasharray  = len;
+    draw.style.strokeDashoffset = len;
+    update();
   }
-  frame();
 
+  function update() {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const prog = scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0;
+
+    // reveal the line as you scroll
+    draw.style.strokeDashoffset = len * (1 - prog);
+
+    // glowing tip rides the growing branch
+    const at = draw.getPointAtLength(len * prog);
+    head.setAttribute('cx', at.x);
+    head.setAttribute('cy', at.y);
+    head.style.opacity = prog > 0.002 && prog < 0.999 ? 1 : 0;
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => { update(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  let rt;
   window.addEventListener('resize', () => {
-    W = window.innerWidth; H = window.innerHeight;
-    camera.aspect = W / H; camera.updateProjectionMatrix();
-    renderer.setSize(W, H);
+    clearTimeout(rt);
+    rt = setTimeout(build, 150);
   });
+
+  window.addEventListener('load', build);
+  build();
 })();
 </script>
 
