@@ -11,7 +11,7 @@ A product studio — *development, marketing & legal under one roof.*
 [![Portfolio](https://img.shields.io/badge/◆%20Portfolio-0E7490?style=for-the-badge&logoColor=white)](https://onlymaxon.github.io/OnlyMaxon/)
 
 [![Instagram](https://img.shields.io/badge/Instagram-E1306C?style=flat-square&logo=instagram&logoColor=white)](https://www.instagram.com/0nlyMaxon)
-[![Email](https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:calilorucli42@gmail.com)
+[![Email](https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:hello@onlymaxon.com)
 
 </div>
 
