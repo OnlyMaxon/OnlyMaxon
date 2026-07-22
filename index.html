@@ -16,18 +16,19 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg:     #070B14;
-      --bg2:    #0C1220;
-      --bg3:    #111827;
+      --bg:     #06080C;
+      --bg2:    #0B0F16;
+      --bg3:    #121824;
       --border: rgba(255,255,255,0.07);
-      --border-h: rgba(79,127,255,0.4);
-      --blue:   #4F7FFF;
-      --blue-d: rgba(79,127,255,0.15);
-      --purple: #A855F7;
-      --cyan:   #22D3EE;
-      --text:   #EFF6FF;
-      --text-d: #94A3B8;
-      --text-m: #475569;
+      --border-h: rgba(34,211,238,0.40);
+      --blue:   #22D3EE;   /* primary cyan (logo arrow) */
+      --blue-d: rgba(34,211,238,0.14);
+      --purple: #2C8A9C;   /* deep teal (gradient depth) */
+      --cyan:   #7FE9F0;   /* light cyan highlight */
+      --silver: #C6CED8;   /* metallic silver (logo M) */
+      --text:   #EAF2F6;
+      --text-d: #93A6B2;
+      --text-m: #4C5C68;
       --r:      16px;
     }
 
@@ -49,7 +50,7 @@
 
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: rgba(79,127,255,0.4); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: rgba(34,211,238,0.4); border-radius: 3px; }
 
     h1, h2, h3 {
       font-family: 'Space Grotesk', system-ui, sans-serif;
@@ -95,10 +96,10 @@
     .nav-links a:hover { color: var(--text); }
     .nav-cta {
       background: var(--blue) !important;
-      color: #fff !important;
+      color: #04141A !important;
       padding: 9px 22px; border-radius: 9px;
-      font-weight: 600 !important;
-      box-shadow: 0 0 20px rgba(79,127,255,0.3);
+      font-weight: 700 !important;
+      box-shadow: 0 0 20px rgba(34,211,238,0.3);
     }
     .nav-cta:hover { opacity: 0.88; }
 
@@ -116,13 +117,13 @@
     }
     .blob-1 {
       width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(79,127,255,0.16) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(34,211,238,0.16) 0%, transparent 70%);
       top: -150px; right: -150px;
       animation: float 9s ease-in-out infinite;
     }
     .blob-2 {
       width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(44,138,156,0.16) 0%, transparent 70%);
       bottom: -80px; left: 50px;
       animation: float 11s ease-in-out infinite reverse;
     }
@@ -138,15 +139,40 @@
     }
 
     .hero-inner {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      max-width: 820px; margin: 0 auto;
       position: relative; z-index: 1;
+    }
+
+    /* centered logo showcase */
+    .hero-logo {
+      position: relative;
+      width: 320px; max-width: 76vw;
+      margin: 0 auto 4px;
+    }
+    .hero-logo img {
+      position: relative; z-index: 1;
+      width: 100%; display: block;
+      mix-blend-mode: screen;            /* drops the dark bg → logo floats on page */
+      animation: logoFloat 6s ease-in-out infinite;
+      filter: drop-shadow(0 12px 40px rgba(34,211,238,0.18));
+    }
+    .hero-logo-glow {
+      position: absolute; inset: -6% -6% 2%;
+      background: radial-gradient(ellipse at center, rgba(34,211,238,0.22) 0%, transparent 60%);
+      filter: blur(26px); z-index: 0;
+      animation: glow 4s ease-in-out infinite;
+    }
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
     }
 
     .hero-badge {
       display: inline-flex; align-items: center; gap: 9px;
-      background: rgba(79,127,255,0.1);
-      border: 1px solid rgba(79,127,255,0.28);
+      background: rgba(34,211,238,0.1);
+      border: 1px solid rgba(34,211,238,0.28);
       color: var(--blue);
       font-size: 13px; font-weight: 500;
       padding: 6px 16px; border-radius: 100px;
@@ -171,13 +197,13 @@
     .hero-sub {
       font-size: clamp(16px, 1.8vw, 19px);
       color: var(--text-d);
-      margin-bottom: 44px;
-      max-width: 460px;
+      margin: 0 auto 44px;
+      max-width: 560px;
       line-height: 1.75;
     }
     .hero-sub strong { color: var(--text); font-weight: 600; }
 
-    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
@@ -189,12 +215,12 @@
       font-family: inherit;
     }
     .btn-primary {
-      background: var(--blue); color: #fff;
-      box-shadow: 0 4px 28px rgba(79,127,255,0.38);
+      background: var(--blue); color: #04141A;
+      box-shadow: 0 4px 28px rgba(34,211,238,0.35);
     }
     .btn-primary:hover {
-      background: #6690FF;
-      box-shadow: 0 8px 40px rgba(79,127,255,0.52);
+      background: #5FE6F2;
+      box-shadow: 0 8px 40px rgba(34,211,238,0.5);
       transform: translateY(-2px);
     }
     .btn-secondary {
@@ -203,13 +229,13 @@
     }
     .btn-secondary:hover {
       border-color: var(--border-h);
-      background: rgba(79,127,255,0.06);
+      background: rgba(34,211,238,0.06);
       transform: translateY(-2px);
     }
 
     .hero-stats {
-      display: flex; align-items: center; gap: 28px;
-      margin-top: 44px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 28px; margin-top: 44px;
     }
     .stat { display: flex; flex-direction: column; gap: 2px; }
     .stat-val {
@@ -233,7 +259,7 @@
     }
     .photo-glow {
       position: absolute; inset: -30px;
-      background: radial-gradient(circle, rgba(79,127,255,0.22) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(34,211,238,0.22) 0%, transparent 65%);
       animation: glow 4s ease-in-out infinite;
     }
     @keyframes glow {
@@ -243,7 +269,7 @@
     .photo-frame {
       position: relative; width: 100%; height: 100%;
       border-radius: 28px; overflow: hidden;
-      border: 1px solid rgba(79,127,255,0.25);
+      border: 1px solid rgba(34,211,238,0.25);
       background: #08090d;
     }
     .photo-frame img {
@@ -316,7 +342,7 @@
     .proj-card:hover {
       transform: translateY(-7px);
       border-color: var(--border-h);
-      box-shadow: 0 24px 64px rgba(79,127,255,0.13);
+      box-shadow: 0 24px 64px rgba(34,211,238,0.13);
     }
 
     .proj-thumb {
@@ -355,8 +381,8 @@
     .badge-dev {
       font-size: 10px; font-weight: 600; padding: 2px 9px;
       border-radius: 5px; text-transform: uppercase; letter-spacing: 0.5px;
-      background: rgba(168,85,247,0.12); color: #C084FC;
-      border: 1px solid rgba(168,85,247,0.25);
+      background: rgba(245,180,90,0.12); color: #F5B45A;
+      border: 1px solid rgba(245,180,90,0.28);
     }
     .proj-desc {
       font-size: 14px; color: var(--text-d);
@@ -381,29 +407,13 @@
       padding: 120px 0;
       background: linear-gradient(to bottom, transparent, rgba(12,18,32,0.7), transparent);
     }
-    .process-grid {
+    .process-head { text-align: center; max-width: 660px; margin: 0 auto 56px; }
+    .process-head .sec-desc { margin: 0 auto; }
+
+    .proc-steps {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center; margin-top: 0;
+      gap: 18px; max-width: 900px; margin: 0 auto;
     }
-
-    .proc-photo {
-      position: relative; border-radius: 24px;
-      overflow: hidden; height: 540px;
-    }
-    .proc-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .proc-photo::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(79,127,255,0.18), rgba(168,85,247,0.12));
-      mix-blend-mode: multiply;
-    }
-    .proc-photo-border {
-      position: absolute; inset: 0;
-      border-radius: 24px; border: 1px solid rgba(79,127,255,0.2);
-      pointer-events: none; z-index: 2;
-    }
-
-    .proc-steps { display: flex; flex-direction: column; gap: 18px; }
 
     .proc-step {
       display: flex; gap: 18px;
@@ -414,14 +424,14 @@
     }
     .proc-step:hover {
       border-color: var(--border-h);
-      transform: translateX(6px);
-      background: rgba(12,18,32,0.9);
+      transform: translateY(-5px);
+      background: var(--bg3);
     }
     .step-num {
       width: 40px; height: 40px; flex-shrink: 0;
       border-radius: 10px;
       background: var(--blue-d);
-      border: 1px solid rgba(79,127,255,0.3);
+      border: 1px solid rgba(34,211,238,0.3);
       color: var(--blue);
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700; font-size: 15px;
@@ -449,7 +459,7 @@
       font-size: 34px; margin-bottom: 16px;
       width: 60px; height: 60px; border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
-      background: var(--blue-d); border: 1px solid rgba(79,127,255,0.2);
+      background: var(--blue-d); border: 1px solid rgba(34,211,238,0.2);
     }
     .sc-name {
       font-family: 'Space Grotesk', sans-serif;
@@ -476,7 +486,7 @@
     }
     .sc-tag:hover {
       background: var(--blue-d);
-      border-color: rgba(79,127,255,0.4);
+      border-color: rgba(34,211,238,0.4);
       color: var(--text);
     }
 
@@ -489,7 +499,7 @@
     .contact-glow {
       position: absolute;
       width: 700px; height: 500px;
-      background: radial-gradient(ellipse, rgba(79,127,255,0.1) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(34,211,238,0.1) 0%, transparent 70%);
       top: 50%; left: 50%; transform: translate(-50%,-50%);
       pointer-events: none;
     }
@@ -562,19 +572,16 @@
 
     /* ── RESPONSIVE ───────────────────────── */
     @media (max-width: 960px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-      .hero-sub { max-width: 100%; }
-      .hero-btns { justify-content: center; }
-      .hero-stats { justify-content: center; }
-      .hero-visual { order: -1; }
-      .photo-wrap { width: 260px; height: 320px; }
-      .fc-1 { display: none; }
-      .fc-2 { display: none; }
-      .projects-grid { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: 1fr; }
-      .proc-photo { height: 300px; }
-      .stack-grid { grid-template-columns: 1fr; }
+      .stack-grid { grid-template-columns: 1fr; max-width: 440px; }
       .footer-inner { flex-direction: column; gap: 10px; text-align: center; }
+    }
+    @media (max-width: 640px) {
+      #hero { padding: 116px 0 70px; }
+      .hero-logo { width: 260px; }
+      .hero-stats { gap: 18px; }
+      .stat-val { font-size: 21px; }
+      .stat-lab { font-size: 10px; }
     }
     @media (max-width: 600px) {
       .nav-links { display: none; }
@@ -588,9 +595,9 @@
   <svg id="scroll-line" preserveAspectRatio="xMidYMin meet" fill="none">
     <defs>
       <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0"   stop-color="#22D3EE"/>
-        <stop offset="0.5" stop-color="#4F7FFF"/>
-        <stop offset="1"   stop-color="#A855F7"/>
+        <stop offset="0"   stop-color="#EAF2F6"/>
+        <stop offset="0.5" stop-color="#22D3EE"/>
+        <stop offset="1"   stop-color="#2C8A9C"/>
       </linearGradient>
     </defs>
     <path id="line-track" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
@@ -628,21 +635,24 @@
   <div class="container">
     <div class="hero-inner">
 
-      <div>
-        <div class="hero-badge">
-          <div class="badge-dot"></div>
-          OnlyMaxon Studio · Taking new projects
-        </div>
-        <h1 class="hero-title">
-          We turn ideas<br>
-          into <span class="gradient-text">working</span><br>
-          products.
-        </h1>
-        <p class="hero-sub">
-          <strong>OnlyMaxon</strong> is a product studio.
-          We design, build, launch and grow real products —
-          <strong>development, marketing &amp; legal</strong> under one roof.
-        </p>
+      <div class="hero-logo">
+        <div class="hero-logo-glow"></div>
+        <img src="images/logo.jpg" alt="OnlyMaxon Ltd logo">
+      </div>
+
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        OnlyMaxon Studio · Taking new projects
+      </div>
+      <h1 class="hero-title">
+        We turn ideas into<br>
+        <span class="gradient-text">working products.</span>
+      </h1>
+      <p class="hero-sub">
+        <strong>OnlyMaxon</strong> is a product studio.
+        We design, build, launch and grow real products —
+        <strong>development, marketing &amp; legal</strong> under one roof.
+      </p>
         <div class="hero-btns">
           <a href="mailto:calilorucli42@gmail.com" class="btn btn-primary">
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -673,24 +683,6 @@
             <span class="stat-lab">MVP Timeline</span>
           </div>
         </div>
-      </div>
-
-      <div class="hero-visual">
-        <div class="photo-wrap tilt">
-          <div class="photo-glow"></div>
-          <div class="photo-frame">
-            <img src="images/logo.jpg" alt="OnlyMaxon Ltd logo">
-          </div>
-          <div class="float-card fc-1">
-            <div class="fc-label">Currently building</div>
-            <div class="fc-value"><span style="color:var(--cyan)">◆</span> birklik.az</div>
-          </div>
-          <div class="float-card fc-2">
-            <div class="fc-label">Based in</div>
-            <div class="fc-value">🌍 Available worldwide</div>
-          </div>
-        </div>
-      </div>
 
     </div>
   </div>
@@ -790,46 +782,40 @@
 <!-- ─── PROCESS ───────────────────────────── -->
 <section id="process">
   <div class="container">
-    <div class="process-grid">
-
-      <div>
-        <p class="eyebrow fade-up">How we work</p>
-        <h2 class="sec-title fade-up d1">You don't manage us.<br>We manage the product.</h2>
-        <p class="sec-desc fade-up d2" style="margin-bottom:36px">
-          One team, full ownership — from the first idea to a live, growing product.
-        </p>
-        <div class="proc-steps">
-          <div class="proc-step fade-up">
-            <div class="step-num">01</div>
-            <div class="step-body">
-              <h3>End-to-end ownership</h3>
-              <p>Design, code, deployment, launch — we handle everything. No hand-holding required.</p>
-            </div>
-          </div>
-          <div class="proc-step fade-up d1">
-            <div class="step-num">02</div>
-            <div class="step-body">
-              <h3>Ship fast</h3>
-              <p>MVPs in 3–6 weeks, not 6 months. Real users, real feedback, real iteration.</p>
-            </div>
-          </div>
-          <div class="proc-step fade-up d2">
-            <div class="step-num">03</div>
-            <div class="step-body">
-              <h3>More than code</h3>
-              <p>Marketing to get you users and legal to keep you safe — all under one roof.</p>
-            </div>
-          </div>
-          <div class="proc-step fade-up d3">
-            <div class="step-num">04</div>
-            <div class="step-body">
-              <h3>Transparent by default</h3>
-              <p>Weekly updates, clear progress. No surprises, no hidden blockers.</p>
-            </div>
-          </div>
+    <div class="process-head">
+      <p class="eyebrow fade-up">How we work</p>
+      <h2 class="sec-title fade-up d1">You don't manage us.<br>We manage the product.</h2>
+      <p class="sec-desc fade-up d2">One team, full ownership — from the first idea to a live, growing product.</p>
+    </div>
+    <div class="proc-steps">
+      <div class="proc-step fade-up">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <h3>End-to-end ownership</h3>
+          <p>Design, code, deployment, launch — we handle everything. No hand-holding required.</p>
         </div>
       </div>
-
+      <div class="proc-step fade-up d1">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <h3>Ship fast</h3>
+          <p>MVPs in 3–6 weeks, not 6 months. Real users, real feedback, real iteration.</p>
+        </div>
+      </div>
+      <div class="proc-step fade-up d2">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <h3>More than code</h3>
+          <p>Marketing to get you users and legal to keep you safe — all under one roof.</p>
+        </div>
+      </div>
+      <div class="proc-step fade-up d3">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <h3>Transparent by default</h3>
+          <p>Weekly updates, clear progress. No surprises, no hidden blockers.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -908,23 +894,17 @@
           </svg>
           Send an Email
         </a>
-        <a href="https://linkedin.com/in/jorujli7250" target="_blank" class="btn btn-secondary">
+        <a href="https://github.com/OnlyMaxon" target="_blank" class="btn btn-secondary">
           <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
-            <circle cx="4" cy="4" r="2"/>
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
           </svg>
-          LinkedIn
+          GitHub
         </a>
       </div>
       <div class="contact-socials fade-up d4">
         <a href="mailto:calilorucli42@gmail.com" class="social-link">
           <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
           calilorucli42@gmail.com
-        </a>
-        <span class="soc-sep">·</span>
-        <a href="https://linkedin.com/in/jorujli7250" target="_blank" class="social-link">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-          jorujli7250
         </a>
         <span class="soc-sep">·</span>
         <a href="https://github.com/OnlyMaxon" target="_blank" class="social-link">
