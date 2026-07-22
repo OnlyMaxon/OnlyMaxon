@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OnlyMaxon — We turn ideas into working products.</title>
+  <link rel="icon" type="image/jpeg" href="images/logo.jpg">
+  <meta property="og:title" content="OnlyMaxon — We turn ideas into working products.">
+  <meta property="og:description" content="OnlyMaxon is a product studio. Development, marketing & legal under one roof.">
+  <meta property="og:image" content="images/logo.jpg">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -239,14 +244,10 @@
       position: relative; width: 100%; height: 100%;
       border-radius: 28px; overflow: hidden;
       border: 1px solid rgba(79,127,255,0.25);
+      background: #08090d;
     }
     .photo-frame img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-    }
-    .photo-frame::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(7,11,20,0.5) 0%, transparent 50%);
+      width: 100%; height: 100%; object-fit: contain; display: block;
     }
 
     .float-card {
@@ -678,7 +679,7 @@
         <div class="photo-wrap tilt">
           <div class="photo-glow"></div>
           <div class="photo-frame">
-            <img src="images/photo1.png" alt="Max Orujli">
+            <img src="images/logo.jpg" alt="OnlyMaxon Ltd logo">
           </div>
           <div class="float-card fc-1">
             <div class="fc-label">Currently building</div>
