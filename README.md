@@ -1,14 +1,15 @@
 <div align="center">
 
-![Profile Views](https://komarev.com/ghpvc/?username=OnlyMaxon&color=4F7FFF&style=flat-square&label=Profile+Views)
+![Profile Views](https://komarev.com/ghpvc/?username=OnlyMaxon&color=22D3EE&style=flat-square&label=Profile+Views)
 
-# Hi there, I'm Max👋
+# OnlyMaxon
 
-**Software Engineer — Mobile & Web**
+**We turn ideas into working products.**
 
-[![Portfolio](https://img.shields.io/badge/◆%20Portfolio-4F7FFF?style=for-the-badge&logoColor=white)](https://onlymaxon.github.io/OnlyMaxon/)
+A product studio — *development, marketing & legal under one roof.*
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/jorujli7250)
+[![Portfolio](https://img.shields.io/badge/◆%20Portfolio-0E7490?style=for-the-badge&logoColor=white)](https://onlymaxon.github.io/OnlyMaxon/)
+
 [![Instagram](https://img.shields.io/badge/Instagram-E1306C?style=flat-square&logo=instagram&logoColor=white)](https://www.instagram.com/0nlyMaxon)
 [![Email](https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:calilorucli42@gmail.com)
 
@@ -16,9 +17,17 @@
 
 ---
 
-### 🛠 Stack
+### 🚀 What we do
 
-[![Skills](https://skillicons.dev/icons?i=react,ts,js,nodejs,nextjs,flutter,firebase,postgres,docker,vercel,python,vite&theme=dark)](https://skillicons.dev)
+**💻 Development**  ·  **📈 Marketing**  ·  **⚖️ Legal**
+
+Everything a product needs — from the first sketch to launch and growth.
+
+---
+
+### 🛠 Tech we build with
+
+[![Skills](https://skillicons.dev/icons?i=ts,react,nextjs,nodejs,js,flutter,dart,kotlin,java,python,firebase,postgres,docker,vercel&theme=dark)](https://skillicons.dev)
 
 ---
 
