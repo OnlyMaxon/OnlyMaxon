@@ -2,7 +2,7 @@
 
 ![Profile Views](https://komarev.com/ghpvc/?username=OnlyMaxon&color=4F7FFF&style=flat-square&label=Profile+Views)
 
-# Hi there, I'm Jalil 👋
+# Hi there, I'm Max👋
 
 **Software Engineer — Mobile & Web**
 
