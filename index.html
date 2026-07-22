@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Max Orujli — I build and ship products, end-to-end.</title>
+  <title>OnlyMaxon — We turn ideas into working products.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -297,7 +297,11 @@
     /* ── PROJECTS ─────────────────────────── */
     #projects { padding: 120px 0; }
     .projects-head { margin-bottom: 60px; }
-    .projects-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; perspective: 1200px; }
+    .projects-grid {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 22px;
+      perspective: 1200px;
+    }
 
     .proj-card {
       background: var(--bg2);
@@ -306,6 +310,7 @@
       transition: all 0.32s ease;
       text-decoration: none; color: inherit;
       display: flex; flex-direction: column;
+      flex: 1 1 300px; max-width: 360px;
     }
     .proj-card:hover {
       transform: translateY(-7px);
@@ -326,6 +331,7 @@
     .pt-birklik  { background: linear-gradient(135deg,#0f2027,#203a43,#2c5364); }
     .pt-yodin    { background: linear-gradient(135deg,#1a0533,#2d1557,#4a2080); }
     .pt-nextcargo{ background: linear-gradient(135deg,#0a1628,#0f2a4a,#1a4070); }
+    .pt-velodar  { background: linear-gradient(135deg,#04241a,#0b5137,#12b981); }
 
     .proj-icon {
       font-size: 58px; position: relative; z-index: 1;
@@ -429,16 +435,30 @@
     .stack-head .sec-desc { margin: 0 auto; }
 
     .stack-grid {
-      display: grid; grid-template-columns: repeat(2,1fr);
-      gap: 20px; max-width: 880px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 20px; max-width: 1000px; margin: 0 auto;
     }
     .stack-cat {
       background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 18px; padding: 28px;
-      transition: border-color 0.3s;
+      border-radius: 18px; padding: 30px 28px;
+      transition: all 0.3s ease;
     }
-    .stack-cat:hover { border-color: var(--border-h); }
-    .sc-icon { font-size: 26px; margin-bottom: 12px; }
+    .stack-cat:hover { border-color: var(--border-h); transform: translateY(-5px); }
+    .sc-icon {
+      font-size: 34px; margin-bottom: 16px;
+      width: 60px; height: 60px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--blue-d); border: 1px solid rgba(79,127,255,0.2);
+    }
+    .sc-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .sc-desc {
+      font-size: 14px; color: var(--text-d);
+      line-height: 1.65; margin-bottom: 18px;
+    }
     .sc-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 13px; font-weight: 600;
@@ -586,12 +606,12 @@
 <nav id="nav">
   <div class="container">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo">Max<span>.</span></a>
+      <a href="#hero" class="nav-logo">OnlyMaxon<span>.</span></a>
       <ul class="nav-links">
-        <li><a href="#projects">Projects</a></li>
+        <li><a href="#projects">Work</a></li>
         <li><a href="#process">Process</a></li>
-        <li><a href="#stack">Stack</a></li>
-        <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+        <li><a href="#stack">Services</a></li>
+        <li><a href="#contact" class="nav-cta">Work With Us</a></li>
       </ul>
     </div>
   </div>
@@ -610,18 +630,17 @@
       <div>
         <div class="hero-badge">
           <div class="badge-dot"></div>
-          Available for new projects
+          OnlyMaxon Studio · Taking new projects
         </div>
         <h1 class="hero-title">
-          I build and ship<br>
-          <span class="gradient-text">products,</span><br>
-          end-to-end.
+          We turn ideas<br>
+          into <span class="gradient-text">working</span><br>
+          products.
         </h1>
         <p class="hero-sub">
-          From idea to launched app —
-          <strong>solo, end-to-end.</strong><br>
-          Mobile apps, web platforms, marketplaces.<br>
-          MVPs shipped in <strong>3–6 weeks.</strong>
+          <strong>OnlyMaxon</strong> is a product studio.
+          We design, build, launch and grow real products —
+          <strong>development, marketing &amp; legal</strong> under one roof.
         </p>
         <div class="hero-btns">
           <a href="mailto:calilorucli42@gmail.com" class="btn btn-primary">
@@ -639,13 +658,13 @@
         </div>
         <div class="hero-stats">
           <div class="stat">
-            <span class="stat-val">3+</span>
-            <span class="stat-lab">Live Products</span>
+            <span class="stat-val">4+</span>
+            <span class="stat-lab">Products Built</span>
           </div>
           <div class="stat-sep"></div>
           <div class="stat">
-            <span class="stat-val">5</span>
-            <span class="stat-lab">Languages</span>
+            <span class="stat-val">3</span>
+            <span class="stat-lab">Disciplines</span>
           </div>
           <div class="stat-sep"></div>
           <div class="stat">
@@ -682,9 +701,9 @@
 <section id="projects">
   <div class="container">
     <div class="projects-head">
-      <p class="eyebrow fade-up">Live products</p>
-      <h2 class="sec-title fade-up d1">Things I've shipped</h2>
-      <p class="sec-desc fade-up d2">Real products used by real people. Built from scratch, deployed to production.</p>
+      <p class="eyebrow fade-up">Our work</p>
+      <h2 class="sec-title fade-up d1">Products we've brought to life</h2>
+      <p class="sec-desc fade-up d2">Real products used by real people — designed, built, and launched by OnlyMaxon.</p>
     </div>
     <div class="projects-grid">
 
@@ -744,6 +763,23 @@
         </div>
       </a>
 
+      <div class="proj-card fade-up d3 tilt">
+        <div class="proj-thumb pt-velodar">
+          <div class="proj-icon">🚴</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-name">Velodar <span class="badge-dev">In dev</span></div>
+          <p class="proj-desc">Waze for cyclists in Poland — real-time community map with live reports of police raids, road hazards, obstacles, and safe route alerts.</p>
+          <div class="proj-tags">
+            <span class="tag">React Native</span>
+            <span class="tag">Expo</span>
+            <span class="tag">Maps API</span>
+            <span class="tag">Real-time</span>
+          </div>
+          <span class="proj-link" style="opacity:0.45;cursor:default">In development</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -756,17 +792,17 @@
     <div class="process-grid">
 
       <div>
-        <p class="eyebrow fade-up">How I work</p>
-        <h2 class="sec-title fade-up d1">You don't manage me.<br>I manage the product.</h2>
+        <p class="eyebrow fade-up">How we work</p>
+        <h2 class="sec-title fade-up d1">You don't manage us.<br>We manage the product.</h2>
         <p class="sec-desc fade-up d2" style="margin-bottom:36px">
-          I work like a founding engineer — full ownership, full accountability.
+          One team, full ownership — from the first idea to a live, growing product.
         </p>
         <div class="proc-steps">
           <div class="proc-step fade-up">
             <div class="step-num">01</div>
             <div class="step-body">
               <h3>End-to-end ownership</h3>
-              <p>Architecture, code, deployment — I handle everything. No hand-holding required.</p>
+              <p>Design, code, deployment, launch — we handle everything. No hand-holding required.</p>
             </div>
           </div>
           <div class="proc-step fade-up d1">
@@ -779,15 +815,15 @@
           <div class="proc-step fade-up d2">
             <div class="step-num">03</div>
             <div class="step-body">
-              <h3>Build in public</h3>
-              <p>Weekly updates, transparent progress. No surprises, no hidden blockers.</p>
+              <h3>More than code</h3>
+              <p>Marketing to get you users and legal to keep you safe — all under one roof.</p>
             </div>
           </div>
           <div class="proc-step fade-up d3">
             <div class="step-num">04</div>
             <div class="step-body">
-              <h3>Solo founder mindset</h3>
-              <p>I think about your product — not just the code. Business logic matters.</p>
+              <h3>Transparent by default</h3>
+              <p>Weekly updates, clear progress. No surprises, no hidden blockers.</p>
             </div>
           </div>
         </div>
@@ -803,50 +839,44 @@
 <section id="stack">
   <div class="container">
     <div class="stack-head">
-      <p class="eyebrow fade-up">Tools of the trade</p>
-      <h2 class="sec-title fade-up d1">Tech stack</h2>
-      <p class="sec-desc fade-up d2">What I use to build production-ready products, fast.</p>
+      <p class="eyebrow fade-up">What we do</p>
+      <h2 class="sec-title fade-up d1">Everything under one roof</h2>
+      <p class="sec-desc fade-up d2">Three teams, one goal — get your product built, launched, and growing.</p>
     </div>
     <div class="stack-grid">
       <div class="stack-cat fade-up">
-        <div class="sc-icon">📱</div>
-        <div class="sc-title">Mobile</div>
+        <div class="sc-icon">💻</div>
+        <div class="sc-name">Development</div>
+        <p class="sc-desc">Full-stack product engineering — mobile &amp; web apps built from scratch and shipped to production.</p>
+        <div class="sc-title">We build with</div>
         <div class="sc-tags">
+          <span class="sc-tag">React</span>
           <span class="sc-tag">React Native</span>
-          <span class="sc-tag">Expo</span>
-          <span class="sc-tag">Flutter</span>
-          <span class="sc-tag">Capacitor</span>
+          <span class="sc-tag">TypeScript</span>
+          <span class="sc-tag">Firebase</span>
         </div>
       </div>
       <div class="stack-cat fade-up d1">
-        <div class="sc-icon">🌐</div>
-        <div class="sc-title">Web</div>
+        <div class="sc-icon">📈</div>
+        <div class="sc-name">Marketing</div>
+        <p class="sc-desc">A dedicated marketing team to launch your product, reach real users, and drive growth.</p>
+        <div class="sc-title">We handle</div>
         <div class="sc-tags">
-          <span class="sc-tag">React</span>
-          <span class="sc-tag">TypeScript</span>
-          <span class="sc-tag">Next.js</span>
-          <span class="sc-tag">Node.js</span>
+          <span class="sc-tag">Launch</span>
+          <span class="sc-tag">Growth</span>
+          <span class="sc-tag">Content</span>
+          <span class="sc-tag">Social</span>
         </div>
       </div>
       <div class="stack-cat fade-up d2">
-        <div class="sc-icon">⚙️</div>
-        <div class="sc-title">Backend & Infra</div>
+        <div class="sc-icon">⚖️</div>
+        <div class="sc-name">Legal</div>
+        <p class="sc-desc">Contracts, compliance, and company setup — so your product launches on solid legal ground.</p>
+        <div class="sc-title">We cover</div>
         <div class="sc-tags">
-          <span class="sc-tag">Firebase</span>
-          <span class="sc-tag">PostgreSQL</span>
-          <span class="sc-tag">Docker</span>
-          <span class="sc-tag">Cloudflare</span>
-          <span class="sc-tag">Vercel</span>
-        </div>
-      </div>
-      <div class="stack-cat fade-up d3">
-        <div class="sc-icon">🔌</div>
-        <div class="sc-title">Integrations</div>
-        <div class="sc-tags">
-          <span class="sc-tag">Stripe</span>
-          <span class="sc-tag">Maps API</span>
-          <span class="sc-tag">Real-time chat</span>
-          <span class="sc-tag">Python</span>
+          <span class="sc-tag">Contracts</span>
+          <span class="sc-tag">Compliance</span>
+          <span class="sc-tag">Setup</span>
         </div>
       </div>
     </div>
@@ -866,8 +896,8 @@
         <span class="gradient-text">Let's build it.</span>
       </h2>
       <p class="sec-desc fade-up d2">
-        Tell me what you're building. First call is free.<br>
-        Currently taking on new projects and collaborations.
+        Tell us what you're building. First call is free.<br>
+        OnlyMaxon is currently taking on new projects and collaborations.
       </p>
       <div class="contact-btns fade-up d3">
         <a href="mailto:calilorucli42@gmail.com" class="btn btn-primary">
@@ -909,7 +939,7 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <span class="ft">© 2025 Max Orujli. All rights reserved.</span>
+      <span class="ft">© 2026 OnlyMaxon Ltd. All rights reserved.</span>
       <span class="ft">🌍 Available worldwide · Remote-first</span>
     </div>
   </div>
