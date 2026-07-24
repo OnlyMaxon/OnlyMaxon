@@ -86,6 +86,14 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: rgba(34,211,238,0.4); border-radius: 3px; }
 
+    ::selection { background: rgba(34,211,238,0.28); color: #fff; }
+
+    a:focus-visible, button:focus-visible, .btn:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
     h1, h2, h3 {
       font-family: 'Space Grotesk', system-ui, sans-serif;
       font-weight: 700;
@@ -136,6 +144,30 @@
       box-shadow: 0 0 20px rgba(34,211,238,0.3);
     }
     .nav-cta:hover { opacity: 0.88; }
+
+    /* hamburger button (mobile only) */
+    .nav-toggle {
+      display: none;
+      flex-direction: column; justify-content: center; gap: 5px;
+      width: 42px; height: 42px; padding: 0;
+      background: transparent; border: none; cursor: pointer;
+      z-index: 210;
+    }
+    .nav-toggle span {
+      display: block; width: 24px; height: 2px; border-radius: 2px;
+      background: var(--text); transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.55);
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.3s ease;
+      z-index: 90;
+    }
+    .nav-backdrop.open { opacity: 1; visibility: visible; }
 
     /* ── HERO ─────────────────────────────── */
     #hero {
@@ -614,20 +646,47 @@
     .tilt:hover .tilt-shine { opacity: 1; }
 
     /* ── RESPONSIVE ───────────────────────── */
-    @media (max-width: 960px) {
-      .process-grid { grid-template-columns: 1fr; }
-      .stack-grid { grid-template-columns: 1fr; max-width: 440px; }
+    @media (max-width: 860px) {
+      .stack-grid { grid-template-columns: 1fr; max-width: 460px; }
       .footer-inner { flex-direction: column; gap: 10px; text-align: center; }
     }
     @media (max-width: 640px) {
       #hero { padding: 116px 0 70px; }
       .hero-logo { width: 260px; }
+      .proc-steps { grid-template-columns: 1fr; }
       .hero-stats { gap: 18px; }
       .stat-val { font-size: 21px; }
       .stat-lab { font-size: 10px; }
+      .container { padding: 0 20px; }
     }
     @media (max-width: 600px) {
-      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-links {
+        position: fixed; top: 0; right: 0;
+        height: 100vh; width: min(80vw, 320px);
+        flex-direction: column; align-items: flex-start;
+        justify-content: center; gap: 6px;
+        background: rgba(8,11,18,0.98);
+        -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
+        border-left: 1px solid var(--border);
+        padding: 40px 34px;
+        transform: translateX(100%);
+        transition: transform 0.38s cubic-bezier(.4,0,.2,1);
+      }
+      .nav-links.open { transform: translateX(0); }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; font-size: 18px; padding: 12px 0; }
+      .nav-cta { display: inline-block; margin-top: 14px; }
+    }
+
+    /* respect users who prefer reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
@@ -658,15 +717,19 @@
   <div class="container">
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">OnlyMaxon<span>.</span></a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="navLinks">
         <li><a href="#projects">Work</a></li>
         <li><a href="#process">Process</a></li>
         <li><a href="#stack">Services</a></li>
         <li><a href="#contact" class="nav-cta">Work With Us</a></li>
       </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </nav>
+<div class="nav-backdrop" id="navBackdrop"></div>
 
 <!-- ─── HERO ─────────────────────────────── -->
 <section id="hero">
@@ -980,6 +1043,23 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 50);
   });
+
+  // ── Mobile menu ──
+  const navToggle   = document.getElementById('navToggle');
+  const navLinks    = document.getElementById('navLinks');
+  const navBackdrop = document.getElementById('navBackdrop');
+  function setMenu(open) {
+    navLinks.classList.toggle('open', open);
+    navBackdrop.classList.toggle('open', open);
+    navToggle.classList.toggle('active', open);
+    navToggle.setAttribute('aria-expanded', open);
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  navToggle.addEventListener('click', () => setMenu(!navLinks.classList.contains('open')));
+  navBackdrop.addEventListener('click', () => setMenu(false));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  window.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
   // ── Scroll reveal ──
   const io = new IntersectionObserver((entries) => {

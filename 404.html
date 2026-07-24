@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page not found · OnlyMaxon</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #06080C; --blue: #22D3EE; --purple: #2C8A9C;
+      --text: #EAF2F6; --text-d: #93A6B2; --border: rgba(255,255,255,0.07);
+    }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 24px; overflow: hidden; position: relative;
+    }
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(90px);
+      pointer-events: none; z-index: 0;
+    }
+    .blob-1 {
+      width: 620px; height: 620px; top: -180px; right: -160px;
+      background: radial-gradient(circle, rgba(34,211,238,0.16) 0%, transparent 70%);
+    }
+    .blob-2 {
+      width: 480px; height: 480px; bottom: -140px; left: -120px;
+      background: radial-gradient(circle, rgba(44,138,156,0.16) 0%, transparent 70%);
+    }
+    .wrap { position: relative; z-index: 1; }
+    .code {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+      font-size: clamp(96px, 22vw, 200px); line-height: 1; letter-spacing: -4px;
+      background: linear-gradient(135deg, #fff 0%, var(--blue) 50%, var(--purple) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+      font-size: clamp(22px, 4vw, 30px); margin: 6px 0 14px; letter-spacing: -0.5px;
+    }
+    p { color: var(--text-d); font-size: 16px; margin-bottom: 34px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue); color: #04141A;
+      font-weight: 700; font-size: 15px;
+      padding: 14px 30px; border-radius: 11px; text-decoration: none;
+      box-shadow: 0 4px 28px rgba(34,211,238,0.35); transition: all 0.25s ease;
+    }
+    .btn:hover { background: #5FE6F2; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(34,211,238,0.5); }
+    .brand {
+      margin-top: 40px; font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 16px; color: var(--text);
+      text-decoration: none; letter-spacing: -0.5px;
+    }
+    .brand span { color: var(--blue); }
+  </style>
+</head>
+<body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="wrap">
+    <div class="code">404</div>
+    <h1>This page took a wrong turn.</h1>
+    <p>The page you're looking for doesn't exist or has moved.</p>
+    <a href="/" class="btn">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back to home
+    </a>
+    <div><a href="/" class="brand">OnlyMaxon<span>.</span></a></div>
+  </div>
+</body>
+</html>
