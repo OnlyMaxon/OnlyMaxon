@@ -7,6 +7,10 @@
   <meta name="description" content="OnlyMaxon is a product studio. We design, build, launch and grow real products — development and marketing under one roof.">
   <meta name="keywords" content="OnlyMaxon, product studio, software development, mobile apps, web apps, MVP, marketing, startup studio">
   <link rel="canonical" href="https://onlymaxon.com/">
+  <link rel="alternate" hreflang="pl" href="https://onlymaxon.com/?lang=pl">
+  <link rel="alternate" hreflang="ru" href="https://onlymaxon.com/?lang=ru">
+  <link rel="alternate" hreflang="en" href="https://onlymaxon.com/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://onlymaxon.com/">
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/jpeg" href="images/logo.jpg">
@@ -521,8 +525,8 @@
     .stack-head .sec-desc { margin: 0 auto; }
 
     .stack-grid {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      gap: 20px; max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(2,1fr);
+      gap: 20px; max-width: 720px; margin: 0 auto;
     }
     .stack-cat {
       background: var(--bg2); border: 1px solid var(--border);
@@ -645,9 +649,73 @@
     }
     .tilt:hover .tilt-shine { opacity: 1; }
 
+    /* ── LANGUAGE SWITCHER ────────────────── */
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .lang-switch {
+      display: flex; gap: 2px;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 9px; padding: 3px;
+    }
+    .lang-switch button {
+      background: transparent; border: none;
+      color: var(--text-d); font-family: inherit;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.3px;
+      padding: 5px 9px; border-radius: 6px; cursor: pointer;
+      transition: color 0.2s, background 0.2s;
+    }
+    .lang-switch button:hover { color: var(--text); }
+    .lang-switch button.active { background: var(--blue); color: #04141A; }
+
+    /* ── PRICING ──────────────────────────── */
+    #pricing { padding: 120px 0; }
+    .pricing-head { text-align: center; margin-bottom: 60px; }
+    .pricing-head .sec-desc { margin: 0 auto; }
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 22px; max-width: 1000px; margin: 0 auto;
+    }
+    .price-card {
+      display: flex; flex-direction: column;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px 28px;
+      transition: all 0.3s ease;
+    }
+    .price-card:hover {
+      transform: translateY(-6px); border-color: var(--border-h);
+      box-shadow: 0 24px 64px rgba(34,211,238,0.13);
+    }
+    .price-card.featured { border-color: rgba(34,211,238,0.35); }
+    .price-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px; font-weight: 700; color: var(--text);
+      margin-bottom: 20px; min-height: 48px;
+    }
+    .price-amount {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 34px; font-weight: 700; line-height: 1.1; margin-bottom: 8px;
+      background: linear-gradient(135deg, #fff 0%, var(--blue) 60%, var(--purple) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .price-time {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 13px; color: var(--text-d); margin-bottom: 26px;
+    }
+    .price-time::before { content: '🕒'; }
+    .price-card .btn { margin-top: auto; justify-content: center; }
+
+    /* ── SMALL PROJECT CARDS ──────────────── */
+    .projects-grid.small-grid { margin-top: 22px; }
+    .small-grid .proj-card { max-width: 300px; }
+    .small-grid .proj-thumb { height: 132px; }
+    .small-grid .proj-icon { font-size: 40px; }
+    .small-grid .proj-body { padding: 18px; }
+    .small-grid .proj-name { font-size: 16px; }
+    .small-grid .proj-desc { font-size: 13px; }
+
     /* ── RESPONSIVE ───────────────────────── */
     @media (max-width: 860px) {
       .stack-grid { grid-template-columns: 1fr; max-width: 460px; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
       .footer-inner { flex-direction: column; gap: 10px; text-align: center; }
     }
     @media (max-width: 640px) {
@@ -658,6 +726,7 @@
       .stat-val { font-size: 21px; }
       .stat-lab { font-size: 10px; }
       .container { padding: 0 20px; }
+      .price-name { min-height: 0; }
     }
     @media (max-width: 600px) {
       .nav-toggle { display: flex; }
@@ -677,6 +746,8 @@
       .nav-links li { width: 100%; }
       .nav-links a { display: block; font-size: 18px; padding: 12px 0; }
       .nav-cta { display: inline-block; margin-top: 14px; }
+      .nav-right { gap: 12px; }
+      .lang-switch button { padding: 4px 7px; font-size: 11px; }
     }
 
     /* respect users who prefer reduced motion */
@@ -717,15 +788,22 @@
   <div class="container">
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">OnlyMaxon<span>.</span></a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#projects">Work</a></li>
-        <li><a href="#process">Process</a></li>
-        <li><a href="#stack">Services</a></li>
-        <li><a href="#contact" class="nav-cta">Work With Us</a></li>
-      </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav-right">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#projects" data-i18n="navWork">Work</a></li>
+          <li><a href="#process" data-i18n="navProcess">Process</a></li>
+          <li><a href="#stack" data-i18n="navServices">Services</a></li>
+          <li><a href="#contact" class="nav-cta" data-i18n="navCta">Work With Us</a></li>
+        </ul>
+        <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
+          <button type="button" data-lang="pl">PL</button>
+          <button type="button" data-lang="ru">RU</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </div>
 </nav>
@@ -748,13 +826,13 @@
 
       <div class="hero-badge">
         <div class="badge-dot"></div>
-        OnlyMaxon Studio · Taking new projects
+        <span data-i18n="heroBadge">Warsaw · Apps &amp; websites for local business</span>
       </div>
-      <h1 class="hero-title">
-        We turn ideas into<br>
-        <span class="gradient-text">working products.</span>
+      <h1 class="hero-title" data-i18n-html="heroTitle">
+        Websites &amp; apps that<br>
+        <span class="gradient-text">win you customers.</span>
       </h1>
-      <p class="hero-sub">
+      <p class="hero-sub" data-i18n-html="heroSub">
         <strong>OnlyMaxon</strong> is a product studio.
         We design, build, launch and grow real products —
         <strong>development and marketing</strong> under one roof.
@@ -764,10 +842,10 @@
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.5 12 19.79 19.79 0 011.43 3.33 2 2 0 013.44 1.5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.29 6.29l1.78-1.78a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
             </svg>
-            Book a Call
+            <span data-i18n="heroBtnCall">Book a Call</span>
           </a>
           <a href="#projects" class="btn btn-secondary">
-            See Projects
+            <span data-i18n="heroBtnProjects">See Projects</span>
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
@@ -776,15 +854,48 @@
         <div class="hero-stats">
           <div class="stat">
             <span class="stat-val">4+</span>
-            <span class="stat-lab">Products Built</span>
+            <span class="stat-lab" data-i18n="heroStatProducts">Products Built</span>
           </div>
           <div class="stat-sep"></div>
           <div class="stat">
-            <span class="stat-val">3–6w</span>
-            <span class="stat-lab">MVP Timeline</span>
+            <span class="stat-val" data-i18n="heroStatMvpVal">3–6w</span>
+            <span class="stat-lab" data-i18n="heroStatMvp">MVP Timeline</span>
           </div>
         </div>
 
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PRICING ─────────────────────────── -->
+<section id="pricing">
+  <div class="container">
+    <div class="pricing-head">
+      <p class="eyebrow fade-up" data-i18n="pricingEyebrow">Pricing</p>
+      <h2 class="sec-title fade-up d1" data-i18n="pricingTitle">Simple, upfront pricing</h2>
+      <p class="sec-desc fade-up d2" data-i18n="pricingDesc">Price and timeline up front — no hidden costs.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card fade-up">
+        <div class="price-name" data-i18n="price1Name">Business-card website</div>
+        <div class="price-amount" data-i18n="price1Amount">1500 zł</div>
+        <div class="price-time" data-i18n="price1Time">1 week</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-secondary" data-i18n="priceCta">Get in touch</a>
+      </div>
+      <div class="price-card featured fade-up d1">
+        <div class="price-name" data-i18n="price2Name">Website with online booking</div>
+        <div class="price-amount" data-i18n="price2Amount">2500 zł</div>
+        <div class="price-time" data-i18n="price2Time">2 weeks</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-i18n="priceCta">Get in touch</a>
+      </div>
+      <div class="price-card fade-up d2">
+        <div class="price-name" data-i18n="price3Name">Mobile app</div>
+        <div class="price-amount" data-i18n="price3Amount">from 5000 zł</div>
+        <div class="price-time" data-i18n="price3Time">4–6 weeks</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-secondary" data-i18n="priceCta">Get in touch</a>
+      </div>
     </div>
   </div>
 </section>
@@ -795,19 +906,39 @@
 <section id="projects">
   <div class="container">
     <div class="projects-head">
-      <p class="eyebrow fade-up">Our work</p>
-      <h2 class="sec-title fade-up d1">Products we've brought to life</h2>
-      <p class="sec-desc fade-up d2">Real products used by real people — designed, built, and launched by OnlyMaxon.</p>
+      <p class="eyebrow fade-up" data-i18n="projEyebrow">Our work</p>
+      <h2 class="sec-title fade-up d1" data-i18n="projTitle">Products we've brought to life</h2>
+      <p class="sec-desc fade-up d2" data-i18n="projDesc">Real products used by real people — designed, built, and launched by OnlyMaxon.</p>
     </div>
+
     <div class="projects-grid">
 
-      <a href="https://birklik.az" target="_blank" class="proj-card fade-up tilt">
+      <a href="https://nextcargo.eu" target="_blank" class="proj-card fade-up tilt">
+        <div class="proj-thumb pt-nextcargo">
+          <div class="proj-icon">📦</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-name">nextcargo.eu <span class="badge-live" data-i18n="badgeLive">Live</span></div>
+          <p class="proj-desc" data-i18n="projNextcargo">Cargo &amp; delivery platform with full client cabinet, real-time support chat, and shipment tracking.</p>
+          <div class="proj-tags">
+            <span class="tag">Full-stack</span>
+            <span class="tag">Real-time</span>
+            <span class="tag">Production</span>
+          </div>
+          <span class="proj-link">
+            <span data-i18n="linkVisit">Visit site</span>
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="https://birklik.az" target="_blank" class="proj-card fade-up d1 tilt">
         <div class="proj-thumb pt-birklik">
           <div class="proj-icon">🏠</div>
         </div>
         <div class="proj-body">
-          <div class="proj-name">birklik.az <span class="badge-live">Live</span></div>
-          <p class="proj-desc">Rental marketplace for Azerbaijan — booking calendar, host dashboard, tiered listings, and payment integration.</p>
+          <div class="proj-name">birklik.az <span class="badge-live" data-i18n="badgeLive">Live</span></div>
+          <p class="proj-desc" data-i18n="projBirklik">Rental marketplace for Azerbaijan — booking calendar, host dashboard, tiered listings, and payment integration.</p>
           <div class="proj-tags">
             <span class="tag">React</span>
             <span class="tag">TypeScript</span>
@@ -816,61 +947,46 @@
             <span class="tag">Capacitor</span>
           </div>
           <span class="proj-link">
-            Visit site
+            <span data-i18n="linkVisit">Visit site</span>
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </span>
         </div>
       </a>
 
-      <div class="proj-card fade-up d1 tilt">
+    </div>
+
+    <div class="projects-grid small-grid">
+
+      <div class="proj-card fade-up tilt">
         <div class="proj-thumb pt-yodin">
           <div class="proj-icon">🌍</div>
         </div>
         <div class="proj-body">
-          <div class="proj-name">yOdin <span class="badge-dev">In dev</span></div>
-          <p class="proj-desc">Social platform for international students, built in-house at Akademia Vistula — working on-site with the development team. Behavior-based matching across nationalities.</p>
+          <div class="proj-name">yOdin <span class="badge-dev" data-i18n="badgeDev">In dev</span></div>
+          <p class="proj-desc" data-i18n="projYodin">Social platform for international students, built in-house at Akademia Vistula — working on-site with the development team. Behavior-based matching across nationalities.</p>
           <div class="proj-tags">
             <span class="tag">React Native</span>
             <span class="tag">Expo</span>
             <span class="tag">Firebase</span>
           </div>
-          <span class="proj-link" style="opacity:0.45;cursor:default">In development</span>
+          <span class="proj-link" style="opacity:0.45;cursor:default" data-i18n="linkInDev">In development</span>
         </div>
       </div>
 
-      <a href="https://nextcargo.eu" target="_blank" class="proj-card fade-up d2 tilt">
-        <div class="proj-thumb pt-nextcargo">
-          <div class="proj-icon">📦</div>
-        </div>
-        <div class="proj-body">
-          <div class="proj-name">nextcargo.eu <span class="badge-live">Live</span></div>
-          <p class="proj-desc">Cargo & delivery platform with full client cabinet, real-time support chat, and shipment tracking.</p>
-          <div class="proj-tags">
-            <span class="tag">Full-stack</span>
-            <span class="tag">Real-time</span>
-            <span class="tag">Production</span>
-          </div>
-          <span class="proj-link">
-            Visit site
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <div class="proj-card fade-up d3 tilt">
+      <div class="proj-card fade-up d1 tilt">
         <div class="proj-thumb pt-velodar">
           <div class="proj-icon">🚴</div>
         </div>
         <div class="proj-body">
-          <div class="proj-name">Velodar <span class="badge-dev">In dev</span></div>
-          <p class="proj-desc">Waze for cyclists in Poland — real-time community map with live reports of police raids, road hazards, obstacles, and safe route alerts.</p>
+          <div class="proj-name">Velodar <span class="badge-dev" data-i18n="badgeDev">In dev</span></div>
+          <p class="proj-desc" data-i18n="projVelodar">Waze for cyclists in Poland — real-time community map with live reports of police raids, road hazards, obstacles, and safe route alerts.</p>
           <div class="proj-tags">
             <span class="tag">React Native</span>
             <span class="tag">Expo</span>
             <span class="tag">Maps API</span>
             <span class="tag">Real-time</span>
           </div>
-          <span class="proj-link" style="opacity:0.45;cursor:default">In development</span>
+          <span class="proj-link" style="opacity:0.45;cursor:default" data-i18n="linkInDev">In development</span>
         </div>
       </div>
 
@@ -884,37 +1000,37 @@
 <section id="process">
   <div class="container">
     <div class="process-head">
-      <p class="eyebrow fade-up">How we work</p>
-      <h2 class="sec-title fade-up d1">You focus on the vision.<br>We handle the rest.</h2>
-      <p class="sec-desc fade-up d2">One team takes your idea from first sketch to a live, growing product — and you stay in control the whole way.</p>
+      <p class="eyebrow fade-up" data-i18n="procEyebrow">How we work</p>
+      <h2 class="sec-title fade-up d1" data-i18n-html="procTitle">You focus on the vision.<br>We handle the rest.</h2>
+      <p class="sec-desc fade-up d2" data-i18n="procDesc">One team takes your idea from first sketch to a live, growing product — and you stay in control the whole way.</p>
     </div>
     <div class="proc-steps">
       <div class="proc-step fade-up">
         <div class="step-num">01</div>
         <div class="step-body">
-          <h3>End-to-end delivery</h3>
-          <p>Design, code, deployment, launch — we handle everything, so you don't have to juggle it.</p>
+          <h3 data-i18n="proc1Title">End-to-end delivery</h3>
+          <p data-i18n="proc1Desc">Design, code, deployment, launch — we handle everything, so you don't have to juggle it.</p>
         </div>
       </div>
       <div class="proc-step fade-up d1">
         <div class="step-num">02</div>
         <div class="step-body">
-          <h3>Ship fast</h3>
-          <p>MVPs in 3–6 weeks, not 6 months. Real users, real feedback, real iteration.</p>
+          <h3 data-i18n="proc2Title">Ship fast</h3>
+          <p data-i18n="proc2Desc">MVPs in 3–6 weeks, not 6 months. Real users, real feedback, real iteration.</p>
         </div>
       </div>
       <div class="proc-step fade-up d2">
         <div class="step-num">03</div>
         <div class="step-body">
-          <h3>More than code</h3>
-          <p>Marketing to get your product in front of real users and growing — not just code that ships and sits.</p>
+          <h3 data-i18n="proc3Title">More than code</h3>
+          <p data-i18n="proc3Desc">Marketing to get your product in front of real users and growing — not just code that ships and sits.</p>
         </div>
       </div>
       <div class="proc-step fade-up d3">
         <div class="step-num">04</div>
         <div class="step-body">
-          <h3>Transparent by default</h3>
-          <p>Weekly updates, clear progress. No surprises, no hidden blockers.</p>
+          <h3 data-i18n="proc4Title">Transparent by default</h3>
+          <p data-i18n="proc4Desc">Weekly updates, clear progress. No surprises, no hidden blockers.</p>
         </div>
       </div>
     </div>
@@ -927,16 +1043,16 @@
 <section id="stack">
   <div class="container">
     <div class="stack-head">
-      <p class="eyebrow fade-up">What we do</p>
-      <h2 class="sec-title fade-up d1">Everything under one roof</h2>
-      <p class="sec-desc fade-up d2">Two teams, one goal — get your product built, launched, and growing.</p>
+      <p class="eyebrow fade-up" data-i18n="servEyebrow">What we do</p>
+      <h2 class="sec-title fade-up d1" data-i18n="servTitle">Everything under one roof</h2>
+      <p class="sec-desc fade-up d2" data-i18n="servDesc">Two teams, one goal — get your product built, launched, and growing.</p>
     </div>
     <div class="stack-grid">
       <div class="stack-cat fade-up">
         <div class="sc-icon">💻</div>
-        <div class="sc-name">Development</div>
-        <p class="sc-desc">Full-stack engineering — web, mobile, maps &amp; real-time apps built from scratch and shipped to production.</p>
-        <div class="sc-title">We build with</div>
+        <div class="sc-name" data-i18n="devName">Development</div>
+        <p class="sc-desc" data-i18n="devDesc">Full-stack engineering — web, mobile, maps &amp; real-time apps built from scratch and shipped to production.</p>
+        <div class="sc-title" data-i18n="devSub">We build with</div>
         <div class="sc-tags">
           <span class="sc-tag">TypeScript</span>
           <span class="sc-tag">React</span>
@@ -951,9 +1067,9 @@
       </div>
       <div class="stack-cat fade-up d1">
         <div class="sc-icon">📈</div>
-        <div class="sc-name">Marketing</div>
-        <p class="sc-desc">A dedicated marketing team to launch your product, reach real users, and drive growth.</p>
-        <div class="sc-title">We handle</div>
+        <div class="sc-name" data-i18n="mktName">Marketing</div>
+        <p class="sc-desc" data-i18n="mktDesc">A dedicated marketing team to launch your product, reach real users, and drive growth.</p>
+        <div class="sc-title" data-i18n="mktSub">We handle</div>
         <div class="sc-tags">
           <span class="sc-tag">Launch</span>
           <span class="sc-tag">Growth</span>
@@ -972,12 +1088,12 @@
   <div class="contact-glow"></div>
   <div class="container">
     <div class="contact-wrap">
-      <p class="eyebrow fade-up">Let's talk</p>
-      <h2 class="sec-title fade-up d1">
+      <p class="eyebrow fade-up" data-i18n="contactEyebrow">Let's talk</p>
+      <h2 class="sec-title fade-up d1" data-i18n-html="contactTitle">
         Got an idea?<br>
         <span class="gradient-text">Let's build it.</span>
       </h2>
-      <p class="sec-desc fade-up d2">
+      <p class="sec-desc fade-up d2" data-i18n-html="contactDesc">
         Tell us what you're building. First call is free.<br>
         OnlyMaxon is currently taking on new projects and collaborations.
       </p>
@@ -987,7 +1103,7 @@
             <rect x="2" y="4" width="20" height="16" rx="2"/>
             <path d="M2 7l10 7 10-7"/>
           </svg>
-          Send an Email
+          <span data-i18n="contactBtnEmail">Send an Email</span>
         </a>
         <a href="https://github.com/OnlyMaxon" target="_blank" class="btn btn-secondary">
           <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
@@ -1015,8 +1131,8 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <span class="ft">© 2026 OnlyMaxon Studio. All rights reserved.</span>
-      <span class="ft">🌍 Available worldwide · Remote-first</span>
+      <span class="ft" data-i18n="footerCopyright">© 2026 OnlyMaxon Studio. All rights reserved.</span>
+      <span class="ft" data-i18n="footerTagline">📍 Warsaw · Apps &amp; websites for local business</span>
     </div>
   </div>
 </footer>
@@ -1044,6 +1160,120 @@
   navBackdrop.addEventListener('click', () => setMenu(false));
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
   window.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+  // ── Languages (i18n) ──
+  // Base language is EN (source of truth). PL is the default shown.
+  const translations = {
+    // NAV
+    navWork:       { en: "Work",         pl: "Projekty",   ru: "Работы" },
+    navProcess:    { en: "Process",      pl: "Proces",     ru: "Процесс" },
+    navServices:   { en: "Services",     pl: "Usługi",     ru: "Услуги" },
+    navCta:        { en: "Work With Us", pl: "Współpraca",  ru: "Сотрудничество" },
+
+    // HERO
+    heroBadge:     { en: "Warsaw · Apps & websites for local business", pl: "Warszawa · Aplikacje i strony dla lokalnego biznesu", ru: "Варшава · Приложения и сайты для локального бизнеса" },
+    heroTitle:     { en: 'Websites &amp; apps that<br><span class="gradient-text">win you customers.</span>', pl: 'Strony i aplikacje, które<br><span class="gradient-text">przynoszą klientów.</span>', ru: 'Сайты и приложения, которые<br><span class="gradient-text">приводят клиентов.</span>' },
+    heroSub:       { en: "<strong>OnlyMaxon</strong> is a product studio. We design, build, launch and grow real products — <strong>development and marketing</strong> under one roof.", pl: "<strong>OnlyMaxon</strong> to studio produktowe. Projektujemy, budujemy, wdrażamy i rozwijamy prawdziwe produkty — <strong>development i marketing</strong> pod jednym dachem.", ru: "<strong>OnlyMaxon</strong> — продуктовая студия. Проектируем, разрабатываем, запускаем и развиваем реальные продукты — <strong>разработка и маркетинг</strong> под одной крышей." },
+    heroBtnCall:     { en: "Book a Call",  pl: "Umów rozmowę",    ru: "Записаться на звонок" },
+    heroBtnProjects: { en: "See Projects", pl: "Zobacz projekty", ru: "Смотреть проекты" },
+    heroStatProducts:{ en: "Products Built", pl: "Zbudowanych produktów", ru: "Продуктов создано" },
+    heroStatMvpVal:  { en: "3–6w",        pl: "3–6 tyg.",   ru: "3–6 нед." },
+    heroStatMvp:     { en: "MVP Timeline",pl: "Czas MVP",   ru: "Срок MVP" },
+
+    // PRICING
+    pricingEyebrow: { en: "Pricing",              pl: "Cennik",              ru: "Цены" },
+    pricingTitle:   { en: "Simple, upfront pricing", pl: "Proste, jasne ceny", ru: "Простые, прозрачные цены" },
+    pricingDesc:    { en: "Price and timeline up front — no hidden costs.", pl: "Cena i termin od razu — bez ukrytych kosztów.", ru: "Цена и срок сразу — без скрытых расходов." },
+    price1Name:   { en: "Business-card website",       pl: "Strona wizytówka",           ru: "Сайт-визитка" },
+    price1Amount: { en: "1500 zł",                     pl: "1500 zł",                    ru: "1500 zł" },
+    price1Time:   { en: "1 week",                      pl: "1 tydzień",                  ru: "1 неделя" },
+    price2Name:   { en: "Website with online booking", pl: "Strona z rezerwacją online", ru: "Сайт с онлайн-бронированием" },
+    price2Amount: { en: "2500 zł",                     pl: "2500 zł",                    ru: "2500 zł" },
+    price2Time:   { en: "2 weeks",                     pl: "2 tygodnie",                 ru: "2 недели" },
+    price3Name:   { en: "Mobile app",                  pl: "Aplikacja mobilna",          ru: "Мобильное приложение" },
+    price3Amount: { en: "from 5000 zł",                pl: "od 5000 zł",                 ru: "от 5000 zł" },
+    price3Time:   { en: "4–6 weeks",                   pl: "4–6 tygodni",                ru: "4–6 недель" },
+    priceCta:     { en: "Get in touch",                pl: "Napisz do nas",              ru: "Написать нам" },
+
+    // PROJECTS
+    projEyebrow: { en: "Our work", pl: "Nasze prace", ru: "Наши работы" },
+    projTitle:   { en: "Products we've brought to life", pl: "Produkty, które ożywiliśmy", ru: "Продукты, которые мы оживили" },
+    projDesc:    { en: "Real products used by real people — designed, built, and launched by OnlyMaxon.", pl: "Prawdziwe produkty używane przez prawdziwych ludzi — zaprojektowane, zbudowane i wdrożone przez OnlyMaxon.", ru: "Реальные продукты для реальных людей — спроектированы, созданы и запущены OnlyMaxon." },
+    badgeLive:   { en: "Live",     pl: "Live",       ru: "Онлайн" },
+    badgeDev:    { en: "In dev",   pl: "W budowie",  ru: "В разработке" },
+    linkVisit:   { en: "Visit site", pl: "Zobacz stronę", ru: "Открыть сайт" },
+    linkInDev:   { en: "In development", pl: "W budowie", ru: "В разработке" },
+    projNextcargo: { en: "Cargo & delivery platform with full client cabinet, real-time support chat, and shipment tracking.", pl: "Platforma cargo i dostaw z pełnym panelem klienta, czatem wsparcia w czasie rzeczywistym i śledzeniem przesyłek.", ru: "Платформа грузоперевозок и доставки с полным кабинетом клиента, чатом поддержки в реальном времени и отслеживанием отправлений." },
+    projBirklik:   { en: "Rental marketplace for Azerbaijan — booking calendar, host dashboard, tiered listings, and payment integration.", pl: "Marketplace wynajmu dla Azerbejdżanu — kalendarz rezerwacji, panel gospodarza, listingi i integracja płatności.", ru: "Маркетплейс аренды для Азербайджана — календарь бронирований, панель хоста, тарифные объявления и приём платежей." },
+    projYodin:     { en: "Social platform for international students, built in-house at Akademia Vistula — working on-site with the development team. Behavior-based matching across nationalities.", pl: "Platforma społecznościowa dla studentów zagranicznych, tworzona wewnętrznie w Akademii Vistula — praca na miejscu z zespołem developerskim. Dopasowanie oparte na zachowaniach między narodowościami.", ru: "Социальная платформа для иностранных студентов, разработана внутри Akademia Vistula — работа на месте с командой разработки. Подбор по поведению между национальностями." },
+    projVelodar:   { en: "Waze for cyclists in Poland — real-time community map with live reports of police raids, road hazards, obstacles, and safe route alerts.", pl: "Waze dla rowerzystów w Polsce — mapa społeczności w czasie rzeczywistym ze zgłoszeniami kontroli policji, zagrożeń, przeszkód i bezpiecznych tras.", ru: "Waze для велосипедистов в Польше — карта сообщества в реальном времени с отметками рейдов, опасностей, препятствий и безопасных маршрутов." },
+
+    // PROCESS
+    procEyebrow: { en: "How we work", pl: "Jak pracujemy", ru: "Как мы работаем" },
+    procTitle:   { en: "You focus on the vision.<br>We handle the rest.", pl: "Ty skupiasz się na wizji.<br>My robimy resztę.", ru: "Ты — на видении.<br>Мы — на всём остальном." },
+    procDesc:    { en: "One team takes your idea from first sketch to a live, growing product — and you stay in control the whole way.", pl: "Jeden zespół prowadzi Twój pomysł od pierwszego szkicu do działającego, rozwijającego się produktu — a Ty przez cały czas masz kontrolę.", ru: "Одна команда ведёт твою идею от первого наброска до живого, растущего продукта — а ты всё время сохраняешь контроль." },
+    proc1Title: { en: "End-to-end delivery", pl: "Realizacja end-to-end", ru: "Реализация под ключ" },
+    proc1Desc:  { en: "Design, code, deployment, launch — we handle everything, so you don't have to juggle it.", pl: "Projekt, kod, wdrożenie, launch — zajmujemy się wszystkim, żebyś nie musiał tego ogarniać.", ru: "Дизайн, код, деплой, запуск — берём всё на себя, чтобы тебе не пришлось всё это разруливать." },
+    proc2Title: { en: "Ship fast", pl: "Szybkie wdrożenie", ru: "Быстрый запуск" },
+    proc2Desc:  { en: "MVPs in 3–6 weeks, not 6 months. Real users, real feedback, real iteration.", pl: "MVP w 3–6 tygodni, nie 6 miesięcy. Prawdziwi użytkownicy, prawdziwy feedback, prawdziwa iteracja.", ru: "MVP за 3–6 недель, а не за 6 месяцев. Реальные пользователи, реальный фидбэк, реальные итерации." },
+    proc3Title: { en: "More than code", pl: "Więcej niż kod", ru: "Больше, чем код" },
+    proc3Desc:  { en: "Marketing to get your product in front of real users and growing — not just code that ships and sits.", pl: "Marketing, żeby Twój produkt trafił do prawdziwych użytkowników i rósł — a nie tylko kod, który leży bezczynnie.", ru: "Маркетинг, чтобы продукт дошёл до реальных пользователей и рос — а не просто код, который лежит без дела." },
+    proc4Title: { en: "Transparent by default", pl: "Domyślnie transparentnie", ru: "Прозрачность по умолчанию" },
+    proc4Desc:  { en: "Weekly updates, clear progress. No surprises, no hidden blockers.", pl: "Cotygodniowe aktualizacje, jasny postęp. Bez niespodzianek i ukrytych blokad.", ru: "Еженедельные апдейты, понятный прогресс. Без сюрпризов и скрытых блокеров." },
+
+    // SERVICES
+    servEyebrow: { en: "What we do", pl: "Co robimy", ru: "Что мы делаем" },
+    servTitle:   { en: "Everything under one roof", pl: "Wszystko pod jednym dachem", ru: "Всё под одной крышей" },
+    servDesc:    { en: "Two teams, one goal — get your product built, launched, and growing.", pl: "Dwa zespoły, jeden cel — zbudować, wdrożyć i rozwijać Twój produkt.", ru: "Две команды, одна цель — создать, запустить и развивать твой продукт." },
+    devName: { en: "Development", pl: "Development", ru: "Разработка" },
+    devDesc: { en: "Full-stack engineering — web, mobile, maps & real-time apps built from scratch and shipped to production.", pl: "Inżynieria full-stack — web, mobile, mapy i aplikacje real-time budowane od zera i wdrażane na produkcję.", ru: "Full-stack инженерия — web, mobile, карты и real-time приложения с нуля и до продакшена." },
+    devSub:  { en: "We build with", pl: "Budujemy w", ru: "Мы используем" },
+    mktName: { en: "Marketing", pl: "Marketing", ru: "Маркетинг" },
+    mktDesc: { en: "A dedicated marketing team to launch your product, reach real users, and drive growth.", pl: "Dedykowany zespół marketingowy, który wypuści Twój produkt, dotrze do realnych użytkowników i napędzi wzrost.", ru: "Отдельная маркетинговая команда, чтобы запустить продукт, привести реальных пользователей и обеспечить рост." },
+    mktSub:  { en: "We handle", pl: "Zajmujemy się", ru: "Мы занимаемся" },
+
+    // CONTACT
+    contactEyebrow: { en: "Let's talk", pl: "Porozmawiajmy", ru: "Давай обсудим" },
+    contactTitle:   { en: 'Got an idea?<br><span class="gradient-text">Let\'s build it.</span>', pl: 'Masz pomysł?<br><span class="gradient-text">Zbudujmy go.</span>', ru: 'Есть идея?<br><span class="gradient-text">Давай сделаем.</span>' },
+    contactDesc:    { en: "Tell us what you're building. First call is free.<br>OnlyMaxon is currently taking on new projects and collaborations.", pl: "Powiedz nam, co budujesz. Pierwsza rozmowa jest bezpłatna.<br>OnlyMaxon przyjmuje teraz nowe projekty i współprace.", ru: "Расскажи, что ты создаёшь. Первый созвон — бесплатно.<br>OnlyMaxon сейчас берёт новые проекты и коллаборации." },
+    contactBtnEmail:{ en: "Send an Email", pl: "Napisz e-mail", ru: "Написать письмо" },
+
+    // FOOTER
+    footerCopyright: { en: "© 2026 OnlyMaxon Studio. All rights reserved.", pl: "© 2026 OnlyMaxon Studio. Wszelkie prawa zastrzeżone.", ru: "© 2026 OnlyMaxon Studio. Все права защищены." },
+    footerTagline:   { en: "📍 Warsaw · Apps & websites for local business", pl: "📍 Warszawa · Aplikacje i strony dla lokalnego biznesu", ru: "📍 Варшава · Приложения и сайты для локального бизнеса" }
+  };
+
+  const LANGS = ['pl', 'ru', 'en'];
+  const langButtons = document.querySelectorAll('#langSwitch button');
+
+  function pick(entry, lang) {
+    if (!entry) return null;
+    return (entry[lang] && entry[lang].length) ? entry[lang] : (entry.en || entry.pl || '');
+  }
+  function applyLang(lang) {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const v = pick(translations[el.getAttribute('data-i18n')], lang);
+      if (v !== null) el.textContent = v;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const v = pick(translations[el.getAttribute('data-i18n-html')], lang);
+      if (v !== null) el.innerHTML = v;
+    });
+    document.documentElement.lang = lang;
+    langButtons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  }
+  function setLang(lang) {
+    if (!LANGS.includes(lang)) lang = 'en';
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+    applyLang(lang);
+  }
+  langButtons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+  const urlLang = new URLSearchParams(location.search).get('lang');
+  let saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  const initialLang = LANGS.includes(urlLang) ? urlLang : (LANGS.includes(saved) ? saved : 'en');
+  applyLang(initialLang);
 
   // ── Scroll reveal ──
   const io = new IntersectionObserver((entries) => {
