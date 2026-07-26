@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnlyMaxon — QR card</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #06080C; --blue: #22D3EE; --purple: #2C8A9C;
+      --text: #EAF2F6; --text-d: #93A6B2; --border: rgba(255,255,255,0.08);
+    }
+    body {
+      background: #0e1117;
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 24px; padding: 30px;
+    }
+
+    /* ── the card (A6 flyer, portrait) ── */
+    .card {
+      width: 340px; height: 520px;
+      background: var(--bg);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      padding: 34px 34px 30px;
+      color: var(--text);
+    }
+    /* gradient top hairline */
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--purple));
+      z-index: 2;
+    }
+    .glow-a, .glow-b { position: absolute; pointer-events: none; }
+    .glow-a {
+      width: 420px; height: 420px; top: -170px; right: -160px;
+      background: radial-gradient(circle, rgba(34,211,238,0.20) 0%, transparent 65%);
+      filter: blur(30px);
+    }
+    .glow-b {
+      width: 360px; height: 360px; bottom: -150px; left: -150px;
+      background: radial-gradient(circle, rgba(44,138,156,0.18) 0%, transparent 65%);
+      filter: blur(30px);
+    }
+    .card > .content { position: relative; z-index: 1; display: contents; }
+
+    /* logo mark (dark bg dropped via screen blend) */
+    .logo-img {
+      height: 92px; width: auto; display: block; margin: 4px auto 0;
+      mix-blend-mode: screen;
+      -webkit-mask-image:
+        linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%),
+        linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, transparent 100%);
+      -webkit-mask-composite: source-in;
+      mask-image:
+        linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%),
+        linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, transparent 100%);
+      mask-composite: intersect;
+    }
+    .tagline {
+      margin-top: 6px; font-size: 13.5px; line-height: 1.5;
+      color: var(--text-d); max-width: 240px;
+    }
+    .tagline b { color: var(--text); font-weight: 600; }
+
+    .qr-wrap { position: relative; margin: 22px 0 16px; }
+    .qr-tile {
+      background: #fff; border-radius: 18px;
+      padding: 15px; line-height: 0;
+      box-shadow: 0 12px 40px rgba(34,211,238,0.18);
+    }
+    .qr-tile img { width: 188px; height: 188px; display: block; }
+    /* logo badge in the centre of the QR */
+    .qr-badge {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 46px; height: 46px; border-radius: 11px;
+      background: #06080C; border: 3px solid #fff;
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    .qr-badge img {
+      width: 150%; height: 150%; object-fit: cover; object-position: 50% 38%;
+    }
+
+    .scan {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600; font-size: 15px; color: var(--blue);
+    }
+    .scan svg { width: 16px; height: 16px; }
+
+    .foot {
+      margin-top: auto; padding-top: 20px;
+      display: flex; flex-direction: column; gap: 3px;
+      font-size: 13px; color: var(--text-d);
+    }
+    .foot .site { color: var(--blue); font-weight: 600; font-size: 14px; }
+    .foot .mail { color: var(--text); font-weight: 600; }
+    .foot .ig { color: var(--text-d); font-size: 12px; }
+
+    /* ── screen-only controls ── */
+    .controls { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      background: var(--blue); color: #04141A;
+      border: none; font-family: inherit; font-weight: 700; font-size: 14px;
+      padding: 12px 24px; border-radius: 10px; cursor: pointer;
+    }
+    .hint { color: #8b97a3; font-size: 13px; max-width: 380px; text-align: center; line-height: 1.6; }
+
+    /* ── print ── */
+    @media print {
+      body { background: #fff; padding: 0; gap: 0; }
+      .controls, .hint { display: none !important; }
+      .card { width: 100mm; height: 148mm; border-radius: 0; border: none; }
+      @page { size: A6; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="glow-a"></div>
+    <div class="glow-b"></div>
+
+    <img class="logo-img" src="images/logo.jpg" alt="OnlyMaxon">
+    <div class="tagline"><b>Dreaming of your own website or app?</b><br>Your idea, your brand — made real.</div>
+
+    <div class="qr-wrap">
+      <div class="qr-tile">
+        <img alt="Scan to visit onlymaxon.com"
+             src="https://api.qrserver.com/v1/create-qr-code/?size=600x600&ecc=H&margin=0&color=06080C&bgcolor=FFFFFF&data=https%3A%2F%2Fonlymaxon.com">
+      </div>
+      <div class="qr-badge"><img src="images/logo.jpg" alt=""></div>
+    </div>
+
+    <div class="scan">
+      Scan me
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </div>
+
+    <div class="foot">
+      <span class="site">onlymaxon.com</span>
+      <span class="mail">hello@onlymaxon.com</span>
+      <span class="ig">@0nlyMaxon</span>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" onclick="window.print()">🖨 Print card</button>
+  </div>
+  <p class="hint">
+    A6 flyer. Hit <b>Print</b> (or Ctrl/Cmd+P) → save as PDF or print on paper/sticker.
+    <b>Scan-test with your phone before printing a batch</b> — the centre logo covers part of the code,
+    so make sure it still reads.
+  </p>
+
+</body>
+</html>
