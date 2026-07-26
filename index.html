@@ -172,6 +172,7 @@
       z-index: 90;
     }
     .nav-backdrop.open { opacity: 1; visibility: visible; }
+    .nav-m-only { display: none; }   /* mobile-menu extras: hidden on desktop */
 
     /* ── HERO ─────────────────────────────── */
     #hero {
@@ -671,9 +672,11 @@
     .pricing-head { text-align: center; margin-bottom: 60px; }
     .pricing-head .sec-desc { margin: 0 auto; }
     .pricing-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 22px; max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 20px; max-width: 1160px; margin: 0 auto;
     }
+    @media (max-width: 1040px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); max-width: 640px; } }
+    @media (max-width: 560px)  { .pricing-grid { grid-template-columns: 1fr; max-width: 380px; } }
     .price-card {
       display: flex; flex-direction: column;
       background: var(--bg2); border: 1px solid var(--border);
@@ -765,7 +768,6 @@
     /* ── RESPONSIVE ───────────────────────── */
     @media (max-width: 860px) {
       .stack-grid { grid-template-columns: 1fr; max-width: 460px; }
-      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
       .footer-inner { flex-direction: column; gap: 10px; text-align: center; }
     }
     @media (max-width: 640px) {
@@ -780,24 +782,57 @@
     }
     @media (max-width: 600px) {
       .nav-toggle { display: flex; }
+      #langSwitch { display: none; }   /* top-bar lang hidden; use in-panel one */
       .nav-links {
         position: fixed; top: 0; right: 0;
-        height: 100vh; width: min(80vw, 320px);
-        flex-direction: column; align-items: flex-start;
-        justify-content: center; gap: 6px;
+        height: 100vh; width: min(85vw, 340px);
+        flex-direction: column; align-items: stretch;
+        justify-content: flex-start; gap: 0;
         background: rgba(8,11,18,0.98);
         -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
         border-left: 1px solid var(--border);
-        padding: 40px 34px;
+        padding: 82px 30px 30px;
+        overflow-y: auto;
         transform: translateX(100%);
         transition: transform 0.38s cubic-bezier(.4,0,.2,1);
       }
       .nav-links.open { transform: translateX(0); }
       .nav-links li { width: 100%; }
-      .nav-links a { display: block; font-size: 18px; padding: 12px 0; }
-      .nav-cta { display: inline-block; margin-top: 14px; }
+      .nav-links a {
+        display: block; font-size: 19px; font-weight: 500;
+        padding: 15px 0; color: var(--text);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links a:hover { color: var(--blue); }
+      .nav-cta {
+        display: block !important; text-align: center;
+        margin-top: 20px; border-bottom: none !important;
+      }
       .nav-right { gap: 12px; }
-      .lang-switch button { padding: 4px 7px; font-size: 11px; }
+
+      .nav-m-only { display: flex; }
+      .nav-m-brand {
+        flex-direction: column; gap: 5px;
+        padding-bottom: 18px; margin-bottom: 8px;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-m-logo {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700; font-size: 22px; color: var(--text); letter-spacing: -0.5px;
+      }
+      .nav-m-logo span { color: var(--blue); }
+      .nav-m-tag { font-size: 12px; color: var(--text-d); line-height: 1.4; }
+      .nav-m-extra {
+        flex-direction: column; gap: 16px;
+        margin-top: auto; padding-top: 24px; align-items: flex-start;
+      }
+      .nav-m-extra .lang-switch { align-self: stretch; justify-content: center; }
+      .nav-m-extra .lang-switch button { flex: 1; padding: 8px 0; font-size: 13px; }
+      .nav-m-mail {
+        font-size: 14px; color: var(--text-d) !important;
+        padding: 0 !important; border-bottom: none !important;
+      }
+      .nav-m-mail:hover { color: var(--blue) !important; }
     }
 
     /* respect users who prefer reduced motion */
@@ -840,10 +875,22 @@
       <a href="#hero" class="nav-logo">OnlyMaxon<span>.</span></a>
       <div class="nav-right">
         <ul class="nav-links" id="navLinks">
+          <li class="nav-m-only nav-m-brand" aria-hidden="true">
+            <span class="nav-m-logo">OnlyMaxon<span>.</span></span>
+            <span class="nav-m-tag" data-i18n="heroBadge">Working worldwide · Taking new projects</span>
+          </li>
           <li><a href="#projects" data-i18n="navWork">Work</a></li>
           <li><a href="#process" data-i18n="navProcess">Process</a></li>
           <li><a href="#stack" data-i18n="navServices">Services</a></li>
           <li><a href="#contact" class="nav-cta" data-i18n="navCta">Work With Us</a></li>
+          <li class="nav-m-only nav-m-extra">
+            <div class="lang-switch" role="group" aria-label="Language">
+              <button type="button" data-lang="pl">PL</button>
+              <button type="button" data-lang="ru">RU</button>
+              <button type="button" data-lang="en">EN</button>
+            </div>
+            <a class="nav-m-mail" href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a>
+          </li>
         </ul>
         <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
           <button type="button" data-lang="pl">PL</button>
@@ -925,26 +972,32 @@
     <div class="pricing-head">
       <p class="eyebrow fade-up" data-i18n="pricingEyebrow">Pricing</p>
       <h2 class="sec-title fade-up d1" data-i18n="pricingTitle">Simple, upfront pricing</h2>
-      <p class="sec-desc fade-up d2" data-i18n="pricingDesc">Price and timeline up front — no hidden costs.</p>
+      <p class="sec-desc fade-up d2" data-i18n="pricingDesc">Dreaming of a website or app — for your business, your idea, or someone you love? Here's the price and timeline up front, no hidden costs.</p>
     </div>
     <div class="pricing-grid">
       <div class="price-card fade-up">
         <div class="price-name" data-i18n="price1Name">Business-card website</div>
         <div class="price-amount" data-i18n="price1Amount">from €390</div>
         <div class="price-time" data-i18n="price1Time">1 week</div>
-        <a href="mailto:hello@onlymaxon.com" class="btn btn-secondary" data-i18n="priceCta">Get in touch</a>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-secondary" data-modal-open data-i18n="priceCta">Get in touch</a>
       </div>
       <div class="price-card featured fade-up d1">
         <div class="price-name" data-i18n="price2Name">Website with online booking</div>
         <div class="price-amount" data-i18n="price2Amount">from €690</div>
         <div class="price-time" data-i18n="price2Time">2 weeks</div>
-        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-i18n="priceCta">Get in touch</a>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
       </div>
       <div class="price-card fade-up d2">
         <div class="price-name" data-i18n="price3Name">Mobile app</div>
         <div class="price-amount" data-i18n="price3Amount">from €1400</div>
         <div class="price-time" data-i18n="price3Time">4–6 weeks</div>
-        <a href="mailto:hello@onlymaxon.com" class="btn btn-secondary" data-i18n="priceCta">Get in touch</a>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-secondary" data-modal-open data-i18n="priceCta">Get in touch</a>
+      </div>
+      <div class="price-card fade-up d3">
+        <div class="price-name" data-i18n="price4Name">Marketing &amp; growth</div>
+        <div class="price-amount" data-i18n="price4Amount">from €300/mo</div>
+        <div class="price-time" data-i18n="price4Time">monthly · ongoing</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-secondary" data-modal-open data-i18n="priceCta">Get in touch</a>
       </div>
     </div>
   </div>
@@ -1237,7 +1290,7 @@
     // PRICING
     pricingEyebrow: { en: "Pricing",              pl: "Cennik",              ru: "Цены" },
     pricingTitle:   { en: "Simple, upfront pricing", pl: "Proste, jasne ceny", ru: "Простые, прозрачные цены" },
-    pricingDesc:    { en: "Price and timeline up front — no hidden costs.", pl: "Cena i termin od razu — bez ukrytych kosztów.", ru: "Цена и срок сразу — без скрытых расходов." },
+    pricingDesc:    { en: "Dreaming of a website or app — for your business, your idea, or someone you love? Here's the price and timeline up front, no hidden costs.", pl: "Marzysz o stronie lub aplikacji — dla swojego biznesu, pomysłu albo kogoś bliskiego? Oto cena i termin z góry, bez ukrytych kosztów.", ru: "Мечтаешь о сайте или приложении — для бизнеса, своей идеи или близкого человека? Вот цена и сроки сразу, без скрытых расходов." },
     price1Name:   { en: "Business-card website",       pl: "Strona wizytówka",           ru: "Сайт-визитка" },
     price1Amount: { en: "from €390",                   pl: "od 390 €",                   ru: "от 390 €" },
     price1Time:   { en: "1 week",                      pl: "1 tydzień",                  ru: "1 неделя" },
@@ -1247,6 +1300,9 @@
     price3Name:   { en: "Mobile app",                  pl: "Aplikacja mobilna",          ru: "Мобильное приложение" },
     price3Amount: { en: "from €1400",                  pl: "od 1400 €",                  ru: "от 1400 €" },
     price3Time:   { en: "4–6 weeks",                   pl: "4–6 tygodni",                ru: "4–6 недель" },
+    price4Name:   { en: "Marketing & growth",          pl: "Marketing i rozwój",         ru: "Маркетинг и рост" },
+    price4Amount: { en: "from €300/mo",                pl: "od 300 €/mies",              ru: "от 300 €/мес" },
+    price4Time:   { en: "monthly · ongoing",           pl: "miesięcznie",                ru: "ежемесячно" },
     priceCta:     { en: "Get in touch",                pl: "Napisz do nas",              ru: "Написать нам" },
 
     // PROJECTS
@@ -1307,7 +1363,7 @@
   };
 
   const LANGS = ['pl', 'ru', 'en'];
-  const langButtons = document.querySelectorAll('#langSwitch button');
+  const langButtons = document.querySelectorAll('.lang-switch button');
 
   function pick(entry, lang) {
     if (!entry) return null;
