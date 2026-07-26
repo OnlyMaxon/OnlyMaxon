@@ -6,9 +6,9 @@
 
 **We turn ideas into working products.**
 
-A product studio — *development & SEO under one roof.*
+A product studio — *development & SEO/ASO under one roof.*
 
-[![Portfolio](https://img.shields.io/badge/◆%20Portfolio-0E7490?style=for-the-badge&logoColor=white)](https://onlymaxon.github.io/OnlyMaxon/)
+[![Portfolio](https://img.shields.io/badge/◆%20Portfolio-0E7490?style=for-the-badge&logoColor=white)](https://onlymaxon.com)
 
 [![Instagram](https://img.shields.io/badge/Instagram-E1306C?style=flat-square&logo=instagram&logoColor=white)](https://www.instagram.com/0nlyMaxon)
 [![Email](https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:hello@onlymaxon.com)
@@ -19,9 +19,9 @@ A product studio — *development & SEO under one roof.*
 
 ### 🚀 What we do
 
-**💻 Development**  ·  **🔍 SEO**
+**💻 Development**  ·  **🔍 SEO / ASO**
 
-Everything a product needs — from the first sketch to launch and growth.
+Websites, apps, and the visibility to get them found — from first sketch to launch.
 
 ---
 

@@ -49,6 +49,21 @@
   }
   </script>
 
+  <!-- FAQ structured data (rich results in Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How much does a website cost?", "acceptedAnswer": { "@type": "Answer", "text": "Websites start at €390 (business-card) and €690 (with online booking). Mobile apps from €1400. You always see the price and timeline before we start — no hidden costs." } },
+      { "@type": "Question", "name": "How long does it take?", "acceptedAnswer": { "@type": "Answer", "text": "A simple website takes about 1 week, a booking site around 2 weeks, and a mobile app 4-6 weeks. We agree the timeline up front and send you weekly updates." } },
+      { "@type": "Question", "name": "Do I own the website and the code?", "acceptedAnswer": { "@type": "Answer", "text": "Yes - 100%. Once it's done, the site, the code and all accounts are fully yours. No lock-in, no strings attached." } },
+      { "@type": "Question", "name": "What if I need changes later?", "acceptedAnswer": { "@type": "Answer", "text": "No problem. Small tweaks are easy, and for ongoing work (new features, SEO/ASO) we agree a clear rate up front. You're never stuck." } },
+      { "@type": "Question", "name": "How do we start?", "acceptedAnswer": { "@type": "Answer", "text": "Just send a message with your idea. The first call is free - we'll figure out what you need, give you a price and timeline, and start whenever you're ready." } }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -142,6 +157,7 @@
       font-size: 14px; font-weight: 500; transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--text); }
+    .nav-links a.current { color: var(--blue); }
     .nav-cta {
       background: var(--blue) !important;
       color: #04141A !important;
@@ -446,6 +462,15 @@
       font-size: 58px; position: relative; z-index: 1;
       filter: drop-shadow(0 4px 16px rgba(0,0,0,0.6));
     }
+    .proj-logo {
+      position: relative; z-index: 1;
+      max-width: 78%; max-height: 78%;
+      object-fit: contain; display: block;
+      filter: drop-shadow(0 6px 22px rgba(0,0,0,0.45));
+    }
+    .pl-birklik  { max-width: 92%; mix-blend-mode: screen; filter: none; }
+    .pl-nextcargo{ max-width: 132px; }
+    .pl-yodin    { max-width: 116px; border-radius: 22px; }
 
     .proj-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
 
@@ -1037,7 +1062,7 @@
 
       <a href="https://nextcargo.eu" target="_blank" class="proj-card fade-up tilt">
         <div class="proj-thumb pt-nextcargo">
-          <div class="proj-icon">📦</div>
+          <img class="proj-logo pl-nextcargo" src="images/nextcargo.png" alt="nextcargo.eu logo">
         </div>
         <div class="proj-body">
           <div class="proj-name">nextcargo.eu <span class="badge-live" data-i18n="badgeLive">Live</span></div>
@@ -1056,7 +1081,7 @@
 
       <a href="https://birklik.az" target="_blank" class="proj-card fade-up d1 tilt">
         <div class="proj-thumb pt-birklik">
-          <div class="proj-icon">🏠</div>
+          <img class="proj-logo pl-birklik" src="images/birklik.png" alt="birklik.az logo">
         </div>
         <div class="proj-body">
           <div class="proj-name">birklik.az <span class="badge-live" data-i18n="badgeLive">Live</span></div>
@@ -1081,7 +1106,7 @@
 
       <div class="proj-card fade-up tilt">
         <div class="proj-thumb pt-yodin">
-          <div class="proj-icon">🌍</div>
+          <img class="proj-logo pl-yodin" src="images/yodin.png" alt="yOdin logo">
         </div>
         <div class="proj-body">
           <div class="proj-name">yOdin <span class="badge-dev" data-i18n="badgeDev">In dev</span></div>
@@ -1590,6 +1615,23 @@
       modalStatus.textContent = pick(translations.modalError, lang) || 'Error';
     }
     sendBtn.disabled = false;
+  });
+
+  // ── Nav scrollspy (highlight active section) ──
+  const spyLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  const spyMap = {};
+  spyLinks.forEach(a => { const id = a.getAttribute('href').slice(1); if (id) spyMap[id] = a; });
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        spyLinks.forEach(a => a.classList.remove('current'));
+        if (spyMap[e.target.id]) spyMap[e.target.id].classList.add('current');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  ['projects', 'stack', 'process', 'contact'].forEach(id => {
+    const s = document.getElementById(id);
+    if (s) spyObserver.observe(s);
   });
 
   // ── FAQ accordion ──
