@@ -6,7 +6,7 @@
 
 **We turn ideas into working products.**
 
-A product studio — *development & marketing under one roof.*
+A product studio — *development & SEO under one roof.*
 
 [![Portfolio](https://img.shields.io/badge/◆%20Portfolio-0E7490?style=for-the-badge&logoColor=white)](https://onlymaxon.github.io/OnlyMaxon/)
 
@@ -19,7 +19,7 @@ A product studio — *development & marketing under one roof.*
 
 ### 🚀 What we do
 
-**💻 Development**  ·  **📈 Marketing**
+**💻 Development**  ·  **🔍 SEO**
 
 Everything a product needs — from the first sketch to launch and growth.
 
