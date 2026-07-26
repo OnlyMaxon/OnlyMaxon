@@ -712,6 +712,56 @@
     .small-grid .proj-name { font-size: 16px; }
     .small-grid .proj-desc { font-size: 13px; }
 
+    /* ── CONTACT MODAL ────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 300;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      background: rgba(3,5,9,0.72);
+      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.28s ease;
+    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+    .modal {
+      width: 100%; max-width: 460px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px;
+      position: relative;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 0.3s ease;
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      width: 34px; height: 34px; border-radius: 8px;
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text-d); font-size: 20px; line-height: 1;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .modal-close:hover { color: var(--text); border-color: var(--border-h); }
+    .modal h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px; font-weight: 700; margin-bottom: 8px; padding-right: 30px;
+    }
+    .modal-note { font-size: 14px; color: var(--text-d); line-height: 1.6; margin-bottom: 22px; }
+    .modal form { display: flex; flex-direction: column; gap: 12px; }
+    .modal input, .modal textarea {
+      width: 100%; background: var(--bg3);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 14px; color: var(--text);
+      font-family: inherit; font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    .modal input:focus, .modal textarea:focus { outline: none; border-color: var(--border-h); }
+    .modal textarea { resize: vertical; min-height: 110px; }
+    .modal input::placeholder, .modal textarea::placeholder { color: var(--text-m); }
+    .modal form .btn { margin-top: 4px; justify-content: center; }
+    .modal-status { font-size: 13px; text-align: center; min-height: 18px; }
+    .modal-status.ok  { color: #4ADE80; }
+    .modal-status.err { color: #F87171; }
+
     /* ── RESPONSIVE ───────────────────────── */
     @media (max-width: 860px) {
       .stack-grid { grid-template-columns: 1fr; max-width: 460px; }
@@ -838,11 +888,11 @@
         <strong>development and marketing</strong> under one roof.
       </p>
         <div class="hero-btns">
-          <a href="mailto:hello@onlymaxon.com" class="btn btn-primary">
+          <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.5 12 19.79 19.79 0 011.43 3.33 2 2 0 013.44 1.5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.29 6.29l1.78-1.78a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
             </svg>
-            <span data-i18n="heroBtnCall">Book a Call</span>
+            <span data-i18n="heroBtnCall">Send a message</span>
           </a>
           <a href="#projects" class="btn btn-secondary">
             <span data-i18n="heroBtnProjects">See Projects</span>
@@ -880,13 +930,13 @@
     <div class="pricing-grid">
       <div class="price-card fade-up">
         <div class="price-name" data-i18n="price1Name">Business-card website</div>
-        <div class="price-amount" data-i18n="price1Amount">€390</div>
+        <div class="price-amount" data-i18n="price1Amount">from €390</div>
         <div class="price-time" data-i18n="price1Time">1 week</div>
         <a href="mailto:hello@onlymaxon.com" class="btn btn-secondary" data-i18n="priceCta">Get in touch</a>
       </div>
       <div class="price-card featured fade-up d1">
         <div class="price-name" data-i18n="price2Name">Website with online booking</div>
-        <div class="price-amount" data-i18n="price2Amount">€690</div>
+        <div class="price-amount" data-i18n="price2Amount">from €690</div>
         <div class="price-time" data-i18n="price2Time">2 weeks</div>
         <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-i18n="priceCta">Get in touch</a>
       </div>
@@ -940,10 +990,10 @@
           <div class="proj-name">birklik.az <span class="badge-live" data-i18n="badgeLive">Live</span></div>
           <p class="proj-desc" data-i18n="projBirklik">Rental marketplace for Azerbaijan — booking calendar, host dashboard, tiered listings, and payment integration.</p>
           <div class="proj-tags">
+            <span class="tag">Next.js</span>
             <span class="tag">React</span>
             <span class="tag">TypeScript</span>
             <span class="tag">Firebase</span>
-            <span class="tag">Vite</span>
             <span class="tag">Capacitor</span>
           </div>
           <span class="proj-link">
@@ -963,28 +1013,13 @@
         </div>
         <div class="proj-body">
           <div class="proj-name">yOdin <span class="badge-dev" data-i18n="badgeDev">In dev</span></div>
-          <p class="proj-desc" data-i18n="projYodin">Social platform for international students, built in-house at Akademia Vistula — working on-site with the development team. Behavior-based matching across nationalities.</p>
+          <p class="proj-desc" data-i18n="projYodin">Social platform for international students across universities — behavior-based matching that connects people beyond nationalities.</p>
           <div class="proj-tags">
             <span class="tag">React Native</span>
             <span class="tag">Expo</span>
             <span class="tag">Firebase</span>
-          </div>
-          <span class="proj-link" style="opacity:0.45;cursor:default" data-i18n="linkInDev">In development</span>
-        </div>
-      </div>
-
-      <div class="proj-card fade-up d1 tilt">
-        <div class="proj-thumb pt-velodar">
-          <div class="proj-icon">🚴</div>
-        </div>
-        <div class="proj-body">
-          <div class="proj-name">Velodar <span class="badge-dev" data-i18n="badgeDev">In dev</span></div>
-          <p class="proj-desc" data-i18n="projVelodar">Waze for cyclists in Poland — real-time community map with live reports of police raids, road hazards, obstacles, and safe route alerts.</p>
-          <div class="proj-tags">
-            <span class="tag">React Native</span>
-            <span class="tag">Expo</span>
-            <span class="tag">Maps API</span>
-            <span class="tag">Real-time</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Dart</span>
           </div>
           <span class="proj-link" style="opacity:0.45;cursor:default" data-i18n="linkInDev">In development</span>
         </div>
@@ -1098,7 +1133,7 @@
         OnlyMaxon is currently taking on new projects and collaborations.
       </p>
       <div class="contact-btns fade-up d3">
-        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary">
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>
           <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <rect x="2" y="4" width="20" height="16" rx="2"/>
             <path d="M2 7l10 7 10-7"/>
@@ -1137,6 +1172,25 @@
   </div>
 </footer>
 
+<!-- ─── CONTACT MODAL ─────────────────────── -->
+<div class="modal-overlay" id="contactModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Close">&times;</button>
+    <h3 id="modalTitle" data-i18n="modalTitle">Let's work together</h3>
+    <p class="modal-note" data-i18n="modalNote">Tell us clearly what you want to build and why you'd like to work with us — the more detail you give, the faster and better we can help.</p>
+    <form id="contactForm">
+      <input type="hidden" name="access_key" value="c98b4381-eb21-4a0f-a150-d462b1530e52">
+      <input type="hidden" name="subject" value="New inquiry from onlymaxon.com">
+      <input type="hidden" name="from_name" value="OnlyMaxon website">
+      <input type="text"  name="name"  required data-i18n-ph="modalName"  placeholder="Your name">
+      <input type="email" name="email" required data-i18n-ph="modalEmail" placeholder="Your email">
+      <textarea name="message" required data-i18n-ph="modalMessage" placeholder="Describe your project and why you want to work with us…"></textarea>
+      <button type="submit" class="btn btn-primary" data-i18n="modalSend">Send message</button>
+      <div class="modal-status" id="modalStatus" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
 <script>
   // ── Sticky nav ──
   const nav = document.getElementById('nav');
@@ -1174,7 +1228,7 @@
     heroBadge:     { en: "Working worldwide · Taking new projects", pl: "Pracujemy na całym świecie · Przyjmujemy nowe projekty", ru: "Работаем по всему миру · Берём новые проекты" },
     heroTitle:     { en: 'We turn ideas<br><span class="gradient-text">into working products.</span>', pl: 'Zamieniamy pomysły<br><span class="gradient-text">w działające produkty.</span>', ru: 'Превращаем идеи<br><span class="gradient-text">в работающие продукты.</span>' },
     heroSub:       { en: "<strong>OnlyMaxon</strong> is a product studio. We design, build, launch and grow real products — <strong>development and marketing</strong> under one roof.", pl: "<strong>OnlyMaxon</strong> to studio produktowe. Projektujemy, budujemy, wdrażamy i rozwijamy prawdziwe produkty — <strong>development i marketing</strong> pod jednym dachem.", ru: "<strong>OnlyMaxon</strong> — продуктовая студия. Проектируем, разрабатываем, запускаем и развиваем реальные продукты — <strong>разработка и маркетинг</strong> под одной крышей." },
-    heroBtnCall:     { en: "Book a Call",  pl: "Umów rozmowę",    ru: "Записаться на звонок" },
+    heroBtnCall:     { en: "Send a message", pl: "Napisz do nas",  ru: "Написать нам" },
     heroBtnProjects: { en: "See Projects", pl: "Zobacz projekty", ru: "Смотреть проекты" },
     heroStatProducts:{ en: "Products Built", pl: "Zbudowanych produktów", ru: "Продуктов создано" },
     heroStatMvpVal:  { en: "3–6w",        pl: "3–6 tyg.",   ru: "3–6 нед." },
@@ -1185,10 +1239,10 @@
     pricingTitle:   { en: "Simple, upfront pricing", pl: "Proste, jasne ceny", ru: "Простые, прозрачные цены" },
     pricingDesc:    { en: "Price and timeline up front — no hidden costs.", pl: "Cena i termin od razu — bez ukrytych kosztów.", ru: "Цена и срок сразу — без скрытых расходов." },
     price1Name:   { en: "Business-card website",       pl: "Strona wizytówka",           ru: "Сайт-визитка" },
-    price1Amount: { en: "€390",                        pl: "390 €",                      ru: "390 €" },
+    price1Amount: { en: "from €390",                   pl: "od 390 €",                   ru: "от 390 €" },
     price1Time:   { en: "1 week",                      pl: "1 tydzień",                  ru: "1 неделя" },
     price2Name:   { en: "Website with online booking", pl: "Strona z rezerwacją online", ru: "Сайт с онлайн-бронированием" },
-    price2Amount: { en: "€690",                        pl: "690 €",                      ru: "690 €" },
+    price2Amount: { en: "from €690",                   pl: "od 690 €",                   ru: "от 690 €" },
     price2Time:   { en: "2 weeks",                     pl: "2 tygodnie",                 ru: "2 недели" },
     price3Name:   { en: "Mobile app",                  pl: "Aplikacja mobilna",          ru: "Мобильное приложение" },
     price3Amount: { en: "from €1400",                  pl: "od 1400 €",                  ru: "от 1400 €" },
@@ -1205,8 +1259,7 @@
     linkInDev:   { en: "In development", pl: "W budowie", ru: "В разработке" },
     projNextcargo: { en: "Cargo & delivery platform with full client cabinet, real-time support chat, and shipment tracking.", pl: "Platforma cargo i dostaw z pełnym panelem klienta, czatem wsparcia w czasie rzeczywistym i śledzeniem przesyłek.", ru: "Платформа грузоперевозок и доставки с полным кабинетом клиента, чатом поддержки в реальном времени и отслеживанием отправлений." },
     projBirklik:   { en: "Rental marketplace for Azerbaijan — booking calendar, host dashboard, tiered listings, and payment integration.", pl: "Marketplace wynajmu dla Azerbejdżanu — kalendarz rezerwacji, panel gospodarza, listingi i integracja płatności.", ru: "Маркетплейс аренды для Азербайджана — календарь бронирований, панель хоста, тарифные объявления и приём платежей." },
-    projYodin:     { en: "Social platform for international students, built in-house at Akademia Vistula — working on-site with the development team. Behavior-based matching across nationalities.", pl: "Platforma społecznościowa dla studentów zagranicznych, tworzona wewnętrznie w Akademii Vistula — praca na miejscu z zespołem developerskim. Dopasowanie oparte na zachowaniach między narodowościami.", ru: "Социальная платформа для иностранных студентов, разработана внутри Akademia Vistula — работа на месте с командой разработки. Подбор по поведению между национальностями." },
-    projVelodar:   { en: "Waze for cyclists in Poland — real-time community map with live reports of police raids, road hazards, obstacles, and safe route alerts.", pl: "Waze dla rowerzystów w Polsce — mapa społeczności w czasie rzeczywistym ze zgłoszeniami kontroli policji, zagrożeń, przeszkód i bezpiecznych tras.", ru: "Waze для велосипедистов в Польше — карта сообщества в реальном времени с отметками рейдов, опасностей, препятствий и безопасных маршрутов." },
+    projYodin:     { en: "Social platform for international students across universities — behavior-based matching that connects people beyond nationalities.", pl: "Platforma społecznościowa dla studentów zagranicznych ze wszystkich uczelni — dopasowanie oparte na zachowaniach, które łączy ludzi ponad narodowościami.", ru: "Социальная платформа для иностранных студентов из всех университетов — подбор по поведению, соединяющий людей поверх национальностей." },
 
     // PROCESS
     procEyebrow: { en: "How we work", pl: "Jak pracujemy", ru: "Как мы работаем" },
@@ -1240,7 +1293,17 @@
 
     // FOOTER
     footerCopyright: { en: "© 2026 OnlyMaxon Studio. All rights reserved.", pl: "© 2026 OnlyMaxon Studio. Wszelkie prawa zastrzeżone.", ru: "© 2026 OnlyMaxon Studio. Все права защищены." },
-    footerTagline:   { en: "🌍 Working worldwide · Remote-first", pl: "🌍 Pracujemy na całym świecie · Remote-first", ru: "🌍 Работаем по всему миру · Remote-first" }
+    footerTagline:   { en: "🌍 Working worldwide · Remote-first", pl: "🌍 Pracujemy na całym świecie · Remote-first", ru: "🌍 Работаем по всему миру · Remote-first" },
+
+    // CONTACT MODAL
+    modalTitle:   { en: "Let's work together", pl: "Popracujmy razem", ru: "Давайте поработаем вместе" },
+    modalNote:    { en: "Tell us clearly what you want to build and why you'd like to work with us — the more detail you give, the faster and better we can help.", pl: "Napisz jasno, co chcesz zbudować i dlaczego chcesz z nami pracować — im więcej szczegółów, tym szybciej i lepiej pomożemy.", ru: "Опиши чётко, что хочешь создать и почему хочешь работать с нами — чем больше деталей, тем быстрее и лучше мы поможем." },
+    modalName:    { en: "Your name", pl: "Twoje imię", ru: "Ваше имя" },
+    modalEmail:   { en: "Your email", pl: "Twój e-mail", ru: "Ваш e-mail" },
+    modalMessage: { en: "Describe your project and why you want to work with us…", pl: "Opisz swój projekt i dlaczego chcesz z nami pracować…", ru: "Опишите проект и почему хотите работать с нами…" },
+    modalSend:    { en: "Send message", pl: "Wyślij", ru: "Отправить" },
+    modalSuccess: { en: "Thanks! We'll get back to you soon.", pl: "Dziękujemy! Odezwiemy się wkrótce.", ru: "Спасибо! Скоро свяжемся с вами." },
+    modalError:   { en: "Something went wrong — please email hello@onlymaxon.com", pl: "Coś poszło nie tak — napisz na hello@onlymaxon.com", ru: "Что-то пошло не так — напишите на hello@onlymaxon.com" }
   };
 
   const LANGS = ['pl', 'ru', 'en'];
@@ -1259,6 +1322,10 @@
       const v = pick(translations[el.getAttribute('data-i18n-html')], lang);
       if (v !== null) el.innerHTML = v;
     });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const v = pick(translations[el.getAttribute('data-i18n-ph')], lang);
+      if (v !== null) el.setAttribute('placeholder', v);
+    });
     document.documentElement.lang = lang;
     langButtons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
   }
@@ -1272,8 +1339,68 @@
   const urlLang = new URLSearchParams(location.search).get('lang');
   let saved = null;
   try { saved = localStorage.getItem('lang'); } catch (e) {}
-  const initialLang = LANGS.includes(urlLang) ? urlLang : (LANGS.includes(saved) ? saved : 'en');
+  function detectDeviceLang() {
+    const list = navigator.languages || [navigator.language || ''];
+    for (const l of list) {
+      const code = (l || '').slice(0, 2).toLowerCase();
+      if (LANGS.includes(code)) return code;   // pl / ru / en
+    }
+    return 'en';                               // fallback: English
+  }
+  // priority: URL ?lang → user's saved choice → device language → English
+  const initialLang = LANGS.includes(urlLang) ? urlLang
+                    : (LANGS.includes(saved) ? saved
+                    : detectDeviceLang());
   applyLang(initialLang);
+
+  // ── Contact modal (Web3Forms) ──
+  const modal       = document.getElementById('contactModal');
+  const modalForm   = document.getElementById('contactForm');
+  const modalStatus = document.getElementById('modalStatus');
+  function openModal() {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('[data-modal-open]').forEach(el =>
+    el.addEventListener('click', e => { e.preventDefault(); openModal(); }));
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  window.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  modalForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const lang = document.documentElement.lang;
+    const sendBtn = modalForm.querySelector('button[type="submit"]');
+    modalStatus.className = 'modal-status';
+    modalStatus.textContent = '…';
+    sendBtn.disabled = true;
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(modalForm)
+      });
+      const json = await res.json();
+      if (json.success) {
+        modalStatus.className = 'modal-status ok';
+        modalStatus.textContent = pick(translations.modalSuccess, lang) || 'Thanks!';
+        modalForm.reset();
+      } else {
+        modalStatus.className = 'modal-status err';
+        modalStatus.textContent = pick(translations.modalError, lang) || 'Error';
+      }
+    } catch (err) {
+      modalStatus.className = 'modal-status err';
+      modalStatus.textContent = pick(translations.modalError, lang) || 'Error';
+    }
+    sendBtn.disabled = false;
+  });
 
   // ── Scroll reveal ──
   const io = new IntersectionObserver((entries) => {
