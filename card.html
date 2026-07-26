@@ -120,9 +120,16 @@
 
     /* ── print ── */
     @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
       body { background: #fff; padding: 0; gap: 0; }
       .controls, .hint { display: none !important; }
-      .card { width: 100mm; height: 148mm; border-radius: 0; border: none; }
+      .card {
+        width: 100mm; height: 148mm; border-radius: 0; border: none;
+        box-shadow: none;
+      }
       @page { size: A6; margin: 0; }
     }
   </style>
@@ -160,9 +167,10 @@
     <button class="btn" onclick="window.print()">🖨 Print card</button>
   </div>
   <p class="hint">
-    A6 flyer. Hit <b>Print</b> (or Ctrl/Cmd+P) → save as PDF or print on paper/sticker.
-    <b>Scan-test with your phone before printing a batch</b> — the centre logo covers part of the code,
-    so make sure it still reads.
+    A6 flyer. Hit <b>Print</b> (or Ctrl/Cmd+P) → save as PDF or print on paper/sticker.<br>
+    If the preview looks white/empty, open <b>More settings</b> in the print dialog and turn on
+    <b>“Background graphics”</b>.<br>
+    <b>Scan-test with your phone before printing a batch</b> — the centre logo covers part of the code.
   </p>
 
 </body>
