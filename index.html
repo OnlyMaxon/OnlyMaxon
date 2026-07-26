@@ -786,6 +786,42 @@
     .modal-status.ok  { color: #4ADE80; }
     .modal-status.err { color: #F87171; }
 
+    /* ── SERVICE "WHY" EXPLAINER ──────────── */
+    .sc-why {
+      font-size: 12.5px; color: var(--text-d); line-height: 1.6;
+      margin-bottom: 18px; padding: 12px 14px;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .sc-why b { color: var(--text); font-weight: 600; }
+
+    /* ── FAQ ──────────────────────────────── */
+    #faq { padding: 120px 0; }
+    .faq-head { text-align: center; margin-bottom: 52px; }
+    .faq-head .sec-desc { margin: 0 auto; }
+    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden; transition: border-color 0.3s;
+    }
+    .faq-item.open { border-color: var(--border-h); }
+    .faq-q {
+      width: 100%; text-align: left; cursor: pointer;
+      background: transparent; border: none; color: var(--text);
+      font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 16px;
+      padding: 20px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .faq-icon { flex-shrink: 0; width: 20px; height: 20px; position: relative; }
+    .faq-icon::before, .faq-icon::after {
+      content: ''; position: absolute; background: var(--blue); border-radius: 2px;
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+    }
+    .faq-icon::before { width: 13px; height: 2px; }
+    .faq-icon::after { width: 2px; height: 13px; transition: transform 0.3s ease; }
+    .faq-item.open .faq-icon::after { transform: translate(-50%,-50%) scaleY(0); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-a p { padding: 0 22px 20px; color: var(--text-d); font-size: 14px; line-height: 1.7; }
+
     /* ── RESPONSIVE ───────────────────────── */
     @media (max-width: 860px) {
       .stack-grid { grid-template-columns: 1fr; max-width: 460px; }
@@ -988,45 +1024,6 @@
 
 <div class="divider"></div>
 
-<!-- ─── PRICING ─────────────────────────── -->
-<section id="pricing">
-  <div class="container">
-    <div class="pricing-head">
-      <p class="eyebrow fade-up" data-i18n="pricingEyebrow">Pricing</p>
-      <h2 class="sec-title fade-up d1" data-i18n="pricingTitle">Simple, upfront pricing</h2>
-      <p class="sec-desc fade-up d2" data-i18n="pricingDesc">Dreaming of a website or app — for your business, your idea, or someone you love? Here's the price and timeline up front, no hidden costs.</p>
-    </div>
-    <div class="pricing-grid">
-      <div class="price-card fade-up">
-        <div class="price-name" data-i18n="price1Name">Business-card website</div>
-        <div class="price-amount" data-i18n="price1Amount">from €390</div>
-        <div class="price-time" data-i18n="price1Time">1 week</div>
-        <a href="mailto:hello@onlymaxon.com" class="btn btn-secondary" data-modal-open data-i18n="priceCta">Get in touch</a>
-      </div>
-      <div class="price-card featured fade-up d1">
-        <div class="price-name" data-i18n="price2Name">Website with online booking</div>
-        <div class="price-amount" data-i18n="price2Amount">from €690</div>
-        <div class="price-time" data-i18n="price2Time">2 weeks</div>
-        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
-      </div>
-      <div class="price-card fade-up d2">
-        <div class="price-name" data-i18n="price3Name">Mobile app</div>
-        <div class="price-amount" data-i18n="price3Amount">from €1400</div>
-        <div class="price-time" data-i18n="price3Time">4–6 weeks</div>
-        <a href="mailto:hello@onlymaxon.com" class="btn btn-secondary" data-modal-open data-i18n="priceCta">Get in touch</a>
-      </div>
-      <div class="price-card fade-up d3">
-        <div class="price-name" data-i18n="price4Name">Ongoing SEO</div>
-        <div class="price-amount" data-i18n="price4Amount">from €200/mo</div>
-        <div class="price-time" data-i18n="price4Time">monthly · ongoing</div>
-        <a href="mailto:hello@onlymaxon.com" class="btn btn-secondary" data-modal-open data-i18n="priceCta">Get in touch</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
 <!-- ─── PROJECTS ─────────────────────────── -->
 <section id="projects">
   <div class="container">
@@ -1106,6 +1103,92 @@
 
 <div class="divider"></div>
 
+<!-- ─── STACK (Services) ──────────────────── -->
+<section id="stack">
+  <div class="container">
+    <div class="stack-head">
+      <p class="eyebrow fade-up" data-i18n="servEyebrow">What we do</p>
+      <h2 class="sec-title fade-up d1" data-i18n="servTitle">Everything under one roof</h2>
+      <p class="sec-desc fade-up d2" data-i18n="servDesc">Two teams, one goal — get your product built, launched, and growing.</p>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-cat fade-up">
+        <div class="sc-icon">💻</div>
+        <div class="sc-name" data-i18n="devName">Development</div>
+        <p class="sc-desc" data-i18n="devDesc">Full-stack engineering — web, mobile, maps &amp; real-time apps built from scratch and shipped to production.</p>
+        <p class="sc-why" data-i18n="devWhy"><b>What it is:</b> building your website or app itself. <b>Why:</b> a fast, custom product that's truly yours — no templates, no limits.</p>
+        <div class="sc-title" data-i18n="devSub">We build with</div>
+        <div class="sc-tags">
+          <span class="sc-tag">TypeScript</span>
+          <span class="sc-tag">React</span>
+          <span class="sc-tag">Next.js</span>
+          <span class="sc-tag">React Native</span>
+          <span class="sc-tag">Flutter</span>
+          <span class="sc-tag">Node.js</span>
+          <span class="sc-tag">Java</span>
+          <span class="sc-tag">Firebase</span>
+          <span class="sc-tag">Maps &amp; 3D</span>
+        </div>
+      </div>
+      <div class="stack-cat fade-up d1">
+        <div class="sc-icon">🔍</div>
+        <div class="sc-name" data-i18n="mktName">SEO / ASO</div>
+        <p class="sc-desc" data-i18n="mktDesc">Websites ship SEO-ready and apps ASO-ready — sitemap, Search Console, store listings and on-page optimization. Ongoing ranking work available too.</p>
+        <p class="sc-why" data-i18n="seoWhy"><b>What it is:</b> making Google and app stores show your product. <b>Why:</b> so customers actually find you — not your competitors.</p>
+        <div class="sc-title" data-i18n="mktSub">We handle</div>
+        <div class="sc-tags">
+          <span class="sc-tag">On-page SEO</span>
+          <span class="sc-tag">ASO</span>
+          <span class="sc-tag">Sitemap</span>
+          <span class="sc-tag">Search Console</span>
+          <span class="sc-tag">Analytics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PRICING ─────────────────────────── -->
+<section id="pricing">
+  <div class="container">
+    <div class="pricing-head">
+      <p class="eyebrow fade-up" data-i18n="pricingEyebrow">Pricing</p>
+      <h2 class="sec-title fade-up d1" data-i18n="pricingTitle">Simple, upfront pricing</h2>
+      <p class="sec-desc fade-up d2" data-i18n="pricingDesc">Dreaming of a website or app — for your business, your idea, or someone you love? Here's the price and timeline up front, no hidden costs.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card fade-up">
+        <div class="price-name" data-i18n="price1Name">Business-card website</div>
+        <div class="price-amount" data-i18n="price1Amount">from €390</div>
+        <div class="price-time" data-i18n="price1Time">1 week</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-secondary" data-modal-open data-i18n="priceCta">Get in touch</a>
+      </div>
+      <div class="price-card featured fade-up d1">
+        <div class="price-name" data-i18n="price2Name">Website with online booking</div>
+        <div class="price-amount" data-i18n="price2Amount">from €690</div>
+        <div class="price-time" data-i18n="price2Time">2 weeks</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
+      </div>
+      <div class="price-card fade-up d2">
+        <div class="price-name" data-i18n="price3Name">Mobile app</div>
+        <div class="price-amount" data-i18n="price3Amount">from €1400</div>
+        <div class="price-time" data-i18n="price3Time">4–6 weeks</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-secondary" data-modal-open data-i18n="priceCta">Get in touch</a>
+      </div>
+      <div class="price-card fade-up d3">
+        <div class="price-name" data-i18n="price4Name">Ongoing SEO / ASO</div>
+        <div class="price-amount" data-i18n="price4Amount">from €200/mo</div>
+        <div class="price-time" data-i18n="price4Time">monthly · ongoing</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-secondary" data-modal-open data-i18n="priceCta">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ─── PROCESS ───────────────────────────── -->
 <section id="process">
   <div class="container">
@@ -1149,43 +1232,34 @@
 
 <div class="divider"></div>
 
-<!-- ─── STACK ─────────────────────────────── -->
-<section id="stack">
+<!-- ─── FAQ ───────────────────────────────── -->
+<section id="faq">
   <div class="container">
-    <div class="stack-head">
-      <p class="eyebrow fade-up" data-i18n="servEyebrow">What we do</p>
-      <h2 class="sec-title fade-up d1" data-i18n="servTitle">Everything under one roof</h2>
-      <p class="sec-desc fade-up d2" data-i18n="servDesc">Two teams, one goal — get your product built, launched, and growing.</p>
+    <div class="faq-head">
+      <p class="eyebrow fade-up" data-i18n="faqEyebrow">FAQ</p>
+      <h2 class="sec-title fade-up d1" data-i18n="faqTitle">Frequently asked questions</h2>
+      <p class="sec-desc fade-up d2" data-i18n="faqDesc">Everything you might be wondering — answered up front.</p>
     </div>
-    <div class="stack-grid">
-      <div class="stack-cat fade-up">
-        <div class="sc-icon">💻</div>
-        <div class="sc-name" data-i18n="devName">Development</div>
-        <p class="sc-desc" data-i18n="devDesc">Full-stack engineering — web, mobile, maps &amp; real-time apps built from scratch and shipped to production.</p>
-        <div class="sc-title" data-i18n="devSub">We build with</div>
-        <div class="sc-tags">
-          <span class="sc-tag">TypeScript</span>
-          <span class="sc-tag">React</span>
-          <span class="sc-tag">Next.js</span>
-          <span class="sc-tag">React Native</span>
-          <span class="sc-tag">Flutter</span>
-          <span class="sc-tag">Node.js</span>
-          <span class="sc-tag">Java</span>
-          <span class="sc-tag">Firebase</span>
-          <span class="sc-tag">Maps &amp; 3D</span>
-        </div>
+    <div class="faq-list">
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq1Q">How much does a website cost?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p data-i18n="faq1A">Websites start at €390 (business-card) and €690 (with online booking). Mobile apps from €1400. You always see the price and timeline before we start — no hidden costs.</p></div>
       </div>
-      <div class="stack-cat fade-up d1">
-        <div class="sc-icon">🔍</div>
-        <div class="sc-name" data-i18n="mktName">SEO</div>
-        <p class="sc-desc" data-i18n="mktDesc">Every website ships SEO-ready — sitemap, Google Search Console and on-page optimization. Ongoing ranking work available too.</p>
-        <div class="sc-title" data-i18n="mktSub">We handle</div>
-        <div class="sc-tags">
-          <span class="sc-tag">On-page SEO</span>
-          <span class="sc-tag">Sitemap</span>
-          <span class="sc-tag">Search Console</span>
-          <span class="sc-tag">Analytics</span>
-        </div>
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq2Q">How long does it take?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p data-i18n="faq2A">A simple website takes about 1 week, a booking site around 2 weeks, and a mobile app 4–6 weeks. We agree the timeline up front and send you weekly updates.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq3Q">Do I own the website and the code?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p data-i18n="faq3A">Yes — 100%. Once it's done, the site, the code and all accounts are fully yours. No lock-in, no strings attached.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq4Q">What if I need changes later?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p data-i18n="faq4A">No problem. Small tweaks are easy, and for ongoing work (new features, SEO) we agree a clear rate up front. You're never stuck.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq5Q">How do we start?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p data-i18n="faq5A">Just send a message with your idea. The first call is free — we'll figure out what you need, give you a price and timeline, and start whenever you're ready.</p></div>
       </div>
     </div>
   </div>
@@ -1322,7 +1396,7 @@
     price3Name:   { en: "Mobile app",                  pl: "Aplikacja mobilna",          ru: "Мобильное приложение", tr: "Mobil uygulama", es: "App móvil" },
     price3Amount: { en: "from €1400",                  pl: "od 1400 €",                  ru: "от 1400 €", tr: "€1400'den", es: "desde 1400 €" },
     price3Time:   { en: "4–6 weeks",                   pl: "4–6 tygodni",                ru: "4–6 недель", tr: "4–6 hafta", es: "4–6 semanas" },
-    price4Name:   { en: "Ongoing SEO",                 pl: "Stałe SEO",                  ru: "Постоянное SEO", tr: "Sürekli SEO", es: "SEO continuo" },
+    price4Name:   { en: "Ongoing SEO / ASO",           pl: "Stałe SEO / ASO",            ru: "Постоянное SEO / ASO", tr: "Sürekli SEO / ASO", es: "SEO / ASO continuo" },
     price4Amount: { en: "from €200/mo",                pl: "od 200 €/mies",              ru: "от 200 €/мес", tr: "€200/ay'dan", es: "desde 200 €/mes" },
     price4Time:   { en: "monthly · ongoing",           pl: "miesięcznie",                ru: "ежемесячно", tr: "aylık · sürekli", es: "mensual · continuo" },
     priceCta:     { en: "Get in touch",                pl: "Napisz do nas",              ru: "Написать нам", tr: "İletişime geç", es: "Contáctanos" },
@@ -1359,8 +1433,8 @@
     devName: { en: "Development", pl: "Development", ru: "Разработка", tr: "Geliştirme", es: "Desarrollo" },
     devDesc: { en: "Full-stack engineering — web, mobile, maps & real-time apps built from scratch and shipped to production.", pl: "Inżynieria full-stack — web, mobile, mapy i aplikacje real-time budowane od zera i wdrażane na produkcję.", ru: "Full-stack инженерия — web, mobile, карты и real-time приложения с нуля и до продакшена.", tr: "Full-stack mühendislik — web, mobil, harita ve gerçek zamanlı uygulamalar sıfırdan geliştirilip yayına alınır.", es: "Ingeniería full-stack — web, móvil, mapas y apps en tiempo real creadas desde cero y llevadas a producción." },
     devSub:  { en: "We build with", pl: "Budujemy w", ru: "Мы используем", tr: "Kullandıklarımız", es: "Construimos con" },
-    mktName: { en: "SEO", pl: "SEO", ru: "SEO", tr: "SEO", es: "SEO" },
-    mktDesc: { en: "Every website ships SEO-ready — sitemap, Google Search Console and on-page optimization. Ongoing ranking work available too.", pl: "Każda strona jest gotowa pod SEO — mapa witryny, Google Search Console i optymalizacja on-page. Dostępna też stała praca nad pozycjami.", ru: "Каждый сайт готов к SEO — карта сайта, Google Search Console и on-page оптимизация. Постоянная работа над позициями — тоже по желанию.", tr: "Her web sitesi SEO'ya hazır gelir — site haritası, Google Search Console ve sayfa içi optimizasyon. Sürekli sıralama çalışması da mevcut.", es: "Cada web se entrega lista para SEO — sitemap, Google Search Console y optimización on-page. También hay trabajo continuo de posicionamiento." },
+    mktName: { en: "SEO / ASO", pl: "SEO / ASO", ru: "SEO / ASO", tr: "SEO / ASO", es: "SEO / ASO" },
+    mktDesc: { en: "Websites ship SEO-ready and apps ASO-ready — sitemap, Search Console, store listings and on-page optimization. Ongoing ranking work available too.", pl: "Strony gotowe pod SEO, aplikacje pod ASO — mapa witryny, Search Console, wpisy w sklepach i optymalizacja on-page. Dostępna też stała praca nad pozycjami.", ru: "Сайты готовы к SEO, приложения — к ASO — карта сайта, Search Console, карточки в сторах и on-page оптимизация. Постоянная работа над позициями — тоже по желанию.", tr: "Web siteleri SEO'ya, uygulamalar ASO'ya hazır gelir — site haritası, Search Console, mağaza listelemeleri ve sayfa içi optimizasyon. Sürekli sıralama çalışması da mevcut.", es: "Las webs se entregan listas para SEO y las apps para ASO — sitemap, Search Console, fichas de tienda y optimización on-page. También hay trabajo continuo de posicionamiento." },
     mktSub:  { en: "We handle", pl: "Zajmujemy się", ru: "Мы занимаемся", tr: "İlgilendiklerimiz", es: "Nos encargamos de" },
 
     // CONTACT
@@ -1381,7 +1455,26 @@
     modalMessage: { en: "Describe your project and why you want to work with us…", pl: "Opisz swój projekt i dlaczego chcesz z nami pracować…", ru: "Опишите проект и почему хотите работать с нами…", tr: "Projeni ve neden bizimle çalışmak istediğini anlat…", es: "Describe tu proyecto y por qué quieres trabajar con nosotros…" },
     modalSend:    { en: "Send message", pl: "Wyślij", ru: "Отправить", tr: "Gönder", es: "Enviar" },
     modalSuccess: { en: "Thanks! We'll get back to you soon.", pl: "Dziękujemy! Odezwiemy się wkrótce.", ru: "Спасибо! Скоро свяжемся с вами.", tr: "Teşekkürler! Yakında size döneceğiz.", es: "¡Gracias! Te responderemos pronto." },
-    modalError:   { en: "Something went wrong — please email hello@onlymaxon.com", pl: "Coś poszło nie tak — napisz na hello@onlymaxon.com", ru: "Что-то пошло не так — напишите на hello@onlymaxon.com", tr: "Bir şeyler ters gitti — lütfen hello@onlymaxon.com adresine yazın", es: "Algo salió mal — escríbenos a hello@onlymaxon.com" }
+    modalError:   { en: "Something went wrong — please email hello@onlymaxon.com", pl: "Coś poszło nie tak — napisz na hello@onlymaxon.com", ru: "Что-то пошло не так — напишите на hello@onlymaxon.com", tr: "Bir şeyler ters gitti — lütfen hello@onlymaxon.com adresine yazın", es: "Algo salió mal — escríbenos a hello@onlymaxon.com" },
+
+    // SERVICE "WHY" EXPLAINERS
+    devWhy: { en: "<b>What it is:</b> building your website or app itself. <b>Why:</b> a fast, custom product that's truly yours — no templates, no limits.", pl: "<b>Co to:</b> zbudowanie samej strony lub aplikacji. <b>Po co:</b> szybki, indywidualny produkt, który jest naprawdę Twój — bez szablonów i ograniczeń.", ru: "<b>Что это:</b> создание самого сайта или приложения. <b>Зачем:</b> быстрый, индивидуальный продукт, который реально твой — без шаблонов и ограничений.", tr: "<b>Nedir:</b> web sitenizin veya uygulamanızın kendisini oluşturmak. <b>Neden:</b> gerçekten size ait, hızlı ve özel bir ürün — şablon yok, sınır yok.", es: "<b>Qué es:</b> construir tu web o app en sí. <b>Por qué:</b> un producto rápido y a medida que es realmente tuyo — sin plantillas, sin límites." },
+    seoWhy: { en: "<b>What it is:</b> making Google and app stores show your product. <b>Why:</b> so customers actually find you — not your competitors.", pl: "<b>Co to:</b> sprawienie, że Google i sklepy z aplikacjami pokazują Twój produkt. <b>Po co:</b> żeby klienci naprawdę Cię znajdowali — a nie konkurencję.", ru: "<b>Что это:</b> чтобы Google и магазины приложений показывали твой продукт. <b>Зачем:</b> чтобы клиенты находили именно тебя — а не конкурентов.", tr: "<b>Nedir:</b> Google ve uygulama mağazalarının ürününüzü göstermesini sağlamak. <b>Neden:</b> müşteriler rakiplerinizi değil sizi bulsun diye.", es: "<b>Qué es:</b> hacer que Google y las tiendas de apps muestren tu producto. <b>Por qué:</b> para que los clientes te encuentren a ti — no a tu competencia." },
+
+    // FAQ
+    faqEyebrow: { en: "FAQ", pl: "FAQ", ru: "Вопросы", tr: "SSS", es: "FAQ" },
+    faqTitle:   { en: "Frequently asked questions", pl: "Najczęstsze pytania", ru: "Частые вопросы", tr: "Sık sorulan sorular", es: "Preguntas frecuentes" },
+    faqDesc:    { en: "Everything you might be wondering — answered up front.", pl: "Wszystko, o co możesz pytać — z góry wyjaśnione.", ru: "Всё, что ты можешь спросить — отвечаем сразу.", tr: "Merak edebileceğin her şey — baştan yanıtlandı.", es: "Todo lo que puedas preguntarte — respondido de antemano." },
+    faq1Q: { en: "How much does a website cost?", pl: "Ile kosztuje strona?", ru: "Сколько стоит сайт?", tr: "Web sitesi ne kadar?", es: "¿Cuánto cuesta una web?" },
+    faq1A: { en: "Websites start at €390 (business-card) and €690 (with online booking). Mobile apps from €1400. You always see the price and timeline before we start — no hidden costs.", pl: "Strony zaczynają się od 390 € (wizytówka) i 690 € (z rezerwacją online). Aplikacje od 1400 €. Cenę i termin widzisz zawsze przed startem — bez ukrytych kosztów.", ru: "Сайты — от 390 € (визитка) и 690 € (с онлайн-бронированием). Приложения — от 1400 €. Цену и сроки видишь до старта — без скрытых расходов.", tr: "Web siteleri 390 €'dan (kartvizit) ve 690 €'dan (online rezervasyonlu) başlar. Mobil uygulamalar 1400 €'dan. Fiyatı ve süreyi başlamadan önce görürsün — gizli maliyet yok.", es: "Las webs empiezan en 390 € (presentación) y 690 € (con reservas online). Apps desde 1400 €. Siempre ves el precio y el plazo antes de empezar — sin costes ocultos." },
+    faq2Q: { en: "How long does it take?", pl: "Ile to trwa?", ru: "Сколько времени занимает?", tr: "Ne kadar sürer?", es: "¿Cuánto tarda?" },
+    faq2A: { en: "A simple website takes about 1 week, a booking site around 2 weeks, and a mobile app 4–6 weeks. We agree the timeline up front and send you weekly updates.", pl: "Prosta strona to około 1 tydzień, strona z rezerwacją ~2 tygodnie, aplikacja 4–6 tygodni. Termin ustalamy z góry i wysyłamy cotygodniowe aktualizacje.", ru: "Простой сайт — около 1 недели, сайт с бронированием ~2 недели, приложение 4–6 недель. Сроки согласуем заранее и присылаем еженедельные апдейты.", tr: "Basit bir site yaklaşık 1 hafta, rezervasyonlu site ~2 hafta, mobil uygulama 4–6 hafta sürer. Süreyi baştan belirler, haftalık güncelleme göndeririz.", es: "Una web sencilla lleva ~1 semana, una con reservas ~2 semanas y una app 4–6 semanas. Acordamos el plazo por adelantado y enviamos avances semanales." },
+    faq3Q: { en: "Do I own the website and the code?", pl: "Czy strona i kod są moje?", ru: "Сайт и код принадлежат мне?", tr: "Site ve kod bana mı ait?", es: "¿La web y el código son míos?" },
+    faq3A: { en: "Yes — 100%. Once it's done, the site, the code and all accounts are fully yours. No lock-in, no strings attached.", pl: "Tak — w 100%. Po zakończeniu strona, kod i wszystkie konta są w pełni Twoje. Bez uzależnienia, bez haczyków.", ru: "Да — на 100%. После завершения сайт, код и все аккаунты полностью твои. Без привязки и подводных камней.", tr: "Evet — %100. Bittiğinde site, kod ve tüm hesaplar tamamen senindir. Bağlılık yok, gizli şart yok.", es: "Sí — al 100%. Cuando termina, la web, el código y todas las cuentas son totalmente tuyos. Sin ataduras." },
+    faq4Q: { en: "What if I need changes later?", pl: "A jeśli później będę potrzebować zmian?", ru: "А если понадобятся правки позже?", tr: "Sonra değişiklik gerekirse?", es: "¿Y si necesito cambios después?" },
+    faq4A: { en: "No problem. Small tweaks are easy, and for ongoing work (new features, SEO/ASO) we agree a clear rate up front. You're never stuck.", pl: "Żaden problem. Drobne poprawki są proste, a przy stałej pracy (nowe funkcje, SEO/ASO) ustalamy jasną stawkę z góry. Nigdy nie utkniesz.", ru: "Без проблем. Мелкие правки — легко, а для постоянной работы (новые функции, SEO/ASO) заранее согласуем понятную ставку. Ты никогда не застрянешь.", tr: "Sorun değil. Küçük düzenlemeler kolaydır; sürekli işler (yeni özellikler, SEO/ASO) için baştan net bir ücret belirleriz. Asla takılıp kalmazsın.", es: "Sin problema. Los ajustes pequeños son fáciles, y para trabajo continuo (nuevas funciones, SEO/ASO) acordamos una tarifa clara por adelantado. Nunca te quedas atascado." },
+    faq5Q: { en: "How do we start?", pl: "Jak zaczynamy?", ru: "Как начать?", tr: "Nasıl başlıyoruz?", es: "¿Cómo empezamos?" },
+    faq5A: { en: "Just send a message with your idea. The first call is free — we'll figure out what you need, give you a price and timeline, and start whenever you're ready.", pl: "Po prostu napisz wiadomość ze swoim pomysłem. Pierwsza rozmowa jest bezpłatna — ustalimy, czego potrzebujesz, podamy cenę i termin, i zaczniemy, gdy będziesz gotowy.", ru: "Просто напиши сообщение со своей идеей. Первый созвон бесплатный — поймём, что тебе нужно, назовём цену и сроки и начнём, когда будешь готов.", tr: "Sadece fikrini içeren bir mesaj gönder. İlk görüşme ücretsiz — neye ihtiyacın olduğunu anlarız, fiyat ve süre veririz ve hazır olduğunda başlarız.", es: "Solo envía un mensaje con tu idea. La primera llamada es gratis — averiguamos qué necesitas, te damos precio y plazo, y empezamos cuando quieras." }
   };
 
   const LANGS = ['pl', 'ru', 'en', 'tr', 'es'];
@@ -1497,6 +1590,16 @@
       modalStatus.textContent = pick(translations.modalError, lang) || 'Error';
     }
     sendBtn.disabled = false;
+  });
+
+  // ── FAQ accordion ──
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const ans  = item.querySelector('.faq-a');
+      const open = item.classList.toggle('open');
+      ans.style.maxHeight = open ? ans.scrollHeight + 'px' : '0';
+    });
   });
 
   // ── Scroll reveal ──
