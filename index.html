@@ -847,6 +847,50 @@
     .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
     .faq-a p { padding: 0 22px 20px; color: var(--text-d); font-size: 14px; line-height: 1.7; }
 
+    /* ── "WHAT'S A BUSINESS-CARD SITE" (static, no jank) ── */
+    #whatvisitka { padding: 110px 0; }
+    .vk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; max-width: 1000px; margin: 0 auto; }
+    .vk-phone-wrap { display: flex; justify-content: center; }
+    .vk-phone {
+      width: 256px; height: 524px; flex-shrink: 0;
+      border-radius: 42px; background: #14181f; padding: 9px; position: relative;
+      border: 1px solid rgba(255,255,255,0.09);
+    }
+    .vk-phone::before {
+      content: ''; position: absolute; top: 11px; left: 50%; transform: translateX(-50%);
+      width: 90px; height: 20px; background: #0a0d12; border-radius: 12px; z-index: 2;
+    }
+    .vk-screen {
+      width: 100%; height: 100%; border-radius: 34px; overflow: hidden;
+      background: linear-gradient(180deg, #100E0A, #1A150E);
+      color: #F4EEE4; display: flex; flex-direction: column; text-align: center;
+      padding: 44px 20px 22px;
+    }
+    .vk-ava {
+      width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 12px;
+      background: linear-gradient(140deg, #E7B45A, #C8922F);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 29px; color: #1a1509;
+    }
+    .vk-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; }
+    .vk-role { color: #E7B45A; font-size: 12px; font-weight: 600; margin-top: 3px; letter-spacing: 0.4px; }
+    .vk-rating { font-size: 12px; color: #E7B45A; font-weight: 600; margin: 7px 0 13px; }
+    .vk-srv {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(231,180,90,0.13);
+      border-radius: 10px; padding: 9px 13px; margin-bottom: 8px; font-size: 13px;
+    }
+    .vk-srv b { font-family: 'Space Grotesk', sans-serif; color: #E7B45A; }
+    .vk-hours { font-size: 11.5px; color: #B0A493; margin: 11px 0 12px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .vk-btns { margin-top: auto; display: flex; gap: 8px; }
+    .vk-cta { flex: 1; background: linear-gradient(135deg, #E7B45A, #C8922F); color: #1a1509; font-weight: 700; font-size: 13px; padding: 11px; border-radius: 11px; }
+    .vk-cta2 { background: transparent; border: 1px solid rgba(231,180,90,0.42); color: #E7B45A; }
+    .vk-caption { font-size: 12px; color: var(--text-m); text-align: center; margin-top: 22px; }
+    @media (max-width: 860px) {
+      .vk-grid { grid-template-columns: 1fr; gap: 34px; }
+      .vk-text { text-align: center; }
+    }
+
     /* ── RESPONSIVE ───────────────────────── */
     @media (max-width: 860px) {
       .stack-grid { grid-template-columns: 1fr; max-width: 460px; }
@@ -1157,19 +1201,53 @@
       </div>
       <div class="stack-cat fade-up d1">
         <div class="sc-icon">🔍</div>
-        <div class="sc-name" data-i18n="mktName">SEO / ASO</div>
-        <p class="sc-desc" data-i18n="mktDesc">Websites ship SEO-ready and apps ASO-ready — sitemap, Search Console, store listings and on-page optimization. Ongoing ranking work available too.</p>
-        <p class="sc-why" data-i18n="seoWhy"><b>What it is:</b> making Google and app stores show your product. <b>Why:</b> so customers actually find you — not your competitors.</p>
+        <div class="sc-name" data-i18n="mktName">SEO / ASO / AI</div>
+        <p class="sc-desc" data-i18n="mktDesc">Websites ship SEO-ready, apps ASO-ready, and your brand tuned to be recommended by AI (ChatGPT, Perplexity, Google AI). Ongoing ranking work available too.</p>
+        <p class="sc-why" data-i18n="seoWhy"><b>What it is:</b> making Google, app stores and AI assistants show your product. <b>Why:</b> so customers actually find you — not your competitors.</p>
         <div class="sc-title" data-i18n="mktSub">We handle</div>
         <div class="sc-tags">
           <span class="sc-tag">On-page SEO</span>
           <span class="sc-tag">ASO</span>
-          <span class="sc-tag">Sitemap</span>
+          <span class="sc-tag">AI-SEO / GEO</span>
           <span class="sc-tag">Search Console</span>
           <span class="sc-tag">Analytics</span>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── WHAT'S A BUSINESS-CARD SITE ──────── -->
+<section id="whatvisitka">
+  <div class="container">
+    <div class="vk-grid">
+      <div class="vk-text">
+        <p class="eyebrow fade-up" data-i18n="vkEyebrow">Business-card website</p>
+        <h2 class="sec-title fade-up d1" data-i18n="vkTitle">What's a business-card site?</h2>
+        <p class="sec-desc fade-up d2" data-i18n="vkDesc">One clean page — who you are, what you do, your prices and contacts. Like a paper business card, but online: people find you on Google and reach you in one tap. Here's what one looks like:</p>
+      </div>
+      <div class="vk-phone-wrap">
+        <div class="vk-phone">
+          <div class="vk-screen">
+            <div class="vk-ava">M</div>
+            <div class="vk-name">Marek</div>
+            <div class="vk-role">BARBER · WARSZAWA</div>
+            <div class="vk-rating">★★★★★ 4.9 · 120 reviews</div>
+            <div class="vk-srv"><span>Haircut</span><b>60 zł</b></div>
+            <div class="vk-srv"><span>Beard trim</span><b>40 zł</b></div>
+            <div class="vk-srv"><span>Cut + beard</span><b>90 zł</b></div>
+            <div class="vk-hours">🕒 Mon–Sat · 10:00–20:00</div>
+            <div class="vk-btns">
+              <div class="vk-cta">📞 Call</div>
+              <div class="vk-cta vk-cta2">Book</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="vk-caption fade-up" data-i18n="vkCaption">An example — your business-card site could look like this.</p>
   </div>
 </section>
 
@@ -1203,7 +1281,7 @@
         <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
       </div>
       <div class="price-card fade-up d3">
-        <div class="price-name" data-i18n="price4Name">Ongoing SEO / ASO</div>
+        <div class="price-name" data-i18n="price4Name">Ongoing SEO / ASO / AI</div>
         <div class="price-amount" data-i18n="price4Amount">from €200/mo</div>
         <div class="price-time" data-i18n="price4Time">monthly · ongoing</div>
         <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
@@ -1409,6 +1487,10 @@
     heroStatMvp:     { en: "MVP Timeline",pl: "Czas MVP",   ru: "Срок MVP", tr: "MVP süresi", es: "Plazo MVP" },
 
     // PRICING
+    vkEyebrow: { en: "Business-card website", pl: "Strona wizytówka", ru: "Сайт-визитка", tr: "Kartvizit web sitesi", es: "Web de presentación" },
+    vkTitle:   { en: "What's a business-card site?", pl: "Czym jest strona wizytówka?", ru: "Что такое сайт-визитка?", tr: "Kartvizit sitesi nedir?", es: "¿Qué es una web de presentación?" },
+    vkDesc:    { en: "One clean page — who you are, what you do, your prices and contacts. Like a paper business card, but online: people find you on Google and reach you in one tap. Here's what one looks like:", pl: "Jedna czysta strona — kim jesteś, co robisz, ceny i kontakt. Jak papierowa wizytówka, ale online: klienci znajdują Cię w Google i dzwonią jednym dotknięciem. Oto jak to wygląda:", ru: "Одна аккуратная страница — кто ты, что делаешь, цены и контакты. Как бумажная визитка, только онлайн: тебя находят в Google и звонят в одно касание. Вот как это выглядит:", tr: "Tek temiz sayfa — kim olduğun, ne yaptığın, fiyatların ve iletişimin. Kâğıt kartvizit gibi ama online: insanlar seni Google'da bulur ve tek dokunuşla ulaşır. İşte böyle görünür:", es: "Una página limpia — quién eres, qué haces, tus precios y contacto. Como una tarjeta de visita, pero online: te encuentran en Google y te contactan con un toque. Así se ve:" },
+    vkCaption: { en: "An example — your business-card site could look like this.", pl: "Przykład — Twoja strona wizytówka może tak wyglądać.", ru: "Пример — твой сайт-визитка может выглядеть так.", tr: "Bir örnek — kartvizit siten böyle görünebilir.", es: "Un ejemplo — tu web de presentación podría verse así." },
     pricingEyebrow: { en: "Pricing",              pl: "Cennik",              ru: "Цены", tr: "Fiyatlar", es: "Precios" },
     pricingTitle:   { en: "Simple, upfront pricing", pl: "Proste, jasne ceny", ru: "Простые, прозрачные цены", tr: "Basit, şeffaf fiyatlar", es: "Precios simples y claros" },
     pricingDesc:    { en: "Dreaming of a website or app — for your business, your idea, or someone you love? Here's the price and timeline up front, no hidden costs.", pl: "Marzysz o stronie lub aplikacji — dla swojego biznesu, pomysłu albo kogoś bliskiego? Oto cena i termin z góry, bez ukrytych kosztów.", ru: "Мечтаешь о сайте или приложении — для бизнеса, своей идеи или близкого человека? Вот цена и сроки сразу, без скрытых расходов.", tr: "Bir web sitesi veya uygulama mı hayal ediyorsun — işin, fikrin ya da sevdiğin biri için? İşte fiyat ve süre baştan, gizli maliyet yok.", es: "¿Sueñas con una web o una app — para tu negocio, tu idea o alguien a quien quieres? Aquí tienes el precio y el plazo por adelantado, sin costes ocultos." },
@@ -1421,7 +1503,7 @@
     price3Name:   { en: "Mobile app",                  pl: "Aplikacja mobilna",          ru: "Мобильное приложение", tr: "Mobil uygulama", es: "App móvil" },
     price3Amount: { en: "from €1400",                  pl: "od 1400 €",                  ru: "от 1400 €", tr: "€1400'den", es: "desde 1400 €" },
     price3Time:   { en: "4–6 weeks",                   pl: "4–6 tygodni",                ru: "4–6 недель", tr: "4–6 hafta", es: "4–6 semanas" },
-    price4Name:   { en: "Ongoing SEO / ASO",           pl: "Stałe SEO / ASO",            ru: "Постоянное SEO / ASO", tr: "Sürekli SEO / ASO", es: "SEO / ASO continuo" },
+    price4Name:   { en: "Ongoing SEO / ASO / AI",      pl: "Stałe SEO / ASO / AI",       ru: "Постоянное SEO / ASO / AI", tr: "Sürekli SEO / ASO / AI", es: "SEO / ASO / AI continuo" },
     price4Amount: { en: "from €200/mo",                pl: "od 200 €/mies",              ru: "от 200 €/мес", tr: "€200/ay'dan", es: "desde 200 €/mes" },
     price4Time:   { en: "monthly · ongoing",           pl: "miesięcznie",                ru: "ежемесячно", tr: "aylık · sürekli", es: "mensual · continuo" },
     priceCta:     { en: "Get in touch",                pl: "Napisz do nas",              ru: "Написать нам", tr: "İletişime geç", es: "Contáctanos" },
@@ -1458,8 +1540,8 @@
     devName: { en: "Development", pl: "Development", ru: "Разработка", tr: "Geliştirme", es: "Desarrollo" },
     devDesc: { en: "Full-stack engineering — web, mobile, maps & real-time apps built from scratch and shipped to production.", pl: "Inżynieria full-stack — web, mobile, mapy i aplikacje real-time budowane od zera i wdrażane na produkcję.", ru: "Full-stack инженерия — web, mobile, карты и real-time приложения с нуля и до продакшена.", tr: "Full-stack mühendislik — web, mobil, harita ve gerçek zamanlı uygulamalar sıfırdan geliştirilip yayına alınır.", es: "Ingeniería full-stack — web, móvil, mapas y apps en tiempo real creadas desde cero y llevadas a producción." },
     devSub:  { en: "We build with", pl: "Budujemy w", ru: "Мы используем", tr: "Kullandıklarımız", es: "Construimos con" },
-    mktName: { en: "SEO / ASO", pl: "SEO / ASO", ru: "SEO / ASO", tr: "SEO / ASO", es: "SEO / ASO" },
-    mktDesc: { en: "Websites ship SEO-ready and apps ASO-ready — sitemap, Search Console, store listings and on-page optimization. Ongoing ranking work available too.", pl: "Strony gotowe pod SEO, aplikacje pod ASO — mapa witryny, Search Console, wpisy w sklepach i optymalizacja on-page. Dostępna też stała praca nad pozycjami.", ru: "Сайты готовы к SEO, приложения — к ASO — карта сайта, Search Console, карточки в сторах и on-page оптимизация. Постоянная работа над позициями — тоже по желанию.", tr: "Web siteleri SEO'ya, uygulamalar ASO'ya hazır gelir — site haritası, Search Console, mağaza listelemeleri ve sayfa içi optimizasyon. Sürekli sıralama çalışması da mevcut.", es: "Las webs se entregan listas para SEO y las apps para ASO — sitemap, Search Console, fichas de tienda y optimización on-page. También hay trabajo continuo de posicionamiento." },
+    mktName: { en: "SEO / ASO / AI", pl: "SEO / ASO / AI", ru: "SEO / ASO / AI", tr: "SEO / ASO / AI", es: "SEO / ASO / AI" },
+    mktDesc: { en: "Websites ship SEO-ready, apps ASO-ready, and your brand tuned to be recommended by AI (ChatGPT, Perplexity, Google AI). Ongoing ranking work available too.", pl: "Strony gotowe pod SEO, aplikacje pod ASO, a Twoja marka dostrojona tak, by polecało ją AI (ChatGPT, Perplexity, Google AI). Dostępna też stała praca nad pozycjami.", ru: "Сайты готовы к SEO, приложения — к ASO, а бренд настроен так, чтобы его рекомендовал ИИ (ChatGPT, Perplexity, Google AI). Постоянная работа над позициями — тоже по желанию.", tr: "Web siteleri SEO'ya, uygulamalar ASO'ya hazır gelir ve markanız yapay zekânın (ChatGPT, Perplexity, Google AI) önerebileceği şekilde ayarlanır. Sürekli sıralama çalışması da mevcut.", es: "Las webs se entregan listas para SEO, las apps para ASO, y tu marca ajustada para que la recomiende la IA (ChatGPT, Perplexity, Google AI). También hay trabajo continuo de posicionamiento." },
     mktSub:  { en: "We handle", pl: "Zajmujemy się", ru: "Мы занимаемся", tr: "İlgilendiklerimiz", es: "Nos encargamos de" },
 
     // CONTACT
@@ -1484,7 +1566,7 @@
 
     // SERVICE "WHY" EXPLAINERS
     devWhy: { en: "<b>What it is:</b> building your website or app itself. <b>Why:</b> a fast, custom product that's truly yours — no templates, no limits.", pl: "<b>Co to:</b> zbudowanie samej strony lub aplikacji. <b>Po co:</b> szybki, indywidualny produkt, który jest naprawdę Twój — bez szablonów i ograniczeń.", ru: "<b>Что это:</b> создание самого сайта или приложения. <b>Зачем:</b> быстрый, индивидуальный продукт, который реально твой — без шаблонов и ограничений.", tr: "<b>Nedir:</b> web sitenizin veya uygulamanızın kendisini oluşturmak. <b>Neden:</b> gerçekten size ait, hızlı ve özel bir ürün — şablon yok, sınır yok.", es: "<b>Qué es:</b> construir tu web o app en sí. <b>Por qué:</b> un producto rápido y a medida que es realmente tuyo — sin plantillas, sin límites." },
-    seoWhy: { en: "<b>What it is:</b> making Google and app stores show your product. <b>Why:</b> so customers actually find you — not your competitors.", pl: "<b>Co to:</b> sprawienie, że Google i sklepy z aplikacjami pokazują Twój produkt. <b>Po co:</b> żeby klienci naprawdę Cię znajdowali — a nie konkurencję.", ru: "<b>Что это:</b> чтобы Google и магазины приложений показывали твой продукт. <b>Зачем:</b> чтобы клиенты находили именно тебя — а не конкурентов.", tr: "<b>Nedir:</b> Google ve uygulama mağazalarının ürününüzü göstermesini sağlamak. <b>Neden:</b> müşteriler rakiplerinizi değil sizi bulsun diye.", es: "<b>Qué es:</b> hacer que Google y las tiendas de apps muestren tu producto. <b>Por qué:</b> para que los clientes te encuentren a ti — no a tu competencia." },
+    seoWhy: { en: "<b>What it is:</b> making Google, app stores and AI assistants show your product. <b>Why:</b> so customers actually find you — not your competitors.", pl: "<b>Co to:</b> sprawienie, że Google, sklepy z aplikacjami i asystenci AI pokazują Twój produkt. <b>Po co:</b> żeby klienci naprawdę Cię znajdowali — a nie konkurencję.", ru: "<b>Что это:</b> чтобы Google, магазины приложений и ИИ-ассистенты показывали твой продукт. <b>Зачем:</b> чтобы клиенты находили именно тебя — а не конкурентов.", tr: "<b>Nedir:</b> Google, uygulama mağazaları ve yapay zekâ asistanlarının ürününüzü göstermesini sağlamak. <b>Neden:</b> müşteriler rakiplerinizi değil sizi bulsun diye.", es: "<b>Qué es:</b> hacer que Google, las tiendas de apps y los asistentes de IA muestren tu producto. <b>Por qué:</b> para que los clientes te encuentren a ti — no a tu competencia." },
 
     // FAQ
     faqEyebrow: { en: "FAQ", pl: "FAQ", ru: "Вопросы", tr: "SSS", es: "FAQ" },
