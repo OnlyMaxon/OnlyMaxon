@@ -4,13 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OnlyMaxon — QR card</title>
+  <link rel="icon" type="image/png" href="images/icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- QR comes from a third party; warm the connection up front -->
+  <link rel="preconnect" href="https://api.qrserver.com" crossorigin>
+  <!-- only the weights this page actually uses: SG 600, Inter 400/600/700 -->
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&family=Inter:wght@400;600;700&display=swap">
+  <noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&family=Inter:wght@400;600;700&display=swap">
+  </noscript>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --bg: #06080C; --blue: #22D3EE; --purple: #2C8A9C;
+      --bg: #06080C; --blue: #22D3EE; --purple: #2C8A9C; --cyan: #7FE9F0;
       --text: #EAF2F6; --text-d: #93A6B2; --border: rgba(255,255,255,0.08);
     }
     body {
@@ -53,7 +62,6 @@
       background: radial-gradient(circle, rgba(168,85,247,0.30) 0%, transparent 62%);
       filter: blur(34px);
     }
-    .card > .content { position: relative; z-index: 1; display: contents; }
 
     /* logo mark (dark bg dropped via screen blend) */
     .logo-img {
@@ -109,6 +117,54 @@
     .foot .mail { color: var(--text); font-weight: 600; }
     .foot .ig { color: var(--text-d); font-size: 12px; }
 
+    /* ── round sticker (5 cm) ── */
+    .sticker {
+      width: 520px; height: 520px; flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid rgba(34,211,238,0.55);
+      box-shadow: 0 0 0 1px rgba(34,211,238,0.15), 0 0 80px rgba(34,211,238,0.28);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; color: var(--text);
+      padding: 52px;
+    }
+    /* inner neon ring hint */
+    .sticker::before {
+      content: ''; position: absolute; inset: 16px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(34,211,238,0.22);
+      pointer-events: none;
+    }
+    .sticker .glow-a {
+      width: 560px; height: 560px; top: -210px; right: -210px;
+      background: radial-gradient(circle, rgba(34,211,238,0.38) 0%, transparent 62%);
+      filter: blur(52px);
+    }
+    .sticker .glow-b {
+      width: 520px; height: 520px; bottom: -210px; left: -210px;
+      background: radial-gradient(circle, rgba(168,85,247,0.28) 0%, transparent 62%);
+      filter: blur(52px);
+    }
+    .st-logo {
+      position: relative; z-index: 1;
+      height: 52px; width: auto; display: block; margin-bottom: 21px;
+      mix-blend-mode: screen;
+    }
+    .st-qr {
+      position: relative; z-index: 1;
+      background: #fff; border-radius: 24px; padding: 17px; line-height: 0;
+      box-shadow: 0 0 38px rgba(34,211,238,0.4);
+    }
+    .st-qr img { width: 222px; height: 222px; display: block; }
+    .st-tag {
+      position: relative; z-index: 1;
+      margin-top: 21px; font-size: 21px; line-height: 1.45;
+      color: var(--text-d); max-width: 365px;
+    }
+    .st-tag b { color: var(--text); font-weight: 600; }
+
     /* ── screen-only controls ── */
     .controls { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
     .btn {
@@ -116,7 +172,8 @@
       border: none; font-family: inherit; font-weight: 700; font-size: 14px;
       padding: 12px 24px; border-radius: 10px; cursor: pointer;
     }
-    .hint { color: #8b97a3; font-size: 13px; max-width: 380px; text-align: center; line-height: 1.6; }
+    .btn.alt { background: transparent; color: var(--blue); box-shadow: inset 0 0 0 1.5px var(--blue); }
+    .hint { color: #8b97a3; font-size: 13px; max-width: 400px; text-align: center; line-height: 1.6; }
 
     /* ── print ── */
     @media print {
@@ -126,11 +183,28 @@
       }
       body { background: #fff; padding: 0; gap: 0; }
       .controls, .hint { display: none !important; }
-      .card {
+
+      /* default: hide both; body class decides what prints */
+      .card, .sticker { display: none !important; }
+
+      body.print-card .card {
+        display: flex !important;
         width: 100mm; height: 148mm; border-radius: 0; border: none;
         box-shadow: none;
       }
-      @page { size: A6; margin: 0; }
+      body.print-sticker .sticker {
+        display: flex !important;
+        width: 50mm; height: 50mm;
+        border: none; box-shadow: none;
+        padding: 5mm;
+      }
+      body.print-sticker .st-logo { height: 5mm; margin-bottom: 2.5mm; }
+      body.print-sticker .st-qr { padding: 2mm; border-radius: 2.5mm; }
+      body.print-sticker .st-qr img { width: 22mm; height: 22mm; }
+      body.print-sticker .st-tag {
+        margin-top: 2.5mm; max-width: 31mm;
+        font-size: 2.5mm; line-height: 1.35;
+      }
     }
   </style>
 </head>
@@ -140,14 +214,14 @@
     <div class="glow-a"></div>
     <div class="glow-b"></div>
 
-    <img class="logo-img" src="images/logo.jpg" alt="OnlyMaxon">
+    <img class="logo-img" src="images/logo.webp" alt="OnlyMaxon" width="640" height="737">
     <div class="tagline"><b>You're great at what you do.</b><br>Let the world find you.</div>
       <div class="qr-wrap">
       <div class="qr-tile">
         <img alt="Scan to visit onlymaxon.com"
              src="https://api.qrserver.com/v1/create-qr-code/?size=600x600&ecc=H&margin=0&color=06080C&bgcolor=FFFFFF&data=https%3A%2F%2Fonlymaxon.com">
       </div>
-      <div class="qr-badge"><img src="images/logo.jpg" alt=""></div>
+      <div class="qr-badge"><img src="images/icon.png" alt="" width="180" height="207"></div>
     </div>
 
     <div class="scan">
@@ -162,15 +236,44 @@
     </div>
   </div>
 
+  <!-- ── round sticker, 5 cm ── -->
+  <div class="sticker">
+    <div class="glow-a"></div>
+    <div class="glow-b"></div>
+    <img class="st-logo" src="images/logo.jpg" alt="OnlyMaxon">
+    <div class="st-qr">
+      <img alt="Scan to visit onlymaxon.com"
+           src="https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&ecc=H&margin=0&color=06080C&bgcolor=FFFFFF&data=https%3A%2F%2Fonlymaxon.com">
+    </div>
+    <div class="st-tag"><b>You're great at what you do.</b><br>Let the world find you.</div>
+  </div>
+
   <div class="controls">
-    <button class="btn" onclick="window.print()">🖨 Print card</button>
+    <button class="btn" onclick="printAs('card')">🖨 Print flyer (A6)</button>
+    <button class="btn alt" onclick="printAs('sticker')">⬤ Print sticker (5 cm round)</button>
   </div>
   <p class="hint">
-    A6 flyer. Hit <b>Print</b> (or Ctrl/Cmd+P) → save as PDF or print on paper/sticker.<br>
-    If the preview looks white/empty, open <b>More settings</b> in the print dialog and turn on
-    <b>“Background graphics”</b>.<br>
-    <b>Scan-test with your phone before printing a batch</b> — the centre logo covers part of the code.
+    Two formats in one page. Pick <b>Flyer (A6)</b> or <b>Sticker (5 cm round)</b> — the other is hidden on print.<br>
+    If the preview looks white/empty, open <b>More settings</b> → turn on <b>“Background graphics”</b>.<br>
+    For the round sticker, print on a <b>50 mm circular label</b> (or square label + die-cut/punch).<br>
+    <b>Scan-test with your phone before printing a batch.</b>
   </p>
+
+  <style id="pageRule">@page { size: A6; margin: 0; }</style>
+  <script>
+    function printAs(kind) {
+      var rule = document.getElementById('pageRule');
+      document.body.classList.remove('print-card', 'print-sticker');
+      if (kind === 'sticker') {
+        document.body.classList.add('print-sticker');
+        rule.textContent = '@page { size: 50mm 50mm; margin: 0; }';
+      } else {
+        document.body.classList.add('print-card');
+        rule.textContent = '@page { size: A6; margin: 0; }';
+      }
+      window.print();
+    }
+  </script>
 
 </body>
 </html>

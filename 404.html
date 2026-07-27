@@ -5,10 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 — Page not found · OnlyMaxon</title>
   <meta name="robots" content="noindex">
-  <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
+  <link rel="icon" type="image/png" href="/images/icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <!-- only the weights this page actually uses: SG 600/700, Inter 400/700 -->
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;700&display=swap">
+  <noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;700&display=swap">
+  </noscript>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -50,7 +56,8 @@
       background: var(--blue); color: #04141A;
       font-weight: 700; font-size: 15px;
       padding: 14px 30px; border-radius: 11px; text-decoration: none;
-      box-shadow: 0 4px 28px rgba(34,211,238,0.35); transition: all 0.25s ease;
+      box-shadow: 0 4px 28px rgba(34,211,238,0.35);
+      transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
     .btn:hover { background: #5FE6F2; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(34,211,238,0.5); }
     .brand {
