@@ -23,7 +23,58 @@ const translations = {
     vkEyebrow: { en: "Business-card website", pl: "Strona wizytówka", ru: "Сайт-визитка", tr: "Kartvizit web sitesi", es: "Web de presentación" },
     vkTitle:   { en: "What's a business-card site?", pl: "Czym jest strona wizytówka?", ru: "Что такое сайт-визитка?", tr: "Kartvizit sitesi nedir?", es: "¿Qué es una web de presentación?" },
     vkDesc:    { en: "One clean page — who you are, what you do, your prices and contacts. Like a paper business card, but online: people find you on Google and reach you in one tap. Here's what one looks like:", pl: "Jedna czysta strona — kim jesteś, co robisz, ceny i kontakt. Jak papierowa wizytówka, ale online: klienci znajdują Cię w Google i dzwonią jednym dotknięciem. Oto jak to wygląda:", ru: "Одна аккуратная страница — кто ты, что делаешь, цены и контакты. Как бумажная визитка, только онлайн: тебя находят в Google и звонят в одно касание. Вот как это выглядит:", tr: "Tek temiz sayfa — kim olduğun, ne yaptığın, fiyatların ve iletişimin. Kâğıt kartvizit gibi ama online: insanlar seni Google'da bulur ve tek dokunuşla ulaşır. İşte böyle görünür:", es: "Una página limpia — quién eres, qué haces, tus precios y contacto. Como una tarjeta de visita, pero online: te encuentran en Google y te contactan con un toque. Así se ve:" },
-    vkCaption: { en: "An example — your business-card site could look like this.", pl: "Przykład — Twoja strona wizytówka może tak wyglądać.", ru: "Пример — твой сайт-визитка может выглядеть так.", tr: "Bir örnek — kartvizit siten böyle görünebilir.", es: "Un ejemplo — tu web de presentación podría verse así." },
+    vkCaption: { en: "Three examples — yours can look however you want.", pl: "Trzy przykłady — Twój może wyglądać, jak tylko chcesz.", ru: "Три примера — твой может выглядеть как захочешь.", tr: "Üç örnek — seninki nasıl istersen öyle görünebilir.", es: "Tres ejemplos — el tuyo puede verse como tú quieras." },
+
+    // ── DEMO PHONES ──────────────────────────────────────────────────────────
+    // Three mock business-card sites. Names, cities and services are localised so a
+    // visitor sees a business from their own market, not a foreign one.
+    // Prices are EUR everywhere; only the symbol's position follows local habit
+    // (en/tr "€18", pl/ru/es "18 €") — same convention as the pricing section above.
+    vkCall: { en: "Call", pl: "Zadzwoń", ru: "Позвонить", tr: "Ara", es: "Llamar" },
+    vkBook: { en: "Book", pl: "Rezerwuj", ru: "Записаться", tr: "Randevu", es: "Reservar" },
+
+    // phone 1 — barber (amber)
+    vk1Ava:   { en: "M", pl: "M", ru: "М", tr: "E", es: "C" },
+    vk1Name:  { en: "Mark", pl: "Marek", ru: "Марк", tr: "Emre", es: "Carlos" },
+    vk1Role:  { en: "BARBER · LONDON", pl: "BARBER · WARSZAWA", ru: "БАРБЕР · БАКУ", tr: "BERBER · İSTANBUL", es: "BARBERÍA · MADRID" },
+    vk1Rate:  { en: "4.9 · 120 reviews", pl: "4,9 · 120 opinii", ru: "4,9 · 120 отзывов", tr: "4,9 · 120 yorum", es: "4,9 · 120 reseñas" },
+    vk1S1:    { en: "Haircut", pl: "Strzyżenie", ru: "Стрижка", tr: "Saç kesimi", es: "Corte" },
+    vk1P1:    { en: "€18", pl: "18 €", ru: "18 €", tr: "€18", es: "18 €" },
+    vk1S2:    { en: "Beard trim", pl: "Broda", ru: "Борода", tr: "Sakal", es: "Barba" },
+    vk1P2:    { en: "€12", pl: "12 €", ru: "12 €", tr: "€12", es: "12 €" },
+    vk1S3:    { en: "Cut + beard", pl: "Strzyżenie + broda", ru: "Стрижка + борода", tr: "Saç + sakal", es: "Corte + barba" },
+    vk1P3:    { en: "€26", pl: "26 €", ru: "26 €", tr: "€26", es: "26 €" },
+    vk1Hours: { en: "Mon–Sat · 10:00–20:00", pl: "Pn–Sob · 10:00–20:00", ru: "Пн–Сб · 10:00–20:00", tr: "Pzt–Cmt · 10:00–20:00", es: "Lun–Sáb · 10:00–20:00" },
+
+    // phone 2 — beauty studio (rose) · featured, centre
+    vk2Ava:   { en: "S", pl: "Z", ru: "С", tr: "E", es: "L" },
+    vk2Name:  { en: "Sofia", pl: "Zofia", ru: "София", tr: "Elif", es: "Lucía" },
+    vk2Role:  { en: "BEAUTY STUDIO · LONDON", pl: "STUDIO URODY · WARSZAWA", ru: "БЬЮТИ-СТУДИЯ · БАКУ", tr: "GÜZELLİK · İSTANBUL", es: "ESTÉTICA · MADRID" },
+    vk2Rate:  { en: "5.0 · 86 reviews", pl: "5,0 · 86 opinii", ru: "5,0 · 86 отзывов", tr: "5,0 · 86 yorum", es: "5,0 · 86 reseñas" },
+    vk2S1:    { en: "Manicure", pl: "Manicure", ru: "Маникюр", tr: "Manikür", es: "Manicura" },
+    vk2P1:    { en: "€25", pl: "25 €", ru: "25 €", tr: "€25", es: "25 €" },
+    vk2S2:    { en: "Pedicure", pl: "Pedicure", ru: "Педикюр", tr: "Pedikür", es: "Pedicura" },
+    vk2P2:    { en: "€30", pl: "30 €", ru: "30 €", tr: "€30", es: "30 €" },
+    vk2S3:    { en: "Lash extensions", pl: "Przedłużanie rzęs", ru: "Наращивание ресниц", tr: "Kirpik uygulaması", es: "Extensión de pestañas" },
+    vk2P3:    { en: "€40", pl: "40 €", ru: "40 €", tr: "€40", es: "40 €" },
+    // the featured phone is taller, so it carries a fourth row — otherwise the extra
+    // height shows up as dead space above the buttons
+    vk2S4:    { en: "Facial", pl: "Zabieg na twarz", ru: "Уход за лицом", tr: "Cilt bakımı", es: "Tratamiento facial" },
+    vk2P4:    { en: "€55", pl: "55 €", ru: "55 €", tr: "€55", es: "55 €" },
+    vk2Hours: { en: "Tue–Sat · 09:00–19:00", pl: "Wt–Sob · 09:00–19:00", ru: "Вт–Сб · 09:00–19:00", tr: "Sal–Cmt · 09:00–19:00", es: "Mar–Sáb · 09:00–19:00" },
+
+    // phone 3 — photographer (cyan)
+    vk3Ava:   { en: "D", pl: "T", ru: "Д", tr: "K", es: "J" },
+    vk3Name:  { en: "Daniel", pl: "Tomasz", ru: "Даниил", tr: "Kerem", es: "Javier" },
+    vk3Role:  { en: "PHOTOGRAPHER · LONDON", pl: "FOTOGRAF · WARSZAWA", ru: "ФОТОГРАФ · БАКУ", tr: "FOTOĞRAFÇI · İSTANBUL", es: "FOTÓGRAFO · MADRID" },
+    vk3Rate:  { en: "4.9 · 64 reviews", pl: "4,9 · 64 opinie", ru: "4,9 · 64 отзыва", tr: "4,9 · 64 yorum", es: "4,9 · 64 reseñas" },
+    vk3S1:    { en: "Portrait session", pl: "Sesja portretowa", ru: "Портретная съёмка", tr: "Portre çekimi", es: "Sesión de retrato" },
+    vk3P1:    { en: "€90", pl: "90 €", ru: "90 €", tr: "€90", es: "90 €" },
+    vk3S2:    { en: "Family shoot", pl: "Sesja rodzinna", ru: "Семейная съёмка", tr: "Aile çekimi", es: "Sesión familiar" },
+    vk3P2:    { en: "€140", pl: "140 €", ru: "140 €", tr: "€140", es: "140 €" },
+    vk3S3:    { en: "Wedding", pl: "Wesele", ru: "Свадьба", tr: "Düğün", es: "Boda" },
+    vk3P3:    { en: "€450", pl: "450 €", ru: "450 €", tr: "€450", es: "450 €" },
+    vk3Hours: { en: "Mon–Fri · 09:00–18:00", pl: "Pn–Pt · 09:00–18:00", ru: "Пн–Пт · 09:00–18:00", tr: "Pzt–Cum · 09:00–18:00", es: "Lun–Vie · 09:00–18:00" },
     pricingEyebrow: { en: "Pricing",              pl: "Cennik",              ru: "Цены", tr: "Fiyatlar", es: "Precios" },
     pricingTitle:   { en: "Simple, upfront pricing", pl: "Proste, jasne ceny", ru: "Простые, прозрачные цены", tr: "Basit, şeffaf fiyatlar", es: "Precios simples y claros" },
     pricingDesc:    { en: "Dreaming of a website or app — for your business, your idea, or someone you love? Here's the price and timeline up front, no hidden costs.", pl: "Marzysz o stronie lub aplikacji — dla swojego biznesu, pomysłu albo kogoś bliskiego? Oto cena i termin z góry, bez ukrytych kosztów.", ru: "Мечтаешь о сайте или приложении — для бизнеса, своей идеи или близкого человека? Вот цена и сроки сразу, без скрытых расходов.", tr: "Bir web sitesi veya uygulama mı hayal ediyorsun — işin, fikrin ya da sevdiğin biri için? İşte fiyat ve süre baştan, gizli maliyet yok.", es: "¿Sueñas con una web o una app — para tu negocio, tu idea o alguien a quien quieres? Aquí tienes el precio y el plazo por adelantado, sin costes ocultos." },

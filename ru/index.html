@@ -828,46 +828,93 @@
 
     /* ── "WHAT'S A BUSINESS-CARD SITE" (static, no jank) ── */
     #whatvisitka { padding: 110px 0; }
-    .vk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; max-width: 1000px; margin: 0 auto; }
-    .vk-phone-wrap { display: flex; justify-content: center; }
+    .vk-head { text-align: center; max-width: 640px; margin: 0 auto 54px; }
+    .vk-head .sec-desc { margin: 0 auto; }
+    .vk-row {
+      display: flex; justify-content: center; align-items: center;
+      gap: 26px;
+    }
+
+    /* Each phone is themed purely by these four custom properties — a new colourway
+       is one .vk-<name> rule, nothing else needs touching. */
     .vk-phone {
+      --acc:  #E7B45A;            /* accent (amber, the barber) */
+      --acc-d:#C8922F;
+      --scr:  linear-gradient(180deg, #100E0A, #1A150E);
+      --ink:  #F4EEE4;            /* screen text */
+      --mut:  #B0A493;            /* muted screen text */
+      --on-acc:#1a1509;           /* text sitting on the accent */
       width: 256px; height: 524px; flex-shrink: 0;
       border-radius: 42px; background: #14181f; padding: 9px; position: relative;
       border: 1px solid rgba(255,255,255,0.09);
     }
+    .vk-rose {
+      --acc: #E9A5BC; --acc-d: #C0687F;
+      --scr: linear-gradient(180deg, #120A0E, #1C1016);
+      --ink: #F6EAEF; --mut: #B39AA3; --on-acc: #1e0d13;
+    }
+    .vk-cyan {
+      --acc: #7FE9F0; --acc-d: #2C8A9C;
+      --scr: linear-gradient(180deg, #08111A, #0D1A24);
+      --ink: #E6F4F7; --mut: #93AAB3; --on-acc: #04141A;
+    }
+    /* the middle one is the hero of the row — bigger box, not a transform, so it
+       can't fight the .fade-up translate */
+    .vk-featured {
+      width: 278px; height: 568px; border-radius: 46px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.5);
+    }
+    .vk-featured .vk-screen { border-radius: 38px; }
+
     .vk-phone::before {
       content: ''; position: absolute; top: 11px; left: 50%; transform: translateX(-50%);
       width: 90px; height: 20px; background: #0a0d12; border-radius: 12px; z-index: 2;
     }
     .vk-screen {
       width: 100%; height: 100%; border-radius: 34px; overflow: hidden;
-      background: linear-gradient(180deg, #100E0A, #1A150E);
-      color: #F4EEE4; display: flex; flex-direction: column; text-align: center;
+      background: var(--scr);
+      color: var(--ink); display: flex; flex-direction: column; text-align: center;
       padding: 44px 20px 22px;
     }
     .vk-ava {
       width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 12px;
-      background: linear-gradient(140deg, #E7B45A, #C8922F);
+      background: linear-gradient(140deg, var(--acc), var(--acc-d));
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 29px; color: #1a1509;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 29px; color: var(--on-acc);
     }
     .vk-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; }
-    .vk-role { color: #E7B45A; font-size: 12px; font-weight: 600; margin-top: 3px; letter-spacing: 0.4px; }
-    .vk-rating { font-size: 12px; color: #E7B45A; font-weight: 600; margin: 7px 0 13px; }
+    .vk-role { color: var(--acc); font-size: 11px; font-weight: 600; margin-top: 3px; letter-spacing: 0.4px; }
+    .vk-rating { font-size: 12px; color: var(--acc); font-weight: 600; margin: 7px 0 13px; }
     .vk-srv {
-      display: flex; justify-content: space-between; align-items: center;
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(231,180,90,0.13);
+      display: flex; justify-content: space-between; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
       border-radius: 10px; padding: 9px 13px; margin-bottom: 8px; font-size: 13px;
     }
-    .vk-srv b { font-family: 'Space Grotesk', sans-serif; color: #E7B45A; }
-    .vk-hours { font-size: 11.5px; color: #B0A493; margin: 11px 0 12px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .vk-srv span { text-align: left; }
+    .vk-srv b { font-family: 'Space Grotesk', sans-serif; color: var(--acc); white-space: nowrap; }
+    .vk-hours { font-size: 11.5px; color: var(--mut); margin: 11px 0 12px; display: flex; align-items: center; justify-content: center; gap: 6px; }
     .vk-btns { margin-top: auto; display: flex; gap: 8px; }
-    .vk-cta { flex: 1; background: linear-gradient(135deg, #E7B45A, #C8922F); color: #1a1509; font-weight: 700; font-size: 13px; padding: 11px; border-radius: 11px; }
-    .vk-cta2 { background: transparent; border: 1px solid rgba(231,180,90,0.42); color: #E7B45A; }
-    .vk-caption { font-size: 12px; color: var(--text-m); text-align: center; margin-top: 22px; }
-    @media (max-width: 860px) {
-      .vk-grid { grid-template-columns: 1fr; gap: 34px; }
-      .vk-text { text-align: center; }
+    .vk-cta { flex: 1; background: linear-gradient(135deg, var(--acc), var(--acc-d)); color: var(--on-acc); font-weight: 700; font-size: 13px; padding: 11px; border-radius: 11px; }
+    .vk-cta2 { background: transparent; border: 1px solid var(--acc); color: var(--acc); }
+    .vk-caption { font-size: 12px; color: var(--text-m); text-align: center; margin-top: 30px; }
+
+    /* three phones don't fit side by side below ~900px — turn the row into a
+       swipeable strip instead of letting flex-wrap break it into 2 + 1 */
+    @media (max-width: 900px) {
+      .vk-row {
+        justify-content: flex-start;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 18px;
+        padding: 10px 28px 22px;
+        margin: 0 -28px;
+      }
+      .vk-phone { scroll-snap-align: center; }
+      .vk-featured { width: 256px; height: 524px; border-radius: 42px; }
+      .vk-featured .vk-screen { border-radius: 34px; }
+    }
+    @media (max-width: 640px) {
+      .vk-row { padding: 10px 20px 22px; margin: 0 -20px; }
     }
 
     /* ── RESPONSIVE ───────────────────────── */
@@ -1199,32 +1246,70 @@
 <!-- ─── WHAT'S A BUSINESS-CARD SITE ──────── -->
 <section id="whatvisitka">
   <div class="container">
-    <div class="vk-grid">
-      <div class="vk-text">
-        <p class="eyebrow fade-up">Сайт-визитка</p>
-        <h2 class="sec-title fade-up d1">Что такое сайт-визитка?</h2>
-        <p class="sec-desc fade-up d2">Одна аккуратная страница — кто ты, что делаешь, цены и контакты. Как бумажная визитка, только онлайн: тебя находят в Google и звонят в одно касание. Вот как это выглядит:</p>
-      </div>
-      <div class="vk-phone-wrap">
-        <div class="vk-phone">
-          <div class="vk-screen">
-            <div class="vk-ava">M</div>
-            <div class="vk-name">Marek</div>
-            <div class="vk-role">BARBER · WARSZAWA</div>
-            <div class="vk-rating">★★★★★ 4.9 · 120 reviews</div>
-            <div class="vk-srv"><span>Haircut</span><b>60 zł</b></div>
-            <div class="vk-srv"><span>Beard trim</span><b>40 zł</b></div>
-            <div class="vk-srv"><span>Cut + beard</span><b>90 zł</b></div>
-            <div class="vk-hours">🕒 Mon–Sat · 10:00–20:00</div>
-            <div class="vk-btns">
-              <div class="vk-cta">📞 Call</div>
-              <div class="vk-cta vk-cta2">Book</div>
-            </div>
+    <div class="vk-head">
+      <p class="eyebrow fade-up">Сайт-визитка</p>
+      <h2 class="sec-title fade-up d1">Что такое сайт-визитка?</h2>
+      <p class="sec-desc fade-up d2">Одна аккуратная страница — кто ты, что делаешь, цены и контакты. Как бумажная визитка, только онлайн: тебя находят в Google и звонят в одно касание. Вот как это выглядит:</p>
+    </div>
+
+    <!-- Mock sites, not real businesses — the caption below says so. Every string is
+         localised, so a visitor sees a business from their own market. -->
+    <div class="vk-row">
+
+      <div class="vk-phone fade-up d1">
+        <div class="vk-screen">
+          <div class="vk-ava">М</div>
+          <div class="vk-name">Марк</div>
+          <div class="vk-role">БАРБЕР · БАКУ</div>
+          <div class="vk-rating">★★★★★ <span>4,9 · 120 отзывов</span></div>
+          <div class="vk-srv"><span>Стрижка</span><b>18 €</b></div>
+          <div class="vk-srv"><span>Борода</span><b>12 €</b></div>
+          <div class="vk-srv"><span>Стрижка + борода</span><b>26 €</b></div>
+          <div class="vk-hours">🕒 <span>Пн–Сб · 10:00–20:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span>Позвонить</span></div>
+            <div class="vk-cta vk-cta2">Записаться</div>
           </div>
         </div>
       </div>
+
+      <div class="vk-phone vk-rose vk-featured fade-up d2">
+        <div class="vk-screen">
+          <div class="vk-ava">С</div>
+          <div class="vk-name">София</div>
+          <div class="vk-role">БЬЮТИ-СТУДИЯ · БАКУ</div>
+          <div class="vk-rating">★★★★★ <span>5,0 · 86 отзывов</span></div>
+          <div class="vk-srv"><span>Маникюр</span><b>25 €</b></div>
+          <div class="vk-srv"><span>Педикюр</span><b>30 €</b></div>
+          <div class="vk-srv"><span>Наращивание ресниц</span><b>40 €</b></div>
+          <div class="vk-srv"><span>Уход за лицом</span><b>55 €</b></div>
+          <div class="vk-hours">🕒 <span>Вт–Сб · 09:00–19:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span>Позвонить</span></div>
+            <div class="vk-cta vk-cta2">Записаться</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vk-phone vk-cyan fade-up d3">
+        <div class="vk-screen">
+          <div class="vk-ava">Д</div>
+          <div class="vk-name">Даниил</div>
+          <div class="vk-role">ФОТОГРАФ · БАКУ</div>
+          <div class="vk-rating">★★★★★ <span>4,9 · 64 отзыва</span></div>
+          <div class="vk-srv"><span>Портретная съёмка</span><b>90 €</b></div>
+          <div class="vk-srv"><span>Семейная съёмка</span><b>140 €</b></div>
+          <div class="vk-srv"><span>Свадьба</span><b>450 €</b></div>
+          <div class="vk-hours">🕒 <span>Пн–Пт · 09:00–18:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span>Позвонить</span></div>
+            <div class="vk-cta vk-cta2">Записаться</div>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <p class="vk-caption fade-up">Пример — твой сайт-визитка может выглядеть так.</p>
+    <p class="vk-caption fade-up">Три примера — твой может выглядеть как захочешь.</p>
   </div>
 </section>
 
