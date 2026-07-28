@@ -626,10 +626,7 @@
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
     .fade-up.in { opacity: 1; transform: translateY(0); }
-    .d1 { transition-delay: 0.1s; }
-    .d2 { transition-delay: 0.2s; }
-    .d3 { transition-delay: 0.3s; }
-    .d4 { transition-delay: 0.4s; }
+    /* the .d1–.d4 stagger helpers live further down, AFTER .tilt — see the note there */
 
     /* ── SCROLL-DRAWN 3D LINE + TILT ──────── */
     #scroll-line-wrap {
@@ -641,13 +638,27 @@
     #hero .container { position: relative; z-index: 2; }
     footer { position: relative; z-index: 1; }
 
+    /* This list MUST keep opacity and transform at the .fade-up reveal speed.
+       `transition` is a shorthand and .tilt is declared after .fade-up with equal
+       specificity, so a shorter list here silently kills the card's reveal — opacity
+       stops transitioning at all. The fast tilt-return timing is applied inline by JS
+       on mouseenter instead, where it can't affect the reveal. */
     .tilt {
       transform-style: preserve-3d;
-      transition: transform 0.18s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+      transition: opacity 0.7s ease, transform 0.7s ease,
+                  box-shadow 0.3s ease, border-color 0.3s ease;
     }
     /* promote to its own layer only while actually being tilted — a permanent
        will-change kept 3 compositor layers alive for the whole session */
     .tilt:hover { will-change: transform; }
+
+    /* Stagger helpers. They sit here, after .tilt, on purpose: `transition` is a
+       shorthand, so .tilt resets transition-delay to 0 for anything it matches. Declared
+       above .tilt these silently do nothing on the project cards. */
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
     .tilt-shine {
       position: absolute; inset: 0;
       border-radius: inherit; pointer-events: none;
@@ -1161,7 +1172,7 @@
 
     <div class="projects-grid">
 
-      <a href="https://nextcargo.eu" target="_blank" rel="noopener noreferrer" class="proj-card fade-up tilt">
+      <a href="https://nextcargo.eu" target="_blank" rel="noopener noreferrer" class="proj-card fade-up d1 tilt">
         <div class="proj-thumb pt-nextcargo">
           <img class="proj-logo pl-nextcargo" src="images/nextcargo.webp" alt="nextcargo.eu logo"
                width="300" height="300" loading="lazy" decoding="async">
@@ -1181,7 +1192,7 @@
         </div>
       </a>
 
-      <a href="https://birklik.az" target="_blank" rel="noopener noreferrer" class="proj-card fade-up d1 tilt">
+      <a href="https://birklik.az" target="_blank" rel="noopener noreferrer" class="proj-card fade-up d2 tilt">
         <div class="proj-thumb pt-birklik">
           <img class="proj-logo pl-birklik" src="images/birklik.webp" alt="birklik.az logo"
                width="700" height="467" loading="lazy" decoding="async">
@@ -1207,7 +1218,7 @@
 
     <div class="projects-grid small-grid">
 
-      <div class="proj-card fade-up tilt">
+      <div class="proj-card fade-up d3 tilt">
         <div class="proj-thumb pt-yodin">
           <img class="proj-logo pl-yodin" src="images/yodin.webp" alt="yOdin logo"
                width="280" height="280" loading="lazy" decoding="async">
@@ -1733,6 +1744,8 @@
       el.addEventListener('mouseenter', () => {
         rect = el.getBoundingClientRect();
         tiltRectsStale = false;
+        // snappy tilt timing, set here so the CSS rule can stay slow for the reveal
+        el.style.transition = 'transform 0.18s ease-out, box-shadow 0.3s ease, border-color 0.3s ease';
       });
 
       el.addEventListener('mousemove', e => {
