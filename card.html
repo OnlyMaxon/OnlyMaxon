@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- internal print tool, not part of the public site — keep it out of search results.
+       Deliberately NOT blocked in robots.txt: a Disallow would stop crawlers reading
+       this line, and they could still list the URL from an external link. -->
+  <meta name="robots" content="noindex, nofollow">
   <title>OnlyMaxon — QR sticker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
