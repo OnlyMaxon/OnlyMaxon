@@ -621,12 +621,31 @@
     .ft { font-size: 13px; color: var(--text-m); }
 
     /* ── ANIMATIONS ───────────────────────── */
-    .fade-up {
-      opacity: 0; transform: translateY(38px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+    /* The reveal runs on `animation`, deliberately NOT on `transition`.
+       `transition` is a shorthand, and several components below (.tilt, .price-card,
+       .faq-item …) declare their own hover transition after this rule — each one
+       silently replaced the whole list and killed the reveal on its elements.
+       `animation` is a separate property, so a component's transition can no longer
+       reach it, and every component keeps its own snappy hover timing.
+       `backwards` holds the start frame during the stagger delay; there is no
+       `forwards`, so once it ends the static .in values below take over — which is what
+       lets the JS tilt keep writing its own inline transform afterwards. */
+    .fade-up { opacity: 0; transform: translateY(38px); }
+    .fade-up.in {
+      opacity: 1; transform: none;
+      /* The stagger comes in through a custom property rather than a separate
+         animation-delay rule. `animation` is a shorthand too, so it would reset any
+         delay declared elsewhere — and .fade-up.in outweighs a bare .d1. Feeding the
+         value into the shorthand makes the order of these rules irrelevant. */
+      animation: fadeUp 0.7s ease var(--reveal-delay, 0s) backwards;
     }
-    .fade-up.in { opacity: 1; transform: translateY(0); }
-    /* the .d1–.d4 stagger helpers live further down, AFTER .tilt — see the note there */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(38px); }
+    }
+    .d1 { --reveal-delay: 0.1s; }
+    .d2 { --reveal-delay: 0.2s; }
+    .d3 { --reveal-delay: 0.3s; }
+    .d4 { --reveal-delay: 0.4s; }
 
     /* ── SCROLL-DRAWN 3D LINE + TILT ──────── */
     #scroll-line-wrap {
@@ -645,20 +664,11 @@
        on mouseenter instead, where it can't affect the reveal. */
     .tilt {
       transform-style: preserve-3d;
-      transition: opacity 0.7s ease, transform 0.7s ease,
-                  box-shadow 0.3s ease, border-color 0.3s ease;
+      transition: transform 0.18s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
     }
     /* promote to its own layer only while actually being tilted — a permanent
        will-change kept 3 compositor layers alive for the whole session */
     .tilt:hover { will-change: transform; }
-
-    /* Stagger helpers. They sit here, after .tilt, on purpose: `transition` is a
-       shorthand, so .tilt resets transition-delay to 0 for anything it matches. Declared
-       above .tilt these silently do nothing on the project cards. */
-    .d1 { transition-delay: 0.1s; }
-    .d2 { transition-delay: 0.2s; }
-    .d3 { transition-delay: 0.3s; }
-    .d4 { transition-delay: 0.4s; }
     .tilt-shine {
       position: absolute; inset: 0;
       border-radius: inherit; pointer-events: none;
@@ -1744,8 +1754,6 @@
       el.addEventListener('mouseenter', () => {
         rect = el.getBoundingClientRect();
         tiltRectsStale = false;
-        // snappy tilt timing, set here so the CSS rule can stay slow for the reveal
-        el.style.transition = 'transform 0.18s ease-out, box-shadow 0.3s ease, border-color 0.3s ease';
       });
 
       el.addEventListener('mousemove', e => {
