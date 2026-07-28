@@ -898,23 +898,52 @@
     .vk-cta2 { background: transparent; border: 1px solid var(--acc); color: var(--acc); }
     .vk-caption { font-size: 12px; color: var(--text-m); text-align: center; margin-top: 30px; }
 
-    /* three phones don't fit side by side below ~900px — turn the row into a
-       swipeable strip instead of letting flex-wrap break it into 2 + 1 */
+    .vk-swipe { display: none; }
+
+    /* Three phones can't sit side by side below ~900px. Rather than let flex-wrap
+       break them into an ugly 2 + 1, the row becomes a snap-scrolling strip — and the
+       phones shrink, because at full size one alone ate ~60% of a phone screen. */
     @media (max-width: 900px) {
       .vk-row {
         justify-content: flex-start;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        gap: 18px;
-        padding: 10px 28px 22px;
+        scroll-behavior: auto;   /* the initial centring must be instant, not animated */
+        gap: 16px;
+        /* half-viewport padding lets the first and last phone snap to the centre
+           instead of getting stuck against the edges */
+        padding: 6px calc(50vw - 112px) 20px;
         margin: 0 -28px;
+        scrollbar-width: none;
       }
-      .vk-phone { scroll-snap-align: center; }
-      .vk-featured { width: 256px; height: 524px; border-radius: 42px; }
-      .vk-featured .vk-screen { border-radius: 34px; }
-    }
-    @media (max-width: 640px) {
-      .vk-row { padding: 10px 20px 22px; margin: 0 -20px; }
+      .vk-row::-webkit-scrollbar { display: none; }
+      .vk-phone, .vk-featured {
+        scroll-snap-align: center;
+        width: 224px; height: 466px;
+        border-radius: 36px; padding: 8px;
+        box-shadow: none;
+      }
+      .vk-phone .vk-screen, .vk-featured .vk-screen {
+        border-radius: 30px; padding: 36px 15px 16px;
+      }
+      /* the middle phone carries a fourth service row, and long names ("Наращивание
+         ресниц", "Extensión de pestañas") wrap onto two lines — it needs the extra
+         height here too, not just on desktop */
+      .vk-featured { height: 512px; }
+      .vk-ava { width: 54px; height: 54px; font-size: 24px; margin-bottom: 10px; }
+      .vk-name { font-size: 18px; }
+      .vk-role { font-size: 10px; }
+      .vk-rating { font-size: 11px; margin: 5px 0 11px; }
+      .vk-srv { font-size: 12px; padding: 8px 11px; margin-bottom: 7px; }
+      .vk-hours { font-size: 10.5px; margin: 9px 0 10px; }
+      .vk-cta { font-size: 12px; padding: 10px 6px; }
+
+      .vk-head { margin-bottom: 28px; }
+      .vk-swipe {
+        display: block; text-align: center;
+        font-size: 12px; color: var(--text-m); margin-top: 4px;
+      }
+      .vk-caption { margin-top: 14px; }
     }
 
     /* ── RESPONSIVE ───────────────────────── */
@@ -1309,6 +1338,8 @@
       </div>
 
     </div>
+    <!-- mobile only: without this nothing tells you the strip scrolls -->
+    <p class="vk-swipe">← üçünü de görmek için kaydır →</p>
     <p class="vk-caption fade-up">Üç örnek — seninki nasıl istersen öyle görünebilir.</p>
   </div>
 </section>
@@ -1622,6 +1653,38 @@
     const s = document.getElementById(id);
     if (s) spyObserver.observe(s);
   });
+
+  // ── Demo-phone strip: start centred on the middle one ──
+  // On mobile the three phones become a scroll strip. Left at scrollLeft 0 you'd see
+  // phone 1 with one clipped edge on the right, which reads as broken layout. Centring
+  // the middle phone leaves a slice of a neighbour on BOTH sides, which reads as "there
+  // is more here, swipe" — and puts the featured card in front of you first.
+  const vkRow = document.querySelector('.vk-row');
+  const vkMid = document.querySelector('.vk-featured');
+  if (vkRow && vkMid) {
+    // Listen for real input, NOT for 'scroll': centreVk() scrolls the strip itself, so a
+    // scroll listener would immediately flag it as "user touched it" and disable itself.
+    let vkTouched = false;
+    ['touchstart', 'wheel', 'pointerdown', 'keydown'].forEach(ev =>
+      vkRow.addEventListener(ev, () => { vkTouched = true; }, { passive: true, once: true }));
+
+    function centreVk() {
+      if (vkTouched) return;                                   // the visitor is driving now
+      if (vkRow.scrollWidth <= vkRow.clientWidth + 1) return;   // desktop: nothing scrolls
+      // measured from rects, so it doesn't care about offsetParent or current position
+      const row = vkRow.getBoundingClientRect();
+      const mid = vkMid.getBoundingClientRect();
+      vkRow.scrollLeft += (mid.left + mid.width / 2) - (row.left + row.width / 2);
+    }
+
+    centreVk();
+    window.addEventListener('load', centreVk);   // after fonts settle the widths
+    let vkRt;
+    window.addEventListener('resize', () => {
+      clearTimeout(vkRt);
+      vkRt = setTimeout(centreVk, 150);          // e.g. crossing the 900px breakpoint
+    }, { passive: true });
+  }
 
   // ── FAQ accordion ──
   document.querySelectorAll('.faq-q').forEach(q => {

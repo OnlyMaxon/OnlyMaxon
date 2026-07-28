@@ -30,6 +30,7 @@ const translations = {
     // visitor sees a business from their own market, not a foreign one.
     // Prices are EUR everywhere; only the symbol's position follows local habit
     // (en/tr "€18", pl/ru/es "18 €") — same convention as the pricing section above.
+    vkSwipe: { en: "← swipe to see all three →", pl: "← przesuń, by zobaczyć wszystkie trzy →", ru: "← листай, чтобы увидеть все три →", tr: "← üçünü de görmek için kaydır →", es: "← desliza para ver los tres →" },
     vkCall: { en: "Call", pl: "Zadzwoń", ru: "Позвонить", tr: "Ara", es: "Llamar" },
     vkBook: { en: "Book", pl: "Rezerwuj", ru: "Записаться", tr: "Randevu", es: "Reservar" },
 
@@ -88,13 +89,13 @@ const translations = {
     price3Amount: { en: "from €1400",                  pl: "od 1400 €",                  ru: "от 1400 €", tr: "€1400'den", es: "desde 1400 €" },
     price3Time:   { en: "4–6 weeks",                   pl: "4–6 tygodni",                ru: "4–6 недель", tr: "4–6 hafta", es: "4–6 semanas" },
     price4Name:   { en: "Ongoing SEO / ASO / AI",      pl: "Stałe SEO / ASO / AI",       ru: "Постоянное SEO / ASO / AI", tr: "Sürekli SEO / ASO / AI", es: "SEO / ASO / AI continuo" },
-    price4Amount: { en: "from €200/mo",                pl: "od 200 €/mies",              ru: "от 200 €/мес", tr: "€200/ay'dan", es: "desde 200 €/mes" },
+    price4Amount: { en: "from €200/mo",                pl: "od 200 €/mies.",             ru: "от 200 €/мес", tr: "€200/ay'dan", es: "desde 200 €/mes" },
     price4Time:   { en: "monthly · ongoing",           pl: "miesięcznie",                ru: "ежемесячно", tr: "aylık · sürekli", es: "mensual · continuo" },
     priceCta:     { en: "Get in touch",                pl: "Napisz do nas",              ru: "Написать нам", tr: "İletişime geç", es: "Contáctanos" },
 
     // PROJECTS
     projEyebrow: { en: "Our work", pl: "Nasze prace", ru: "Наши работы", tr: "İşlerimiz", es: "Nuestro trabajo" },
-    projTitle:   { en: "Products we've brought to life", pl: "Produkty, które ożywiliśmy", ru: "Продукты, которые мы оживили", tr: "Hayata geçirdiğimiz ürünler", es: "Productos que hemos dado vida" },
+    projTitle:   { en: "Products we've brought to life", pl: "Produkty, które ożywiliśmy", ru: "Продукты, которые мы оживили", tr: "Hayata geçirdiğimiz ürünler", es: "Productos a los que hemos dado vida" },
     projDesc:    { en: "Real products used by real people — designed, built, and launched by OnlyMaxon.", pl: "Prawdziwe produkty używane przez prawdziwych ludzi — zaprojektowane, zbudowane i wdrożone przez OnlyMaxon.", ru: "Реальные продукты для реальных людей — спроектированы, созданы и запущены OnlyMaxon.", tr: "Gerçek insanların kullandığı gerçek ürünler — OnlyMaxon tarafından tasarlandı, geliştirildi ve yayınlandı.", es: "Productos reales usados por personas reales — diseñados, construidos y lanzados por OnlyMaxon." },
     badgeLive:   { en: "Live",     pl: "Live",       ru: "Онлайн", tr: "Yayında", es: "En vivo" },
     badgeDev:    { en: "In dev",   pl: "W budowie",  ru: "В разработке", tr: "Geliştiriliyor", es: "En desarrollo" },
