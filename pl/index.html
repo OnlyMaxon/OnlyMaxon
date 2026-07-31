@@ -566,19 +566,28 @@
     }
     .sc-desc {
       font-size: 14px; color: var(--text-d);
-      line-height: 1.65; margin-bottom: 18px;
+      line-height: 1.65; margin-bottom: 10px;
+    }
+    /* The line above sells; this one is the proof under it. Smaller and dimmer on
+       purpose — it must not be the first thing the eye lands on. */
+    .sc-meta {
+      font-size: 12.5px; color: var(--text-d); opacity: 0.72;
+      line-height: 1.6; margin-bottom: 18px;
     }
     .sc-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 13px; font-weight: 600;
       text-transform: uppercase; letter-spacing: 1.2px;
-      color: var(--text-m); margin-bottom: 16px;
+      color: var(--text-m); margin-bottom: 12px;
     }
-    .sc-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .sc-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    /* Deliberately smaller than the copy above: these are credibility, not the pitch.
+       The colour stays at --text-d — dropping to --text-m would make them unreadable
+       on --bg3 rather than merely quiet. */
     .sc-tag {
       background: var(--bg3); border: 1px solid var(--border);
-      color: var(--text-d); font-size: 13px; font-weight: 500;
-      padding: 6px 14px; border-radius: 8px;
+      color: var(--text-d); font-size: 12px; font-weight: 500;
+      padding: 5px 11px; border-radius: 8px;
       transition: background-color 0.2s, border-color 0.2s, color 0.2s;
       font-family: 'SF Mono', 'Fira Code', monospace;
     }
@@ -822,15 +831,6 @@
     .modal-status { font-size: 13px; text-align: center; min-height: 18px; }
     .modal-status.ok  { color: #4ADE80; }
     .modal-status.err { color: #F87171; }
-
-    /* ── SERVICE "WHY" EXPLAINER ──────────── */
-    .sc-why {
-      font-size: 12.5px; color: var(--text-d); line-height: 1.6;
-      margin-bottom: 18px; padding: 12px 14px;
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 10px;
-    }
-    .sc-why b { color: var(--text); font-weight: 600; }
 
     /* ── FAQ ──────────────────────────────── */
     #faq { padding: 120px 0; }
@@ -1258,58 +1258,11 @@
 
 <div class="divider"></div>
 
-<!-- ─── STACK (Services) ──────────────────── -->
-<section id="stack">
-  <div class="container">
-    <div class="stack-head">
-      <p class="eyebrow fade-up">Co robimy</p>
-      <h2 class="sec-title fade-up d1">Wszystko pod jednym dachem</h2>
-      <p class="sec-desc fade-up d2">Dwa zespoły, jeden cel — zbudować, wdrożyć i rozwijać Twój produkt.</p>
-    </div>
-    <div class="stack-grid">
-      <div class="stack-cat fade-up">
-        <div class="sc-icon">💻</div>
-        <div class="sc-name">Development</div>
-        <p class="sc-desc">Inżynieria full-stack — web, mobile, mapy i aplikacje real-time budowane od zera i wdrażane na produkcję.</p>
-        <p class="sc-why">&lt;b&gt;Co to:&lt;/b&gt; zbudowanie samej strony lub aplikacji. &lt;b&gt;Po co:&lt;/b&gt; szybki, indywidualny produkt, który jest naprawdę Twój — bez szablonów i ograniczeń.</p>
-        <div class="sc-title">Budujemy w</div>
-        <div class="sc-tags">
-          <span class="sc-tag">TypeScript</span>
-          <span class="sc-tag">React</span>
-          <span class="sc-tag">Next.js</span>
-          <span class="sc-tag">React Native</span>
-          <span class="sc-tag">Flutter</span>
-          <span class="sc-tag">Node.js</span>
-          <span class="sc-tag">Java</span>
-          <span class="sc-tag">Firebase</span>
-          <span class="sc-tag">Maps &amp; 3D</span>
-        </div>
-      </div>
-      <div class="stack-cat fade-up d1">
-        <div class="sc-icon">🔍</div>
-        <div class="sc-name">SEO / ASO / AI</div>
-        <p class="sc-desc">Strony gotowe pod SEO, aplikacje pod ASO, a Twoja marka dostrojona tak, by polecało ją AI (ChatGPT, Perplexity, Google AI). Dostępna też stała praca nad pozycjami.</p>
-        <p class="sc-why">&lt;b&gt;Co to:&lt;/b&gt; sprawienie, że Google, sklepy z aplikacjami i asystenci AI pokazują Twój produkt. &lt;b&gt;Po co:&lt;/b&gt; żeby klienci naprawdę Cię znajdowali — a nie konkurencję.</p>
-        <div class="sc-title">Zajmujemy się</div>
-        <div class="sc-tags">
-          <span class="sc-tag">On-page SEO</span>
-          <span class="sc-tag">ASO</span>
-          <span class="sc-tag">AI-SEO / GEO</span>
-          <span class="sc-tag">Search Console</span>
-          <span class="sc-tag">Analytics</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
 <!-- ─── WHAT'S A BUSINESS-CARD SITE ──────── -->
 <section id="whatvisitka">
   <div class="container">
     <div class="vk-head">
-      <p class="eyebrow fade-up">Strona wizytówka</p>
+      <p class="eyebrow fade-up">Przykład · strona wizytówka</p>
       <h2 class="sec-title fade-up d1">Czym jest strona wizytówka?</h2>
       <p class="sec-desc fade-up d2">Jedna czysta strona — kim jesteś, co robisz, ceny i kontakt. Jak papierowa wizytówka, ale online: klienci znajdują Cię w Google i dzwonią jednym dotknięciem. Oto jak to wygląda:</p>
     </div>
@@ -1374,6 +1327,55 @@
     <!-- mobile only: without this nothing tells you the strip scrolls -->
     <p class="vk-swipe">← przesuń, by zobaczyć wszystkie trzy →</p>
     <p class="vk-caption fade-up">Trzy przykłady — Twój może wyglądać, jak tylko chcesz.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── STACK (Services) ──────────────────── -->
+<!-- Sits after the phone examples on purpose: a visitor who has already seen the
+     thing they want reads the tech list as reassurance instead of as a wall. -->
+<section id="stack">
+  <div class="container">
+    <div class="stack-head">
+      <p class="eyebrow fade-up">Co robimy</p>
+      <h2 class="sec-title fade-up d1">Wszystko pod jednym dachem</h2>
+      <p class="sec-desc fade-up d2">Te same ręce, które budują Twój produkt, przyprowadzają do niego ludzi. Nie musisz szukać drugiej agencji.</p>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-cat fade-up">
+        <div class="sc-icon">💻</div>
+        <div class="sc-name">Budujemy Twój produkt</div>
+        <p class="sc-desc">Twoja strona lub aplikacja od zera — zrobiona pod Ciebie, a nie szablon, którego używa już setka innych firm.</p>
+        <p class="sc-meta">Strony, aplikacje mobilne, rezerwacja online, mapy, dane na żywo.</p>
+        <div class="sc-title">Budujemy w</div>
+        <div class="sc-tags">
+          <span class="sc-tag">TypeScript</span>
+          <span class="sc-tag">React</span>
+          <span class="sc-tag">Next.js</span>
+          <span class="sc-tag">React Native</span>
+          <span class="sc-tag">Flutter</span>
+          <span class="sc-tag">Node.js</span>
+          <span class="sc-tag">Java</span>
+          <span class="sc-tag">Firebase</span>
+          <span class="sc-tag">Maps &amp; 3D</span>
+        </div>
+      </div>
+      <div class="stack-cat fade-up d1">
+        <div class="sc-icon">🔍</div>
+        <div class="sc-name">Sprawiamy, że Cię znajdą</div>
+        <p class="sc-desc">Piękna strona, której nikt nie znajduje, to wizytówka w szufladzie. Sprawiamy, że Google, sklepy z aplikacjami i asystenci AI pokazują Cię tym, którzy już Cię szukają.</p>
+        <p class="sc-meta">Wyszukiwarka, App Store i Google Play, odpowiedzi w ChatGPT, Perplexity, Google AI.</p>
+        <div class="sc-title">Zajmujemy się</div>
+        <div class="sc-tags">
+          <span class="sc-tag">On-page SEO</span>
+          <span class="sc-tag">ASO</span>
+          <span class="sc-tag">AI-SEO / GEO</span>
+          <span class="sc-tag">Search Console</span>
+          <span class="sc-tag">Analytics</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
