@@ -316,10 +316,22 @@
     }
 
     .hero-title {
-      font-size: clamp(44px, 5vw, 68px);
+      /* The 44px floor was tuned for the old, shorter headline. With this copy it left
+         Russian and Turkish at six lines with orphaned words on a phone; 34px is the
+         measured sweet spot across all five languages at 360–390px, and the steeper vw
+         term keeps tablets and desktop where they were. */
+      font-size: clamp(34px, 6.5vw, 68px);
       letter-spacing: -2.5px;
       margin-bottom: 22px;
+      /* Evens out the line lengths instead of letting a single short word ("do.",
+         "you.", "находили.") drop onto a line of its own. Unsupported browsers just
+         wrap normally, so there is nothing to fall back to. */
+      text-wrap: balance;
     }
+    /* Each sentence is its own block so `balance` (inherited from above) evens out that
+       sentence alone. Sharing one block via <br> made the balancer treat both as one
+       run: it tidied the first line pair and left the second ending on a lone word. */
+    .hero-title span { display: block; }
     .hero-sub {
       font-size: clamp(16px, 1.8vw, 19px);
       color: var(--text-d);
@@ -1130,7 +1142,7 @@
         <div class="badge-dot"></div>
         <span>Работаем по всему миру · Берём новые проекты</span>
       </div>
-      <h1 class="hero-title">Превращаем идеи<br><span class="gradient-text">в работающие продукты.</span></h1>
+      <h1 class="hero-title"><span>Ты отлично делаешь своё дело.</span><span class="gradient-text">Сделаем так, чтобы тебя находили.</span></h1>
       <p class="hero-sub"><strong>OnlyMaxon</strong> — продуктовая студия. Проектируем, разрабатываем, запускаем и развиваем реальные продукты — <strong>разработка и SEO</strong> под одной крышей.</p>
         <div class="hero-btns">
           <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>

@@ -11,7 +11,15 @@ const translations = {
 
     // HERO
     heroBadge:     { en: "Working worldwide · Taking new projects", pl: "Pracujemy na całym świecie · Przyjmujemy nowe projekty", ru: "Работаем по всему миру · Берём новые проекты", tr: "Tüm dünyada çalışıyoruz · Yeni projeler alıyoruz", es: "Trabajamos en todo el mundo · Aceptando nuevos proyectos" },
-    heroTitle:     { en: 'We turn ideas<br><span class="gradient-text">into working products.</span>', pl: 'Zamieniamy pomysły<br><span class="gradient-text">w działające produkty.</span>', ru: 'Превращаем идеи<br><span class="gradient-text">в работающие продукты.</span>', tr: 'Fikirleri<br><span class="gradient-text">çalışan ürünlere dönüştürüyoruz.</span>', es: 'Convertimos ideas<br><span class="gradient-text">en productos que funcionan.</span>' },
+    // On-screen headline. Translations are idiomatic rather than literal, and every
+    // language avoids gendered adjectives — the audience includes beauty studios and
+    // barbers alike, and "Jesteś świetny" / "Eres bueno" would address only half of it.
+    heroTitle:     { en: '<span>You\'re great at what you do.</span><span class="gradient-text">We make the world find you.</span>', pl: '<span>Robisz świetną robotę.</span><span class="gradient-text">Sprawimy, że świat Cię znajdzie.</span>', ru: '<span>Ты отлично делаешь своё дело.</span><span class="gradient-text">Сделаем так, чтобы тебя находили.</span>', tr: '<span>İşini harika yapıyorsun.</span><span class="gradient-text">Dünyanın seni bulmasını sağlıyoruz.</span>', es: '<span>Eres genial en lo que haces.</span><span class="gradient-text">Hacemos que el mundo te encuentre.</span>' },
+
+    // Search-result title, deliberately separate from heroTitle. The headline above is an
+    // emotional promise with no keywords in it; this stays descriptive and under the
+    // ~60 characters Google shows. Editing the headline no longer rewrites the <title>.
+    metaTitle:     { en: "We turn ideas into working products.", pl: "Zamieniamy pomysły w działające produkty.", ru: "Превращаем идеи в работающие продукты.", tr: "Fikirleri çalışan ürünlere dönüştürüyoruz.", es: "Convertimos ideas en productos que funcionan." },
     heroSub:       { en: "<strong>OnlyMaxon</strong> is a product studio. We design, build, launch and grow real products — <strong>development and SEO</strong> under one roof.", pl: "<strong>OnlyMaxon</strong> to studio produktowe. Projektujemy, budujemy, wdrażamy i rozwijamy prawdziwe produkty — <strong>development i SEO</strong> pod jednym dachem.", ru: "<strong>OnlyMaxon</strong> — продуктовая студия. Проектируем, разрабатываем, запускаем и развиваем реальные продукты — <strong>разработка и SEO</strong> под одной крышей.", tr: "<strong>OnlyMaxon</strong> bir ürün stüdyosudur. Gerçek ürünleri tasarlar, geliştirir, yayınlar ve büyütürüz — <strong>geliştirme ve SEO</strong> tek çatı altında.", es: "<strong>OnlyMaxon</strong> es un estudio de producto. Diseñamos, construimos, lanzamos y hacemos crecer productos reales — <strong>desarrollo y SEO</strong> bajo un mismo techo." },
     heroBtnCall:     { en: "Send a message", pl: "Napisz do nas",  ru: "Написать нам", tr: "Mesaj gönder", es: "Enviar mensaje" },
     heroBtnProjects: { en: "See Projects", pl: "Zobacz projekty", ru: "Смотреть проекты", tr: "Projeleri gör", es: "Ver proyectos" },

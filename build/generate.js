@@ -31,7 +31,8 @@ const source = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 
 const usedKeys = new Set();
 for (const m of source.matchAll(/data-i18n(?:-html|-ph)?="([\w]+)"/g)) usedKeys.add(m[1]);
-usedKeys.add('modalSuccess').add('modalError');
+// Not carried by a data-i18n attribute: these are consumed by the build itself.
+usedKeys.add('modalSuccess').add('modalError').add('metaTitle');
 
 const missing = [];
 for (const key of usedKeys) {
@@ -94,8 +95,10 @@ function build(lang) {
     /<link rel="canonical" href="[^"]*">/,
     `<link rel="canonical" href="${SITE}/${lang}/">`);
 
-  // 8. title + descriptions, derived from the already-translated hero copy
-  const tagline = stripTags(t('heroTitle'));
+  // 8. title + descriptions. The title comes from its own key, NOT from heroTitle —
+  //    the on-screen headline is free to be a keyword-free emotional line without
+  //    dragging every search result along with it.
+  const tagline = stripTags(t('metaTitle'));
   const summary = stripTags(t('heroSub'));
   const title = `OnlyMaxon — ${tagline}`;
   html = html.replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`);
