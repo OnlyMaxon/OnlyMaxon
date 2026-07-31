@@ -27,7 +27,10 @@ const escAttr = s => esc(s).replace(/"/g, '&quot;');
 const stripTags = s => s.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 
 // ── read + validate the source ────────────────────────────────────────────────
-const source = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+// Normalise to LF. Git is configured to check files out with CRLF on this machine, so
+// after any `git checkout index.html` the source comes back with \r\n — and the
+// structured-data patterns below, which match on \n, silently stop matching.
+const source = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8').replace(/\r\n/g, '\n');
 
 const usedKeys = new Set();
 for (const m of source.matchAll(/data-i18n(?:-html|-ph)?="([\w]+)"/g)) usedKeys.add(m[1]);

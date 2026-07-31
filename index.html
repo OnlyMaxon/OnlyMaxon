@@ -119,10 +119,6 @@
       overflow-x: clip;
       position: relative;
     }
-    #line-head {
-      transition: opacity 0.4s ease;
-      filter: drop-shadow(0 0 5px #22D3EE);
-    }
 
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
@@ -668,46 +664,8 @@
     .d3 { --reveal-delay: 0.3s; }
     .d4 { --reveal-delay: 0.4s; }
 
-    /* ── SCROLL-DRAWN 3D LINE + TILT ──────── */
-    /* Default: the wrapper is as tall as the document and scrolls with it, so the
-       browser keeps the line glued to the page for free. It costs more repaint (the SVG
-       is ~10000px tall and stroke-dashoffset invalidates the whole path), but it is
-       always correct. The @supports block below is the faster path. */
-    #scroll-line-wrap {
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 0; pointer-events: none; overflow: hidden;
-    }
-    #scroll-line { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-
-    /* Shrinking the wrapper to one screen is what makes the repaint cheap — but only if
-       the line can still be slid up as you scroll without drifting. Doing that slide
-       from JS was measured drifting up to 77px on 89% of frames, which is exactly what
-       reads as trembling. A scroll-driven animation is computed by the compositor in the
-       same frame as the scroll, so it cannot lag behind it at all. Browsers without
-       `animation-timeline` keep the document-tall wrapper above. */
-    @supports (animation-timeline: scroll()) {
-      #scroll-line-wrap {
-        position: fixed; height: 100vh;
-        contain: strict;     /* the part the compositor actually reads */
-      }
-      #scroll-line {
-        /* auto so the width/height attributes the script writes win — a CSS 100% would
-           squash the whole drawing into the viewport box instead of clipping it */
-        width: auto; height: auto;
-        animation: lineSlide linear both;
-        animation-timeline: scroll(root block);
-      }
-      /* -100% is the SVG's own height, i.e. the document height; +100vh leaves the last
-         screen in place. Together that is exactly -scrollY over the whole range. */
-      @keyframes lineSlide {
-        from { transform: translateY(0); }
-        to   { transform: translateY(calc(-100% + 100vh)); }
-      }
-    }
+    /* keeps the hero copy above the blurred blobs behind it */
     #hero .container { position: relative; z-index: 2; }
-    footer { position: relative; z-index: 1; }
-
     /* This list MUST keep opacity and transform at the .fade-up reveal speed.
        `transition` is a shorthand and .tilt is declared after .fade-up with equal
        specificity, so a shorter list here silently kills the card's reveal — opacity
@@ -1088,26 +1046,6 @@
   </style>
 </head>
 <body>
-
-<!-- ─── SCROLL-DRAWN 3D LINE ──────────────── -->
-<div id="scroll-line-wrap" aria-hidden="true">
-  <svg id="scroll-line" preserveAspectRatio="xMidYMin meet" fill="none">
-    <defs>
-      <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0"   stop-color="#EAF2F6"/>
-        <stop offset="0.5" stop-color="#22D3EE"/>
-        <stop offset="1"   stop-color="#2C8A9C"/>
-      </linearGradient>
-    </defs>
-    <path id="line-track" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
-    <!-- cheap "glow": a fat low-opacity stroke, no SVG filter -->
-    <path id="line-glow"  stroke="url(#lineGrad)" stroke-width="9"
-          stroke-linecap="round" opacity="0.18"/>
-    <path id="line-draw"  stroke="url(#lineGrad)" stroke-width="2.5"
-          stroke-linecap="round"/>
-    <circle id="line-head" r="5" fill="#22D3EE"/>
-  </svg>
-</div>
 
 <!-- ─── NAV ─────────────────────────────── -->
 <nav id="nav">
@@ -1827,167 +1765,6 @@
       });
     });
   }
-</script>
-
-<!-- ── Scroll-drawn 3D line (no library) ── -->
-<script>
-(function () {
-  const wrap  = document.getElementById('scroll-line-wrap');
-  const svg   = document.getElementById('scroll-line');
-  const track = document.getElementById('line-track');
-  const glow  = document.getElementById('line-glow');
-  const draw  = document.getElementById('line-draw');
-  const head  = document.getElementById('line-head');
-  if (!svg) return;
-
-  // Bail out completely when motion is reduced, or on phones: this SVG is as tall as the
-  // whole document, so on a small screen it is pure GPU/raster cost for a decoration
-  // that barely reads anyway. (The CSS reduced-motion block can't reach this script.)
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-      window.matchMedia('(max-width: 600px)').matches) {
-    wrap.remove();
-    return;
-  }
-
-  const SAMPLES = 240;      // precomputed points along the path
-  let len = 0;
-  let samples = [];         // [x, y] pairs — replaces getPointAtLength() per frame
-  let scrollable = 0;       // cached — reading scrollHeight per frame was a forced reflow
-  let builtH = 0;           // document height the current path was built for
-  let builtW = 0;
-  let headVisible = null;
-
-  // body.offsetHeight, not documentElement.scrollHeight: the fallback wrapper is
-  // absolutely positioned, so it counts toward scrollHeight — measuring that here would
-  // let the ResizeObserver feed its own output back in as a change.
-  const docHeight = () => document.body.offsetHeight;
-
-  // Ask the layout what the CSS actually decided, rather than re-running the same
-  // @supports test here: two independent checks could disagree — a browser that reports
-  // support but ignores the rule would land on the fallback height with the fast-path
-  // wrapper and break. There is only one source of truth this way.
-  const slidesItself = getComputedStyle(wrap).position === 'fixed';
-
-  function build() {
-    const W = window.innerWidth;
-    const H = docHeight();
-    builtH = H; builtW = W;
-    scrollable = document.documentElement.scrollHeight - window.innerHeight;
-
-    // On the fast path the wrapper is one screen tall and sized by CSS, so writing an
-    // inline height here would override it. Only the fallback wrapper needs the height.
-    if (!slidesItself) wrap.style.height = H + 'px';
-
-    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-    svg.setAttribute('width', W);
-    svg.setAttribute('height', H);
-
-    // winding spine that weaves down the whole page (the "branch").
-    // Few points + smooth Q-curves → cheap getPointAtLength & raster.
-    const cx    = W * 0.5;
-    const amp   = Math.min(W * 0.34, 360);   // how far it weaves
-    const waves = H / 620;                     // number of bends
-    const steps = Math.max(24, Math.round(waves * 6)); // far fewer points
-
-    const pts = [];
-    for (let i = 0; i <= steps; i++) {
-      const t = i / steps;
-      const y = t * H;
-      const x = cx + Math.sin(t * Math.PI * 2 * waves) * amp * (0.55 + 0.45 * t);
-      pts.push([x, y]);
-    }
-    // build a smooth path through points (quadratic midpoints)
-    let d = `M${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)} `;
-    for (let i = 1; i < pts.length - 1; i++) {
-      const mx = (pts[i][0] + pts[i+1][0]) / 2;
-      const my = (pts[i][1] + pts[i+1][1]) / 2;
-      d += `Q${pts[i][0].toFixed(1)} ${pts[i][1].toFixed(1)} ${mx.toFixed(1)} ${my.toFixed(1)} `;
-    }
-    d += `L${pts[pts.length-1][0].toFixed(1)} ${pts[pts.length-1][1].toFixed(1)}`;
-
-    track.setAttribute('d', d);
-    glow.setAttribute('d', d);
-    draw.setAttribute('d', d);
-
-    len = draw.getTotalLength();
-    [glow, draw].forEach(el => {
-      el.style.strokeDasharray  = len;
-      el.style.strokeDashoffset = len;
-    });
-
-    // Sample the curve once here (241 geometry queries) so that update() never has to
-    // call getPointAtLength() again — that call used to run on every scrolled frame.
-    samples = new Array(SAMPLES + 1);
-    for (let i = 0; i <= SAMPLES; i++) {
-      const p = draw.getPointAtLength((len * i) / SAMPLES);
-      samples[i] = [p.x, p.y];
-    }
-
-    headVisible = null;
-    update();
-  }
-
-  function update() {
-    if (!len) return;
-    const prog = scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0;
-    const off  = len * (1 - prog);
-
-    // reveal the line as you scroll
-    draw.style.strokeDashoffset = off;
-    glow.style.strokeDashoffset = off;
-
-    // glowing tip rides the growing branch — linear interpolation between two
-    // precomputed samples, no path geometry query
-    const f = prog * SAMPLES;
-    const i = Math.min(SAMPLES - 1, f | 0);
-    const t = f - i;
-    const a = samples[i], b = samples[i + 1];
-    head.setAttribute('cx', (a[0] + (b[0] - a[0]) * t).toFixed(1));
-    head.setAttribute('cy', (a[1] + (b[1] - a[1]) * t).toFixed(1));
-
-    const vis = prog > 0.002 && prog < 0.999;
-    if (vis !== headVisible) {          // only write when it actually changes
-      headVisible = vis;
-      head.style.opacity = vis ? 1 : 0;
-    }
-  }
-
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(() => { update(); ticking = false; });
-    }
-  }, { passive: true });
-
-  let rt;
-  function scheduleBuild() { clearTimeout(rt); rt = setTimeout(build, 150); }
-
-  window.addEventListener('resize', () => {
-    // On mobile every address-bar collapse fires resize. Only the width matters for the
-    // path shape — a height-only change just needs the scroll math refreshed.
-    if (window.innerWidth === builtW) {
-      scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      update();
-      return;
-    }
-    scheduleBuild();
-  }, { passive: true });
-
-  // The document grows when a FAQ item opens, which would leave `scrollable` stale.
-  if (window.ResizeObserver) {
-    new ResizeObserver(() => {
-      if (Math.abs(docHeight() - builtH) > 4) scheduleBuild();
-    }).observe(document.body);
-  }
-
-  build();
-  // Images now carry width/height, so the height is already final — this second pass
-  // is a no-op in practice and is skipped unless something really did change.
-  window.addEventListener('load', () => {
-    if (Math.abs(docHeight() - builtH) > 4) build();
-  });
-})();
 </script>
 
 </body>
