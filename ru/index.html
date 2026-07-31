@@ -669,26 +669,42 @@
     .d4 { --reveal-delay: 0.4s; }
 
     /* ── SCROLL-DRAWN 3D LINE + TILT ──────── */
-    /* The SVG is as tall as the whole document (~10000px), and every scrolled frame
-       moves stroke-dashoffset, which invalidates the path's entire bounding box. Two
-       things together fix that, and only together:
-         `fixed` + 100vh  — the box is one screen, and the script slides the SVG by
-                            -scrollY so the line still reads as part of the page;
-         `contain: strict` — tells the compositor nothing outside that box can paint,
-                            which is what actually collapses the work.
-       Measured at 1440x900, median of 7 interleaved passes: worst-frame time 13.9ms ->
-       7.1ms, i.e. identical to deleting the line. `will-change: transform` was tried
-       here and changed nothing — it only added a document-tall compositor layer. */
+    /* Default: the wrapper is as tall as the document and scrolls with it, so the
+       browser keeps the line glued to the page for free. It costs more repaint (the SVG
+       is ~10000px tall and stroke-dashoffset invalidates the whole path), but it is
+       always correct. The @supports block below is the faster path. */
     #scroll-line-wrap {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100vh;
-      z-index: 0; pointer-events: none;
-      overflow: hidden;      /* fallback for browsers without `contain` */
-      contain: strict;
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0; pointer-events: none; overflow: hidden;
     }
-    /* no width/height here: the script sets them to the document size, and a CSS 100%
-       would squash the SVG down into the viewport box instead of clipping it */
-    #scroll-line { position: absolute; top: 0; left: 0; }
+    #scroll-line { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+    /* Shrinking the wrapper to one screen is what makes the repaint cheap — but only if
+       the line can still be slid up as you scroll without drifting. Doing that slide
+       from JS was measured drifting up to 77px on 89% of frames, which is exactly what
+       reads as trembling. A scroll-driven animation is computed by the compositor in the
+       same frame as the scroll, so it cannot lag behind it at all. Browsers without
+       `animation-timeline` keep the document-tall wrapper above. */
+    @supports (animation-timeline: scroll()) {
+      #scroll-line-wrap {
+        position: fixed; height: 100vh;
+        contain: strict;     /* the part the compositor actually reads */
+      }
+      #scroll-line {
+        /* auto so the width/height attributes the script writes win — a CSS 100% would
+           squash the whole drawing into the viewport box instead of clipping it */
+        width: auto; height: auto;
+        animation: lineSlide linear both;
+        animation-timeline: scroll(root block);
+      }
+      /* -100% is the SVG's own height, i.e. the document height; +100vh leaves the last
+         screen in place. Together that is exactly -scrollY over the whole range. */
+      @keyframes lineSlide {
+        from { transform: translateY(0); }
+        to   { transform: translateY(calc(-100% + 100vh)); }
+      }
+    }
     #hero .container { position: relative; z-index: 2; }
     footer { position: relative; z-index: 1; }
 
@@ -1828,10 +1844,16 @@
   let builtW = 0;
   let headVisible = null;
 
-  // body.offsetHeight, not documentElement.scrollHeight: the wrapper below is absolutely
-  // positioned, so it counts toward scrollHeight — measuring that here would let the
-  // ResizeObserver feed its own output back in as a change.
+  // body.offsetHeight, not documentElement.scrollHeight: the fallback wrapper is
+  // absolutely positioned, so it counts toward scrollHeight — measuring that here would
+  // let the ResizeObserver feed its own output back in as a change.
   const docHeight = () => document.body.offsetHeight;
+
+  // Ask the layout what the CSS actually decided, rather than re-running the same
+  // @supports test here: two independent checks could disagree — a browser that reports
+  // support but ignores the rule would land on the fallback height with the fast-path
+  // wrapper and break. There is only one source of truth this way.
+  const slidesItself = getComputedStyle(wrap).position === 'fixed';
 
   function build() {
     const W = window.innerWidth;
@@ -1839,7 +1861,10 @@
     builtH = H; builtW = W;
     scrollable = document.documentElement.scrollHeight - window.innerHeight;
 
-    // the wrapper is viewport-tall and fixed now — only the SVG carries the full height
+    // On the fast path the wrapper is one screen tall and sized by CSS, so writing an
+    // inline height here would override it. Only the fallback wrapper needs the height.
+    if (!slidesItself) wrap.style.height = H + 'px';
+
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
     svg.setAttribute('width', W);
     svg.setAttribute('height', H);
@@ -1891,13 +1916,8 @@
 
   function update() {
     if (!len) return;
-    const y    = window.scrollY;
-    const prog = scrollable > 0 ? Math.min(y / scrollable, 1) : 0;
+    const prog = scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0;
     const off  = len * (1 - prog);
-
-    // The wrapper no longer scrolls with the page, so the SVG has to be slid by hand.
-    // translate3d, not top: this is the one property here that stays on the compositor.
-    svg.style.transform = `translate3d(0,${-y}px,0)`;
 
     // reveal the line as you scroll
     draw.style.strokeDashoffset = off;
