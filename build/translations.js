@@ -47,7 +47,7 @@ const translations = {
     // phone 1 — barber (amber)
     vk1Ava:   { en: "M", pl: "M", ru: "М", tr: "E", es: "C" },
     vk1Name:  { en: "Mark", pl: "Marek", ru: "Марк", tr: "Emre", es: "Carlos" },
-    vk1Role:  { en: "BARBER · LONDON", pl: "BARBER · WARSZAWA", ru: "БАРБЕР · БАКУ", tr: "BERBER · İSTANBUL", es: "BARBERÍA · MADRID" },
+    vk1Role:  { en: "BARBER · LONDON", pl: "BARBER · WARSZAWA", ru: "БАРБЕР · Нью-Йорк", tr: "BERBER · İSTANBUL", es: "BARBERÍA · MADRID" },
     vk1Rate:  { en: "4.9 · 120 reviews", pl: "4,9 · 120 opinii", ru: "4,9 · 120 отзывов", tr: "4,9 · 120 yorum", es: "4,9 · 120 reseñas" },
     vk1S1:    { en: "Haircut", pl: "Strzyżenie", ru: "Стрижка", tr: "Saç kesimi", es: "Corte" },
     vk1P1:    { en: "€18", pl: "18 €", ru: "18 €", tr: "€18", es: "18 €" },
@@ -60,7 +60,7 @@ const translations = {
     // phone 2 — beauty studio (rose) · featured, centre
     vk2Ava:   { en: "S", pl: "Z", ru: "С", tr: "E", es: "L" },
     vk2Name:  { en: "Sofia", pl: "Zofia", ru: "София", tr: "Elif", es: "Lucía" },
-    vk2Role:  { en: "BEAUTY STUDIO · LONDON", pl: "STUDIO URODY · WARSZAWA", ru: "БЬЮТИ-СТУДИЯ · БАКУ", tr: "GÜZELLİK · İSTANBUL", es: "ESTÉTICA · MADRID" },
+    vk2Role:  { en: "BEAUTY STUDIO · LONDON", pl: "STUDIO URODY · WARSZAWA", ru: "БЬЮТИ-СТУДИЯ · Нью-Йорк", tr: "GÜZELLİK · İSTANBUL", es: "ESTÉTICA · MADRID" },
     vk2Rate:  { en: "5.0 · 86 reviews", pl: "5,0 · 86 opinii", ru: "5,0 · 86 отзывов", tr: "5,0 · 86 yorum", es: "5,0 · 86 reseñas" },
     vk2S1:    { en: "Manicure", pl: "Manicure", ru: "Маникюр", tr: "Manikür", es: "Manicura" },
     vk2P1:    { en: "€25", pl: "25 €", ru: "25 €", tr: "€25", es: "25 €" },
@@ -77,7 +77,7 @@ const translations = {
     // phone 3 — photographer (cyan)
     vk3Ava:   { en: "D", pl: "T", ru: "Д", tr: "K", es: "J" },
     vk3Name:  { en: "Daniel", pl: "Tomasz", ru: "Даниил", tr: "Kerem", es: "Javier" },
-    vk3Role:  { en: "PHOTOGRAPHER · LONDON", pl: "FOTOGRAF · WARSZAWA", ru: "ФОТОГРАФ · БАКУ", tr: "FOTOĞRAFÇI · İSTANBUL", es: "FOTÓGRAFO · MADRID" },
+    vk3Role:  { en: "PHOTOGRAPHER · LONDON", pl: "FOTOGRAF · WARSZAWA", ru: "ФОТОГРАФ · Нью-Йорк", tr: "FOTOĞRAFÇI · İSTANBUL", es: "FOTÓGRAFO · MADRID" },
     vk3Rate:  { en: "4.9 · 64 reviews", pl: "4,9 · 64 opinie", ru: "4,9 · 64 отзыва", tr: "4,9 · 64 yorum", es: "4,9 · 64 reseñas" },
     vk3S1:    { en: "Portrait session", pl: "Sesja portretowa", ru: "Портретная съёмка", tr: "Portre çekimi", es: "Sesión de retrato" },
     vk3P1:    { en: "€90", pl: "90 €", ru: "90 €", tr: "€90", es: "90 €" },
