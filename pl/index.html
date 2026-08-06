@@ -728,11 +728,19 @@
     .pricing-head { text-align: center; margin-bottom: 60px; }
     .pricing-head .sec-desc { margin: 0 auto; }
     .pricing-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 20px; max-width: 1160px; margin: 0 auto;
     }
     @media (max-width: 1040px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); max-width: 640px; } }
     @media (max-width: 560px)  { .pricing-grid { grid-template-columns: 1fr; max-width: 380px; } }
+    .pricing-note {
+      max-width: 760px;
+      margin: 34px auto 0;
+      text-align: center;
+      color: var(--text-d);
+      font-size: 15px;
+      line-height: 1.7;
+    }
     .price-card {
       display: flex; flex-direction: column;
       background: var(--bg2); border: 1px solid var(--border);
@@ -1370,6 +1378,12 @@
         <div class="price-time">2 tygodnie</div>
         <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>Napisz do nas</a>
       </div>
+      <div class="price-card featured fade-up d1">
+        <div class="price-name">Strona e-commerce</div>
+        <div class="price-amount">od 1090 €</div>
+        <div class="price-time">3–4 tygodnie</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>Napisz do nas</a>
+      </div>
       <div class="price-card fade-up d2">
         <div class="price-name">Aplikacja mobilna</div>
         <div class="price-amount">od 1400 €</div>
@@ -1383,6 +1397,7 @@
         <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>Napisz do nas</a>
       </div>
     </div>
+    <div class="pricing-note fade-up">Ceny od. Zawsze chętnie omówimy zakres i budżet.</div>
   </div>
 </section>
 
