@@ -23,6 +23,46 @@
   <link rel="alternate" hreflang="tr" href="https://onlymaxon.com/tr/">
   <link rel="alternate" hreflang="es" href="https://onlymaxon.com/es/">
   <link rel="alternate" hreflang="x-default" href="https://onlymaxon.com/">
+
+  <!-- ── First-visit language routing ────────────────────────────────────────────
+       Shared links and QR codes point at the bare domain, which serves English. A
+       visitor whose phone is set to Polish should land on /pl/ without hunting for the
+       dropdown. Rules, in order:
+         · only runs on the root URL — /pl/, /ru/, /tr/, /es/ fall straight through
+         · a language picked by hand wins forever (localStorage, written by the dropdown)
+         · crawlers are never redirected: Googlebot runs JS, and without this check it
+           would read the redirect as a 301 and drop / from the English index
+         · Ukrainian is deliberately not mapped to Russian — those visitors stay on English
+       Inline and blocking on purpose: it has to decide before the first paint, or the
+       visitor sees a flash of English and is then thrown elsewhere. It also sits above
+       the hero-image preload, so a redirected visit never starts that download. -->
+  <script>
+  (function () {
+    var path = location.pathname;
+    if (path !== '/' && path !== '/index.html') return;
+    if (/bot|crawl|spider|slurp|bingpreview|headless|lighthouse/i.test(navigator.userAgent)) return;
+
+    var store;
+    try { store = window.localStorage; } catch (e) { return; }   // private mode / storage blocked
+
+    var offered = { pl: 1, ru: 1, tr: 1, es: 1 };
+    var saved = store.getItem('om_lang');
+    if (saved === 'en') return;                                  // asked for English on purpose
+    if (saved && offered[saved]) { location.replace('/' + saved + '/'); return; }
+    if (saved) return;
+
+    // Following a link from our own pages back to / is a deliberate move, not a first visit.
+    if (document.referrer && document.referrer.indexOf(location.host) > -1) return;
+
+    var prefs = navigator.languages || [navigator.language || ''];
+    for (var i = 0; i < prefs.length; i++) {
+      var tag = String(prefs[i]).toLowerCase().split('-')[0];
+      if (tag === 'en') return;                                  // English outranks the rest
+      if (offered[tag]) { location.replace('/' + tag + '/'); return; }
+    }
+  })();
+  </script>
+
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="images/icon.png">
@@ -1613,6 +1653,15 @@
       langDD.classList.remove('open');
       langDDBtn.setAttribute('aria-expanded', 'false');
     }
+  });
+
+  // Picking a language by hand overrides the auto-routing in <head>, permanently —
+  // otherwise a Polish phone would drag the visitor back to /pl/ every time they asked
+  // for the English page.
+  langDD.querySelectorAll('a[data-lang]').forEach(a => {
+    a.addEventListener('click', () => {
+      try { localStorage.setItem('om_lang', a.dataset.lang); } catch (e) {}
+    });
   });
 
   // Links shared before the move to /xx/ URLs still land on the right page.
