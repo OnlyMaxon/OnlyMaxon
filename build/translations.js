@@ -222,7 +222,14 @@ const translations = {
 
     // FOOTER
     footerCopyright: { en: "© 2026 OnlyMaxon Studio. All rights reserved.", pl: "© 2026 OnlyMaxon Studio. Wszelkie prawa zastrzeżone.", ru: "© 2026 OnlyMaxon Studio. Все права защищены.", tr: "© 2026 OnlyMaxon Studio. Tüm hakları saklıdır.", es: "© 2026 OnlyMaxon Studio. Todos los derechos reservados." },
-    footerTagline:   { en: "🌍 Working worldwide · Remote-first", pl: "🌍 Pracujemy na całym świecie · Remote-first", ru: "🌍 Работаем по всему миру · Remote-first", tr: "🌍 Tüm dünyada çalışıyoruz · Remote-first", es: "🌍 Trabajamos en todo el mundo · Remote-first" },
+    footerTagline:   { en: "🌍 Five languages · Working worldwide", pl: "🌍 Pięć języków · Pracujemy na całym świecie", ru: "🌍 Пять языков · Работаем по всему миру", tr: "🌍 Beş dil · Tüm dünyada çalışıyoruz", es: "🌍 Cinco idiomas · Trabajamos en todo el mundo" },
+
+    // ── LANGUAGE BAND ────────────────────────────────────────────────────────
+    // The claim is deliberately about the work, not about conversation: five real sites
+    // is provable — this page is the proof — whereas "we speak five languages" would be a
+    // promise about phone calls that nobody here can keep.
+    langTitle: { en: "We work in your language.", pl: "Pracujemy w Twoim języku.", ru: "Работаем на твоём языке.", tr: "Senin dilinde çalışıyoruz.", es: "Trabajamos en tu idioma." },
+    langDesc:  { en: "This page is five real sites, not one page run through a translator. Your site gets the same — written properly in the language your customers actually search in.", pl: "Ta strona to pięć prawdziwych witryn, a nie jedna przepuszczona przez tłumacza. Twoja dostanie to samo — napisana porządnie w języku, w którym Twoi klienci naprawdę szukają.", ru: "Эта страница — пять настоящих сайтов, а не одна, прогнанная через переводчик. Твой получит то же самое: написанный как надо, на языке, на котором твои клиенты действительно ищут.", tr: "Bu sayfa, çeviriden geçirilmiş tek bir sayfa değil, beş gerçek site. Seninki de aynısını alır — müşterilerinin gerçekten arama yaptığı dilde, düzgünce yazılmış.", es: "Esta página son cinco sitios reales, no una página pasada por un traductor. El tuyo recibe lo mismo — escrito como es debido, en el idioma en el que tus clientes realmente buscan." },
 
     // CONTACT MODAL
     modalTitle:   { en: "Let's work together", pl: "Popracujmy razem", ru: "Давайте поработаем вместе", tr: "Birlikte çalışalım", es: "Trabajemos juntos" },

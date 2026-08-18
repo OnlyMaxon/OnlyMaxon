@@ -3,11 +3,11 @@
  *
  *   node build/generate.js
  *
- * index.html is the English source of truth and is never modified. For every other
- * language it emits <lang>/index.html with the text baked in, so each language is a
- * real URL that Google can crawl and rank — instead of one page rewritten by JS.
+ * Every page has an English source of truth that is never modified. For each other
+ * language it emits <lang>/<path>/index.html with the text baked in, so each language is
+ * a real URL that Google can crawl and rank — instead of one page rewritten by JS.
  *
- * Re-run this whenever you edit index.html or build/translations.js.
+ * Re-run this whenever you edit a page source or build/translations.js.
  */
 
 const fs = require('fs');
@@ -19,6 +19,30 @@ const SOURCE_LANG = 'en';
 const LANGS = ['pl', 'ru', 'tr', 'es'];
 const NAMES = { en: 'English', pl: 'Polski', ru: 'Русский', tr: 'Türkçe', es: 'Español' };
 
+/*
+ * Every page the site ships.
+ *
+ *   path      URL segment; '' is the site root. The English source lives at
+ *             <path>/index.html and the translations at <lang>/<path>/index.html.
+ *   titleKey  translation key for the <title> tail, deliberately separate from the
+ *             on-screen headline so the two can be edited independently.
+ *   descKey   translation key feeding meta description, Open Graph and Twitter cards.
+ *   faq       true if the page carries a FAQPage block that must be regenerated.
+ *   priority  sitemap priority for the source-language URL and for the translations.
+ *
+ * Adding a page means adding a line here and writing its English source — everything
+ * else (canonical, hreflang, the language menus, the sitemap) follows automatically.
+ */
+const PAGES = [
+  {
+    path: '',
+    titleKey: 'metaTitle',
+    descKey: 'heroSub',
+    faq: true,
+    priority: { source: '1.0', translated: '0.9' },
+  },
+];
+
 const translations = require('./translations.js');
 
 const fail = msg => { console.error('\n  ERROR: ' + msg + '\n'); process.exit(1); };
@@ -26,16 +50,34 @@ const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&
 const escAttr = s => esc(s).replace(/"/g, '&quot;');
 const stripTags = s => s.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 
-// ── read + validate the source ────────────────────────────────────────────────
+// Where a page lives, as a root-relative href and as an absolute URL. The source
+// language sits at the top level (/, /product/), the rest one directory deeper.
+const href = (lang, p) => '/' + (lang === SOURCE_LANG ? '' : lang + '/') + (p ? p + '/' : '');
+const url  = (lang, p) => SITE + href(lang, p);
+
+// ── read + validate every source ──────────────────────────────────────────────
 // Normalise to LF. Git is configured to check files out with CRLF on this machine, so
 // after any `git checkout index.html` the source comes back with \r\n — and the
 // structured-data patterns below, which match on \n, silently stop matching.
-const source = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8').replace(/\r\n/g, '\n');
+for (const page of PAGES) {
+  page.src = path.join(page.path, 'index.html');
+  const file = path.join(ROOT, page.src);
+  if (!fs.existsSync(file)) fail(`${page.src} does not exist (declared in PAGES)`);
+  page.source = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
 
-const usedKeys = new Set();
-for (const m of source.matchAll(/data-i18n(?:-html|-ph)?="([\w]+)"/g)) usedKeys.add(m[1]);
-// Not carried by a data-i18n attribute: these are consumed by the build itself.
-usedKeys.add('modalSuccess').add('modalError').add('metaTitle');
+  page.keys = new Set([...page.source.matchAll(/data-i18n(?:-html|-ph)?="([\w]+)"/g)].map(m => m[1]));
+  // Not carried by a data-i18n attribute: these are consumed by the build itself.
+  page.keys.add('modalSuccess').add('modalError').add(page.titleKey).add(page.descKey);
+
+  // Document order of the FAQ accordion, reused below to build the rich result.
+  page.faqOrder = [...page.source.matchAll(/data-i18n="faq(\d+)Q"/g)].map(m => m[1]);
+  if (page.faq && !page.faqOrder.length) fail(`${page.src}: declared faq:true but has no faq questions`);
+  for (const i of page.faqOrder) {
+    if (!translations['faq' + i + 'A']) fail(`${page.src}: faq${i}Q has no matching faq${i}A`);
+  }
+}
+
+const usedKeys = new Set(PAGES.flatMap(p => [...p.keys]));
 
 const missing = [];
 for (const key of usedKeys) {
@@ -48,17 +90,10 @@ if (missing.length) fail(`missing translations:\n    ` + missing.join('\n    '))
 
 const unused = Object.keys(translations).filter(k => !usedKeys.has(k));
 
-// Document order of the FAQ accordion, reused below to build the rich result.
-const faqOrder = [...source.matchAll(/data-i18n="faq(\d+)Q"/g)].map(m => m[1]);
-if (!faqOrder.length) fail('no FAQ questions found in index.html');
-for (const i of faqOrder) {
-  if (!translations['faq' + i + 'A']) fail(`faq${i}Q has no matching faq${i}A`);
-}
-
-// ── per-language build ────────────────────────────────────────────────────────
-function build(lang) {
+// ── per page, per language ────────────────────────────────────────────────────
+function build(page, lang) {
   const t = key => translations[key][lang];
-  let html = source;
+  let html = page.source;
   let swaps = 0;
 
   // 1. text nodes:  <p data-i18n="key">English</p>
@@ -86,30 +121,51 @@ function build(lang) {
     });
 
   // 4. the two form-result messages, carried on the status node
-  html = html.replace(/\bdata-ok="[^"]*"/,  `data-ok="${escAttr(t('modalSuccess'))}"`);
-  html = html.replace(/\bdata-err="[^"]*"/, `data-err="${escAttr(t('modalError'))}"`);
-  swaps += 2;
+  if (/\bdata-ok="/.test(html)) {
+    html = html.replace(/\bdata-ok="[^"]*"/,  `data-ok="${escAttr(t('modalSuccess'))}"`);
+    html = html.replace(/\bdata-err="[^"]*"/, `data-err="${escAttr(t('modalError'))}"`);
+    swaps += 2;
+  }
 
-  // 5. document language + the dropdown's own state
+  // 5. document language + both language menus. The dropdown in the nav and the chips
+  //    above the contact form must point at THIS page in each language, not at the home
+  //    page — otherwise switching language on /product/ silently dumps you on /.
   html = html.replace(/<html lang="en">/, `<html lang="${lang}">`);
   html = html.replace(/(<span id="langDDCur">)[^<]*(<\/span>)/, `$1${lang.toUpperCase()}$2`);
   html = html.replace(/(<a role="option" data-lang="en"[^>]*?) class="active"/, '$1');
   html = html.replace(
     new RegExp(`(<a role="option" data-lang="${lang}"[^>]*?)>`), '$1 class="active">');
+  html = html.replace(
+    /(<a role="option" data-lang="(\w\w)" hreflang="\2" href=")[^"]*(")/g,
+    (m, a, l, b) => a + href(l, page.path) + b);
 
-  // 6. relative asset paths — the page now lives one directory deep
+  // ...and the same for the language band above the contact form. These carry no
+  // role="option", so the substitutions above cannot reach them.
+  html = html.replace(/(class="lang-chip) is-current(" data-lang="en")/, '$1$2');
+  html = html.replace(
+    new RegExp(`(class="lang-chip)(" data-lang="${lang}")`), '$1 is-current$2');
+  html = html.replace(
+    /(<a href=")[^"]*(" class="lang-chip[^"]*" data-lang="(\w\w)")/g,
+    (m, a, b, l) => a + href(l, page.path) + b);
+
+  // 6. relative asset paths — the page now lives at least one directory deeper
   html = html.replace(/(href|src)="images\//g, '$1="/images/');
 
-  // 7. canonical for this language (hreflang block is identical on every page)
-  html = html.replace(
-    /<link rel="canonical" href="[^"]*">/,
-    `<link rel="canonical" href="${SITE}/${lang}/">`);
+  // 7. canonical + the hreflang set, both scoped to this page
+  const alts = [SOURCE_LANG, ...LANGS]
+    .map(l => `  <link rel="alternate" hreflang="${l}" href="${url(l, page.path)}">`)
+    .concat(`  <link rel="alternate" hreflang="x-default" href="${url(SOURCE_LANG, page.path)}">`)
+    .join('\n');
+  const headRe = /  <link rel="canonical" href="[^"]*">\n(?:  <link rel="alternate"[^>]*>\n)+/;
+  if (!headRe.test(html)) fail(`${page.src}: canonical + hreflang block not found`);
+  html = html.replace(headRe,
+    `  <link rel="canonical" href="${url(lang, page.path)}">\n${alts}\n`);
 
-  // 8. title + descriptions. The title comes from its own key, NOT from heroTitle —
-  //    the on-screen headline is free to be a keyword-free emotional line without
+  // 8. title + descriptions. The title comes from its own key, NOT from the on-screen
+  //    headline — that headline is free to be a keyword-free emotional line without
   //    dragging every search result along with it.
-  const tagline = stripTags(t('metaTitle'));
-  const summary = stripTags(t('heroSub'));
+  const tagline = stripTags(t(page.titleKey));
+  const summary = stripTags(t(page.descKey));
   const title = `OnlyMaxon — ${tagline}`;
   html = html.replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`);
   for (const [attr, value] of [
@@ -120,83 +176,97 @@ function build(lang) {
     ['name="twitter:description"', summary],
   ]) {
     const re = new RegExp(`(<meta ${attr} content=")[^"]*(">)`);
-    if (!re.test(html)) fail(`meta ${attr} not found`);
+    if (!re.test(html)) fail(`${page.src}: meta ${attr} not found`);
     html = html.replace(re, `$1${escAttr(value)}$2`);
   }
-  html = html.replace(/(<meta property="og:url" content=")[^"]*(">)/, `$1${SITE}/${lang}/$2`);
+  html = html.replace(/(<meta property="og:url" content=")[^"]*(">)/, `$1${url(lang, page.path)}$2`);
 
-  // 9. structured data — description and the FAQ rich result, translated
+  // 9. structured data — description and, where the page has one, the FAQ rich result
   html = html.replace(
     /("description": ")[^"]*(",\n    "sameAs")/,
     (m, a, b) => a + summary.replace(/"/g, '\\"') + b);
 
-  // Read the questions in the order they appear on the page rather than from a hard-coded
-  // list — adding a question to index.html used to leave it out of the rich result
-  // silently, and reordering the accordion put the two out of sync just as quietly.
-  const faq = faqOrder.map(i =>
-    `      { "@type": "Question", "name": ${JSON.stringify(t('faq' + i + 'Q'))}, ` +
-    `"acceptedAnswer": { "@type": "Answer", "text": ${JSON.stringify(t('faq' + i + 'A'))} } }`
-  ).join(',\n');
-  const faqRe = /("mainEntity": \[\n)[\s\S]*?(\n    \])/;
-  if (!faqRe.test(html)) fail('FAQ structured-data block not found');
-  html = html.replace(faqRe, `$1${faq}$2`);
+  if (page.faq) {
+    // Read the questions in the order they appear on the page rather than from a
+    // hard-coded list — adding a question to the source used to leave it out of the rich
+    // result silently, and reordering the accordion put the two out of sync just as
+    // quietly.
+    const faq = page.faqOrder.map(i =>
+      `      { "@type": "Question", "name": ${JSON.stringify(t('faq' + i + 'Q'))}, ` +
+      `"acceptedAnswer": { "@type": "Answer", "text": ${JSON.stringify(t('faq' + i + 'A'))} } }`
+    ).join(',\n');
+    const faqRe = /("mainEntity": \[\n)[\s\S]*?(\n    \])/;
+    if (!faqRe.test(html)) fail(`${page.src}: FAQ structured-data block not found`);
+    html = html.replace(faqRe, `$1${faq}$2`);
+  }
 
   // ── verify before writing ───────────────────────────────────────────────────
   const stillEnglish = [];
-  for (const key of usedKeys) {
+  for (const key of page.keys) {
     const en = translations[key][SOURCE_LANG];
     if (!en || en === t(key)) continue;                 // identical in both languages
     const plain = stripTags(en);
     if (plain.length > 12 && html.includes('>' + plain + '<')) stillEnglish.push(key);
   }
-  if (stillEnglish.length) fail(`${lang}: still English after substitution: ${stillEnglish.join(', ')}`);
-  if (!html.includes(`<html lang="${lang}">`)) fail(`${lang}: lang attribute not set`);
+  if (stillEnglish.length) fail(`${lang} ${page.src}: still English after substitution: ${stillEnglish.join(', ')}`);
+  if (!html.includes(`<html lang="${lang}">`)) fail(`${lang} ${page.src}: lang attribute not set`);
   if (html.includes('href="images/') || html.includes('src="images/'))
-    fail(`${lang}: a relative image path survived`);
+    fail(`${lang} ${page.src}: a relative image path survived`);
 
   // The data-i18n anchors exist so this script can find things. Once the text is baked
   // in they do nothing, so they don't get shipped.
   const anchorRe = /\sdata-i18n(?:-html|-ph)?="[\w]+"/g;
   const anchors = html.match(anchorRe) || [];
-  if (!anchors.length) fail(`${lang}: i18n anchors vanished before substitution finished`);
+  if (!anchors.length) fail(`${lang} ${page.src}: i18n anchors vanished before substitution finished`);
   const saved = anchors.reduce((n, a) => n + a.length, 0);
   html = html.replace(anchorRe, '');
 
-  const dir = path.join(ROOT, lang);
+  const dir = path.join(ROOT, lang, page.path);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'index.html'), html);
   return { swaps, bytes: html.length, stripped: anchors.length, saved };
 }
 
 // ── run ───────────────────────────────────────────────────────────────────────
-console.log(`source: index.html (${(source.length / 1024).toFixed(1)} KB, ${usedKeys.size} keys)\n`);
-for (const lang of LANGS) {
-  const r = build(lang);
-  console.log(`  ${lang}/index.html   ${r.swaps} substitutions   ${(r.bytes / 1024).toFixed(1)} KB   ` +
-              `(-${r.stripped} build-only attrs, -${r.saved} B)   ${NAMES[lang]}`);
+for (const page of PAGES) {
+  const label = page.path ? `/${page.path}/` : '/';
+  console.log(`source: ${page.src} (${(page.source.length / 1024).toFixed(1)} KB, ` +
+              `${page.keys.size} keys) → ${label}\n`);
+  for (const lang of LANGS) {
+    const r = build(page, lang);
+    const out = path.join(lang, page.path, 'index.html').replace(/\\/g, '/');
+    console.log(`  ${out.padEnd(22)} ${r.swaps} substitutions   ${(r.bytes / 1024).toFixed(1)} KB   ` +
+                `(-${r.stripped} build-only attrs, -${r.saved} B)   ${NAMES[lang]}`);
+  }
+  console.log('');
 }
 
-// ── sitemap covering every language ───────────────────────────────────────────
+// ── sitemap covering every page in every language ─────────────────────────────
 const today = new Date().toISOString().slice(0, 10);
-const urls = [`${SITE}/`, ...LANGS.map(l => `${SITE}/${l}/`)];
-const alternates = [SOURCE_LANG, ...LANGS]
-  .map(l => `      <xhtml:link rel="alternate" hreflang="${l}" href="${l === SOURCE_LANG ? SITE + '/' : `${SITE}/${l}/`}"/>`)
-  .concat(`      <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}/"/>`)
-  .join('\n');
+const entries = [];
+for (const page of PAGES) {
+  const alternates = [SOURCE_LANG, ...LANGS]
+    .map(l => `      <xhtml:link rel="alternate" hreflang="${l}" href="${url(l, page.path)}"/>`)
+    .concat(`      <xhtml:link rel="alternate" hreflang="x-default" href="${url(SOURCE_LANG, page.path)}"/>`)
+    .join('\n');
+  for (const lang of [SOURCE_LANG, ...LANGS]) {
+    entries.push(`  <url>
+    <loc>${url(lang, page.path)}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>${lang === SOURCE_LANG ? page.priority.source : page.priority.translated}</priority>
+${alternates}
+  </url>`);
+  }
+}
 
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
 `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${urls.map(u => `  <url>
-    <loc>${u}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>${u === SITE + '/' ? '1.0' : '0.9'}</priority>
-${alternates}
-  </url>`).join('\n')}
+${entries.join('\n')}
 </urlset>
 `);
-console.log(`\n  sitemap.xml      ${urls.length} URLs, hreflang on each`);
+console.log(`  sitemap.xml      ${entries.length} URLs, hreflang on each`);
 if (unused.length) console.log(`\n  note: ${unused.length} unused translation keys: ${unused.join(', ')}`);
 console.log('\ndone.\n');
