@@ -93,6 +93,8 @@
     "legalName": "OnlyMaxon Studio",
     "url": "https://onlymaxon.com",
     "logo": "https://onlymaxon.com/images/logo.jpg",
+    "email": "hello@onlymaxon.com",
+    "telephone": "+48576925110",
     "description": "OnlyMaxon bir ürün stüdyosudur. Gerçek ürünleri tasarlar, geliştirir, yayınlar ve büyütürüz — geliştirme ve SEO tek çatı altında.",
     "sameAs": [
       "https://github.com/OnlyMaxon",
@@ -107,26 +109,74 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "Web sitesi ne kadar?", "acceptedAnswer": { "@type": "Answer", "text": "Web siteleri 390 €'dan (kartvizit) ve 690 €'dan (online rezervasyonlu) başlar. Mobil uygulamalar 1400 €'dan. Fiyatı ve süreyi başlamadan önce görürsün — gizli maliyet yok." } },
+      { "@type": "Question", "name": "Web sitesi ne kadar?", "acceptedAnswer": { "@type": "Answer", "text": "Web siteleri 390 €'dan (kartvizit) ve 690 €'dan (online rezervasyonlu) başlar. Online mağaza 1090 €'dan, mobil uygulama 1400 €'dan, tam bir platform 3000 €'dan. Kesin fiyatı ve tarihi ilk görüşmeden sonraki 48 saat içinde alırsın — gizli maliyet yok." } },
       { "@type": "Question", "name": "Ne kadar sürer?", "acceptedAnswer": { "@type": "Answer", "text": "Basit bir site yaklaşık 1 hafta, rezervasyonlu site ~2 hafta, mobil uygulama 4–6 hafta sürer. Süreyi baştan belirler, haftalık güncelleme göndeririz." } },
+      { "@type": "Question", "name": "OnlyMaxon tam olarak kim?", "acceptedAnswer": { "@type": "Answer", "text": "Satış departmanı olan bir ajans değil, küçük bir stüdyo. Projeni yapan kişilerle doğrudan konuşursun — aranızda müşteri temsilcisi yok. Bu sayfadaki her proje bizim ve hepsi yayında: herhangi birine tıkla ve kendin gör." } },
       { "@type": "Question", "name": "Site ve kod bana mı ait?", "acceptedAnswer": { "@type": "Answer", "text": "Evet — %100. Bittiğinde site, kod ve tüm hesaplar tamamen senindir. Bağlılık yok, gizli şart yok." } },
+      { "@type": "Question", "name": "Ya projenin ortasında ortadan kaybolursanız?", "acceptedAnswer": { "@type": "Answer", "text": "Kodu, depoyu ve tüm hesapları ilk günden alırsın — sonunda değil. Hiçbir şey hiçbir zaman sadece bizim elimizde olmaz. Yarın ortadan kaybolsak, herhangi bir geliştirici projeni açıp bıraktığımız yerden devam edebilir." } },
       { "@type": "Question", "name": "Sonra değişiklik gerekirse?", "acceptedAnswer": { "@type": "Answer", "text": "Sorun değil. Küçük düzenlemeler kolaydır; sürekli işler (yeni özellikler, SEO/ASO) için baştan net bir ücret belirleriz. Asla takılıp kalmazsın." } },
       { "@type": "Question", "name": "Nasıl başlıyoruz?", "acceptedAnswer": { "@type": "Answer", "text": "Sadece fikrini içeren bir mesaj gönder. İlk görüşme ücretsiz — neye ihtiyacın olduğunu anlarız, fiyat ve süre veririz ve hazır olduğunda başlarız." } }
     ]
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- only the weights actually used (SG 600/700, Inter 400/500/600/700), and loaded
-       non-blocking: the inline CSS below paints immediately in system-ui, then swaps. -->
-  <link rel="stylesheet" media="print" onload="this.media='all'"
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&display=swap">
-  <noscript>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&display=swap">
-  </noscript>
   <style>
+    /* Self-hosted, so the page talks to exactly one origin. Google served these same
+       files, but from two extra hosts that each cost a DNS lookup and a TLS handshake
+       before a single glyph moved. Only the subsets these five languages actually use
+       were taken: latin + latin-ext everywhere, cyrillic for Inter. Space Grotesk has no
+       Cyrillic at all upstream, which is why Russian headings fall back to system-ui —
+       that was already true, it is just now visible in the file rather than hidden in a
+       CDN response. font-display: swap keeps first paint in system-ui, same as before. */
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap;
+                 src: url(/fonts/inter-500-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap;
+                 src: url(/fonts/inter-500-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap;
+                 src: url(/fonts/inter-500-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/inter-700-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/inter-700-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/inter-700-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/space-grotesk-600-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/space-grotesk-600-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/space-grotesk-700-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
@@ -518,9 +568,28 @@
       background: rgba(245,180,90,0.12); color: #F5B45A;
       border: 1px solid rgba(245,180,90,0.28);
     }
+    /* The hook: what was broken before we turned up. It sits ABOVE the description so the
+       first line a visitor reads is their own problem, not our feature list. */
+    .proj-problem {
+      font-size: 15px; font-weight: 600; color: var(--text);
+      line-height: 1.45; margin-bottom: 10px;
+    }
     .proj-desc {
       font-size: 14px; color: var(--text-d);
-      line-height: 1.65; margin-bottom: 18px; flex: 1;
+      line-height: 1.65; margin-bottom: 14px; flex: 1;
+    }
+    /* The proof, and the one line a visitor should still remember tomorrow — so it is the
+       only text in the card carrying the accent colour. */
+    .proj-result {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 13.5px; font-weight: 600; color: var(--cyan);
+      line-height: 1.5; margin-bottom: 16px;
+    }
+    .proj-result::before {
+      content: '';
+      flex-shrink: 0; width: 6px; height: 6px; margin-top: 7px;
+      border-radius: 50%; background: var(--blue);
+      box-shadow: 0 0 8px rgba(34,211,238,0.7);
     }
     .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
     .tag {
@@ -536,6 +605,45 @@
     }
     .proj-link:hover { gap: 10px; }
 
+    /* ── PROBLEM → SOLUTION ───────────────── */
+    /* Sits directly under the hero, before any of our work: a visitor recognises their own
+       Tuesday before they are asked to admire ours. */
+    #problems { padding: 110px 0; }
+    .ps-head { text-align: center; max-width: 640px; margin: 0 auto 54px; }
+    .ps-head .sec-desc { margin: 0 auto; }
+    .ps-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 18px; max-width: 900px; margin: 0 auto;
+    }
+    @media (max-width: 760px) { .ps-grid { grid-template-columns: 1fr; max-width: 480px; } }
+    .ps-card {
+      display: flex; flex-direction: column;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 26px 24px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .ps-card:hover { border-color: var(--border-h); transform: translateY(-5px); }
+    /* Their words, not ours — set at --text weight so it reads as someone speaking, with
+       the rule down the side standing in for the quotation marks. */
+    .ps-quote {
+      font-size: 15px; font-weight: 600; color: var(--text);
+      line-height: 1.55; margin-bottom: 16px;
+      padding-left: 16px; border-left: 2px solid rgba(34,211,238,0.35);
+    }
+    .ps-answer {
+      font-size: 14px; color: var(--text-d);
+      line-height: 1.65; margin-bottom: 18px; flex: 1;
+    }
+    .ps-time {
+      align-self: flex-start;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--blue); background: var(--blue-d);
+      border: 1px solid rgba(34,211,238,0.28);
+      padding: 5px 12px; border-radius: 100px;
+    }
+
     /* ── PROCESS ──────────────────────────── */
     #process {
       padding: 120px 0;
@@ -544,9 +652,21 @@
     .process-head { text-align: center; max-width: 660px; margin: 0 auto 56px; }
     .process-head .sec-desc { margin: 0 auto; }
 
+    /* One column, not a 2x2 grid. These four are a sequence, and a grid gives no reading
+       order — the eye picks a corner and the steps read as four unrelated features. */
     .proc-steps {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 18px; max-width: 900px; margin: 0 auto;
+      display: flex; flex-direction: column;
+      gap: 14px; max-width: 780px; margin: 0 auto;
+      position: relative;
+    }
+    /* The rail runs behind the cards on the container, NOT on each step: .proc-step lifts
+       5px on hover, and a per-step connector would lift with it and tear the line. The
+       cards are opaque, so only the segments crossing the gaps are ever visible. */
+    .proc-steps::before {
+      content: '';
+      position: absolute; left: 41px; top: 34px; bottom: 34px; width: 2px;
+      background: linear-gradient(to bottom, rgba(34,211,238,0.32), rgba(34,211,238,0.06));
+      z-index: 0;
     }
 
     .proc-step {
@@ -554,6 +674,7 @@
       padding: 22px; border-radius: 14px;
       border: 1px solid var(--border);
       background: var(--bg2);
+      position: relative; z-index: 1;
       transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
     }
     .proc-step:hover {
@@ -570,6 +691,15 @@
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700; font-size: 15px;
       display: flex; align-items: center; justify-content: center;
+    }
+    /* The commitment. It is the reason this section exists, so it sits above the heading
+       and is the only line here in the accent colour. */
+    .step-time {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.3px;
+      color: var(--blue); margin-bottom: 6px;
     }
     .step-body h3 { font-size: 16px; font-weight: 700; margin-bottom: 5px; }
     .step-body p { font-size: 14px; color: var(--text-d); line-height: 1.6; }
@@ -604,11 +734,25 @@
       font-size: 14px; color: var(--text-d);
       line-height: 1.65; margin-bottom: 10px;
     }
-    /* The line above sells; this one is the proof under it. Smaller and dimmer on
-       purpose — it must not be the first thing the eye lands on. */
-    .sc-meta {
-      font-size: 12.5px; color: var(--text-d); opacity: 0.72;
-      line-height: 1.6; margin-bottom: 18px;
+    /* Plain-language outcomes. The chips further down name the discipline ("On-page SEO");
+       these say what the client actually ends up with, which is the only half of it most
+       visitors can read. Outcomes first, jargon as a footnote for the few who want it. */
+    .sc-outcomes {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 9px;
+      margin: 16px 0 22px;
+    }
+    .sc-outcome {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13.5px; color: var(--text-d); line-height: 1.55;
+    }
+    .sc-outcome::before {
+      content: '✓';
+      flex-shrink: 0; width: 17px; height: 17px; margin-top: 2px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; line-height: 1;
+      background: var(--blue-d); border: 1px solid rgba(34,211,238,0.3);
+      color: var(--blue); font-size: 9px; font-weight: 700;
     }
     .sc-title {
       font-family: 'Space Grotesk', sans-serif;
@@ -809,13 +953,46 @@
     .price-time::before { content: '🕒'; }
     .price-card .btn { margin-top: auto; justify-content: center; }
 
+    /* The recurring tier, deliberately laid out sideways instead of as a sixth column —
+       a different shape says "different kind of thing" faster than any label would. */
+    .pricing-ongoing {
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+      max-width: 1160px; margin: 20px auto 0;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 26px 30px;
+      transition: border-color 0.3s ease;
+    }
+    .pricing-ongoing:hover { border-color: var(--border-h); }
+    .po-text { flex: 1 1 280px; }
+    .po-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px;
+    }
+    .po-desc { font-size: 14px; color: var(--text-d); line-height: 1.6; }
+    .po-price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px; font-weight: 700; line-height: 1.1; flex-shrink: 0;
+      background: linear-gradient(135deg, #fff 0%, var(--blue) 60%, var(--purple) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .pricing-ongoing .btn { flex-shrink: 0; }
+    @media (max-width: 640px) {
+      .pricing-ongoing {
+        flex-direction: column; align-items: stretch;
+        text-align: center; gap: 16px; padding: 24px 22px;
+      }
+      .pricing-ongoing .btn { justify-content: center; }
+    }
+
     /* ── SMALL PROJECT CARDS ──────────────── */
     .projects-grid.small-grid { margin-top: 22px; }
     .small-grid .proj-card { max-width: 300px; }
     .small-grid .proj-thumb { height: 132px; }
     .small-grid .proj-body { padding: 18px; }
     .small-grid .proj-name { font-size: 16px; }
+    .small-grid .proj-problem { font-size: 14px; }
     .small-grid .proj-desc { font-size: 13px; }
+    .small-grid .proj-result { font-size: 12.5px; }
 
     /* ── CONTACT MODAL ────────────────────── */
     .modal-overlay {
@@ -1022,12 +1199,17 @@
     @media (max-width: 640px) {
       #hero { padding: 116px 0 70px; }
       .hero-logo { width: 260px; }
-      .proc-steps { grid-template-columns: 1fr; }
       .hero-stats { gap: 18px; }
       .stat-val { font-size: 21px; }
       .stat-lab { font-size: 10px; }
       .container { padding: 0 20px; }
       .price-name { min-height: 0; }
+    }
+    /* Three stat tiles instead of two: on the narrowest phones the labels need the room
+       back, or the row breaks into a ragged second line with a separator leading it. */
+    @media (max-width: 400px) {
+      .hero-stats { gap: 13px; }
+      .stat-lab { font-size: 9.5px; letter-spacing: 0.3px; }
     }
     @media (max-width: 600px) {
       .nav-toggle { display: flex; }
@@ -1111,6 +1293,7 @@
           <li><a href="#contact" class="nav-cta">Bizimle Çalış</a></li>
           <li class="nav-m-only nav-m-extra">
             <a class="nav-m-mail" href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a>
+            <a class="nav-m-mail" href="tel:+48576925110">+48 576 925 110</a>
           </li>
         </ul>
         <div class="lang-dd" id="langDD">
@@ -1180,10 +1363,55 @@
           </div>
           <div class="stat-sep"></div>
           <div class="stat">
-            <span class="stat-val">3–6 hf</span>
-            <span class="stat-lab">MVP süresi</span>
+            <span class="stat-val">1–6 hf</span>
+            <span class="stat-lab">Yayına kadar</span>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat">
+            <span class="stat-val">100%</span>
+            <span class="stat-lab">Kod senin</span>
           </div>
         </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PROBLEM → SOLUTION ────────────────── -->
+<section id="problems">
+  <div class="container">
+    <div class="ps-head">
+      <p class="eyebrow fade-up">Asıl sorun</p>
+      <h2 class="sec-title fade-up d1">Muhtemelen bunlardan biri sana tanıdık geliyor.</h2>
+      <p class="sec-desc fade-up d2">Öyleyse, ilk görüşmenin ne hakkında olacağını zaten biliyorsun.</p>
+    </div>
+    <div class="ps-grid">
+
+      <div class="ps-card fade-up">
+        <p class="ps-quote">Her şey Instagram mesajlarından yürüyor ve gece yarısı hâlâ cevap yazıyorum.</p>
+        <p class="ps-answer">Online rezervasyonlu bir site. Müşteri boş saati kendi seçer — sen sadece takvimin dolmasını izlersin.</p>
+        <span class="ps-time">2 hafta</span>
+      </div>
+
+      <div class="ps-card fade-up d1">
+        <p class="ps-quote">Yakınlarda arayanlar haritada rakiplerimi buluyor. Beni bulmuyor.</p>
+        <p class="ps-answer">Google profilin olması gerektiği gibi kurulur, her ziyaretten sonra yorumlar otomatik toplanır, site aramaya bağlanır. Sonunda insanların zaten baktığı yerde olursun.</p>
+        <span class="ps-time">aylık · sürekli</span>
+      </div>
+
+      <div class="ps-card fade-up d2">
+        <p class="ps-quote">Bir sitem var. Oradan bana bugüne kadar kimse yazmadı.</p>
+        <p class="ps-answer">Onu, eksik olan tek şeyin — iletişime geçmek için bir sebebin — etrafında yeniden kurarız, sonra da gerçekten bulunmasını sağlarız.</p>
+        <span class="ps-time">1–2 hafta</span>
+      </div>
+
+      <div class="ps-card fade-up d3">
+        <p class="ps-quote">İki yıldır aklımda bir uygulama fikri var ve nereden başlayacağımı bilmiyorum.</p>
+        <p class="ps-answer">Onu ilk taslaktan gerçek insanların kurabileceği bir şeye taşırız — ve ona servet harcamadan önce çalıştığını görürsün.</p>
+        <span class="ps-time">4–6 hafta</span>
+      </div>
 
     </div>
   </div>
@@ -1209,7 +1437,9 @@
         </div>
         <div class="proj-body">
           <div class="proj-name">nextcargo.eu <span class="badge-live">Yayında</span></div>
-          <p class="proj-desc">Tam müşteri paneli, gerçek zamanlı destek sohbeti ve gönderi takibi olan kargo ve teslimat platformu.</p>
+          <p class="proj-problem">Hangi kolinin kime ait olduğunu kimsenin bilmediği bir depo.</p>
+          <p class="proj-desc">Artık her koli saniyeler içinde koduyla tanımlanıyor. Her müşterinin, yükünün nerede olduğunu gördüğü bir paneli var ve her aşamada bildirim alıyor — şirket de bunun etrafına kurulmuş bir siteye kavuştu.</p>
+          <p class="proj-result">Site üzerinden haftada 20–50 sipariş geçiyor.</p>
           <div class="proj-tags">
             <span class="tag">Full-stack</span>
             <span class="tag">Real-time</span>
@@ -1229,7 +1459,9 @@
         </div>
         <div class="proj-body">
           <div class="proj-name">birklik.az <span class="badge-live">Yayında</span></div>
-          <p class="proj-desc">Azerbaycan için kiralama pazarı — rezervasyon takvimi, ev sahibi paneli, kademeli ilanlar ve ödeme entegrasyonu.</p>
+          <p class="proj-problem">Otelleri, evleri ve bağlantıları vardı. Rezervasyon alacak bir yolları yoktu.</p>
+          <p class="proj-desc">Siteyi, rezervasyon sistemini ve bildirimli müşteri panelini kurduk — sonra da Google'ı ele aldık ki konaklama arayanlar onları gerçekten bulsun.</p>
+          <p class="proj-result">70 aktif ilan · Google'dan ayda 2000 ziyaretçi — site artık kendi reklam alanını satıyor.</p>
           <div class="proj-tags">
             <span class="tag">Next.js</span>
             <span class="tag">React</span>
@@ -1255,7 +1487,9 @@
         </div>
         <div class="proj-body">
           <div class="proj-name">yOdin <span class="badge-dev">Geliştiriliyor</span></div>
-          <p class="proj-desc">Üniversitelerdeki uluslararası öğrenciler için sosyal platform — insanları milliyetlerin ötesinde birleştiren davranış temelli eşleştirme.</p>
+          <p class="proj-problem">Doğrudan üniversitenin dekanlığıyla kararlaştırıldı.</p>
+          <p class="proj-desc">Uluslararası öğrenciler için sosyal platform — milliyete göre değil, davranışa göre eşleştirme.</p>
+          <p class="proj-result">Geliştirme aşamasında, üniversitelere yayılıyor.</p>
           <div class="proj-tags">
             <span class="tag">React Native</span>
             <span class="tag">Expo</span>
@@ -1362,7 +1596,12 @@
         <div class="sc-icon">💻</div>
         <div class="sc-name">Ürününü yapıyoruz</div>
         <p class="sc-desc">Siten ya da uygulaman sıfırdan — sana göre yapılır, yüzlerce başka işletmenin kullandığı bir şablon değil.</p>
-        <p class="sc-meta">Web siteleri, mobil uygulamalar, online randevu, haritalar, canlı veri.</p>
+        <ul class="sc-outcomes">
+          <li class="sc-outcome">Online randevu — müşteri gece yarısı sana yazmak yerine saatini kendi seçer.</li>
+          <li class="sc-outcome">Bir gün önce SMS veya e-posta hatırlatması — haftanda daha az boş saat.</li>
+          <li class="sc-outcome">Müşterinin kendi siparişlerini, rezervasyonlarını ya da gönderilerini gördüğü bir panel.</li>
+          <li class="sc-outcome">Ödemeler, haritalar ve canlı veri gerçekten bağlı — ekran görüntüsü değil.</li>
+        </ul>
         <div class="sc-title">Kullandıklarımız</div>
         <div class="sc-tags">
           <span class="sc-tag">TypeScript</span>
@@ -1380,9 +1619,16 @@
         <div class="sc-icon">🔍</div>
         <div class="sc-name">Seni bulmalarını sağlıyoruz</div>
         <p class="sc-desc">Kimsenin bulamadığı güzel bir site, çekmecede duran bir kartvizittir. Google'ın, uygulama mağazalarının ve yapay zekâ asistanlarının, tam da seni arayan kişilere seni göstermesini sağlıyoruz.</p>
-        <p class="sc-meta">Arama, App Store ve Google Play, ChatGPT, Perplexity, Google AI yanıtları.</p>
+        <ul class="sc-outcomes">
+          <li class="sc-outcome">Yakınındaki biri senin yaptığın işi aradığında Google Haritalar'da çıkarsın.</li>
+          <li class="sc-outcome">Google profilin olması gerektiği gibi kurulur — fotoğraflar, fiyatlar, saatler, arama butonu.</li>
+          <li class="sc-outcome">Her ziyaretten sonra yorumlar otomatik toplanır — seni rakiplerin üstüne çıkaran şey yorumlardır.</li>
+          <li class="sc-outcome">Sadece mavi bağlantılarda değil, ChatGPT ve Google AI yanıtlarında da adın geçer.</li>
+          <li class="sc-outcome">Her ay tek bir sayı: kaç kişi seni buldu ve kaçı iletişime geçti.</li>
+        </ul>
         <div class="sc-title">İlgilendiklerimiz</div>
         <div class="sc-tags">
+          <span class="sc-tag">Google Business Profile</span>
           <span class="sc-tag">On-page SEO</span>
           <span class="sc-tag">ASO</span>
           <span class="sc-tag">AI-SEO / GEO</span>
@@ -1429,14 +1675,29 @@
         <div class="price-time">4–6 hafta</div>
         <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>İletişime geç</a>
       </div>
+      <!-- The ceiling. Without it the list topped out at €1400 and the studio read as a
+           €390 shop — while two of the three projects above it are plainly this tier. -->
       <div class="price-card fade-up d3">
-        <div class="price-name">Sürekli SEO / ASO / AI</div>
-        <div class="price-amount">€200/ay'dan</div>
-        <div class="price-time">aylık · sürekli</div>
+        <div class="price-name">Platform veya pazar yeri</div>
+        <div class="price-amount">€3000'den</div>
+        <div class="price-time">6 haftadan</div>
         <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>İletişime geç</a>
       </div>
     </div>
-    <div class="pricing-note fade-up">Fiyatlar başlangıç fiyatıdır. Kapsamı ve bütçeyi her zaman konuşabiliriz.</div>
+
+    <!-- Monthly work, pulled out of the row above: it is not a project, and side by side
+         with them it invited the comparison "€200 or €1400?" — which was never the choice
+         on offer. Down here it reads as what it is: what happens after launch. -->
+    <div class="pricing-ongoing fade-up">
+      <div class="po-text">
+        <div class="po-name">Sürekli SEO / ASO / AI</div>
+        <p class="po-desc">Yayına girdikten sonra bulunmanı sağlayan şey — Google profili, yorumlar, arama, yapay zekâ yanıtları. Aylık, istediğin zaman bırakırsın.</p>
+      </div>
+      <div class="po-price">€200/ay'dan</div>
+      <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>İletişime geç</a>
+    </div>
+
+    <div class="pricing-note fade-up">Buradaki her rakam bir başlangıç noktası. 30 dakikalık bir görüşmeden sonra, 48 saat içinde kesin fiyatı ve kesin tarihi yazılı olarak alırsın.</div>
   </div>
 </section>
 
@@ -1447,36 +1708,40 @@
   <div class="container">
     <div class="process-head">
       <p class="eyebrow fade-up">Nasıl çalışıyoruz</p>
-      <h2 class="sec-title fade-up d1">Sen vizyona odaklan.<br>Gerisini biz halledelim.</h2>
-      <p class="sec-desc fade-up d2">Tek bir ekip fikrini ilk taslaktan canlı, büyüyen bir ürüne taşır — ve tüm süreç boyunca kontrol sende kalır.</p>
+      <h2 class="sec-title fade-up d1">Bize yazdıktan sonra<br><span class="gradient-text">ne oluyor.</span></h2>
+      <p class="sec-desc fade-up d2">Gerçek sürelerle dört adım. Fiyatı ve tarihi, daha hiçbir şey yapılmadan önce bilirsin.</p>
     </div>
     <div class="proc-steps">
       <div class="proc-step fade-up">
         <div class="step-num">01</div>
         <div class="step-body">
-          <h3>Uçtan uca teslimat</h3>
-          <p>Tasarım, kod, dağıtım, lansman — her şeyi biz hallederiz, sen uğraşmak zorunda kalmazsın.</p>
+          <span class="step-time">30 dakika</span>
+          <h3>İlk görüşme, ücretsiz</h3>
+          <p>Neyin çalışmadığını ve zamanını neyin yediğini anlatırsın. Sunum yok, anket yok. Uygun değilsek, görüşmede açıkça söyleriz.</p>
         </div>
       </div>
       <div class="proc-step fade-up d1">
         <div class="step-num">02</div>
         <div class="step-body">
-          <h3>Hızlı yayınla</h3>
-          <p>6 ayda değil, 3–6 haftada MVP. Gerçek kullanıcılar, gerçek geri bildirim, gerçek iterasyon.</p>
+          <span class="step-time">48 saat</span>
+          <h3>Fiyat ve tarih</h3>
+          <p>Tek sayfa: ne yapıyoruz, ne kadar tutuyor, ne zaman bitiyor. Gizli kalem yok, “duruma göre” yok. Evet ya da hayır — her hâlükârda nerede durduğunu bilirsin.</p>
         </div>
       </div>
       <div class="proc-step fade-up d2">
         <div class="step-num">03</div>
         <div class="step-body">
-          <h3>Sadece koddan fazlası</h3>
-          <p>Ürününün Google'da bulunup büyümesi için SEO — sadece yayınlanıp bekleyen kod değil.</p>
+          <span class="step-time">1–6 hafta</span>
+          <h3>Biz yaparız, sen işine bakarsın</h3>
+          <p>Kartvizit site bir hafta, rezervasyonlu site iki, uygulama dört ila altı. Her hafta bir güncelleme — ne bitti, sırada ne var, süreye uyuyor muyuz.</p>
         </div>
       </div>
       <div class="proc-step fade-up d3">
         <div class="step-num">04</div>
         <div class="step-body">
-          <h3>Baştan şeffaf</h3>
-          <p>Haftalık güncellemeler, net ilerleme. Sürpriz yok, gizli engel yok.</p>
+          <span class="step-time">Yayın günü</span>
+          <h3>Yayına girer ve senindir</h3>
+          <p>Site, kod ve tüm hesaplar sana devredilir — %100 senin, bağlılık yok. Sonrasında, istediğin sürece Google'da bulunmanı sağlamaya devam ederiz.</p>
         </div>
       </div>
     </div>
@@ -1496,15 +1761,23 @@
     <div class="faq-list">
       <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span>Web sitesi ne kadar?</span><span class="faq-icon"></span></button>
-        <div class="faq-a"><p>Web siteleri 390 €'dan (kartvizit) ve 690 €'dan (online rezervasyonlu) başlar. Mobil uygulamalar 1400 €'dan. Fiyatı ve süreyi başlamadan önce görürsün — gizli maliyet yok.</p></div>
+        <div class="faq-a"><p>Web siteleri 390 €'dan (kartvizit) ve 690 €'dan (online rezervasyonlu) başlar. Online mağaza 1090 €'dan, mobil uygulama 1400 €'dan, tam bir platform 3000 €'dan. Kesin fiyatı ve tarihi ilk görüşmeden sonraki 48 saat içinde alırsın — gizli maliyet yok.</p></div>
       </div>
       <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span>Ne kadar sürer?</span><span class="faq-icon"></span></button>
         <div class="faq-a"><p>Basit bir site yaklaşık 1 hafta, rezervasyonlu site ~2 hafta, mobil uygulama 4–6 hafta sürer. Süreyi baştan belirler, haftalık güncelleme göndeririz.</p></div>
       </div>
       <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span>OnlyMaxon tam olarak kim?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p>Satış departmanı olan bir ajans değil, küçük bir stüdyo. Projeni yapan kişilerle doğrudan konuşursun — aranızda müşteri temsilcisi yok. Bu sayfadaki her proje bizim ve hepsi yayında: herhangi birine tıkla ve kendin gör.</p></div>
+      </div>
+      <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span>Site ve kod bana mı ait?</span><span class="faq-icon"></span></button>
         <div class="faq-a"><p>Evet — %100. Bittiğinde site, kod ve tüm hesaplar tamamen senindir. Bağlılık yok, gizli şart yok.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span>Ya projenin ortasında ortadan kaybolursanız?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p>Kodu, depoyu ve tüm hesapları ilk günden alırsın — sonunda değil. Hiçbir şey hiçbir zaman sadece bizim elimizde olmaz. Yarın ortadan kaybolsak, herhangi bir geliştirici projeni açıp bıraktığımız yerden devam edebilir.</p></div>
       </div>
       <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span>Sonra değişiklik gerekirse?</span><span class="faq-icon"></span></button>
@@ -1536,17 +1809,25 @@
           </svg>
           <span>E-posta gönder</span>
         </a>
-        <a href="https://github.com/OnlyMaxon" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+        <!-- WhatsApp, not GitHub, is the second button: the person buying a booking site
+             taps a green icon, they do not open a repository. GitHub keeps its place in
+             the row below, where it still does its job for the other half of the room. -->
+        <a href="https://wa.me/48576925110" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
           <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
           </svg>
-          GitHub
+          WhatsApp
         </a>
       </div>
       <div class="contact-socials fade-up d4">
         <a href="mailto:hello@onlymaxon.com" class="social-link">
           <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
           hello@onlymaxon.com
+        </a>
+        <span class="soc-sep">·</span>
+        <a href="tel:+48576925110" class="social-link">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          +48 576 925 110
         </a>
         <span class="soc-sep">·</span>
         <a href="https://github.com/OnlyMaxon" target="_blank" rel="noopener noreferrer" class="social-link">

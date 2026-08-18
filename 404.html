@@ -6,16 +6,18 @@
   <title>404 — Page not found · OnlyMaxon</title>
   <meta name="robots" content="noindex">
   <link rel="icon" type="image/png" href="/images/icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- only the weights this page actually uses: SG 600/700, Inter 400/700 -->
-  <link rel="stylesheet" media="print" onload="this.media='all'"
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;700&display=swap">
-  <noscript>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;700&display=swap">
-  </noscript>
   <style>
+    /* Self-hosted from /fonts/, same as the main page. This one is English-only and uses
+       just two weights, so it takes the latin subsets and nothing else. */
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-latin.woff2) format('woff2'); }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/inter-700-latin.woff2) format('woff2'); }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/space-grotesk-600-latin.woff2) format('woff2'); }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/space-grotesk-700-latin.woff2) format('woff2'); }
+
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --blue: #22D3EE; --purple: #2C8A9C;

@@ -93,6 +93,8 @@
     "legalName": "OnlyMaxon Studio",
     "url": "https://onlymaxon.com",
     "logo": "https://onlymaxon.com/images/logo.jpg",
+    "email": "hello@onlymaxon.com",
+    "telephone": "+48576925110",
     "description": "A product studio that builds apps and websites and ranks them on Google — development and SEO under one roof.",
     "sameAs": [
       "https://github.com/OnlyMaxon",
@@ -107,26 +109,74 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "How much does a website cost?", "acceptedAnswer": { "@type": "Answer", "text": "Websites start at €390 (business-card) and €690 (with online booking). Mobile apps from €1400. You always see the price and timeline before we start — no hidden costs." } },
-      { "@type": "Question", "name": "How long does it take?", "acceptedAnswer": { "@type": "Answer", "text": "A simple website takes about 1 week, a booking site around 2 weeks, and a mobile app 4-6 weeks. We agree the timeline up front and send you weekly updates." } },
-      { "@type": "Question", "name": "Do I own the website and the code?", "acceptedAnswer": { "@type": "Answer", "text": "Yes - 100%. Once it's done, the site, the code and all accounts are fully yours. No lock-in, no strings attached." } },
+      { "@type": "Question", "name": "How much does a website cost?", "acceptedAnswer": { "@type": "Answer", "text": "Websites start at €390 (business-card) and €690 (with online booking). An online shop from €1090, a mobile app from €1400, a full platform from €3000. You get the exact price and date within 48 hours of the first call — no hidden costs." } },
+      { "@type": "Question", "name": "How long does it take?", "acceptedAnswer": { "@type": "Answer", "text": "A simple website takes about 1 week, a booking site around 2 weeks, and a mobile app 4–6 weeks. We agree the timeline up front and send you weekly updates." } },
+      { "@type": "Question", "name": "Who exactly is OnlyMaxon?", "acceptedAnswer": { "@type": "Answer", "text": "A small studio, not an agency with a sales department. You talk directly to the people who build your project — there is no account manager in between. Every project on this page is ours and every one of them is live: click any of them and see for yourself." } },
+      { "@type": "Question", "name": "Do I own the website and the code?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — 100%. Once it's done, the site, the code and all accounts are fully yours. No lock-in, no strings attached." } },
+      { "@type": "Question", "name": "What if you disappear halfway through?", "acceptedAnswer": { "@type": "Answer", "text": "You get the code, the repository and every account from day one — not at the end. Nothing is ever only in our hands. If we vanished tomorrow, any developer could open your project and carry on from where we stopped." } },
       { "@type": "Question", "name": "What if I need changes later?", "acceptedAnswer": { "@type": "Answer", "text": "No problem. Small tweaks are easy, and for ongoing work (new features, SEO/ASO) we agree a clear rate up front. You're never stuck." } },
-      { "@type": "Question", "name": "How do we start?", "acceptedAnswer": { "@type": "Answer", "text": "Just send a message with your idea. The first call is free - we'll figure out what you need, give you a price and timeline, and start whenever you're ready." } }
+      { "@type": "Question", "name": "How do we start?", "acceptedAnswer": { "@type": "Answer", "text": "Just send a message with your idea. The first call is free — we'll figure out what you need, give you a price and timeline, and start whenever you're ready." } }
     ]
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- only the weights actually used (SG 600/700, Inter 400/500/600/700), and loaded
-       non-blocking: the inline CSS below paints immediately in system-ui, then swaps. -->
-  <link rel="stylesheet" media="print" onload="this.media='all'"
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&display=swap">
-  <noscript>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&display=swap">
-  </noscript>
   <style>
+    /* Self-hosted, so the page talks to exactly one origin. Google served these same
+       files, but from two extra hosts that each cost a DNS lookup and a TLS handshake
+       before a single glyph moved. Only the subsets these five languages actually use
+       were taken: latin + latin-ext everywhere, cyrillic for Inter. Space Grotesk has no
+       Cyrillic at all upstream, which is why Russian headings fall back to system-ui —
+       that was already true, it is just now visible in the file rather than hidden in a
+       CDN response. font-display: swap keeps first paint in system-ui, same as before. */
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap;
+                 src: url(/fonts/inter-500-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap;
+                 src: url(/fonts/inter-500-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap;
+                 src: url(/fonts/inter-500-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/inter-700-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/inter-700-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/inter-700-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/space-grotesk-600-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/space-grotesk-600-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/space-grotesk-700-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
@@ -518,9 +568,28 @@
       background: rgba(245,180,90,0.12); color: #F5B45A;
       border: 1px solid rgba(245,180,90,0.28);
     }
+    /* The hook: what was broken before we turned up. It sits ABOVE the description so the
+       first line a visitor reads is their own problem, not our feature list. */
+    .proj-problem {
+      font-size: 15px; font-weight: 600; color: var(--text);
+      line-height: 1.45; margin-bottom: 10px;
+    }
     .proj-desc {
       font-size: 14px; color: var(--text-d);
-      line-height: 1.65; margin-bottom: 18px; flex: 1;
+      line-height: 1.65; margin-bottom: 14px; flex: 1;
+    }
+    /* The proof, and the one line a visitor should still remember tomorrow — so it is the
+       only text in the card carrying the accent colour. */
+    .proj-result {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 13.5px; font-weight: 600; color: var(--cyan);
+      line-height: 1.5; margin-bottom: 16px;
+    }
+    .proj-result::before {
+      content: '';
+      flex-shrink: 0; width: 6px; height: 6px; margin-top: 7px;
+      border-radius: 50%; background: var(--blue);
+      box-shadow: 0 0 8px rgba(34,211,238,0.7);
     }
     .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
     .tag {
@@ -536,6 +605,45 @@
     }
     .proj-link:hover { gap: 10px; }
 
+    /* ── PROBLEM → SOLUTION ───────────────── */
+    /* Sits directly under the hero, before any of our work: a visitor recognises their own
+       Tuesday before they are asked to admire ours. */
+    #problems { padding: 110px 0; }
+    .ps-head { text-align: center; max-width: 640px; margin: 0 auto 54px; }
+    .ps-head .sec-desc { margin: 0 auto; }
+    .ps-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 18px; max-width: 900px; margin: 0 auto;
+    }
+    @media (max-width: 760px) { .ps-grid { grid-template-columns: 1fr; max-width: 480px; } }
+    .ps-card {
+      display: flex; flex-direction: column;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 26px 24px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .ps-card:hover { border-color: var(--border-h); transform: translateY(-5px); }
+    /* Their words, not ours — set at --text weight so it reads as someone speaking, with
+       the rule down the side standing in for the quotation marks. */
+    .ps-quote {
+      font-size: 15px; font-weight: 600; color: var(--text);
+      line-height: 1.55; margin-bottom: 16px;
+      padding-left: 16px; border-left: 2px solid rgba(34,211,238,0.35);
+    }
+    .ps-answer {
+      font-size: 14px; color: var(--text-d);
+      line-height: 1.65; margin-bottom: 18px; flex: 1;
+    }
+    .ps-time {
+      align-self: flex-start;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--blue); background: var(--blue-d);
+      border: 1px solid rgba(34,211,238,0.28);
+      padding: 5px 12px; border-radius: 100px;
+    }
+
     /* ── PROCESS ──────────────────────────── */
     #process {
       padding: 120px 0;
@@ -544,9 +652,21 @@
     .process-head { text-align: center; max-width: 660px; margin: 0 auto 56px; }
     .process-head .sec-desc { margin: 0 auto; }
 
+    /* One column, not a 2x2 grid. These four are a sequence, and a grid gives no reading
+       order — the eye picks a corner and the steps read as four unrelated features. */
     .proc-steps {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 18px; max-width: 900px; margin: 0 auto;
+      display: flex; flex-direction: column;
+      gap: 14px; max-width: 780px; margin: 0 auto;
+      position: relative;
+    }
+    /* The rail runs behind the cards on the container, NOT on each step: .proc-step lifts
+       5px on hover, and a per-step connector would lift with it and tear the line. The
+       cards are opaque, so only the segments crossing the gaps are ever visible. */
+    .proc-steps::before {
+      content: '';
+      position: absolute; left: 41px; top: 34px; bottom: 34px; width: 2px;
+      background: linear-gradient(to bottom, rgba(34,211,238,0.32), rgba(34,211,238,0.06));
+      z-index: 0;
     }
 
     .proc-step {
@@ -554,6 +674,7 @@
       padding: 22px; border-radius: 14px;
       border: 1px solid var(--border);
       background: var(--bg2);
+      position: relative; z-index: 1;
       transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
     }
     .proc-step:hover {
@@ -570,6 +691,15 @@
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700; font-size: 15px;
       display: flex; align-items: center; justify-content: center;
+    }
+    /* The commitment. It is the reason this section exists, so it sits above the heading
+       and is the only line here in the accent colour. */
+    .step-time {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.3px;
+      color: var(--blue); margin-bottom: 6px;
     }
     .step-body h3 { font-size: 16px; font-weight: 700; margin-bottom: 5px; }
     .step-body p { font-size: 14px; color: var(--text-d); line-height: 1.6; }
@@ -604,11 +734,25 @@
       font-size: 14px; color: var(--text-d);
       line-height: 1.65; margin-bottom: 10px;
     }
-    /* The line above sells; this one is the proof under it. Smaller and dimmer on
-       purpose — it must not be the first thing the eye lands on. */
-    .sc-meta {
-      font-size: 12.5px; color: var(--text-d); opacity: 0.72;
-      line-height: 1.6; margin-bottom: 18px;
+    /* Plain-language outcomes. The chips further down name the discipline ("On-page SEO");
+       these say what the client actually ends up with, which is the only half of it most
+       visitors can read. Outcomes first, jargon as a footnote for the few who want it. */
+    .sc-outcomes {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 9px;
+      margin: 16px 0 22px;
+    }
+    .sc-outcome {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13.5px; color: var(--text-d); line-height: 1.55;
+    }
+    .sc-outcome::before {
+      content: '✓';
+      flex-shrink: 0; width: 17px; height: 17px; margin-top: 2px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; line-height: 1;
+      background: var(--blue-d); border: 1px solid rgba(34,211,238,0.3);
+      color: var(--blue); font-size: 9px; font-weight: 700;
     }
     .sc-title {
       font-family: 'Space Grotesk', sans-serif;
@@ -809,13 +953,46 @@
     .price-time::before { content: '🕒'; }
     .price-card .btn { margin-top: auto; justify-content: center; }
 
+    /* The recurring tier, deliberately laid out sideways instead of as a sixth column —
+       a different shape says "different kind of thing" faster than any label would. */
+    .pricing-ongoing {
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+      max-width: 1160px; margin: 20px auto 0;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 26px 30px;
+      transition: border-color 0.3s ease;
+    }
+    .pricing-ongoing:hover { border-color: var(--border-h); }
+    .po-text { flex: 1 1 280px; }
+    .po-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px;
+    }
+    .po-desc { font-size: 14px; color: var(--text-d); line-height: 1.6; }
+    .po-price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px; font-weight: 700; line-height: 1.1; flex-shrink: 0;
+      background: linear-gradient(135deg, #fff 0%, var(--blue) 60%, var(--purple) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .pricing-ongoing .btn { flex-shrink: 0; }
+    @media (max-width: 640px) {
+      .pricing-ongoing {
+        flex-direction: column; align-items: stretch;
+        text-align: center; gap: 16px; padding: 24px 22px;
+      }
+      .pricing-ongoing .btn { justify-content: center; }
+    }
+
     /* ── SMALL PROJECT CARDS ──────────────── */
     .projects-grid.small-grid { margin-top: 22px; }
     .small-grid .proj-card { max-width: 300px; }
     .small-grid .proj-thumb { height: 132px; }
     .small-grid .proj-body { padding: 18px; }
     .small-grid .proj-name { font-size: 16px; }
+    .small-grid .proj-problem { font-size: 14px; }
     .small-grid .proj-desc { font-size: 13px; }
+    .small-grid .proj-result { font-size: 12.5px; }
 
     /* ── CONTACT MODAL ────────────────────── */
     .modal-overlay {
@@ -1022,12 +1199,17 @@
     @media (max-width: 640px) {
       #hero { padding: 116px 0 70px; }
       .hero-logo { width: 260px; }
-      .proc-steps { grid-template-columns: 1fr; }
       .hero-stats { gap: 18px; }
       .stat-val { font-size: 21px; }
       .stat-lab { font-size: 10px; }
       .container { padding: 0 20px; }
       .price-name { min-height: 0; }
+    }
+    /* Three stat tiles instead of two: on the narrowest phones the labels need the room
+       back, or the row breaks into a ragged second line with a separator leading it. */
+    @media (max-width: 400px) {
+      .hero-stats { gap: 13px; }
+      .stat-lab { font-size: 9.5px; letter-spacing: 0.3px; }
     }
     @media (max-width: 600px) {
       .nav-toggle { display: flex; }
@@ -1111,6 +1293,7 @@
           <li><a href="#contact" class="nav-cta" data-i18n="navCta">Work With Us</a></li>
           <li class="nav-m-only nav-m-extra">
             <a class="nav-m-mail" href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a>
+            <a class="nav-m-mail" href="tel:+48576925110">+48 576 925 110</a>
           </li>
         </ul>
         <div class="lang-dd" id="langDD">
@@ -1187,10 +1370,55 @@
           </div>
           <div class="stat-sep"></div>
           <div class="stat">
-            <span class="stat-val" data-i18n="heroStatMvpVal">3–6w</span>
-            <span class="stat-lab" data-i18n="heroStatMvp">MVP Timeline</span>
+            <span class="stat-val" data-i18n="heroStatMvpVal">1–6w</span>
+            <span class="stat-lab" data-i18n="heroStatMvp">To launch</span>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat">
+            <span class="stat-val">100%</span>
+            <span class="stat-lab" data-i18n="heroStatOwn">Code is yours</span>
           </div>
         </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PROBLEM → SOLUTION ────────────────── -->
+<section id="problems">
+  <div class="container">
+    <div class="ps-head">
+      <p class="eyebrow fade-up" data-i18n="psEyebrow">The real problem</p>
+      <h2 class="sec-title fade-up d1" data-i18n="psTitle">One of these probably sounds familiar.</h2>
+      <p class="sec-desc fade-up d2" data-i18n="psDesc">If it does, you already know what the first call is about.</p>
+    </div>
+    <div class="ps-grid">
+
+      <div class="ps-card fade-up">
+        <p class="ps-quote" data-i18n="ps1Quote">Everything runs through my Instagram DMs, and I'm still answering at midnight.</p>
+        <p class="ps-answer" data-i18n="ps1Answer">A site with online booking. Your client picks a free slot themselves — you just watch the calendar fill up.</p>
+        <span class="ps-time" data-i18n="ps1Time">2 weeks</span>
+      </div>
+
+      <div class="ps-card fade-up d1">
+        <p class="ps-quote" data-i18n="ps2Quote">People searching nearby find my competitors on the map. They don't find me.</p>
+        <p class="ps-answer" data-i18n="ps2Answer">Your Google profile set up properly, reviews collected automatically after each visit, the site wired into search. You end up where people are already looking.</p>
+        <span class="ps-time" data-i18n="ps2Time">monthly · ongoing</span>
+      </div>
+
+      <div class="ps-card fade-up d2">
+        <p class="ps-quote" data-i18n="ps3Quote">I have a website. Nobody has ever written to me from it.</p>
+        <p class="ps-answer" data-i18n="ps3Answer">We rebuild it around the one thing it was missing — a reason to get in touch — and then make sure it actually gets found.</p>
+        <span class="ps-time" data-i18n="ps3Time">1–2 weeks</span>
+      </div>
+
+      <div class="ps-card fade-up d3">
+        <p class="ps-quote" data-i18n="ps4Quote">I've had an idea for an app for two years and no idea where to start.</p>
+        <p class="ps-answer" data-i18n="ps4Answer">We take it from a first sketch to something real people can install — and you see it working before you've spent a fortune on it.</p>
+        <span class="ps-time" data-i18n="ps4Time">4–6 weeks</span>
+      </div>
 
     </div>
   </div>
@@ -1216,7 +1444,9 @@
         </div>
         <div class="proj-body">
           <div class="proj-name">nextcargo.eu <span class="badge-live" data-i18n="badgeLive">Live</span></div>
-          <p class="proj-desc" data-i18n="projNextcargo">Cargo &amp; delivery platform with full client cabinet, real-time support chat, and shipment tracking.</p>
+          <p class="proj-problem" data-i18n="projNextcargoProblem">A warehouse where nobody could tell whose parcel was whose.</p>
+          <p class="proj-desc" data-i18n="projNextcargo">Now every parcel is identified by its code in seconds. Each client gets a cabinet showing where their cargo is, with a notification at every stage — and the company got the whole site built around it.</p>
+          <p class="proj-result" data-i18n="projNextcargoResult">20–50 orders a week run through the site.</p>
           <div class="proj-tags">
             <span class="tag">Full-stack</span>
             <span class="tag">Real-time</span>
@@ -1236,7 +1466,9 @@
         </div>
         <div class="proj-body">
           <div class="proj-name">birklik.az <span class="badge-live" data-i18n="badgeLive">Live</span></div>
-          <p class="proj-desc" data-i18n="projBirklik">Rental marketplace for Azerbaijan — booking calendar, host dashboard, tiered listings, and payment integration.</p>
+          <p class="proj-problem" data-i18n="projBirklikProblem">They had the hotels, the houses and the contacts. No way to take a booking.</p>
+          <p class="proj-desc" data-i18n="projBirklik">We built the site, the booking system and a client cabinet with notifications — then took on Google, so the people looking for somewhere to stay actually find them.</p>
+          <p class="proj-result" data-i18n="projBirklikResult">70 live listings · 2,000 visitors a month from Google — the site now sells its own ad space.</p>
           <div class="proj-tags">
             <span class="tag">Next.js</span>
             <span class="tag">React</span>
@@ -1262,7 +1494,9 @@
         </div>
         <div class="proj-body">
           <div class="proj-name">yOdin <span class="badge-dev" data-i18n="badgeDev">In dev</span></div>
-          <p class="proj-desc" data-i18n="projYodin">Social platform for international students across universities — behavior-based matching that connects people beyond nationalities.</p>
+          <p class="proj-problem" data-i18n="projYodinProblem">Agreed directly with the university's dean's office.</p>
+          <p class="proj-desc" data-i18n="projYodin">A social platform for international students — matching by behaviour, not by nationality.</p>
+          <p class="proj-result" data-i18n="projYodinResult">In development, rolling out across universities.</p>
           <div class="proj-tags">
             <span class="tag">React Native</span>
             <span class="tag">Expo</span>
@@ -1369,7 +1603,12 @@
         <div class="sc-icon">💻</div>
         <div class="sc-name" data-i18n="devName">We build it</div>
         <p class="sc-desc" data-i18n="devDesc">Your site or app from scratch — made for you, not a template a hundred other businesses already use.</p>
-        <p class="sc-meta" data-i18n="devMeta">Websites, mobile apps, online booking, maps, live data.</p>
+        <ul class="sc-outcomes">
+          <li class="sc-outcome" data-i18n="devOut1">Online booking — clients pick their own slot instead of messaging you at midnight.</li>
+          <li class="sc-outcome" data-i18n="devOut2">A reminder by SMS or email the day before — fewer empty slots in your week.</li>
+          <li class="sc-outcome" data-i18n="devOut3">A cabinet where your client sees their own orders, bookings or deliveries.</li>
+          <li class="sc-outcome" data-i18n="devOut4">Payments, maps and live data actually wired in — not screenshots of them.</li>
+        </ul>
         <div class="sc-title" data-i18n="devSub">We build with</div>
         <div class="sc-tags">
           <span class="sc-tag">TypeScript</span>
@@ -1387,9 +1626,16 @@
         <div class="sc-icon">🔍</div>
         <div class="sc-name" data-i18n="mktName">We make people find it</div>
         <p class="sc-desc" data-i18n="mktDesc">A beautiful site nobody finds is a business card in a drawer. We make Google, the app stores and AI assistants show you to people already looking for you.</p>
-        <p class="sc-meta" data-i18n="mktMeta">Search, App Store &amp; Google Play, answers in ChatGPT, Perplexity, Google AI.</p>
+        <ul class="sc-outcomes">
+          <li class="sc-outcome" data-i18n="mktOut1">You show up on Google Maps when someone nearby searches for what you do.</li>
+          <li class="sc-outcome" data-i18n="mktOut2">Your Google profile set up properly — photos, prices, hours, a call button.</li>
+          <li class="sc-outcome" data-i18n="mktOut3">Reviews collected automatically after each visit — reviews are what lifts you above the competition.</li>
+          <li class="sc-outcome" data-i18n="mktOut4">Named inside ChatGPT and Google AI answers, not just in the blue links.</li>
+          <li class="sc-outcome" data-i18n="mktOut5">One number every month: how many people found you, and how many got in touch.</li>
+        </ul>
         <div class="sc-title" data-i18n="mktSub">We handle</div>
         <div class="sc-tags">
+          <span class="sc-tag">Google Business Profile</span>
           <span class="sc-tag">On-page SEO</span>
           <span class="sc-tag">ASO</span>
           <span class="sc-tag">AI-SEO / GEO</span>
@@ -1436,14 +1682,29 @@
         <div class="price-time" data-i18n="price3Time">4–6 weeks</div>
         <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
       </div>
+      <!-- The ceiling. Without it the list topped out at €1400 and the studio read as a
+           €390 shop — while two of the three projects above it are plainly this tier. -->
       <div class="price-card fade-up d3">
-        <div class="price-name" data-i18n="price4Name">Ongoing SEO / ASO / AI</div>
-        <div class="price-amount" data-i18n="price4Amount">from €200/mo</div>
-        <div class="price-time" data-i18n="price4Time">monthly · ongoing</div>
+        <div class="price-name" data-i18n="price6Name">Platform or marketplace</div>
+        <div class="price-amount" data-i18n="price6Amount">from €3000</div>
+        <div class="price-time" data-i18n="price6Time">from 6 weeks</div>
         <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
       </div>
     </div>
-    <div class="pricing-note fade-up" data-i18n-html="pricingNote">Prices start from. Always open to discuss scope and budget.</div>
+
+    <!-- Monthly work, pulled out of the row above: it is not a project, and side by side
+         with them it invited the comparison "€200 or €1400?" — which was never the choice
+         on offer. Down here it reads as what it is: what happens after launch. -->
+    <div class="pricing-ongoing fade-up">
+      <div class="po-text">
+        <div class="po-name" data-i18n="price4Name">Ongoing SEO / ASO / AI</div>
+        <p class="po-desc" data-i18n="price4Desc">What keeps you found after launch — Google profile, reviews, search, AI answers. Monthly, stop whenever you want.</p>
+      </div>
+      <div class="po-price" data-i18n="price4Amount">from €200/mo</div>
+      <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
+    </div>
+
+    <div class="pricing-note fade-up" data-i18n-html="pricingNote">Every number here is a starting point. After a 30-minute call you get the exact price and the exact date in writing, within 48 hours.</div>
   </div>
 </section>
 
@@ -1454,36 +1715,40 @@
   <div class="container">
     <div class="process-head">
       <p class="eyebrow fade-up" data-i18n="procEyebrow">How we work</p>
-      <h2 class="sec-title fade-up d1" data-i18n-html="procTitle">You focus on the vision.<br>We handle the rest.</h2>
-      <p class="sec-desc fade-up d2" data-i18n="procDesc">One team takes your idea from first sketch to a live, growing product — and you stay in control the whole way.</p>
+      <h2 class="sec-title fade-up d1" data-i18n-html="procTitle">What happens<br><span class="gradient-text">after you write.</span></h2>
+      <p class="sec-desc fade-up d2" data-i18n="procDesc">Four steps with real times on them. You know the price and the date before anything gets built.</p>
     </div>
     <div class="proc-steps">
       <div class="proc-step fade-up">
         <div class="step-num">01</div>
         <div class="step-body">
-          <h3 data-i18n="proc1Title">End-to-end delivery</h3>
-          <p data-i18n="proc1Desc">Design, code, deployment, launch — we handle everything, so you don't have to juggle it.</p>
+          <span class="step-time" data-i18n="proc1Time">30 minutes</span>
+          <h3 data-i18n="proc1Title">First call, free</h3>
+          <p data-i18n="proc1Desc">You tell us what isn't working and what's eating your time. No presentation, no questionnaire. If we're not the right fit, we say so on the call.</p>
         </div>
       </div>
       <div class="proc-step fade-up d1">
         <div class="step-num">02</div>
         <div class="step-body">
-          <h3 data-i18n="proc2Title">Ship fast</h3>
-          <p data-i18n="proc2Desc">MVPs in 3–6 weeks, not 6 months. Real users, real feedback, real iteration.</p>
+          <span class="step-time" data-i18n="proc2Time">48 hours</span>
+          <h3 data-i18n="proc2Title">Price and date</h3>
+          <p data-i18n="proc2Desc">One page: what we build, what it costs, when it's done. No hidden lines, no “it depends”. Yes or no — either way you know where you stand.</p>
         </div>
       </div>
       <div class="proc-step fade-up d2">
         <div class="step-num">03</div>
         <div class="step-body">
-          <h3 data-i18n="proc3Title">More than code</h3>
-          <p data-i18n="proc3Desc">SEO to get your product found on Google and growing — not just code that ships and sits.</p>
+          <span class="step-time" data-i18n="proc3Time">1–6 weeks</span>
+          <h3 data-i18n="proc3Title">We build, you keep working</h3>
+          <p data-i18n="proc3Desc">A business-card site takes a week, a booking site two, an app four to six. One update every week — what's done, what's next, whether we're on schedule.</p>
         </div>
       </div>
       <div class="proc-step fade-up d3">
         <div class="step-num">04</div>
         <div class="step-body">
-          <h3 data-i18n="proc4Title">Transparent by default</h3>
-          <p data-i18n="proc4Desc">Weekly updates, clear progress. No surprises, no hidden blockers.</p>
+          <span class="step-time" data-i18n="proc4Time">Launch day</span>
+          <h3 data-i18n="proc4Title">It goes live, and it's yours</h3>
+          <p data-i18n="proc4Desc">Site, code and every account handed over — 100% yours, no lock-in. From there we keep you found on Google for as long as you want us to.</p>
         </div>
       </div>
     </div>
@@ -1503,15 +1768,23 @@
     <div class="faq-list">
       <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span data-i18n="faq1Q">How much does a website cost?</span><span class="faq-icon"></span></button>
-        <div class="faq-a"><p data-i18n="faq1A">Websites start at €390 (business-card) and €690 (with online booking). Mobile apps from €1400. You always see the price and timeline before we start — no hidden costs.</p></div>
+        <div class="faq-a"><p data-i18n="faq1A">Websites start at €390 (business-card) and €690 (with online booking). An online shop from €1090, a mobile app from €1400, a full platform from €3000. You get the exact price and date within 48 hours of the first call — no hidden costs.</p></div>
       </div>
       <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span data-i18n="faq2Q">How long does it take?</span><span class="faq-icon"></span></button>
         <div class="faq-a"><p data-i18n="faq2A">A simple website takes about 1 week, a booking site around 2 weeks, and a mobile app 4–6 weeks. We agree the timeline up front and send you weekly updates.</p></div>
       </div>
       <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq6Q">Who exactly is OnlyMaxon?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p data-i18n="faq6A">A small studio, not an agency with a sales department. You talk directly to the people who build your project — there is no account manager in between. Every project on this page is ours and every one of them is live: click any of them and see for yourself.</p></div>
+      </div>
+      <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span data-i18n="faq3Q">Do I own the website and the code?</span><span class="faq-icon"></span></button>
         <div class="faq-a"><p data-i18n="faq3A">Yes — 100%. Once it's done, the site, the code and all accounts are fully yours. No lock-in, no strings attached.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq7Q">What if you disappear halfway through?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p data-i18n="faq7A">You get the code, the repository and every account from day one — not at the end. Nothing is ever only in our hands. If we vanished tomorrow, any developer could open your project and carry on from where we stopped.</p></div>
       </div>
       <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span data-i18n="faq4Q">What if I need changes later?</span><span class="faq-icon"></span></button>
@@ -1549,17 +1822,25 @@
           </svg>
           <span data-i18n="contactBtnEmail">Send an Email</span>
         </a>
-        <a href="https://github.com/OnlyMaxon" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+        <!-- WhatsApp, not GitHub, is the second button: the person buying a booking site
+             taps a green icon, they do not open a repository. GitHub keeps its place in
+             the row below, where it still does its job for the other half of the room. -->
+        <a href="https://wa.me/48576925110" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
           <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
           </svg>
-          GitHub
+          WhatsApp
         </a>
       </div>
       <div class="contact-socials fade-up d4">
         <a href="mailto:hello@onlymaxon.com" class="social-link">
           <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
           hello@onlymaxon.com
+        </a>
+        <span class="soc-sep">·</span>
+        <a href="tel:+48576925110" class="social-link">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          +48 576 925 110
         </a>
         <span class="soc-sep">·</span>
         <a href="https://github.com/OnlyMaxon" target="_blank" rel="noopener noreferrer" class="social-link">

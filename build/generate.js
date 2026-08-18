@@ -48,6 +48,13 @@ if (missing.length) fail(`missing translations:\n    ` + missing.join('\n    '))
 
 const unused = Object.keys(translations).filter(k => !usedKeys.has(k));
 
+// Document order of the FAQ accordion, reused below to build the rich result.
+const faqOrder = [...source.matchAll(/data-i18n="faq(\d+)Q"/g)].map(m => m[1]);
+if (!faqOrder.length) fail('no FAQ questions found in index.html');
+for (const i of faqOrder) {
+  if (!translations['faq' + i + 'A']) fail(`faq${i}Q has no matching faq${i}A`);
+}
+
 // ── per-language build ────────────────────────────────────────────────────────
 function build(lang) {
   const t = key => translations[key][lang];
@@ -123,7 +130,10 @@ function build(lang) {
     /("description": ")[^"]*(",\n    "sameAs")/,
     (m, a, b) => a + summary.replace(/"/g, '\\"') + b);
 
-  const faq = [1, 2, 3, 4, 5].map(i =>
+  // Read the questions in the order they appear on the page rather than from a hard-coded
+  // list — adding a question to index.html used to leave it out of the rich result
+  // silently, and reordering the accordion put the two out of sync just as quietly.
+  const faq = faqOrder.map(i =>
     `      { "@type": "Question", "name": ${JSON.stringify(t('faq' + i + 'Q'))}, ` +
     `"acceptedAnswer": { "@type": "Answer", "text": ${JSON.stringify(t('faq' + i + 'A'))} } }`
   ).join(',\n');
