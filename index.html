@@ -176,16 +176,6 @@
     }
     .container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
     section { position: relative; z-index: 1; }
-    #problems, #whatvisitka, #pricing, #faq, #languages {
-      content-visibility: auto;
-    }
-    #problems     { contain-intrinsic-size: 700px; contain-intrinsic-size: auto 700px; }
-    #whatvisitka  { contain-intrinsic-size: 950px; contain-intrinsic-size: auto 950px; }
-    #pricing      { contain-intrinsic-size: 900px; contain-intrinsic-size: auto 900px; }
-    #faq          { contain-intrinsic-size: 800px; contain-intrinsic-size: auto 800px; }
-    #languages    { contain-intrinsic-size: 320px; contain-intrinsic-size: auto 320px; }
-    body.cv-off #problems, body.cv-off #whatvisitka, body.cv-off #pricing,
-    body.cv-off #faq, body.cv-off #languages { content-visibility: visible; }
     .gradient-text {
       background: linear-gradient(135deg, #fff 0%, var(--blue) 45%, var(--purple) 100%);
       -webkit-background-clip: text;
@@ -1877,13 +1867,6 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
-  document.addEventListener('click', e => {
-    const a = e.target.closest && e.target.closest('a[href^="#"]');
-    if (!a || a.getAttribute('href') === '#') return;
-    if (document.body.classList.contains('cv-off')) return;
-    document.body.classList.add('cv-off');
-    void document.body.offsetHeight;        // flush the layout now, not after the scroll
-  }, true);
   const heroEl = document.getElementById('hero');
   if (heroEl) {
     new IntersectionObserver(([e]) => {

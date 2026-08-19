@@ -119,18 +119,10 @@
     h1, h2, h3 { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; line-height: 1.1; }
     .container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
     section { position: relative; z-index: 1; }
-    /* Skip layout and paint for what the visitor has not reached yet. Deliberately not on
-       #hero, #work, #process, #stack or #contact: those are anchor targets, and jumping
-       into a section whose height is still an estimate lands at the wrong offset. The two
-       declarations are a pair — the plain length is the fallback for browsers that do not
-       parse `auto <length>` and would otherwise drop the property and leave a zero-height
-       placeholder. See body.cv-off below for how anchor scrolling stays exact. */
-    #pricing, #faq, #languages { content-visibility: auto; }
-    #pricing   { contain-intrinsic-size: 800px; contain-intrinsic-size: auto 800px; }
-    #faq       { contain-intrinsic-size: 700px; contain-intrinsic-size: auto 700px; }
-    #languages { contain-intrinsic-size: 320px; contain-intrinsic-size: auto 320px; }
-    body.cv-off #pricing, body.cv-off #faq,
-    body.cv-off #languages { content-visibility: visible; }
+    /* No `content-visibility: auto` here, deliberately — tried and taken back out. It
+       stands in an estimated height for a section until you scroll to it, and swapping in
+       the real one resizes the document under the scroll position, so an overestimate
+       makes the page lurch as you reach it. Not worth it for sections this small. */
     .gradient-text {
       background: linear-gradient(135deg, #fff 0%, var(--blue) 45%, var(--purple) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
@@ -1112,19 +1104,6 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
-
-  // ── Make anchor destinations exact ──
-  // The sections carrying `content-visibility: auto` are only as tall as their estimate
-  // until they have been rendered once, and a smooth scroll works out where it is going
-  // before it starts. Un-skipping them on the first anchor click costs one layout and
-  // makes the destination true; by then the initial paint has already happened.
-  document.addEventListener('click', e => {
-    const a = e.target.closest && e.target.closest('a[href^="#"]');
-    if (!a || a.getAttribute('href') === '#') return;
-    if (document.body.classList.contains('cv-off')) return;
-    document.body.classList.add('cv-off');
-    void document.body.offsetHeight;
-  }, true);
 
   // ── Park the hero's infinite animations while it is off screen ──
   const heroEl = document.getElementById('hero');

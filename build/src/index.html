@@ -249,33 +249,14 @@
     .container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
     section { position: relative; z-index: 1; }
 
-    /* Skip layout and paint for sections the visitor has not reached yet — the phone
-       mock-ups alone are a few hundred nodes with their own gradients and shadows, and
-       all of it used to be laid out and painted before the hero could show.
-       Deliberately NOT applied to #projects, #stack, #process, #contact or #hero: those
-       are anchor targets, and jumping into a section whose height is still an estimate
-       lands at the wrong offset until the real size is known.
-       Two declarations, not one: the plain length is the fallback for browsers that do
-       not parse `auto <length>`, which would otherwise drop the property entirely and
-       leave a zero-height placeholder. `auto` lets the browser reuse the real measured
-       height once it has seen it, so the scrollbar stops moving after the first pass. */
-    #problems, #whatvisitka, #pricing, #faq, #languages {
-      content-visibility: auto;
-    }
-    #problems     { contain-intrinsic-size: 700px; contain-intrinsic-size: auto 700px; }
-    #whatvisitka  { contain-intrinsic-size: 950px; contain-intrinsic-size: auto 950px; }
-    #pricing      { contain-intrinsic-size: 900px; contain-intrinsic-size: auto 900px; }
-    #faq          { contain-intrinsic-size: 800px; contain-intrinsic-size: auto 800px; }
-    #languages    { contain-intrinsic-size: 320px; contain-intrinsic-size: auto 320px; }
-    /* An anchor jump is where a size estimate stops being harmless: `scroll-behavior:
-       smooth` works out its destination once, at the start, so a click on "Work With Us"
-       at the top of the page aims past five sections whose real heights are still unknown
-       and lands somewhere else by the time they render. The script switches this on at the
-       first anchor click and leaves it on — by then the initial paint, which is what
-       content-visibility was for, has already happened. */
-    body.cv-off #problems, body.cv-off #whatvisitka, body.cv-off #pricing,
-    body.cv-off #faq, body.cv-off #languages { content-visibility: visible; }
-
+    /* No `content-visibility: auto` here, deliberately — it was tried and taken back out.
+       It replaces an unrendered section's height with an estimate until you scroll to it,
+       and the moment the real height arrives the document resizes under the scroll
+       position: overestimate a section and everything below it lurches upward as you
+       reach it. That is a jolt on every single scroll through the page, in exchange for
+       skipping the layout of sections that are 12 to 78 elements each. The property earns
+       its keep on lists of thousands of nodes; this page is 541 elements in total, so
+       there was never much to win and the scroll is the thing you must not break. */
     .gradient-text {
       background: linear-gradient(135deg, #fff 0%, var(--blue) 45%, var(--purple) 100%);
       -webkit-background-clip: text;
@@ -2252,11 +2233,10 @@
       vkRow.scrollLeft += (mid.left + mid.width / 2) - (row.left + row.width / 2);
     }
 
-    // Driven by visibility, not by load. #whatvisitka carries `content-visibility: auto`,
-    // so while it is still far below the fold it has no laid-out contents at all and both
-    // scrollWidth and clientWidth read 0 — centreVk would bail out and never run again.
-    // Firing when the strip actually reaches the viewport also means the measurement
-    // happens after fonts have settled, which is what the old `load` handler was for.
+    // Driven by visibility rather than by `load`: the measurement then happens when the
+    // strip is actually on screen and the fonts that set its width have settled, and it
+    // also works when the page opens already scrolled past the hero — a reload restoring
+    // its position used to run this against a layout that was not final yet.
     new IntersectionObserver((entries, obs) => {
       if (!entries[0].isIntersecting) return;
       centreVk();
@@ -2299,18 +2279,6 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
-
-  // ── Make anchor destinations exact ──
-  // See `body.cv-off` in the stylesheet: the skipped sections have to be measured for
-  // real before a smooth scroll can compute where it is going. Capture phase, so the
-  // layout is settled before the browser acts on the navigation. Once is enough.
-  document.addEventListener('click', e => {
-    const a = e.target.closest && e.target.closest('a[href^="#"]');
-    if (!a || a.getAttribute('href') === '#') return;
-    if (document.body.classList.contains('cv-off')) return;
-    document.body.classList.add('cv-off');
-    void document.body.offsetHeight;        // flush the layout now, not after the scroll
-  }, true);
 
   // ── Park the hero's infinite animations while it is off screen ──
   // See `body.hero-out` in the stylesheet. The margin restarts them slightly before the
