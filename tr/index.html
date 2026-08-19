@@ -114,6 +114,7 @@
       { "@type": "Question", "name": "Site ve kod bana mı ait?", "acceptedAnswer": { "@type": "Answer", "text": "Evet — %100. Bittiğinde site, kod ve tüm hesaplar tamamen senindir. Bağlılık yok, gizli şart yok." } },
       { "@type": "Question", "name": "Ya projenin ortasında ortadan kaybolursanız?", "acceptedAnswer": { "@type": "Answer", "text": "Kodu, depoyu ve tüm hesapları ilk günden alırsın — sonunda değil. Hiçbir şey hiçbir zaman sadece bizim elimizde olmaz. Yarın ortadan kaybolsak, herhangi bir geliştirici projeni açıp bıraktığımız yerden devam edebilir." } },
       { "@type": "Question", "name": "Sonra değişiklik gerekirse?", "acceptedAnswer": { "@type": "Answer", "text": "Sorun değil. Küçük düzenlemeler kolaydır; sürekli işler (yeni özellikler, SEO/ASO) için baştan net bir ücret belirleriz. Asla takılıp kalmazsın." } },
+      { "@type": "Question", "name": "Hangi dilde çalışacağız?", "acceptedAnswer": { "@type": "Answer", "text": "Bu sayfanın üstünde seçtiğin beş dilden hangisiyse onda. E-postalar, brief, güncellemeler ve kendi sitendeki metinler — hepsi senin dilinde. Bizim rahatımız için İngilizceye geçmek zorunda kalmazsın." } },
       { "@type": "Question", "name": "Nasıl başlıyoruz?", "acceptedAnswer": { "@type": "Answer", "text": "Sadece fikrini içeren bir mesaj gönder. İlk görüşme ücretsiz — neye ihtiyacın olduğunu anlarız, fiyat ve süre veririz ve hazır olduğunda başlarız." } }
     ]
   }
@@ -633,6 +634,16 @@
       font-size: 14px; color: var(--text-d);
       line-height: 1.65; margin-bottom: 18px; flex: 1;
     }
+    /* Only the fourth card carries a second door out of the page, so the row exists just
+       there — the other three end on the pill alone. */
+    .ps-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .ps-more {
+      font-size: 13px; font-weight: 600; color: var(--blue);
+      text-decoration: none; transition: gap 0.2s;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .ps-more::after { content: '→'; }
+    .ps-more:hover { gap: 9px; }
     .ps-time {
       align-self: flex-start;
       font-family: 'Space Grotesk', sans-serif;
@@ -853,6 +864,8 @@
       display: flex; align-items: center; justify-content: space-between;
     }
     .ft { font-size: 13px; color: var(--text-m); }
+    .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
+    .ft a:hover { color: var(--blue); }
 
     /* ── ANIMATIONS ───────────────────────── */
     /* The reveal runs on `animation`, deliberately NOT on `transition`.
@@ -1014,6 +1027,10 @@
         flex-direction: column; align-items: stretch;
         text-align: center; gap: 16px; padding: 24px 22px;
       }
+      /* flex-basis follows the main axis, and the main axis just became vertical: the
+         280px that reserved WIDTH on desktop was reserving 280px of HEIGHT here, so the
+         two lines of text sat at the top of an empty box. Back to content height. */
+      .po-text { flex: 0 1 auto; }
       .pricing-ongoing .btn { justify-content: center; }
     }
 
@@ -1062,17 +1079,33 @@
     }
     .modal-note { font-size: 14px; color: var(--text-d); line-height: 1.6; margin-bottom: 22px; }
     .modal form { display: flex; flex-direction: column; gap: 12px; }
-    .modal input, .modal textarea {
+    .modal input, .modal textarea, .modal select {
       width: 100%; background: var(--bg3);
       border: 1px solid var(--border); border-radius: 10px;
       padding: 12px 14px; color: var(--text);
       font-family: inherit; font-size: 14px;
       transition: border-color 0.2s;
     }
-    .modal input:focus, .modal textarea:focus { outline: none; border-color: var(--border-h); }
+    .modal input:focus, .modal textarea:focus, .modal select:focus { outline: none; border-color: var(--border-h); }
+    /* The native arrow is drawn by the OS and comes out light-on-light in a dark form, so
+       it is replaced with an inline chevron and the room for it made on the right. */
+    .modal select {
+      appearance: none; -webkit-appearance: none;
+      cursor: pointer; padding-right: 38px;
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2393A6B2' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 13px center; background-size: 13px;
+    }
+    /* Until something is picked the field reads as a placeholder, like the inputs above it. */
+    .modal select:invalid { color: var(--text-m); }
+    .modal select option { background: var(--bg2); color: var(--text); }
     .modal textarea { resize: vertical; min-height: 110px; }
     .modal input::placeholder, .modal textarea::placeholder { color: var(--text-m); }
     .modal form .btn { margin-top: 4px; justify-content: center; }
+    /* Quiet on purpose: reassurance for whoever looks for it, not a warning for everyone
+       else. The link is the only part that reads as clickable. */
+    .modal-privacy { font-size: 12px; color: var(--text-m); text-align: center; line-height: 1.5; }
+    .modal-privacy a { color: var(--text-d); text-decoration: underline; text-underline-offset: 2px; }
+    .modal-privacy a:hover { color: var(--blue); }
     .modal-status { font-size: 13px; text-align: center; min-height: 18px; }
     .modal-status.ok  { color: #4ADE80; }
     .modal-status.err { color: #F87171; }
@@ -1103,6 +1136,21 @@
     .faq-item.open .faq-icon::after { transform: translate(-50%,-50%) scaleY(0); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
     .faq-a p { padding: 0 22px 20px; color: var(--text-d); font-size: 14px; line-height: 1.7; }
+    /* When an answer carries a follow-up link, the answer gives up most of its bottom
+       padding so the two do not read as two separate blocks. */
+    .faq-a p:not(:last-child) { padding-bottom: 10px; }
+
+    /* In-content links to the blog. Deliberately not in the nav: they belong at the exact
+       line where the visitor forms the question, not in a menu they were not reading. */
+    .faq-more a, .pricing-more a, .sc-more a {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--blue);
+      text-decoration: none; transition: gap 0.2s;
+    }
+    .faq-more a::after, .pricing-more a::after, .sc-more a::after { content: '→'; }
+    .faq-more a:hover, .pricing-more a:hover, .sc-more a:hover { gap: 10px; }
+    .pricing-more { text-align: center; margin-top: 14px; }
+    .sc-more { margin-top: 16px; }
 
     /* ── "WHAT'S A BUSINESS-CARD SITE" (static, no jank) ── */
     #whatvisitka { padding: 110px 0; }
@@ -1244,7 +1292,11 @@
       .hero-stats { gap: 13px; }
       .stat-lab { font-size: 9.5px; letter-spacing: 0.3px; }
     }
-    @media (max-width: 600px) {
+    /* 820, not 600. The nav gained a fifth link ("Apps & platforms"), and five links plus
+       the CTA plus the language button stopped fitting on one line well before a phone —
+       a tablet in portrait was already overflowing. The slide-out menu takes over early
+       rather than letting the row collapse. */
+    @media (max-width: 820px) {
       .nav-toggle { display: flex; }
       .nav-links {
         position: fixed; top: 0; right: 0;
@@ -1323,6 +1375,9 @@
           <li><a href="#projects">İşler</a></li>
           <li><a href="#process">Süreç</a></li>
           <li><a href="#stack">Hizmetler</a></li>
+          <!-- the visible door to the founder half of the studio; the two below it in the
+               page body catch whoever scrolls past this without reading it -->
+          <li><a href="/tr/product/">Uygulamalar ve platformlar</a></li>
           <li><a href="#contact" class="nav-cta">Bizimle Çalış</a></li>
           <li class="nav-m-only nav-m-extra">
             <a class="nav-m-mail" href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a>
@@ -1424,13 +1479,19 @@
       <div class="ps-card fade-up">
         <p class="ps-quote">Her şey Instagram mesajlarından yürüyor ve gece yarısı hâlâ cevap yazıyorum.</p>
         <p class="ps-answer">Online rezervasyonlu bir site. Müşteri boş saati kendi seçer — sen sadece takvimin dolmasını izlersin.</p>
-        <span class="ps-time">2 hafta</span>
+        <div class="ps-foot">
+          <span class="ps-time">2 hafta</span>
+          <a class="ps-more" href="/tr/blog/website-or-instagram/">Site mi Instagram mı?</a>
+        </div>
       </div>
 
       <div class="ps-card fade-up d1">
         <p class="ps-quote">Yakınlarda arayanlar haritada rakiplerimi buluyor. Beni bulmuyor.</p>
         <p class="ps-answer">Google profilin olması gerektiği gibi kurulur, her ziyaretten sonra yorumlar otomatik toplanır, site aramaya bağlanır. Sonunda insanların zaten baktığı yerde olursun.</p>
-        <span class="ps-time">aylık · sürekli</span>
+        <div class="ps-foot">
+          <span class="ps-time">aylık · sürekli</span>
+          <a class="ps-more" href="/tr/blog/not-in-google/">Bu neden oluyor</a>
+        </div>
       </div>
 
       <div class="ps-card fade-up d2">
@@ -1442,7 +1503,10 @@
       <div class="ps-card fade-up d3">
         <p class="ps-quote">İki yıldır aklımda bir uygulama fikri var ve nereden başlayacağımı bilmiyorum.</p>
         <p class="ps-answer">Onu ilk taslaktan gerçek insanların kurabileceği bir şeye taşırız — ve ona servet harcamadan önce çalıştığını görürsün.</p>
-        <span class="ps-time">4–6 hafta</span>
+        <div class="ps-foot">
+          <span class="ps-time">4–6 hafta</span>
+          <a class="ps-more" href="/tr/product/">Ürünleri nasıl yapıyoruz</a>
+        </div>
       </div>
 
     </div>
@@ -1462,7 +1526,10 @@
 
     <div class="projects-grid">
 
-      <a href="https://nextcargo.eu" target="_blank" rel="noopener noreferrer" class="proj-card fade-up d1 tilt">
+      <!-- These three used to point straight at the client's own domain, which meant the
+           portfolio's job was to send visitors away. Now they open the case, and the live
+           link sits at the bottom of it. -->
+      <a href="/tr/cases/nextcargo/" class="proj-card fade-up d1 tilt">
         <div class="proj-thumb pt-nextcargo">
           <img class="proj-logo pl-nextcargo" src="/images/nextcargo.webp" alt="nextcargo.eu logo"
                width="300" height="300" loading="lazy" decoding="async">
@@ -1478,13 +1545,13 @@
             <span class="tag">Production</span>
           </div>
           <span class="proj-link">
-            <span>Siteyi ziyaret et</span>
+            <span>Vakayı oku</span>
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </span>
         </div>
       </a>
 
-      <a href="https://birklik.az" target="_blank" rel="noopener noreferrer" class="proj-card fade-up d2 tilt">
+      <a href="/tr/cases/birklik/" class="proj-card fade-up d2 tilt">
         <div class="proj-thumb pt-birklik">
           <img class="proj-logo pl-birklik" src="/images/birklik.webp" alt="birklik.az logo"
                width="700" height="467" loading="lazy" decoding="async">
@@ -1502,7 +1569,7 @@
             <span class="tag">Capacitor</span>
           </div>
           <span class="proj-link">
-            <span>Siteyi ziyaret et</span>
+            <span>Vakayı oku</span>
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </span>
         </div>
@@ -1512,7 +1579,7 @@
 
     <div class="projects-grid small-grid">
 
-      <div class="proj-card fade-up d3 tilt">
+      <a href="/tr/cases/yodin/" class="proj-card fade-up d3 tilt">
         <div class="proj-thumb pt-yodin">
           <img class="proj-logo pl-yodin" src="/images/yodin.webp" alt="yOdin logo"
                width="280" height="280" loading="lazy" decoding="async">
@@ -1529,9 +1596,12 @@
             <span class="tag">Docker</span>
             <span class="tag">Dart</span>
           </div>
-          <span class="proj-link" style="opacity:0.45;cursor:default">Geliştiriliyor</span>
+          <span class="proj-link">
+            <span>Vakayı oku</span>
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
         </div>
-      </div>
+      </a>
 
     </div>
   </div>
@@ -1658,6 +1728,9 @@
           <li class="sc-outcome">Sadece mavi bağlantılarda değil, ChatGPT ve Google AI yanıtlarında da adın geçer.</li>
           <li class="sc-outcome">Her ay tek bir sayı: kaç kişi seni buldu ve kaçı iletişime geçti.</li>
         </ul>
+        <p class="sc-more">
+          <a href="/tr/blog/google-answers-now/">Yanıt motorları kimi anacağına nasıl karar verir</a>
+        </p>
         <div class="sc-title">İlgilendiklerimiz</div>
         <div class="sc-tags">
           <span class="sc-tag">Google Business Profile</span>
@@ -1713,7 +1786,9 @@
         <div class="price-name">Platform veya pazar yeri</div>
         <div class="price-amount">€3000'den</div>
         <div class="price-time">6 haftadan</div>
-        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>İletişime geç</a>
+        <!-- the one price card that does NOT open the form: at this size the visitor has
+             questions the home page deliberately no longer answers -->
+        <a href="/tr/product/" class="btn btn-primary">Nasıl yaptığımıza bak</a>
       </div>
     </div>
 
@@ -1730,6 +1805,9 @@
     </div>
 
     <div class="pricing-note fade-up">Buradaki her rakam bir başlangıç noktası. 30 dakikalık bir görüşmeden sonra, 48 saat içinde kesin fiyatı ve kesin tarihi yazılı olarak alırsın.</div>
+    <p class="pricing-more fade-up">
+      <a href="/tr/blog/what-a-website-costs/">Aynı brief neden 400 € ve 4000 € olarak dönüyor</a>
+    </p>
   </div>
 </section>
 
@@ -1793,7 +1871,10 @@
     <div class="faq-list">
       <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span>Web sitesi ne kadar?</span><span class="faq-icon"></span></button>
-        <div class="faq-a"><p>Web siteleri 390 €'dan (kartvizit) ve 690 €'dan (online rezervasyonlu) başlar. Online mağaza 1090 €'dan, mobil uygulama 1400 €'dan, tam bir platform 3000 €'dan. Kesin fiyatı ve tarihi ilk görüşmeden sonraki 48 saat içinde alırsın — gizli maliyet yok.</p></div>
+        <div class="faq-a">
+          <p>Web siteleri 390 €'dan (kartvizit) ve 690 €'dan (online rezervasyonlu) başlar. Online mağaza 1090 €'dan, mobil uygulama 1400 €'dan, tam bir platform 3000 €'dan. Kesin fiyatı ve tarihi ilk görüşmeden sonraki 48 saat içinde alırsın — gizli maliyet yok.</p>
+          <p class="faq-more"><a href="/tr/blog/what-a-website-costs/">Teklifler arasındaki fark gerçekte ne satın alıyor</a></p>
+        </div>
       </div>
       <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span>Ne kadar sürer?</span><span class="faq-icon"></span></button>
@@ -1814,6 +1895,10 @@
       <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span>Sonra değişiklik gerekirse?</span><span class="faq-icon"></span></button>
         <div class="faq-a"><p>Sorun değil. Küçük düzenlemeler kolaydır; sürekli işler (yeni özellikler, SEO/ASO) için baştan net bir ücret belirleriz. Asla takılıp kalmazsın.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span>Hangi dilde çalışacağız?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p>Bu sayfanın üstünde seçtiğin beş dilden hangisiyse onda. E-postalar, brief, güncellemeler ve kendi sitendeki metinler — hepsi senin dilinde. Bizim rahatımız için İngilizceye geçmek zorunda kalmazsın.</p></div>
       </div>
       <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span>Nasıl başlıyoruz?</span><span class="faq-icon"></span></button>
@@ -1892,6 +1977,8 @@
   <div class="container">
     <div class="footer-inner">
       <span class="ft">© 2026 OnlyMaxon Studio. Tüm hakları saklıdır.</span>
+      <span class="ft"><a href="/tr/blog/">Blog</a></span>
+      <span class="ft"><a href="/tr/privacy/">Gizlilik</a></span>
       <span class="ft">🌍 Beş dil · Tüm dünyada çalışıyoruz</span>
     </div>
   </div>
@@ -1912,8 +1999,26 @@
              aria-hidden="true" style="display:none !important">
       <input type="text"  name="name"  required  placeholder="Adın">
       <input type="email" name="email" required placeholder="E-postan">
+      <!-- Asks about the job, not the budget. The prices are already on this page, so
+           "how much do you want to spend?" would only invite someone to anchor themselves
+           below a number they have just read. The values stay in English so the inbox is
+           filterable whichever of the five languages the visitor wrote in. -->
+      <select name="need" required>
+        <option value="" disabled selected>Neye ihtiyacın var?</option>
+        <option value="business-card">Kartvizit web sitesi</option>
+        <option value="booking">Online rezervasyonlu site</option>
+        <option value="shop">Online mağaza</option>
+        <option value="app">Mobil uygulama</option>
+        <option value="platform">Platform veya pazar yeri</option>
+        <option value="seo">SEO — bulunmak için</option>
+        <option value="unsure">Henüz emin değilim</option>
+      </select>
       <textarea name="message" required placeholder="Projeni ve neden bizimle çalışmak istediğini anlat…"></textarea>
       <button type="submit" class="btn btn-primary">Gönder</button>
+      <p class="modal-privacy">
+        <span>Bilgilerin bize gelir, başka hiçbir yere gitmez.</span>
+        <a href="/tr/privacy/">Onları nasıl işliyoruz</a>
+      </p>
       <div class="modal-status" id="modalStatus" role="status" aria-live="polite"
            data-ok="Teşekkürler! Yakında size döneceğiz."
            data-err="Bir şeyler ters gitti — lütfen hello@onlymaxon.com adresine yazın"></div>
@@ -2145,6 +2250,15 @@
     });
   }
 </script>
+
+<!-- Cloudflare Web Analytics. Installed by hand rather than through Cloudflare's automatic
+     injection: that only rewrites responses passing through Cloudflare's proxy, and this
+     site is served straight off GitHub Pages, so the automatic setup silently measured
+     nothing. type="module" defers it, so it never competes with first paint. Cookieless
+     and unable to distinguish one visitor from another — which is why /privacy/ can still
+     say this site asks you to accept nothing. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
 
 </body>
 </html>

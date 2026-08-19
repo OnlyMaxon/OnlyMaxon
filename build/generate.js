@@ -41,6 +41,83 @@ const PAGES = [
     faq: true,
     priority: { source: '1.0', translated: '0.9' },
   },
+  {
+    path: 'product',
+    titleKey: 'prMetaTitle',
+    descKey: 'prMetaDesc',
+    faq: false,
+    priority: { source: '0.9', translated: '0.8' },
+  },
+  {
+    path: 'blog',
+    titleKey: 'blMetaTitle',
+    descKey: 'blMetaDesc',
+    faq: false,
+    priority: { source: '0.8', translated: '0.7' },
+  },
+  {
+    path: 'blog/not-in-google',
+    titleKey: 'b1MetaTitle',
+    descKey: 'b1MetaDesc',
+    faq: false,
+    article: true,
+    priority: { source: '0.7', translated: '0.6' },
+  },
+  {
+    path: 'blog/what-a-website-costs',
+    titleKey: 'b2MetaTitle',
+    descKey: 'b2MetaDesc',
+    faq: false,
+    article: true,
+    priority: { source: '0.7', translated: '0.6' },
+  },
+  {
+    path: 'blog/google-answers-now',
+    titleKey: 'b3MetaTitle',
+    descKey: 'b3MetaDesc',
+    faq: false,
+    article: true,
+    priority: { source: '0.7', translated: '0.6' },
+  },
+  {
+    path: 'blog/website-or-instagram',
+    titleKey: 'b4MetaTitle',
+    descKey: 'b4MetaDesc',
+    faq: false,
+    article: true,
+    priority: { source: '0.7', translated: '0.6' },
+  },
+  {
+    path: 'cases/nextcargo',
+    titleKey: 'c1MetaTitle',
+    descKey: 'c1MetaDesc',
+    faq: false,
+    article: true,
+    priority: { source: '0.8', translated: '0.7' },
+  },
+  {
+    path: 'cases/birklik',
+    titleKey: 'c2MetaTitle',
+    descKey: 'c2MetaDesc',
+    faq: false,
+    article: true,
+    priority: { source: '0.8', translated: '0.7' },
+  },
+  {
+    path: 'cases/yodin',
+    titleKey: 'c3MetaTitle',
+    descKey: 'c3MetaDesc',
+    faq: false,
+    article: true,
+    priority: { source: '0.8', translated: '0.7' },
+  },
+  {
+    path: 'privacy',
+    titleKey: 'ppMetaTitle',
+    descKey: 'ppMetaDesc',
+    faq: false,
+    priority: { source: '0.3', translated: '0.3' },
+  },
 ];
 
 const translations = require('./translations.js');
@@ -76,6 +153,29 @@ for (const page of PAGES) {
     if (!translations['faq' + i + 'A']) fail(`${page.src}: faq${i}Q has no matching faq${i}A`);
   }
 }
+
+// English lives in two places at once — inline in the page source, which is what visitors
+// actually read, and as the .en entry in translations.js, which is what the "still
+// English" guard below compares against. Nothing kept them in step: editing only the
+// translation left the English page saying one thing and the other four saying another,
+// silently, because no substitution ever runs on English.
+// Entities are decoded before comparing: the page has to write "&amp;" where the
+// translation quite reasonably just writes "&", and that is not a drift.
+const norm = s => s
+  .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+  .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
+  .replace(/\s+/g, ' ').trim();
+const drift = [];
+for (const page of PAGES) {
+  for (const m of page.source.matchAll(/(<([a-z0-9]+)[^>]*\bdata-i18n="(\w+)"[^>]*>)([\s\S]*?)(<\/\2>)/g)) {
+    const [, , , key, inline] = m;
+    if (!translations[key]) continue;                 // reported as missing below
+    if (norm(inline) !== norm(translations[key].en || '')) {
+      drift.push(`${key} (${page.src})\n      page: ${norm(inline)}\n      .en : ${norm(translations[key].en || '')}`);
+    }
+  }
+}
+if (drift.length) fail(`English source and translations.en disagree:\n    ` + drift.join('\n    '));
 
 const usedKeys = new Set(PAGES.flatMap(p => [...p.keys]));
 
@@ -148,6 +248,13 @@ function build(page, lang) {
     /(<a href=")[^"]*(" class="lang-chip[^"]*" data-lang="(\w\w)")/g,
     (m, a, b, l) => a + href(l, page.path) + b);
 
+  // 5b. cross-page links. Any <a> carrying data-page="<path>" is pointed at the current
+  //     language's copy of that page — otherwise the footer's privacy link would drop a
+  //     Polish reader onto the English text. Runs after the text substitutions above, so
+  //     links that arrive inside a translated string are rewritten too.
+  html = html.replace(/<a\b[^>]*\bdata-page="([\w/-]*)"[^>]*>/g, (tag, p) =>
+    tag.replace(/\bhref="[^"]*"/, `href="${href(lang, p)}"`));
+
   // 6. relative asset paths — the page now lives at least one directory deeper
   html = html.replace(/(href|src)="images\//g, '$1="/images/');
 
@@ -186,6 +293,18 @@ function build(page, lang) {
     /("description": ")[^"]*(",\n    "sameAs")/,
     (m, a, b) => a + summary.replace(/"/g, '\\"') + b);
 
+  // A blog post carries BlogPosting data whose headline and description have to follow the
+  // translation, or every language would be handed the English one — and an article the
+  // AI engines cannot read in the visitor's language is the whole point missed.
+  if (page.article) {
+    for (const [field, value] of [['headline', tagline], ['description', summary]]) {
+      const re = new RegExp(`("${field}": ")[^"]*(")`);
+      if (!re.test(html)) fail(`${page.src}: BlogPosting "${field}" not found`);
+      html = html.replace(re, `$1${value.replace(/"/g, '\\"')}$2`);
+    }
+    html = html.replace(/("mainEntityOfPage": ")[^"]*(")/, `$1${url(lang, page.path)}$2`);
+  }
+
   if (page.faq) {
     // Read the questions in the order they appear on the page rather than from a
     // hard-coded list — adding a question to the source used to leave it out of the rich
@@ -220,6 +339,7 @@ function build(page, lang) {
   if (!anchors.length) fail(`${lang} ${page.src}: i18n anchors vanished before substitution finished`);
   const saved = anchors.reduce((n, a) => n + a.length, 0);
   html = html.replace(anchorRe, '');
+  html = html.replace(/\sdata-page="[\w/-]*"/g, '');   // build-only, same as the anchors
 
   const dir = path.join(ROOT, lang, page.path);
   fs.mkdirSync(dir, { recursive: true });

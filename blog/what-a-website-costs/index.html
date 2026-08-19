@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!--
+  ENGLISH SOURCE OF TRUTH for /blog/what-a-website-costs/.
+
+      node build/generate.js
+
+  Written by scratchpad/makearticles.js so every article shares one presentation layer and
+  every English string comes from build/translations.js. Edit the copy there, not here.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnlyMaxon — What does a website actually cost?</title>
+  <meta name="description" content="The same brief comes back at €400 and at €4000. Here is what the difference actually buys, and the costs nobody puts in the quote.">
+  <link rel="canonical" href="https://onlymaxon.com/blog/what-a-website-costs/">
+  <link rel="alternate" hreflang="en" href="https://onlymaxon.com/blog/what-a-website-costs/">
+  <link rel="alternate" hreflang="pl" href="https://onlymaxon.com/pl/blog/what-a-website-costs/">
+  <link rel="alternate" hreflang="ru" href="https://onlymaxon.com/ru/blog/what-a-website-costs/">
+  <link rel="alternate" hreflang="tr" href="https://onlymaxon.com/tr/blog/what-a-website-costs/">
+  <link rel="alternate" hreflang="es" href="https://onlymaxon.com/es/blog/what-a-website-costs/">
+  <link rel="alternate" hreflang="x-default" href="https://onlymaxon.com/blog/what-a-website-costs/">
+  <meta name="theme-color" content="#06080C">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/png" href="/images/icon.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="OnlyMaxon">
+  <meta property="og:title" content="OnlyMaxon — What does a website actually cost?">
+  <meta property="og:description" content="The same brief comes back at €400 and at €4000. Here is what the difference actually buys, and the costs nobody puts in the quote.">
+  <meta property="og:url" content="https://onlymaxon.com/blog/what-a-website-costs/">
+  <meta property="og:image" content="https://onlymaxon.com/images/logo.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OnlyMaxon — What does a website actually cost?">
+  <meta name="twitter:description" content="The same brief comes back at €400 and at €4000. Here is what the difference actually buys, and the costs nobody puts in the quote.">
+  <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "What does a website actually cost?",
+    "description": "The same brief comes back at €400 and at €4000. Here is what the difference actually buys, and the costs nobody puts in the quote.",
+    "datePublished": "2026-08-19",
+    "dateModified": "2026-08-19",
+    "inLanguage": "en",
+    "mainEntityOfPage": "https://onlymaxon.com/blog/what-a-website-costs/",
+    "author": { "@type": "Organization", "name": "OnlyMaxon", "url": "https://onlymaxon.com" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "OnlyMaxon",
+      "logo": { "@type": "ImageObject", "url": "https://onlymaxon.com/images/logo.jpg" }
+    }
+  }
+  </script>
+
+  <style>
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/space-grotesk-700-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
+      --border: rgba(255,255,255,0.07); --border-h: rgba(34,211,238,0.40);
+      --blue: #22D3EE; --blue-d: rgba(34,211,238,0.14);
+      --text: #EAF2F6; --text-d: #93A6B2; --text-m: #4C5C68;
+    }
+    html { overflow-x: hidden; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif; line-height: 1.75;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+    ::selection { background: rgba(34,211,238,0.28); color: #fff; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 28px; width: 100%; }
+
+    header { border-bottom: 1px solid var(--border); padding: 20px 0; }
+    .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: var(--text); text-decoration: none; letter-spacing: -0.5px; }
+    .brand span { color: var(--blue); }
+
+    .lang-dd { position: relative; }
+    .lang-dd-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text-d); font-family: inherit;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.3px;
+      padding: 7px 11px; border-radius: 9px; cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .lang-dd-btn:hover { color: var(--text); border-color: var(--border-h); }
+    .lang-dd-btn > svg { width: 15px; height: 15px; }
+    .lang-dd-btn .chev { width: 11px; height: 11px; opacity: 0.7; transition: transform 0.2s; }
+    .lang-dd.open .lang-dd-btn .chev { transform: rotate(180deg); }
+    .lang-dd-menu {
+      position: absolute; top: calc(100% + 8px); right: 0;
+      min-width: 152px; list-style: none;
+      background: rgba(11,15,22,0.98);
+      -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 6px; z-index: 120;
+      opacity: 0; visibility: hidden; transform: translateY(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    }
+    .lang-dd.open .lang-dd-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .lang-dd-menu a { display: block; text-decoration: none; color: var(--text-d); font-size: 14px; font-weight: 500; padding: 9px 12px; border-radius: 8px; transition: background-color 0.15s, color 0.15s; }
+    .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
+    .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
+
+    main { flex: 1; padding: 56px 0 90px; }
+    .back { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--text-d); text-decoration: none; margin-bottom: 26px; transition: color 0.2s, gap 0.2s; }
+    .back::before { content: '←'; }
+    .back:hover { color: var(--blue); gap: 11px; }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(28px, 4.6vw, 40px); line-height: 1.15; letter-spacing: -1.4px; margin-bottom: 12px; }
+    .meta { font-size: 13px; color: var(--text-m); margin-bottom: 34px; }
+    .lede {
+      font-size: 17px; color: var(--text-d);
+      padding: 20px 24px; margin-bottom: 44px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-left: 2px solid var(--blue); border-radius: 12px;
+    }
+    section { margin-bottom: 36px; }
+    h2 {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+      font-size: 20px; line-height: 1.3; margin-bottom: 12px;
+      display: flex; align-items: baseline; gap: 12px;
+    }
+    h2::before { content: counter(sec, decimal-leading-zero); font-size: 13px; font-weight: 700; color: var(--blue); letter-spacing: 1px; flex-shrink: 0; }
+    main { counter-reset: sec; }
+    section { counter-increment: sec; }
+    p { color: var(--text-d); font-size: 16px; }
+    p + p { margin-top: 12px; }
+    strong { color: var(--text); font-weight: 600; }
+    main a { color: var(--blue); text-decoration: none; }
+    main a:hover { text-decoration: underline; }
+
+    .cta-band { margin-top: 48px; text-align: center; background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 32px 28px; }
+    .cta-band h2 { font-size: 22px; justify-content: center; margin-bottom: 10px; }
+    .cta-band h2::before { content: none; }
+    .cta-band p { font-size: 15px; margin-bottom: 22px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue); color: #04141A; text-decoration: none;
+      padding: 13px 28px; border-radius: 11px; font-size: 15px; font-weight: 600;
+      box-shadow: 0 4px 28px rgba(34,211,238,0.35);
+      transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .btn:hover { background: #5FE6F2; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(34,211,238,0.5); }
+
+    footer { border-top: 1px solid var(--border); padding: 26px 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .ft { font-size: 13px; color: var(--text-m); }
+    .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
+    .ft a:hover { color: var(--blue); }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      main { padding: 40px 0 64px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; } }
+  </style>
+
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="head-inner">
+      <a href="/" class="brand" data-page="">OnlyMaxon<span>.</span></a>
+      <div class="lang-dd" id="langDD">
+        <button type="button" class="lang-dd-btn" id="langDDBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
+          <span id="langDDCur">EN</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <ul class="lang-dd-menu" role="listbox">
+          <li><a role="option" data-lang="pl" hreflang="pl" href="/pl/blog/what-a-website-costs/">Polski</a></li>
+          <li><a role="option" data-lang="ru" hreflang="ru" href="/ru/blog/what-a-website-costs/">Русский</a></li>
+          <li><a role="option" data-lang="en" hreflang="en" href="/blog/what-a-website-costs/" class="active">English</a></li>
+          <li><a role="option" data-lang="tr" hreflang="tr" href="/tr/blog/what-a-website-costs/">Türkçe</a></li>
+          <li><a role="option" data-lang="es" hreflang="es" href="/es/blog/what-a-website-costs/">Español</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <a class="back" href="/blog/" data-page="blog" data-i18n="b1Back">All articles</a>
+
+    <h1 data-i18n="b2H1">What does a website actually cost, and why do quotes differ tenfold?</h1>
+    <p class="meta">2026-08-19 · <span data-i18n="blReadTime">4 min read</span></p>
+
+    <p class="lede" data-i18n-html="b2Lede">The same brief comes back at €400 and at €4000, and neither is necessarily a scam. <strong>Here is what the difference actually buys</strong> — and the costs that appear in neither quote.</p>
+
+    <section>
+      <h2 data-i18n="b2S1T">Why the same brief comes back at €400 and €4000</h2>
+      <p data-i18n-html="b2S1B">The cheap quote is usually a template with your logo dropped into it. The expensive one is usually an agency where a project manager, a designer and a developer each bill their hours to your invoice. <strong>Both produce a website. Only one of them produced it for you.</strong></p>
+      <p data-i18n-html="b2S1C">The honest middle is a small studio: no template, and no layer of managers between you and the person writing the code. That is where most good small-business work actually gets done.</p>
+    </section>
+
+    <section>
+      <h2 data-i18n="b2S2T">What you are actually paying for</h2>
+      <p data-i18n-html="b2S2B">Four things, always: the design, the code, the words and photos, and the setup — domain, hosting, mail, search. <strong>A quote that says only "website" has hidden three of the four.</strong></p>
+      <p data-i18n-html="b2S2C">Ask which of the four are included. The gap between €400 and €4000 is usually sitting right there, and one question brings it into the open.</p>
+    </section>
+
+    <section>
+      <h2 data-i18n="b2S3T">The costs that never appear in the quote</h2>
+      <p data-i18n-html="b2S3B">The domain, roughly €10–15 a year. Hosting, from nothing to about €10 a month for a small site. A booking system or card payments may carry their own monthly fee.</p>
+      <p data-i18n-html="b2S3C">None of these are large. They are permanent, though — and finding out about them after launch is how a good project turns into a bad memory.</p>
+    </section>
+
+    <section>
+      <h2 data-i18n="b2S4T">Cheap gets paid for twice</h2>
+      <p data-i18n-html="b2S4B">A template site costs less on day one and more on day sixty, when you need the one thing it was not built to do. You then pay a second time to have it done properly.</p>
+      <p data-i18n-html="b2S4C">This is not an argument for expensive. It is an argument for asking what happens when you need a change — <strong>before you sign, not after.</strong></p>
+    </section>
+
+    <section>
+      <h2 data-i18n="b2S5T">Four questions before you sign</h2>
+      <p data-i18n-html="b2S5B">Who owns the code and the accounts when it is finished? What is the exact price and the exact date? What is deliberately not included? And what does a change cost after launch?</p>
+      <p data-i18n-html="b2S5C">Anyone who answers all four in writing is worth working with. <strong>Anyone who answers "it depends" to all four is quoting you a number they intend to revise.</strong></p>
+    </section>
+
+    <div class="cta-band">
+      <h2 data-i18n="b2CtaTitle">Want the number for your case?</h2>
+      <p data-i18n-html="b2CtaDesc">Our prices are on the site, in the open. After a 30-minute call you get the exact figure and the exact date in writing, within 48 hours.</p>
+      <a class="btn" href="/" data-page="" data-i18n="blCtaBtn">Talk to us</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="ft" data-i18n="footerCopyright">© 2026 OnlyMaxon Studio. All rights reserved.</span>
+      <span class="ft"><a href="/privacy/" data-page="privacy" data-i18n="footerPrivacy">Privacy</a></span>
+      <span class="ft"><a href="/blog/" data-page="blog" data-i18n="b1Back">All articles</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const langDD    = document.getElementById('langDD');
+  const langDDBtn = document.getElementById('langDDBtn');
+  langDDBtn.addEventListener('click', ev => {
+    ev.stopPropagation();
+    langDDBtn.setAttribute('aria-expanded', langDD.classList.toggle('open'));
+  });
+  document.addEventListener('click', ev => {
+    if (!langDD.contains(ev.target)) {
+      langDD.classList.remove('open');
+      langDDBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  langDD.querySelectorAll('a[data-lang]').forEach(a => {
+    a.addEventListener('click', () => {
+      try { localStorage.setItem('om_lang', a.dataset.lang); } catch (e) {}
+    });
+  });
+</script>
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
+
+</body>
+</html>

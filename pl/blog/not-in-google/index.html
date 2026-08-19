@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<!--
+  ENGLISH SOURCE OF TRUTH for /blog/not-in-google/.
+
+      node build/generate.js
+
+  Written to be quotable, not to rank on keyword density: short declarative sentences,
+  one idea per heading, numbers left in, and the free fix named out loud instead of held
+  back as bait. An answer engine can lift any single section of this and have it still be
+  true, which is the whole reason the article exists.
+-->
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnlyMaxon — Dlaczego ludzie nie mogą znaleźć mojej firmy w Google?</title>
+  <meta name="description" content="Pięć powodów, dla których małej firmy nie widać w Google, w kolejności, która naprawdę ma znaczenie — i jedna poprawka, która nic nie kosztuje i zajmuje popołudnie.">
+  <link rel="canonical" href="https://onlymaxon.com/pl/blog/not-in-google/">
+  <link rel="alternate" hreflang="en" href="https://onlymaxon.com/blog/not-in-google/">
+  <link rel="alternate" hreflang="pl" href="https://onlymaxon.com/pl/blog/not-in-google/">
+  <link rel="alternate" hreflang="ru" href="https://onlymaxon.com/ru/blog/not-in-google/">
+  <link rel="alternate" hreflang="tr" href="https://onlymaxon.com/tr/blog/not-in-google/">
+  <link rel="alternate" hreflang="es" href="https://onlymaxon.com/es/blog/not-in-google/">
+  <link rel="alternate" hreflang="x-default" href="https://onlymaxon.com/blog/not-in-google/">
+  <meta name="theme-color" content="#06080C">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/png" href="/images/icon.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="OnlyMaxon">
+  <meta property="og:title" content="OnlyMaxon — Dlaczego ludzie nie mogą znaleźć mojej firmy w Google?">
+  <meta property="og:description" content="Pięć powodów, dla których małej firmy nie widać w Google, w kolejności, która naprawdę ma znaczenie — i jedna poprawka, która nic nie kosztuje i zajmuje popołudnie.">
+  <meta property="og:url" content="https://onlymaxon.com/pl/blog/not-in-google/">
+  <meta property="og:image" content="https://onlymaxon.com/images/logo.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OnlyMaxon — Dlaczego ludzie nie mogą znaleźć mojej firmy w Google?">
+  <meta name="twitter:description" content="Pięć powodów, dla których małej firmy nie widać w Google, w kolejności, która naprawdę ma znaczenie — i jedna poprawka, która nic nie kosztuje i zajmuje popołudnie.">
+  <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Dlaczego ludzie nie mogą znaleźć mojej firmy w Google?",
+    "description": "Pięć powodów, dla których małej firmy nie widać w Google, w kolejności, która naprawdę ma znaczenie — i jedna poprawka, która nic nie kosztuje i zajmuje popołudnie.",
+    "datePublished": "2026-08-19",
+    "dateModified": "2026-08-19",
+    "inLanguage": "en",
+    "mainEntityOfPage": "https://onlymaxon.com/pl/blog/not-in-google/",
+    "author": { "@type": "Organization", "name": "OnlyMaxon", "url": "https://onlymaxon.com" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "OnlyMaxon",
+      "logo": { "@type": "ImageObject", "url": "https://onlymaxon.com/images/logo.jpg" }
+    }
+  }
+  </script>
+
+  <style>
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/space-grotesk-700-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
+      --border: rgba(255,255,255,0.07); --border-h: rgba(34,211,238,0.40);
+      --blue: #22D3EE; --blue-d: rgba(34,211,238,0.14);
+      --text: #EAF2F6; --text-d: #93A6B2; --text-m: #4C5C68;
+    }
+    html { overflow-x: hidden; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif; line-height: 1.75;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+    ::selection { background: rgba(34,211,238,0.28); color: #fff; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 28px; width: 100%; }
+
+    header { border-bottom: 1px solid var(--border); padding: 20px 0; }
+    .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: var(--text); text-decoration: none; letter-spacing: -0.5px; }
+    .brand span { color: var(--blue); }
+
+    .lang-dd { position: relative; }
+    .lang-dd-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text-d); font-family: inherit;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.3px;
+      padding: 7px 11px; border-radius: 9px; cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .lang-dd-btn:hover { color: var(--text); border-color: var(--border-h); }
+    .lang-dd-btn > svg { width: 15px; height: 15px; }
+    .lang-dd-btn .chev { width: 11px; height: 11px; opacity: 0.7; transition: transform 0.2s; }
+    .lang-dd.open .lang-dd-btn .chev { transform: rotate(180deg); }
+    .lang-dd-menu {
+      position: absolute; top: calc(100% + 8px); right: 0;
+      min-width: 152px; list-style: none;
+      background: rgba(11,15,22,0.98);
+      -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 6px; z-index: 120;
+      opacity: 0; visibility: hidden; transform: translateY(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    }
+    .lang-dd.open .lang-dd-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .lang-dd-menu a { display: block; text-decoration: none; color: var(--text-d); font-size: 14px; font-weight: 500; padding: 9px 12px; border-radius: 8px; transition: background-color 0.15s, color 0.15s; }
+    .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
+    .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
+
+    main { flex: 1; padding: 56px 0 90px; }
+    .back { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--text-d); text-decoration: none; margin-bottom: 26px; transition: color 0.2s, gap 0.2s; }
+    .back::before { content: '←'; }
+    .back:hover { color: var(--blue); gap: 11px; }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(28px, 4.6vw, 40px); line-height: 1.15; letter-spacing: -1.4px; margin-bottom: 12px; }
+    .meta { font-size: 13px; color: var(--text-m); margin-bottom: 34px; }
+    .lede {
+      font-size: 17px; color: var(--text-d);
+      padding: 20px 24px; margin-bottom: 44px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-left: 2px solid var(--blue); border-radius: 12px;
+    }
+    section { margin-bottom: 36px; }
+    h2 {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+      font-size: 20px; line-height: 1.3; margin-bottom: 12px;
+      display: flex; align-items: baseline; gap: 12px;
+    }
+    h2::before { content: counter(sec, decimal-leading-zero); font-size: 13px; font-weight: 700; color: var(--blue); letter-spacing: 1px; flex-shrink: 0; }
+    main { counter-reset: sec; }
+    section { counter-increment: sec; }
+    p { color: var(--text-d); font-size: 16px; }
+    p + p { margin-top: 12px; }
+    strong { color: var(--text); font-weight: 600; }
+    main a { color: var(--blue); text-decoration: none; }
+    main a:hover { text-decoration: underline; }
+
+    .cta-band { margin-top: 48px; text-align: center; background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 32px 28px; }
+    .cta-band h2 { font-size: 22px; justify-content: center; margin-bottom: 10px; }
+    .cta-band h2::before { content: none; }
+    .cta-band p { font-size: 15px; margin-bottom: 22px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue); color: #04141A; text-decoration: none;
+      padding: 13px 28px; border-radius: 11px; font-size: 15px; font-weight: 600;
+      box-shadow: 0 4px 28px rgba(34,211,238,0.35);
+      transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .btn:hover { background: #5FE6F2; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(34,211,238,0.5); }
+
+    footer { border-top: 1px solid var(--border); padding: 26px 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .ft { font-size: 13px; color: var(--text-m); }
+    .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
+    .ft a:hover { color: var(--blue); }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      main { padding: 40px 0 64px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="head-inner">
+      <a href="/pl/" class="brand">OnlyMaxon<span>.</span></a>
+      <div class="lang-dd" id="langDD">
+        <button type="button" class="lang-dd-btn" id="langDDBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
+          <span id="langDDCur">PL</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <ul class="lang-dd-menu" role="listbox">
+          <li><a role="option" data-lang="pl" hreflang="pl" href="/pl/blog/not-in-google/" class="active">Polski</a></li>
+          <li><a role="option" data-lang="ru" hreflang="ru" href="/ru/blog/not-in-google/">Русский</a></li>
+          <li><a role="option" data-lang="en" hreflang="en" href="/blog/not-in-google/">English</a></li>
+          <li><a role="option" data-lang="tr" hreflang="tr" href="/tr/blog/not-in-google/">Türkçe</a></li>
+          <li><a role="option" data-lang="es" hreflang="es" href="/es/blog/not-in-google/">Español</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <a class="back" href="/pl/blog/">Wszystkie artykuły</a>
+
+    <h1>Dlaczego ludzie nie mogą znaleźć mojej firmy w Google?</h1>
+    <p class="meta">2026-08-19 · <span>4 min czytania</span></p>
+
+    <p class="lede">W dziewięciu przypadkach na dziesięć nie chodzi o stronę, a poprawka nic nie kosztuje. <strong>Najczęstszy powód, dla którego lokalnej firmy nie widać w Google, to brak Profilu Firmy w Google</strong> — darmowej wizytówki, która umieszcza Cię na mapie z godzinami, zdjęciami i przyciskiem „zadzwoń”.</p>
+
+    <section>
+      <h2>Nie masz Profilu Firmy w Google</h2>
+      <p>Kiedy ktoś szuka barbera, mechanika albo salonu paznokci w okolicy, Google pokazuje mapę z trzema firmami ponad wszystkim innym. Te trzy biorą się z Profili Firmy, nie ze stron. <strong>Jeśli go nie masz, nie możesz się tam pojawić w ogóle</strong> — niezależnie od tego, jak dobra jest Twoja strona.</p>
+      <p>Założenie go jest darmowe i zajmuje jakieś dwadzieścia minut. Potem Google wysyła na Twój adres kartkę z kodem, żeby potwierdzić, że naprawdę tam jesteś. Na tej weryfikacji ludzie się poddają — i to właśnie ona ma znaczenie.</p>
+    </section>
+
+    <section>
+      <h2>Masz prawie zero opinii</h2>
+      <p>Spośród dwóch firm w tej samej odległości Google pokazuje tę z większą liczbą opinii. To najsilniejsza dźwignia, jaką ma lokalna firma, i <strong>jedyna rzecz, której konkurent nie skopiuje Ci z dnia na dzień.</strong></p>
+      <p>Pytaj każdego klienta, nie tylko zadowolonych. Filtrowanie — proszenie o opinię tylko wtedy, gdy ktoś wygląda na zadowolonego — łamie zasady Google i może skończyć się usunięciem opinii. Wiadomość godzinę po wizycie albo kod QR przy kasie w zupełności wystarczy.</p>
+    </section>
+
+    <section>
+      <h2>Twoje dane nie zgadzają się między sobą</h2>
+      <p>Twoja nazwa, adres i telefon są na stronie, na Facebooku, w katalogach. Jeśli się różnią — tu stary numer, tam skrócona nazwa ulicy — Google mniej wierzy, że firma jest prawdziwa, a mniej wiarygodne firmy są niżej.</p>
+      <p>Zapisz te trzy rzeczy raz, dokładnie w takiej formie, w jakiej mają wyglądać, i dopilnuj, żeby wszędzie zgadzały się co do znaku.</p>
+    </section>
+
+    <section>
+      <h2>Twoja strona nigdzie nie mówi, gdzie jesteś</h2>
+      <p>Zaskakująco dużo stron małych firm nigdy nie wymienia własnego miasta. Strona mówi „robimy świetne fryzury” i nic poza tym. Google musi zgadywać, komu ją pokazać, a kiedy zgaduje, robi to ostrożnie.</p>
+      <p>Twoje miasto powinno być w tytule strony, w pierwszym nagłówku i w stopce razem z pełnym adresem. To nie upychanie słów kluczowych — to odpowiedź na pytanie, które szukający naprawdę zadał, czyli <strong>„w pobliżu”</strong>.</p>
+    </section>
+
+    <section>
+      <h2>Twoja strona jest nowa i to normalne</h2>
+      <p>Nowa strona potrzebuje tygodni, żeby trafić do indeksu, i miesięcy, żeby wypłynąć na czymkolwiek konkurencyjnym. To jedyny punkt na tej liście, gdzie odpowiedzią jest cierpliwość, a nie działanie.</p>
+      <p>Możesz za to przestać czekać biernie: zgłoś stronę w Google Search Console, a w międzyczasie oprzyj się na Profilu Firmy — wyniki na mapie ruszają dużo szybciej niż niebieskie linki pod nimi.</p>
+    </section>
+
+    <section>
+      <h2>Co więc zrobić najpierw?</h2>
+      <p><strong>Załóż i zweryfikuj Profil Firmy.</strong> To za darmo, zajmuje popołudnie i dla większości lokalnych firm zmienia więcej niż cokolwiek innego z tej listy. Potem zacznij zbierać opinie, a dopiero na końcu martw się stroną.</p>
+      <p>Ktokolwiek mówi Ci, że sama strona sprawi, że Cię znajdą, sprzedaje Ci drugi krok i pomija pierwszy.</p>
+    </section>
+
+    <div class="cta-band">
+      <h2>Chcesz, żebyśmy zrobili to za Ciebie?</h2>
+      <p>Zakładamy profil, podpinamy stronę pod wyszukiwarkę i sprawiamy, że opinie przychodzą same. Od 200 € miesięcznie, rezygnujesz kiedy chcesz.</p>
+      <a class="btn" href="/pl/">Porozmawiajmy</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="ft">© 2026 OnlyMaxon Studio. Wszelkie prawa zastrzeżone.</span>
+      <span class="ft"><a href="/pl/privacy/">Prywatność</a></span>
+      <span class="ft"><a href="/pl/blog/">Wszystkie artykuły</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const langDD    = document.getElementById('langDD');
+  const langDDBtn = document.getElementById('langDDBtn');
+  langDDBtn.addEventListener('click', ev => {
+    ev.stopPropagation();
+    langDDBtn.setAttribute('aria-expanded', langDD.classList.toggle('open'));
+  });
+  document.addEventListener('click', ev => {
+    if (!langDD.contains(ev.target)) {
+      langDD.classList.remove('open');
+      langDDBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  langDD.querySelectorAll('a[data-lang]').forEach(a => {
+    a.addEventListener('click', () => {
+      try { localStorage.setItem('om_lang', a.dataset.lang); } catch (e) {}
+    });
+  });
+</script>
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
+
+</body>
+</html>
