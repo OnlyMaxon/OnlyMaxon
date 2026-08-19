@@ -1,17 +1,5 @@
 <!DOCTYPE html>
-<!--
-  ENGLISH SOURCE OF TRUTH for /blog/.
-  /pl/blog/, /ru/blog/, /tr/blog/, /es/blog/ are generated from it.
-
-      node build/generate.js
-
-  The blog exists for one reason: this studio sells "getting found", including inside AI
-  answers, and had no page an answer engine could quote. Every article answers one
-  question a real client has asked out loud, in plain language, with the numbers left in.
-
-  Article cards are listed newest first by hand — there are few enough of them that a
-  sorting mechanism would cost more than it saves.
--->
+<!-- Generated from build/src/blog/index.html by build/generate.js — do not edit. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -28,18 +16,18 @@
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/images/icon.png">
-
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/space-grotesk-700-latin.woff2">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="OnlyMaxon">
   <meta property="og:title" content="OnlyMaxon — Blog">
-  <meta property="og:description" content="Plain answers to what small business owners actually ask.">
+  <meta property="og:description" content="Plain answers to what small business owners actually ask: why Google can't find you, what a website really costs, and what AI answers changed.">
   <meta property="og:url" content="https://onlymaxon.com/blog/">
   <meta property="og:image" content="https://onlymaxon.com/images/logo.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="OnlyMaxon — Blog">
-  <meta name="twitter:description" content="Plain answers to what small business owners actually ask.">
+  <meta name="twitter:description" content="Plain answers to what small business owners actually ask: why Google can't find you, what a website really costs, and what AI answers changed.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
-
   <style>
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
                  src: url(/fonts/inter-400-latin.woff2) format('woff2');
@@ -65,7 +53,6 @@
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
                  src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
@@ -82,12 +69,10 @@
     ::selection { background: rgba(34,211,238,0.28); color: #fff; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     .container { max-width: 800px; margin: 0 auto; padding: 0 28px; width: 100%; }
-
     header { border-bottom: 1px solid var(--border); padding: 20px 0; }
     .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: var(--text); text-decoration: none; letter-spacing: -0.5px; }
     .brand span { color: var(--blue); }
-
     .lang-dd { position: relative; }
     .lang-dd-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -115,11 +100,9 @@
     .lang-dd-menu a { display: block; text-decoration: none; color: var(--text-d); font-size: 14px; font-weight: 500; padding: 9px 12px; border-radius: 8px; transition: background-color 0.15s, color 0.15s; }
     .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
     .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
-
     main { flex: 1; padding: 64px 0 90px; }
     h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(30px, 5vw, 44px); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 14px; }
     .lede { font-size: 17px; color: var(--text-d); max-width: 620px; margin-bottom: 48px; }
-
     .post-list { display: flex; flex-direction: column; gap: 16px; }
     .post {
       display: block; text-decoration: none;
@@ -135,7 +118,6 @@
     .post-more { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--blue); margin-top: 14px; transition: gap 0.2s; }
     .post-more::after { content: '→'; }
     .post:hover .post-more { gap: 10px; }
-
     .cta-band {
       margin-top: 48px; text-align: center;
       background: var(--bg2); border: 1px solid var(--border);
@@ -151,13 +133,11 @@
       transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
     .btn:hover { background: #5FE6F2; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(34,211,238,0.5); }
-
     footer { border-top: 1px solid var(--border); padding: 26px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
     .ft a:hover { color: var(--blue); }
-
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       main { padding: 44px 0 64px; }
@@ -168,11 +148,10 @@
   </style>
 </head>
 <body>
-
 <header>
   <div class="container">
     <div class="head-inner">
-      <a href="/" class="brand" data-page="">OnlyMaxon<span>.</span></a>
+      <a href="/" class="brand">OnlyMaxon<span>.</span></a>
       <div class="lang-dd" id="langDD">
         <button type="button" class="lang-dd-btn" id="langDDBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
@@ -190,62 +169,52 @@
     </div>
   </div>
 </header>
-
 <main>
   <div class="container">
-    <h1 data-i18n="blTitle">Straight answers</h1>
-    <p class="lede" data-i18n="blLede">Questions clients actually ask us, answered the way we answer them on the phone — without the jargon and without pretending anything is more complicated than it is.</p>
-
+    <h1>Straight answers</h1>
+    <p class="lede">Questions clients actually ask us, answered the way we answer them on the phone — without the jargon and without pretending anything is more complicated than it is.</p>
     <div class="post-list">
-
-      <a class="post" href="/blog/not-in-google/" data-page="blog/not-in-google">
-        <div class="post-meta">2026-08-19 · <span data-i18n="blReadTime">4 min read</span></div>
-        <div class="post-title" data-i18n="b1Title">Why can't people find my business on Google?</div>
-        <p class="post-sum" data-i18n="b1Sum">Five reasons this happens, in the order they actually matter — and the one that fixes most cases in an afternoon, for free.</p>
-        <span class="post-more" data-i18n="blRead">Read</span>
+      <a class="post" href="/blog/not-in-google/">
+        <div class="post-meta">2026-08-19 · <span>4 min read</span></div>
+        <div class="post-title">Why can't people find my business on Google?</div>
+        <p class="post-sum">Five reasons this happens, in the order they actually matter — and the one that fixes most cases in an afternoon, for free.</p>
+        <span class="post-more">Read</span>
       </a>
-
-      <a class="post" href="/blog/what-a-website-costs/" data-page="blog/what-a-website-costs">
-        <div class="post-meta">2026-08-19 · <span data-i18n="blReadTime">4 min read</span></div>
-        <div class="post-title" data-i18n="b2Title">What does a website actually cost, and why do quotes differ tenfold?</div>
-        <p class="post-sum" data-i18n="b2Sum">Neither the €400 quote nor the €4000 one is necessarily a scam. The difference is real — and so are the costs neither of them mentions.</p>
-        <span class="post-more" data-i18n="blRead">Read</span>
+      <a class="post" href="/blog/what-a-website-costs/">
+        <div class="post-meta">2026-08-19 · <span>4 min read</span></div>
+        <div class="post-title">What does a website actually cost, and why do quotes differ tenfold?</div>
+        <p class="post-sum">Neither the €400 quote nor the €4000 one is necessarily a scam. The difference is real — and so are the costs neither of them mentions.</p>
+        <span class="post-more">Read</span>
       </a>
-
-      <a class="post" href="/blog/google-answers-now/" data-page="blog/google-answers-now">
-        <div class="post-meta">2026-08-19 · <span data-i18n="blReadTime">4 min read</span></div>
-        <div class="post-title" data-i18n="b3Title">Google answers now instead of linking. What that means for a small business</div>
-        <p class="post-sum" data-i18n="b3Sum">If the answer at the top does not mention you, that customer never sees you exist — and unlike a lost ranking, nothing in any report tells you it happened.</p>
-        <span class="post-more" data-i18n="blRead">Read</span>
+      <a class="post" href="/blog/google-answers-now/">
+        <div class="post-meta">2026-08-19 · <span>4 min read</span></div>
+        <div class="post-title">Google answers now instead of linking. What that means for a small business</div>
+        <p class="post-sum">If the answer at the top does not mention you, that customer never sees you exist — and unlike a lost ranking, nothing in any report tells you it happened.</p>
+        <span class="post-more">Read</span>
       </a>
-
-      <a class="post" href="/blog/website-or-instagram/" data-page="blog/website-or-instagram">
-        <div class="post-meta">2026-08-19 · <span data-i18n="blReadTime">4 min read</span></div>
-        <div class="post-title" data-i18n="b4Title">Do I need a website if I already have Instagram?</div>
-        <p class="post-sum" data-i18n="b4Sum">We sell websites, so treat this as biased and read it anyway. Instagram does several things better. It also cannot do two things at all, and both cost you customers.</p>
-        <span class="post-more" data-i18n="blRead">Read</span>
+      <a class="post" href="/blog/website-or-instagram/">
+        <div class="post-meta">2026-08-19 · <span>4 min read</span></div>
+        <div class="post-title">Do I need a website if I already have Instagram?</div>
+        <p class="post-sum">We sell websites, so treat this as biased and read it anyway. Instagram does several things better. It also cannot do two things at all, and both cost you customers.</p>
+        <span class="post-more">Read</span>
       </a>
-
     </div>
-
     <div class="cta-band">
-      <h2 data-i18n="blCtaTitle">Rather just ask?</h2>
-      <p data-i18n="blCtaDesc">The first call is free, takes 30 minutes, and you get a price and a date within 48 hours of it.</p>
-      <a class="btn" href="/" data-page="" data-i18n="blCtaBtn">Talk to us</a>
+      <h2>Rather just ask?</h2>
+      <p>The first call is free, takes 30 minutes, and you get a price and a date within 48 hours of it.</p>
+      <a class="btn" href="/">Talk to us</a>
     </div>
   </div>
 </main>
-
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <span class="ft" data-i18n="footerCopyright">© 2026 OnlyMaxon Studio. All rights reserved.</span>
-      <span class="ft"><a href="/privacy/" data-page="privacy" data-i18n="footerPrivacy">Privacy</a></span>
-      <span class="ft"><a href="/" data-page="" data-i18n="ppBack">Back to the site</a></span>
+      <span class="ft">© 2026 OnlyMaxon Studio. All rights reserved.</span>
+      <span class="ft"><a href="/privacy/">Privacy</a></span>
+      <span class="ft"><a href="/">Back to the site</a></span>
     </div>
   </div>
 </footer>
-
 <script>
   const langDD    = document.getElementById('langDD');
   const langDDBtn = document.getElementById('langDDBtn');
@@ -265,9 +234,7 @@
     });
   });
 </script>
-
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
-
 </body>
 </html>

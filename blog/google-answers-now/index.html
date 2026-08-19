@@ -1,12 +1,5 @@
 <!DOCTYPE html>
-<!--
-  ENGLISH SOURCE OF TRUTH for /blog/google-answers-now/.
-
-      node build/generate.js
-
-  Written by scratchpad/makearticles.js so every article shares one presentation layer and
-  every English string comes from build/translations.js. Edit the copy there, not here.
--->
+<!-- Generated from build/src/blog/google-answers-now/index.html by build/generate.js — do not edit. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -23,7 +16,8 @@
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/images/icon.png">
-
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/space-grotesk-700-latin.woff2">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="OnlyMaxon">
   <meta property="og:title" content="OnlyMaxon — Google answers now instead of linking">
@@ -34,7 +28,6 @@
   <meta name="twitter:title" content="OnlyMaxon — Google answers now instead of linking">
   <meta name="twitter:description" content="People increasingly get an answer rather than ten links. If the answer does not name you, you were not there — and no click ever shows it.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -53,7 +46,6 @@
     }
   }
   </script>
-
   <style>
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
                  src: url(/fonts/inter-400-latin.woff2) format('woff2');
@@ -79,7 +71,6 @@
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
                  src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
@@ -96,12 +87,10 @@
     ::selection { background: rgba(34,211,238,0.28); color: #fff; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     .container { max-width: 720px; margin: 0 auto; padding: 0 28px; width: 100%; }
-
     header { border-bottom: 1px solid var(--border); padding: 20px 0; }
     .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: var(--text); text-decoration: none; letter-spacing: -0.5px; }
     .brand span { color: var(--blue); }
-
     .lang-dd { position: relative; }
     .lang-dd-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -129,7 +118,6 @@
     .lang-dd-menu a { display: block; text-decoration: none; color: var(--text-d); font-size: 14px; font-weight: 500; padding: 9px 12px; border-radius: 8px; transition: background-color 0.15s, color 0.15s; }
     .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
     .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
-
     main { flex: 1; padding: 56px 0 90px; }
     .back { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--text-d); text-decoration: none; margin-bottom: 26px; transition: color 0.2s, gap 0.2s; }
     .back::before { content: '←'; }
@@ -156,7 +144,6 @@
     strong { color: var(--text); font-weight: 600; }
     main a { color: var(--blue); text-decoration: none; }
     main a:hover { text-decoration: underline; }
-
     .cta-band { margin-top: 48px; text-align: center; background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 32px 28px; }
     .cta-band h2 { font-size: 22px; justify-content: center; margin-bottom: 10px; }
     .cta-band h2::before { content: none; }
@@ -169,13 +156,11 @@
       transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
     .btn:hover { background: #5FE6F2; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(34,211,238,0.5); }
-
     footer { border-top: 1px solid var(--border); padding: 26px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
     .ft a:hover { color: var(--blue); }
-
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       main { padding: 40px 0 64px; }
@@ -183,14 +168,12 @@
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; } }
   </style>
-
 </head>
 <body>
-
 <header>
   <div class="container">
     <div class="head-inner">
-      <a href="/" class="brand" data-page="">OnlyMaxon<span>.</span></a>
+      <a href="/" class="brand">OnlyMaxon<span>.</span></a>
       <div class="lang-dd" id="langDD">
         <button type="button" class="lang-dd-btn" id="langDDBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
@@ -208,64 +191,53 @@
     </div>
   </div>
 </header>
-
 <main>
   <div class="container">
-    <a class="back" href="/blog/" data-page="blog" data-i18n="b1Back">All articles</a>
-
-    <h1 data-i18n="b3H1">Google answers now instead of linking. What that means for a small business</h1>
-    <p class="meta">2026-08-19 · <span data-i18n="blReadTime">4 min read</span></p>
-
-    <p class="lede" data-i18n-html="b3Lede">More and more searches end with a written answer instead of ten blue links. <strong>If that answer does not mention you, you were not there</strong> — and unlike a lost ranking, no click and no report ever shows it happened.</p>
-
+    <a class="back" href="/blog/">All articles</a>
+    <h1>Google answers now instead of linking. What that means for a small business</h1>
+    <p class="meta">2026-08-19 · <span>4 min read</span></p>
+    <p class="lede">More and more searches end with a written answer instead of ten blue links. <strong>If that answer does not mention you, you were not there</strong> — and unlike a lost ranking, no click and no report ever shows it happened.</p>
     <section>
-      <h2 data-i18n="b3S1T">What actually changed</h2>
-      <p data-i18n-html="b3S1B">Ask a question and you increasingly get a written answer at the top of the page: Google AI Overview, ChatGPT, Perplexity. The links are still underneath. Far fewer people scroll to them.</p>
-      <p data-i18n-html="b3S1C">The old fight was for a position in a list. <strong>The new one is for being named inside the answer.</strong></p>
+      <h2>What actually changed</h2>
+      <p>Ask a question and you increasingly get a written answer at the top of the page: Google AI Overview, ChatGPT, Perplexity. The links are still underneath. Far fewer people scroll to them.</p>
+      <p>The old fight was for a position in a list. <strong>The new one is for being named inside the answer.</strong></p>
     </section>
-
     <section>
-      <h2 data-i18n="b3S2T">Why this hits small business hardest</h2>
-      <p data-i18n-html="b3S2B">"Best barber near me" is exactly the kind of question these systems answer confidently. Three names get mentioned. For that person, everyone else does not exist.</p>
-      <p data-i18n-html="b3S2C">And you never find out. There is no impression, no click, nothing in any report — <strong>just a customer who went somewhere else.</strong></p>
+      <h2>Why this hits small business hardest</h2>
+      <p>"Best barber near me" is exactly the kind of question these systems answer confidently. Three names get mentioned. For that person, everyone else does not exist.</p>
+      <p>And you never find out. There is no impression, no click, nothing in any report — <strong>just a customer who went somewhere else.</strong></p>
     </section>
-
     <section>
-      <h2 data-i18n="b3S3T">How an engine decides who to name</h2>
-      <p data-i18n-html="b3S3B">It reads what the web says about you and prefers what it can repeat with confidence: plain facts, in ordinary sentences, on pages that make clear who is speaking.</p>
-      <p data-i18n-html="b3S3C">Marketing language works against you here. <strong>"Innovative solutions for your business" cannot be quoted. "Business-card website from €390, ready in a week" can.</strong></p>
+      <h2>How an engine decides who to name</h2>
+      <p>It reads what the web says about you and prefers what it can repeat with confidence: plain facts, in ordinary sentences, on pages that make clear who is speaking.</p>
+      <p>Marketing language works against you here. <strong>"Innovative solutions for your business" cannot be quoted. "Business-card website from €390, ready in a week" can.</strong></p>
     </section>
-
     <section>
-      <h2 data-i18n="b3S4T">What actually helps</h2>
-      <p data-i18n-html="b3S4B">Write your facts down in public: what you do, where, what it costs, how long it takes. Answer real questions on real pages. Keep your name, address and phone identical everywhere.</p>
-      <p data-i18n-html="b3S4C">Structured data helps a machine read it, and being mentioned on other sites helps it trust what it read. None of this is different from good SEO — it is good SEO with the vagueness taken out.</p>
+      <h2>What actually helps</h2>
+      <p>Write your facts down in public: what you do, where, what it costs, how long it takes. Answer real questions on real pages. Keep your name, address and phone identical everywhere.</p>
+      <p>Structured data helps a machine read it, and being mentioned on other sites helps it trust what it read. None of this is different from good SEO — it is good SEO with the vagueness taken out.</p>
     </section>
-
     <section>
-      <h2 data-i18n="b3S5T">What to do this month</h2>
-      <p data-i18n-html="b3S5B">Take the five questions customers ask you most often and answer each one on its own page, in plain language, with the numbers left in.</p>
-      <p data-i18n-html="b3S5C">That is the whole method. <strong>It is also why this page exists.</strong></p>
+      <h2>What to do this month</h2>
+      <p>Take the five questions customers ask you most often and answer each one on its own page, in plain language, with the numbers left in.</p>
+      <p>That is the whole method. <strong>It is also why this page exists.</strong></p>
     </section>
-
     <div class="cta-band">
-      <h2 data-i18n="b3CtaTitle">Want to be the one it names?</h2>
-      <p data-i18n-html="b3CtaDesc">We write the pages, wire in the structured data and keep it working. From €200 a month, stop whenever you want.</p>
-      <a class="btn" href="/" data-page="" data-i18n="blCtaBtn">Talk to us</a>
+      <h2>Want to be the one it names?</h2>
+      <p>We write the pages, wire in the structured data and keep it working. From €200 a month, stop whenever you want.</p>
+      <a class="btn" href="/">Talk to us</a>
     </div>
   </div>
 </main>
-
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <span class="ft" data-i18n="footerCopyright">© 2026 OnlyMaxon Studio. All rights reserved.</span>
-      <span class="ft"><a href="/privacy/" data-page="privacy" data-i18n="footerPrivacy">Privacy</a></span>
-      <span class="ft"><a href="/blog/" data-page="blog" data-i18n="b1Back">All articles</a></span>
+      <span class="ft">© 2026 OnlyMaxon Studio. All rights reserved.</span>
+      <span class="ft"><a href="/privacy/">Privacy</a></span>
+      <span class="ft"><a href="/blog/">All articles</a></span>
     </div>
   </div>
 </footer>
-
 <script>
   const langDD    = document.getElementById('langDD');
   const langDDBtn = document.getElementById('langDDBtn');
@@ -285,9 +257,7 @@
     });
   });
 </script>
-
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
-
 </body>
 </html>

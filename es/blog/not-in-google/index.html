@@ -1,14 +1,5 @@
 <!DOCTYPE html>
-<!--
-  ENGLISH SOURCE OF TRUTH for /blog/not-in-google/.
-
-      node build/generate.js
-
-  Written to be quotable, not to rank on keyword density: short declarative sentences,
-  one idea per heading, numbers left in, and the free fix named out loud instead of held
-  back as bait. An answer engine can lift any single section of this and have it still be
-  true, which is the whole reason the article exists.
--->
+<!-- Generated from build/src/blog/not-in-google/index.html by build/generate.js — do not edit. -->
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -25,7 +16,8 @@
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/images/icon.png">
-
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/space-grotesk-700-latin.woff2">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="OnlyMaxon">
   <meta property="og:title" content="OnlyMaxon — ¿Por qué no encuentran mi negocio en Google?">
@@ -36,7 +28,6 @@
   <meta name="twitter:title" content="OnlyMaxon — ¿Por qué no encuentran mi negocio en Google?">
   <meta name="twitter:description" content="Cinco razones por las que un pequeño negocio no aparece en Google, en el orden que de verdad importa — y el arreglo que no cuesta nada y lleva una tarde.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -55,7 +46,6 @@
     }
   }
   </script>
-
   <style>
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
                  src: url(/fonts/inter-400-latin.woff2) format('woff2');
@@ -81,7 +71,6 @@
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
                  src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
@@ -98,12 +87,10 @@
     ::selection { background: rgba(34,211,238,0.28); color: #fff; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     .container { max-width: 720px; margin: 0 auto; padding: 0 28px; width: 100%; }
-
     header { border-bottom: 1px solid var(--border); padding: 20px 0; }
     .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: var(--text); text-decoration: none; letter-spacing: -0.5px; }
     .brand span { color: var(--blue); }
-
     .lang-dd { position: relative; }
     .lang-dd-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -131,7 +118,6 @@
     .lang-dd-menu a { display: block; text-decoration: none; color: var(--text-d); font-size: 14px; font-weight: 500; padding: 9px 12px; border-radius: 8px; transition: background-color 0.15s, color 0.15s; }
     .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
     .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
-
     main { flex: 1; padding: 56px 0 90px; }
     .back { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--text-d); text-decoration: none; margin-bottom: 26px; transition: color 0.2s, gap 0.2s; }
     .back::before { content: '←'; }
@@ -158,7 +144,6 @@
     strong { color: var(--text); font-weight: 600; }
     main a { color: var(--blue); text-decoration: none; }
     main a:hover { text-decoration: underline; }
-
     .cta-band { margin-top: 48px; text-align: center; background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 32px 28px; }
     .cta-band h2 { font-size: 22px; justify-content: center; margin-bottom: 10px; }
     .cta-band h2::before { content: none; }
@@ -171,13 +156,11 @@
       transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
     .btn:hover { background: #5FE6F2; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(34,211,238,0.5); }
-
     footer { border-top: 1px solid var(--border); padding: 26px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
     .ft a:hover { color: var(--blue); }
-
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       main { padding: 40px 0 64px; }
@@ -187,7 +170,6 @@
   </style>
 </head>
 <body>
-
 <header>
   <div class="container">
     <div class="head-inner">
@@ -209,52 +191,42 @@
     </div>
   </div>
 </header>
-
 <main>
   <div class="container">
     <a class="back" href="/es/blog/">Todos los artículos</a>
-
     <h1>¿Por qué no encuentran mi negocio en Google?</h1>
     <p class="meta">2026-08-19 · <span>4 min de lectura</span></p>
-
     <p class="lede">Nueve de cada diez veces la culpa no es de la web, y el arreglo no cuesta nada. <strong>La razón más común por la que un negocio local es invisible en Google es que no tiene un Perfil de Empresa de Google</strong> — la ficha gratuita que te pone en el mapa con tus horarios, tus fotos y un botón de llamar.</p>
-
     <section>
       <h2>No tienes un Perfil de Empresa de Google</h2>
       <p>Cuando alguien busca un barbero, un mecánico o un salón de uñas cerca, Google muestra un mapa con tres negocios por encima de todo lo demás. Esos tres salen de los Perfiles de Empresa, no de las webs. <strong>Si no tienes uno, no puedes aparecer ahí en absoluto</strong> — por buena que sea tu web.</p>
       <p>Crearlo es gratis y lleva unos veinte minutos. Después Google envía una tarjeta a tu dirección con un código para confirmar que estás realmente ahí. En esa verificación es donde la gente abandona, y es justo la parte que importa.</p>
     </section>
-
     <section>
       <h2>Casi no tienes reseñas</h2>
       <p>Entre dos negocios a la misma distancia, Google muestra el que tiene más reseñas. Es la palanca más fuerte que tiene un negocio local, y <strong>lo único que un competidor no puede copiarte de la noche a la mañana.</strong></p>
       <p>Pídesela a todos los clientes, no solo a los contentos. Filtrar — pedir reseña solo cuando alguien parece satisfecho — incumple las normas de Google y puede hacer que te retiren las reseñas. Basta con un mensaje una hora después de la visita, o un QR en el mostrador.</p>
     </section>
-
     <section>
       <h2>Tus datos no coinciden entre sí</h2>
       <p>Tu nombre, dirección y teléfono aparecen en tu web, en Facebook, en directorios. Si no coinciden — un teléfono antiguo aquí, una calle abreviada allá — Google confía menos en que el negocio sea real, y los negocios menos fiables aparecen más abajo.</p>
       <p>Escribe esos tres datos una vez, exactamente como deben aparecer, y haz que en todos los sitios coincidan carácter por carácter.</p>
     </section>
-
     <section>
       <h2>Tu web no dice nunca dónde estás</h2>
       <p>Un número sorprendente de webs de pequeños negocios nunca nombra su propia ciudad. La página dice «hacemos cortes estupendos» y nada más. Google tiene que adivinar a quién mostrarla, y cuando adivina, adivina con prudencia.</p>
       <p>Tu ciudad debe estar en el título de la página, en el primer encabezado y en el pie junto a la dirección completa. Eso no es rellenar de palabras clave — es responder a la pregunta que realmente hizo quien buscaba, que era <strong>«cerca de mí»</strong>.</p>
     </section>
-
     <section>
       <h2>Tu web es nueva, y eso es normal</h2>
       <p>Una web nueva tarda semanas en indexarse y meses en posicionar para algo competitivo. Este es el único punto de la lista en el que la respuesta es paciencia y no acción.</p>
       <p>Lo que sí puedes hacer es dejar de esperar sin más: da de alta la web en Google Search Console y apóyate mientras tanto en el Perfil de Empresa, porque los resultados del mapa se mueven mucho más rápido que los enlaces azules de debajo.</p>
     </section>
-
     <section>
       <h2>Entonces, ¿qué hacer primero?</h2>
       <p><strong>Crea y verifica el Perfil de Empresa.</strong> Es gratis, lleva una tarde y para la mayoría de negocios locales cambia más que cualquier otra cosa de esta lista. Después empieza a reunir reseñas, y solo entonces preocúpate por la web.</p>
       <p>Quien te diga que solo con una web te van a encontrar te está vendiendo el segundo paso y saltándose el primero.</p>
     </section>
-
     <div class="cta-band">
       <h2>¿Quieres que lo hagamos por ti?</h2>
       <p>Montamos el perfil, conectamos la web con la búsqueda y hacemos que las reseñas lleguen solas. Desde 200 € al mes, lo dejas cuando quieras.</p>
@@ -262,7 +234,6 @@
     </div>
   </div>
 </main>
-
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -272,7 +243,6 @@
     </div>
   </div>
 </footer>
-
 <script>
   const langDD    = document.getElementById('langDD');
   const langDDBtn = document.getElementById('langDDBtn');
@@ -292,9 +262,7 @@
     });
   });
 </script>
-
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
-
 </body>
 </html>

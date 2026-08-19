@@ -1,17 +1,5 @@
 <!DOCTYPE html>
-<!--
-  ENGLISH SOURCE OF TRUTH for /cases/yodin/.
-
-      node build/generate.js
-
-  Written by scratchpad/makecases.js. Every English string comes from
-  build/translations.js — edit the copy there, not here.
-
-  These pages exist so the portfolio stops handing its visitors to someone else's domain:
-  the card on the home page used to link straight to the client's live site, and whoever
-  clicked it left and did not come back. Now the story, the numbers and the live link all
-  sit here first.
--->
+<!-- Generated from build/src/cases/yodin/index.html by build/generate.js — do not edit. -->
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
@@ -28,7 +16,8 @@
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/images/icon.png">
-
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/space-grotesk-700-latin.woff2">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="OnlyMaxon">
   <meta property="og:title" content="OnlyMaxon — yOdin — platforma uzgodniona z uczelnią">
@@ -39,7 +28,6 @@
   <meta name="twitter:title" content="OnlyMaxon — yOdin — platforma uzgodniona z uczelnią">
   <meta name="twitter:description" content="Dziekanat ustalił ten projekt bezpośrednio z nami. Platforma dopasowująca studentów zagranicznych po zachowaniu, a nie po narodowości — w budowie i wychodząca poza pierwszą uczelnię.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -58,7 +46,6 @@
     }
   }
   </script>
-
   <style>
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
                  src: url(/fonts/inter-400-latin.woff2) format('woff2');
@@ -84,7 +71,6 @@
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
                  src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
@@ -101,12 +87,10 @@
     ::selection { background: rgba(34,211,238,0.28); color: #fff; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     .container { max-width: 720px; margin: 0 auto; padding: 0 28px; width: 100%; }
-
     header { border-bottom: 1px solid var(--border); padding: 20px 0; }
     .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: var(--text); text-decoration: none; letter-spacing: -0.5px; }
     .brand span { color: var(--blue); }
-
     .lang-dd { position: relative; }
     .lang-dd-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -134,7 +118,6 @@
     .lang-dd-menu a { display: block; text-decoration: none; color: var(--text-d); font-size: 14px; font-weight: 500; padding: 9px 12px; border-radius: 8px; transition: background-color 0.15s, color 0.15s; }
     .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
     .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
-
     main { flex: 1; padding: 56px 0 90px; }
     .back { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--text-d); text-decoration: none; margin-bottom: 26px; transition: color 0.2s, gap 0.2s; }
     .back::before { content: '←'; }
@@ -161,7 +144,6 @@
     strong { color: var(--text); font-weight: 600; }
     main a { color: var(--blue); text-decoration: none; }
     main a:hover { text-decoration: underline; }
-
     .cta-band { margin-top: 48px; text-align: center; background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 32px 28px; }
     .cta-band h2 { font-size: 22px; justify-content: center; margin-bottom: 10px; }
     .cta-band h2::before { content: none; }
@@ -174,21 +156,17 @@
       transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
     .btn:hover { background: #5FE6F2; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(34,211,238,0.5); }
-
     footer { border-top: 1px solid var(--border); padding: 26px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
     .ft a:hover { color: var(--blue); }
-
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       main { padding: 40px 0 64px; }
       .footer-inner { flex-direction: column; text-align: center; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; } }
-  
-    /* ── case-page additions ───────────────── */
     .case-hook {
       font-size: clamp(19px, 2.6vw, 24px); font-weight: 600; color: var(--text);
       line-height: 1.45; letter-spacing: -0.5px; margin-bottom: 16px;
@@ -200,7 +178,6 @@
     }
     .badge-live { background: rgba(34,197,94,0.12); color: #4ADE80; border: 1px solid rgba(34,197,94,0.25); }
     .badge-dev  { background: rgba(245,180,90,0.12); color: #F5B45A; border: 1px solid rgba(245,180,90,0.28); }
-    /* The one number on the page, so it gets the only accent colour and its own box. */
     .case-result {
       display: flex; align-items: flex-start; gap: 12px;
       background: var(--bg2); border: 1px solid rgba(34,211,238,0.28);
@@ -230,7 +207,6 @@
   </style>
 </head>
 <body>
-
 <header>
   <div class="container">
     <div class="head-inner">
@@ -252,38 +228,31 @@
     </div>
   </div>
 </header>
-
 <main>
   <div class="container">
     <a class="back" href="/pl/">Wszystkie nasze prace</a>
-
     <p class="meta">Case study</p>
     <h1>yOdin</h1>
     <p class="case-hook">Dziekanat uczelni ustalił ten projekt bezpośrednio z nami.</p>
     <div class="case-badges">
       <span class="badge-dev">W budowie</span>
     </div>
-
     <section>
       <h2>Z czym przyszli</h2>
       <p>Studenci zagraniczni przyjeżdżają w nowe miejsce i po jakimś tygodniu lądują w grupie z własnego kraju. To najłatwiejsze, co można zrobić — i to właśnie później uznają za swój błąd.</p>
       <p>Projekt został ustalony bezpośrednio z dziekanatem uczelni — <strong>omówiony z instytucją, a nie jej wciśnięty.</strong></p>
     </section>
-
     <section>
       <h2>Co zbudowaliśmy</h2>
       <p>Platforma, która dopasowuje studentów po tym, jak faktycznie się zachowują — do czego dołączają, kiedy się pojawiają, do czego wracają — a nie po tym, jaki mają paszport.</p>
       <p>Najpierw mobile, bo to jedyny ekran, którego student używa do takich rzeczy.</p>
     </section>
-
     <section>
       <h2>Co się zmieniło</h2>
       <p>W aktywnej budowie i wychodzi poza uczelnię, na której się zaczęło.</p>
       <p>To jedyny projekt na tej stronie, którego jeszcze nie otworzysz. Jest tu, bo <strong>sposób, w jaki się zaczął, mówi coś, czego nie powiedzą ukończone: instytucja zgodziła się budować go razem z nami.</strong></p>
     </section>
-
     <p class="case-result">W budowie, wdrażana na kolejnych uczelniach.</p>
-
     <div class="case-tags">
       <span class="case-tag">React Native</span>
       <span class="case-tag">Expo</span>
@@ -291,7 +260,6 @@
       <span class="case-tag">Docker</span>
       <span class="case-tag">Dart</span>
     </div>
-
     <div class="cta-band">
       <h2>Przychodzisz z czymś podobnym?</h2>
       <p>Powiedz, co nie działa. Pierwsza rozmowa jest bezpłatna i trwa 30 minut — a w ciągu 48 godzin po niej masz cenę i termin.</p>
@@ -299,7 +267,6 @@
     </div>
   </div>
 </main>
-
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -309,7 +276,6 @@
     </div>
   </div>
 </footer>
-
 <script>
   const langDD    = document.getElementById('langDD');
   const langDDBtn = document.getElementById('langDDBtn');
@@ -329,9 +295,7 @@
     });
   });
 </script>
-
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
-
 </body>
 </html>

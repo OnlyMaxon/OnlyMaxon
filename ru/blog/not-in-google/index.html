@@ -1,14 +1,5 @@
 <!DOCTYPE html>
-<!--
-  ENGLISH SOURCE OF TRUTH for /blog/not-in-google/.
-
-      node build/generate.js
-
-  Written to be quotable, not to rank on keyword density: short declarative sentences,
-  one idea per heading, numbers left in, and the free fix named out loud instead of held
-  back as bait. An answer engine can lift any single section of this and have it still be
-  true, which is the whole reason the article exists.
--->
+<!-- Generated from build/src/blog/not-in-google/index.html by build/generate.js — do not edit. -->
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -25,7 +16,8 @@
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/images/icon.png">
-
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-cyrillic.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/space-grotesk-700-latin.woff2">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="OnlyMaxon">
   <meta property="og:title" content="OnlyMaxon — Почему меня не находят в Google?">
@@ -36,7 +28,6 @@
   <meta name="twitter:title" content="OnlyMaxon — Почему меня не находят в Google?">
   <meta name="twitter:description" content="Пять причин, по которым малый бизнес не виден в Google, в порядке реальной важности — и одно исправление, которое ничего не стоит и занимает вечер.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -55,7 +46,6 @@
     }
   }
   </script>
-
   <style>
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
                  src: url(/fonts/inter-400-latin.woff2) format('woff2');
@@ -81,7 +71,6 @@
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
                  src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
@@ -98,12 +87,10 @@
     ::selection { background: rgba(34,211,238,0.28); color: #fff; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     .container { max-width: 720px; margin: 0 auto; padding: 0 28px; width: 100%; }
-
     header { border-bottom: 1px solid var(--border); padding: 20px 0; }
     .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: var(--text); text-decoration: none; letter-spacing: -0.5px; }
     .brand span { color: var(--blue); }
-
     .lang-dd { position: relative; }
     .lang-dd-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -131,7 +118,6 @@
     .lang-dd-menu a { display: block; text-decoration: none; color: var(--text-d); font-size: 14px; font-weight: 500; padding: 9px 12px; border-radius: 8px; transition: background-color 0.15s, color 0.15s; }
     .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
     .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
-
     main { flex: 1; padding: 56px 0 90px; }
     .back { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--text-d); text-decoration: none; margin-bottom: 26px; transition: color 0.2s, gap 0.2s; }
     .back::before { content: '←'; }
@@ -158,7 +144,6 @@
     strong { color: var(--text); font-weight: 600; }
     main a { color: var(--blue); text-decoration: none; }
     main a:hover { text-decoration: underline; }
-
     .cta-band { margin-top: 48px; text-align: center; background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 32px 28px; }
     .cta-band h2 { font-size: 22px; justify-content: center; margin-bottom: 10px; }
     .cta-band h2::before { content: none; }
@@ -171,13 +156,11 @@
       transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
     .btn:hover { background: #5FE6F2; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(34,211,238,0.5); }
-
     footer { border-top: 1px solid var(--border); padding: 26px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
     .ft a:hover { color: var(--blue); }
-
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       main { padding: 40px 0 64px; }
@@ -187,7 +170,6 @@
   </style>
 </head>
 <body>
-
 <header>
   <div class="container">
     <div class="head-inner">
@@ -209,52 +191,42 @@
     </div>
   </div>
 </header>
-
 <main>
   <div class="container">
     <a class="back" href="/ru/blog/">Все статьи</a>
-
     <h1>Почему меня не находят в Google?</h1>
     <p class="meta">2026-08-19 · <span>4 мин чтения</span></p>
-
     <p class="lede">В девяти случаях из десяти дело не в сайте, и исправление ничего не стоит. <strong>Самая частая причина, по которой локального бизнеса не видно в Google — у него нет профиля Google Бизнес</strong>: бесплатной карточки, которая ставит тебя на карту с часами работы, фото и кнопкой «позвонить».</p>
-
     <section>
       <h2>У тебя нет профиля Google Бизнес</h2>
       <p>Когда человек ищет барбера, автосервис или маникюр рядом, Google показывает карту с тремя компаниями над всем остальным. Эти трое берутся из профилей Google Бизнес, а не из сайтов. <strong>Если профиля нет, ты там не появишься вообще</strong> — каким бы хорошим ни был твой сайт.</p>
       <p>Создать его бесплатно и занимает минут двадцать. Потом Google присылает на твой адрес открытку с кодом, чтобы подтвердить, что ты действительно там. Именно на этой проверке люди бросают — и именно она решает.</p>
     </section>
-
     <section>
       <h2>У тебя почти нет отзывов</h2>
       <p>Из двух компаний на одинаковом расстоянии Google покажет ту, у которой больше отзывов. Это самый сильный рычаг локального бизнеса и <strong>единственное, что конкурент не скопирует у тебя за ночь.</strong></p>
       <p>Проси каждого клиента, а не только довольных. Фильтрация — просить отзыв только когда человек выглядит довольным — нарушает правила Google, и за это отзывы могут снять. Достаточно сообщения через час после визита или QR-кода на стойке.</p>
     </section>
-
     <section>
       <h2>Твои данные противоречат друг другу</h2>
       <p>Название, адрес и телефон стоят у тебя на сайте, в Facebook, в каталогах. Если они различаются — здесь старый номер, там сокращённая улица — Google меньше уверен, что бизнес настоящий, а менее достоверные ранжируются ниже.</p>
       <p>Запиши эти три вещи один раз, ровно в том виде, в каком они должны выглядеть, и приведи все площадки к нему символ в символ.</p>
     </section>
-
     <section>
       <h2>Твой сайт нигде не говорит, где ты</h2>
       <p>Удивительно много сайтов малого бизнеса ни разу не называют свой город. На странице написано «делаем отличные стрижки» — и всё. Google приходится гадать, кому это показывать, а когда он гадает, он делает это осторожно.</p>
       <p>Твой город должен стоять в заголовке страницы, в первом заголовке на экране и в подвале вместе с полным адресом. Это не набивка ключевыми словами — это ответ на вопрос, который человек на самом деле задал, а он звучал <strong>«рядом со мной»</strong>.</p>
     </section>
-
     <section>
       <h2>Твой сайт новый, и это нормально</h2>
       <p>Новому сайту нужны недели, чтобы попасть в индекс, и месяцы, чтобы подняться по чему-то конкурентному. Это единственный пункт в списке, где ответ — терпение, а не действие.</p>
       <p>Что можно сделать — перестать ждать пассивно: добавь сайт в Google Search Console, а пока опирайся на профиль Google Бизнес, потому что результаты на карте двигаются гораздо быстрее, чем синие ссылки под ними.</p>
     </section>
-
     <section>
       <h2>Так с чего начать?</h2>
       <p><strong>Заведи и подтверди профиль Google Бизнес.</strong> Это бесплатно, занимает вечер и для большинства локальных бизнесов меняет больше, чем всё остальное в этом списке. Потом начинай собирать отзывы, и только потом думай о сайте.</p>
       <p>Тот, кто говорит тебе, что один только сайт сделает тебя находимым, продаёт тебе второй шаг и пропускает первый.</p>
     </section>
-
     <div class="cta-band">
       <h2>Хочешь, чтобы это сделали за тебя?</h2>
       <p>Заводим профиль, связываем сайт с поиском и делаем так, чтобы отзывы приходили сами. От 200 € в месяц, отказаться можно в любой момент.</p>
@@ -262,7 +234,6 @@
     </div>
   </div>
 </main>
-
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -272,7 +243,6 @@
     </div>
   </div>
 </footer>
-
 <script>
   const langDD    = document.getElementById('langDD');
   const langDDBtn = document.getElementById('langDDBtn');
@@ -292,9 +262,7 @@
     });
   });
 </script>
-
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
-
 </body>
 </html>

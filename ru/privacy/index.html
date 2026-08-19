@@ -1,19 +1,5 @@
 <!DOCTYPE html>
-<!--
-  ENGLISH SOURCE OF TRUTH for /privacy/.
-  /pl/privacy/, /ru/privacy/, /tr/privacy/, /es/privacy/ are generated from it.
-
-  After changing anything here (or in build/translations.js) run:
-
-      node build/generate.js
-
-  Deliberately short. GDPR Art. 12 asks for "concise, transparent, intelligible" — a
-  wall of legalese is worse compliance, not better, and this site genuinely does very
-  little with anyone's data, which is easier to say in eight short sections than to bury.
-
-  Asset paths here are absolute (/images/, /fonts/) because the English copy already
-  lives one directory deep and is served as-is, never rewritten by the build.
--->
+<!-- Generated from build/src/privacy/index.html by build/generate.js — do not edit. -->
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -30,7 +16,8 @@
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/images/icon.png">
-
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-cyrillic.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/space-grotesk-700-latin.woff2">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="OnlyMaxon">
   <meta property="og:title" content="OnlyMaxon — Конфиденциальность">
@@ -41,9 +28,7 @@
   <meta name="twitter:title" content="OnlyMaxon — Конфиденциальность">
   <meta name="twitter:description" content="Что OnlyMaxon делает с твоими данными: форма обратной связи и счётчик просмотров без куки. Без следящих куки, без рекламы, без всего, что ходит за тобой по другим сайтам.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
-
   <style>
-    /* Only the weights this page uses: Inter 400/600/700, Space Grotesk 700. */
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
                  src: url(/fonts/inter-400-latin.woff2) format('woff2');
                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -68,7 +53,6 @@
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
                  src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
@@ -85,7 +69,6 @@
     ::selection { background: rgba(34,211,238,0.28); color: #fff; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     .container { max-width: 760px; margin: 0 auto; padding: 0 28px; width: 100%; }
-
     header { border-bottom: 1px solid var(--border); padding: 20px 0; }
     .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand {
@@ -93,9 +76,6 @@
       color: var(--text); text-decoration: none; letter-spacing: -0.5px;
     }
     .brand span { color: var(--blue); }
-
-    /* Same dropdown as the main page — the build rewrites both its label and its links,
-       so switching language here lands on this page, not back on the home page. */
     .lang-dd { position: relative; }
     .lang-dd-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -128,7 +108,6 @@
     }
     .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
     .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
-
     main { flex: 1; padding: 64px 0 90px; }
     h1 {
       font-family: 'Space Grotesk', sans-serif; font-weight: 700;
@@ -160,13 +139,11 @@
     strong { color: var(--text); font-weight: 600; }
     main a { color: var(--blue); text-decoration: none; }
     main a:hover { text-decoration: underline; }
-
     footer { border-top: 1px solid var(--border); padding: 26px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; }
     .ft a:hover { color: var(--blue); }
-
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       main { padding: 44px 0 64px; }
@@ -178,7 +155,6 @@
   </style>
 </head>
 <body>
-
 <header>
   <div class="container">
     <div class="head-inner">
@@ -200,56 +176,45 @@
     </div>
   </div>
 </header>
-
 <main>
   <div class="container">
     <h1>Конфиденциальность</h1>
     <p class="updated"><span>Последнее обновление</span>: 2026-08-19</p>
-
     <p class="lede">Коротко: единственное, что ты вообще передаёшь — это то, что сам напишешь в форме. Просмотры страниц считаются, но без куки и без чего-либо, что могло бы тебя опознать. <strong>Ничего никогда не продаётся, не передаётся рекламодателям и не используется, чтобы ходить за тобой по другим сайтам.</strong></p>
-
     <section>
       <h2>Кто отвечает</h2>
       <p><strong>Max Orucov</strong>, работающий как OnlyMaxon, Польша. Именно я решаю, что происходит с данными, описанными здесь — администратор данных в терминах GDPR. По любому вопросу с этой страницы пиши на <a href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a>.</p>
     </section>
-
     <section>
       <h2>Что собирается</h2>
       <p>Только то, что ты отправишь сам: <strong>имя, адрес почты и текст сообщения.</strong> Ничего не собирается в фоне. Никакого профиля о тебе не строится, и данные ниоткуда не покупаются.</p>
     </section>
-
     <section>
       <h2>Зачем</h2>
       <p>Чтобы прочитать твоё сообщение и ответить на него, а также посчитать цену и срок, если они тебе нужны. Это вся цель. На языке GDPR основанием служит сам твой запрос — действия по твоей инициативе до возможного договора.</p>
     </section>
-
     <section>
       <h2>Кто ещё это видит</h2>
       <p>Сообщение проходит через три сервиса, прежде чем дойти до меня: <strong>Web3Forms</strong> обрабатывает форму, <strong>Cloudflare</strong> пересылает письмо, а <strong>Google</strong> держит ящик, куда оно попадает. Сам сайт лежит на <strong>GitHub Pages</strong>, который — как любой веб-сервер на свете — пишет IP-адреса в свои логи, а описанный ниже счётчик просмотров ведёт <strong>Cloudflare</strong>. Больше никто ничего не получает.</p>
     </section>
-
     <section>
       <h2>Сколько это хранится</h2>
       <p>До закрытия твоего вопроса и <strong>не дольше 12 месяцев</strong> после последней переписки. Если мы начнём работать вместе, проектная переписка хранится столько, сколько требует закон. Попросишь удалить раньше — удалим.</p>
     </section>
-
     <section>
       <h2>Куки и подсчёт</h2>
       <p>Твой браузер хранит одну вещь: выбранный язык, чтобы при следующем заходе сайт не увёз тебя куда-то ещё. Он остаётся у тебя и никуда не отправляется. Визиты считает Cloudflare Web Analytics, который не ставит вообще никаких куки и не умеет отличить одного посетителя от другого — <strong>он считает просмотры, а не людей.</strong> Никаких рекламных пикселей, ничего, что ходит за тобой по другим сайтам — именно поэтому этот сайт никогда не просит тебя ничего принять.</p>
     </section>
-
     <section>
       <h2>Твои права</h2>
       <p>Ты можешь спросить, что о тебе хранится, потребовать исправить, удалить, возразить против использования или запросить копию. Достаточно одного письма на <a href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a> — без формы и без объяснения причин. Если тебя не устроит, как всё решено, можно пожаловаться в польский надзорный орган — UODO.</p>
     </section>
-
     <section>
       <h2>Если это изменится</h2>
       <p>Дата наверху изменится вместе с ней. Ничего отсюда не применяется задним числом к сообщению, которое ты уже отправил.</p>
     </section>
   </div>
 </main>
-
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -259,7 +224,6 @@
     </div>
   </div>
 </footer>
-
 <script>
   const langDD    = document.getElementById('langDD');
   const langDDBtn = document.getElementById('langDDBtn');
@@ -273,18 +237,13 @@
       langDDBtn.setAttribute('aria-expanded', 'false');
     }
   });
-  // Same rule as the home page: a language picked by hand wins over the auto-routing.
   langDD.querySelectorAll('a[data-lang]').forEach(a => {
     a.addEventListener('click', () => {
       try { localStorage.setItem('om_lang', a.dataset.lang); } catch (e) {}
     });
   });
 </script>
-
-<!-- Cloudflare Web Analytics — same beacon as the rest of the site. Section 6 above
-     describes exactly what it does, which is the only reason it is allowed on this page. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
-
 </body>
 </html>

@@ -1,19 +1,5 @@
 <!DOCTYPE html>
-<!--
-  ENGLISH SOURCE OF TRUTH for /privacy/.
-  /pl/privacy/, /ru/privacy/, /tr/privacy/, /es/privacy/ are generated from it.
-
-  After changing anything here (or in build/translations.js) run:
-
-      node build/generate.js
-
-  Deliberately short. GDPR Art. 12 asks for "concise, transparent, intelligible" — a
-  wall of legalese is worse compliance, not better, and this site genuinely does very
-  little with anyone's data, which is easier to say in eight short sections than to bury.
-
-  Asset paths here are absolute (/images/, /fonts/) because the English copy already
-  lives one directory deep and is served as-is, never rewritten by the build.
--->
+<!-- Generated from build/src/privacy/index.html by build/generate.js — do not edit. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -30,20 +16,19 @@
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/images/icon.png">
-
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/space-grotesk-700-latin.woff2">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="OnlyMaxon">
   <meta property="og:title" content="OnlyMaxon — Privacy">
-  <meta property="og:description" content="What OnlyMaxon does with your data.">
+  <meta property="og:description" content="What OnlyMaxon does with your data: the contact form, and a cookieless page counter. No tracking cookies, no advertising, nothing that follows you off the site.">
   <meta property="og:url" content="https://onlymaxon.com/privacy/">
   <meta property="og:image" content="https://onlymaxon.com/images/logo.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="OnlyMaxon — Privacy">
-  <meta name="twitter:description" content="What OnlyMaxon does with your data.">
+  <meta name="twitter:description" content="What OnlyMaxon does with your data: the contact form, and a cookieless page counter. No tracking cookies, no advertising, nothing that follows you off the site.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
-
   <style>
-    /* Only the weights this page uses: Inter 400/600/700, Space Grotesk 700. */
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
                  src: url(/fonts/inter-400-latin.woff2) format('woff2');
                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -68,7 +53,6 @@
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
                  src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
@@ -85,7 +69,6 @@
     ::selection { background: rgba(34,211,238,0.28); color: #fff; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     .container { max-width: 760px; margin: 0 auto; padding: 0 28px; width: 100%; }
-
     header { border-bottom: 1px solid var(--border); padding: 20px 0; }
     .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand {
@@ -93,9 +76,6 @@
       color: var(--text); text-decoration: none; letter-spacing: -0.5px;
     }
     .brand span { color: var(--blue); }
-
-    /* Same dropdown as the main page — the build rewrites both its label and its links,
-       so switching language here lands on this page, not back on the home page. */
     .lang-dd { position: relative; }
     .lang-dd-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -128,7 +108,6 @@
     }
     .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
     .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
-
     main { flex: 1; padding: 64px 0 90px; }
     h1 {
       font-family: 'Space Grotesk', sans-serif; font-weight: 700;
@@ -160,13 +139,11 @@
     strong { color: var(--text); font-weight: 600; }
     main a { color: var(--blue); text-decoration: none; }
     main a:hover { text-decoration: underline; }
-
     footer { border-top: 1px solid var(--border); padding: 26px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; }
     .ft a:hover { color: var(--blue); }
-
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       main { padding: 44px 0 64px; }
@@ -178,11 +155,10 @@
   </style>
 </head>
 <body>
-
 <header>
   <div class="container">
     <div class="head-inner">
-      <a href="/" class="brand" data-page="">OnlyMaxon<span>.</span></a>
+      <a href="/" class="brand">OnlyMaxon<span>.</span></a>
       <div class="lang-dd" id="langDD">
         <button type="button" class="lang-dd-btn" id="langDDBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
@@ -200,112 +176,54 @@
     </div>
   </div>
 </header>
-
 <main>
   <div class="container">
-    <h1 data-i18n="ppTitle">Privacy</h1>
-    <p class="updated"><span data-i18n="ppUpdated">Last updated</span>: 2026-08-19</p>
-
-    <p class="lede" data-i18n-html="ppLede">
-      Short version: the only thing you ever hand over is what you type into the contact
-      form. Page views are counted, but without cookies and without anything that could
-      identify you. <strong>Nothing is ever sold, handed to advertisers, or used to follow
-      you off this site.</strong>
-    </p>
-
+    <h1>Privacy</h1>
+    <p class="updated"><span>Last updated</span>: 2026-08-19</p>
+    <p class="lede">Short version: the only thing you ever hand over is what you type into the contact form. Page views are counted, but without cookies and without anything that could identify you. <strong>Nothing is ever sold, handed to advertisers, or used to follow you off this site.</strong></p>
     <section>
-      <h2 data-i18n="ppS1T">Who is responsible</h2>
-      <p data-i18n-html="ppS1B">
-        <strong>Max Orucov</strong>, working as OnlyMaxon, based in Poland. I am the
-        person who decides what happens to the data described here — the data controller,
-        in the wording of the GDPR. For anything on this page, write to
-        <a href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a>.
-      </p>
+      <h2>Who is responsible</h2>
+      <p><strong>Max Orucov</strong>, working as OnlyMaxon, based in Poland. I am the person who decides what happens to the data described here — the data controller, in the wording of the GDPR. For anything on this page, write to <a href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a>.</p>
     </section>
-
     <section>
-      <h2 data-i18n="ppS2T">What is collected</h2>
-      <p data-i18n-html="ppS2B">
-        Only what you send yourself: <strong>your name, your email address and the text of
-        your message.</strong> Nothing is gathered in the background. There is no profile
-        built about you, and no data is bought from anywhere else.
-      </p>
+      <h2>What is collected</h2>
+      <p>Only what you send yourself: <strong>your name, your email address and the text of your message.</strong> Nothing is gathered in the background. There is no profile built about you, and no data is bought from anywhere else.</p>
     </section>
-
     <section>
-      <h2 data-i18n="ppS3T">Why</h2>
-      <p data-i18n-html="ppS3B">
-        To read your message and reply to it, and to work out a price and a timeline if
-        you want one. That is the whole purpose. In GDPR terms the basis is your request
-        itself — steps taken at your own initiative before a possible contract.
-      </p>
+      <h2>Why</h2>
+      <p>To read your message and reply to it, and to work out a price and a timeline if you want one. That is the whole purpose. In GDPR terms the basis is your request itself — steps taken at your own initiative before a possible contract.</p>
     </section>
-
     <section>
-      <h2 data-i18n="ppS4T">Who else sees it</h2>
-      <p data-i18n-html="ppS4B">
-        A message travels through three services before it reaches me:
-        <strong>Web3Forms</strong> delivers the form, <strong>Cloudflare</strong> routes
-        the email, and <strong>Google</strong> hosts the mailbox it lands in. The site
-        itself is hosted on <strong>GitHub Pages</strong>, which — like every web server
-        on earth — records IP addresses in its own logs, and the page counter described
-        below is run by <strong>Cloudflare</strong>. Nobody else receives anything.
-      </p>
+      <h2>Who else sees it</h2>
+      <p>A message travels through three services before it reaches me: <strong>Web3Forms</strong> delivers the form, <strong>Cloudflare</strong> routes the email, and <strong>Google</strong> hosts the mailbox it lands in. The site itself is hosted on <strong>GitHub Pages</strong>, which — like every web server on earth — records IP addresses in its own logs, and the page counter described below is run by <strong>Cloudflare</strong>. Nobody else receives anything.</p>
     </section>
-
     <section>
-      <h2 data-i18n="ppS5T">How long it is kept</h2>
-      <p data-i18n-html="ppS5B">
-        Until your enquiry is finished with, and <strong>no longer than 12 months</strong>
-        after our last exchange. If we end up working together, the project correspondence
-        is kept for as long as the law requires it. Ask for it to be deleted sooner and it
-        will be.
-      </p>
+      <h2>How long it is kept</h2>
+      <p>Until your enquiry is finished with, and <strong>no longer than 12 months</strong> after our last exchange. If we end up working together, the project correspondence is kept for as long as the law requires it. Ask for it to be deleted sooner and it will be.</p>
     </section>
-
     <section>
-      <h2 data-i18n="ppS6T">Cookies and counting</h2>
-      <p data-i18n-html="ppS6B">
-        Your browser stores one thing: which language you chose, so the site does not throw
-        you somewhere else on your next visit. It stays in your browser and is never sent
-        anywhere. Visits are counted by Cloudflare Web Analytics, which sets no cookies at
-        all and cannot tell one visitor from another — <strong>it counts page views, not
-        people.</strong> No advertising pixels, nothing that follows you elsewhere, and
-        that is exactly why this site never asks you to accept anything.
-      </p>
+      <h2>Cookies and counting</h2>
+      <p>Your browser stores one thing: which language you chose, so the site does not throw you somewhere else on your next visit. It stays in your browser and is never sent anywhere. Visits are counted by Cloudflare Web Analytics, which sets no cookies at all and cannot tell one visitor from another — <strong>it counts page views, not people.</strong> No advertising pixels, nothing that follows you elsewhere, and that is exactly why this site never asks you to accept anything.</p>
     </section>
-
     <section>
-      <h2 data-i18n="ppS7T">Your rights</h2>
-      <p data-i18n-html="ppS7B">
-        You can ask what is held about you, have it corrected, have it deleted, object to
-        it being used, or ask for a copy. One email to
-        <a href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a> is enough — no form,
-        no reason required. If you are unhappy with how it is handled, you can complain to
-        the Polish supervisory authority, UODO.
-      </p>
+      <h2>Your rights</h2>
+      <p>You can ask what is held about you, have it corrected, have it deleted, object to it being used, or ask for a copy. One email to <a href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a> is enough — no form, no reason required. If you are unhappy with how it is handled, you can complain to the Polish supervisory authority, UODO.</p>
     </section>
-
     <section>
-      <h2 data-i18n="ppS8T">If this changes</h2>
-      <p data-i18n-html="ppS8B">
-        The date at the top changes with it. Nothing here is applied retroactively to a
-        message you have already sent.
-      </p>
+      <h2>If this changes</h2>
+      <p>The date at the top changes with it. Nothing here is applied retroactively to a message you have already sent.</p>
     </section>
   </div>
 </main>
-
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <span class="ft" data-i18n="footerCopyright">© 2026 OnlyMaxon Studio. All rights reserved.</span>
-      <span class="ft"><a href="/blog/" data-page="blog" data-i18n="footerBlog">Blog</a></span>
-      <span class="ft"><a href="/" data-page="" data-i18n="ppBack">Back to the site</a></span>
+      <span class="ft">© 2026 OnlyMaxon Studio. All rights reserved.</span>
+      <span class="ft"><a href="/blog/">Blog</a></span>
+      <span class="ft"><a href="/">Back to the site</a></span>
     </div>
   </div>
 </footer>
-
 <script>
   const langDD    = document.getElementById('langDD');
   const langDDBtn = document.getElementById('langDDBtn');
@@ -319,18 +237,13 @@
       langDDBtn.setAttribute('aria-expanded', 'false');
     }
   });
-  // Same rule as the home page: a language picked by hand wins over the auto-routing.
   langDD.querySelectorAll('a[data-lang]').forEach(a => {
     a.addEventListener('click', () => {
       try { localStorage.setItem('om_lang', a.dataset.lang); } catch (e) {}
     });
   });
 </script>
-
-<!-- Cloudflare Web Analytics — same beacon as the rest of the site. Section 6 above
-     describes exactly what it does, which is the only reason it is allowed on this page. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
-
 </body>
 </html>

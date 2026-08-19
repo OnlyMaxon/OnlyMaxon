@@ -1,0 +1,2384 @@
+<!DOCTYPE html>
+<!--
+  SOURCE for the home page, in all five languages.
+  / AND /pl/ /ru/ /tr/ /es/ are all generated from this file — including the English one.
+  Editing the index.html at the repository root does nothing: it is output, and the next
+  build overwrites it.
+
+  After changing anything here (or in build/translations.js) run:
+
+      node build/generate.js
+
+  ...otherwise every language, English included, stays on the old copy.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnlyMaxon — We turn ideas into working products.</title>
+  <meta name="description" content="OnlyMaxon is a product studio. We design, build, launch and grow real products — development and SEO under one roof. Working with clients worldwide.">
+  <meta name="keywords" content="OnlyMaxon, product studio, software development, mobile apps, web apps, MVP, SEO, startup studio">
+  <link rel="canonical" href="https://onlymaxon.com/">
+  <link rel="alternate" hreflang="en" href="https://onlymaxon.com/">
+  <link rel="alternate" hreflang="pl" href="https://onlymaxon.com/pl/">
+  <link rel="alternate" hreflang="ru" href="https://onlymaxon.com/ru/">
+  <link rel="alternate" hreflang="tr" href="https://onlymaxon.com/tr/">
+  <link rel="alternate" hreflang="es" href="https://onlymaxon.com/es/">
+  <link rel="alternate" hreflang="x-default" href="https://onlymaxon.com/">
+
+  <!-- build:root-only -->
+  <!-- ── First-visit language routing ────────────────────────────────────────────
+       Everything between the build:root-only markers is deleted from every generated
+       page. This block decides things only the bare domain can be asked to decide, and
+       /pl/, /ru/, /tr/, /es/ fail its first test and return — so on those four pages it
+       was a kilobyte and a half of script that parsed, ran and did nothing.
+       Shared links and QR codes point at the bare domain, which serves English. A
+       visitor whose phone is set to Polish should land on /pl/ without hunting for the
+       dropdown. Rules, in order:
+         · only runs on the root URL — /pl/, /ru/, /tr/, /es/ fall straight through
+         · a language picked by hand wins forever (localStorage, written by the dropdown)
+         · crawlers are never redirected: Googlebot runs JS, and without this check it
+           would read the redirect as a 301 and drop / from the English index
+         · Ukrainian is deliberately not mapped to Russian — those visitors stay on English
+       Inline and blocking on purpose: it has to decide before the first paint, or the
+       visitor sees a flash of English and is then thrown elsewhere. It also sits above
+       the hero-image preload, so a redirected visit never starts that download. -->
+  <script>
+  (function () {
+    var path = location.pathname;
+    if (path !== '/' && path !== '/index.html') return;
+    if (/bot|crawl|spider|slurp|bingpreview|headless|lighthouse/i.test(navigator.userAgent)) return;
+
+    var store;
+    try { store = window.localStorage; } catch (e) { return; }   // private mode / storage blocked
+
+    var offered = { pl: 1, ru: 1, tr: 1, es: 1 };
+    var saved = store.getItem('om_lang');
+    if (saved === 'en') return;                                  // asked for English on purpose
+    if (saved && offered[saved]) { location.replace('/' + saved + '/'); return; }
+    if (saved) return;
+
+    // Following a link from our own pages back to / is a deliberate move, not a first visit.
+    if (document.referrer && document.referrer.indexOf(location.host) > -1) return;
+
+    var prefs = navigator.languages || [navigator.language || ''];
+    for (var i = 0; i < prefs.length; i++) {
+      var tag = String(prefs[i]).toLowerCase().split('-')[0];
+      if (tag === 'en') return;                                  // English outranks the rest
+      if (offered[tag]) { location.replace('/' + tag + '/'); return; }
+    }
+  })();
+  </script>
+  <!-- /build:root-only -->
+
+  <meta name="theme-color" content="#06080C">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/png" href="images/icon.png">
+  <link rel="apple-touch-icon" href="images/icon.png">
+  <!-- hero logo is the LCP element — start fetching it before the parser reaches <body> -->
+  <link rel="preload" as="image" href="images/logo.webp" fetchpriority="high">
+
+  <!-- The two faces that draw the first screen: body copy at 400 and every heading at 700.
+       Without this they are only discovered once the first text is styled, which is a
+       needless wait for a file we already know is coming. Deliberately just these two —
+       500, 600, Space Grotesk and the latin-ext subset are left to normal discovery, since
+       preloading a font that turns out not to be needed costs the same bandwidth as one
+       that is. `crossorigin` is required even same-origin: fonts are fetched in CORS mode,
+       and without it the preload is thrown away and fetched a second time.
+       generate.js rewrites `latin` to `cyrillic` for /ru/. -->
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-700-latin.woff2">
+
+  <!-- Open Graph (Facebook, WhatsApp, Telegram, LinkedIn) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OnlyMaxon">
+  <meta property="og:title" content="OnlyMaxon — We turn ideas into working products.">
+  <meta property="og:description" content="A product studio — development and SEO under one roof. Working with clients worldwide.">
+  <meta property="og:url" content="https://onlymaxon.com/">
+  <meta property="og:image" content="https://onlymaxon.com/images/logo.jpg">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OnlyMaxon — We turn ideas into working products.">
+  <meta name="twitter:description" content="A product studio — development and SEO under one roof. Working with clients worldwide.">
+  <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
+
+  <!-- Structured data for Google (Organization) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "OnlyMaxon",
+    "legalName": "OnlyMaxon Studio",
+    "url": "https://onlymaxon.com",
+    "logo": "https://onlymaxon.com/images/logo.jpg",
+    "email": "hello@onlymaxon.com",
+    "description": "A product studio that builds apps and websites and ranks them on Google — development and SEO under one roof.",
+    "sameAs": [
+      "https://github.com/OnlyMaxon",
+      "https://www.instagram.com/0nlyMaxon"
+    ]
+  }
+  </script>
+
+  <!-- FAQ structured data (rich results in Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How much does a website cost?", "acceptedAnswer": { "@type": "Answer", "text": "Websites start at €390 (business-card) and €690 (with online booking). An online shop from €1090, a mobile app from €1400, a full platform from €3000. You get the exact price and date within 48 hours of the first call — no hidden costs." } },
+      { "@type": "Question", "name": "How long does it take?", "acceptedAnswer": { "@type": "Answer", "text": "A simple website takes about 1 week, a booking site around 2 weeks, and a mobile app 4–6 weeks. We agree the timeline up front and send you weekly updates." } },
+      { "@type": "Question", "name": "Who exactly is OnlyMaxon?", "acceptedAnswer": { "@type": "Answer", "text": "A small studio, not an agency with a sales department. You talk directly to the people who build your project — there is no account manager in between. Every project on this page is ours and every one of them is live: click any of them and see for yourself." } },
+      { "@type": "Question", "name": "Do I own the website and the code?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — 100%. Once it's done, the site, the code and all accounts are fully yours. No lock-in, no strings attached." } },
+      { "@type": "Question", "name": "What if you disappear halfway through?", "acceptedAnswer": { "@type": "Answer", "text": "You get the code, the repository and every account from day one — not at the end. Nothing is ever only in our hands. If we vanished tomorrow, any developer could open your project and carry on from where we stopped." } },
+      { "@type": "Question", "name": "What if I need changes later?", "acceptedAnswer": { "@type": "Answer", "text": "No problem. Small tweaks are easy, and for ongoing work (new features, SEO/ASO) we agree a clear rate up front. You're never stuck." } },
+      { "@type": "Question", "name": "How do we start?", "acceptedAnswer": { "@type": "Answer", "text": "Just send a message with your idea. The first call is free — we'll figure out what you need, give you a price and timeline, and start whenever you're ready." } }
+    ]
+  }
+  </script>
+
+  <style>
+    /* Self-hosted, so the page talks to exactly one origin. Google served these same
+       files, but from two extra hosts that each cost a DNS lookup and a TLS handshake
+       before a single glyph moved. Only the subsets these five languages actually use
+       were taken: latin + latin-ext everywhere, cyrillic for Inter. Space Grotesk has no
+       Cyrillic at all upstream, which is why Russian headings fall back to system-ui —
+       that was already true, it is just now visible in the file rather than hidden in a
+       CDN response. font-display: swap keeps first paint in system-ui, same as before. */
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap;
+                 src: url(/fonts/inter-500-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap;
+                 src: url(/fonts/inter-500-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap;
+                 src: url(/fonts/inter-500-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/inter-700-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/inter-700-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/inter-700-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/space-grotesk-600-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/space-grotesk-600-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/space-grotesk-700-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:     #06080C;
+      --bg2:    #0B0F16;
+      --bg3:    #121824;
+      --border: rgba(255,255,255,0.07);
+      --border-h: rgba(34,211,238,0.40);
+      --blue:   #22D3EE;   /* primary cyan (logo arrow) */
+      --blue-d: rgba(34,211,238,0.14);
+      --purple: #2C8A9C;   /* deep teal (gradient depth) */
+      --cyan:   #7FE9F0;   /* light cyan highlight */
+      --silver: #C6CED8;   /* metallic silver (logo M) */
+      --text:   #EAF2F6;
+      --text-d: #93A6B2;
+      --text-m: #4C5C68;
+      --r:      16px;
+    }
+
+    /* `clip` clips exactly like `hidden` but does NOT create a scroll container,
+       so it can't break position:sticky or scroll anchoring. `hidden` stays as fallback. */
+    html { scroll-behavior: smooth; overflow-x: hidden; overflow-x: clip; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      overflow-x: clip;
+      position: relative;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(34,211,238,0.4); border-radius: 3px; }
+
+    ::selection { background: rgba(34,211,238,0.28); color: #fff; }
+
+    a:focus-visible, button:focus-visible, .btn:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+    section { position: relative; z-index: 1; }
+
+    /* Skip layout and paint for sections the visitor has not reached yet — the phone
+       mock-ups alone are a few hundred nodes with their own gradients and shadows, and
+       all of it used to be laid out and painted before the hero could show.
+       Deliberately NOT applied to #projects, #stack, #process, #contact or #hero: those
+       are anchor targets, and jumping into a section whose height is still an estimate
+       lands at the wrong offset until the real size is known.
+       Two declarations, not one: the plain length is the fallback for browsers that do
+       not parse `auto <length>`, which would otherwise drop the property entirely and
+       leave a zero-height placeholder. `auto` lets the browser reuse the real measured
+       height once it has seen it, so the scrollbar stops moving after the first pass. */
+    #problems, #whatvisitka, #pricing, #faq, #languages {
+      content-visibility: auto;
+    }
+    #problems     { contain-intrinsic-size: 700px; contain-intrinsic-size: auto 700px; }
+    #whatvisitka  { contain-intrinsic-size: 950px; contain-intrinsic-size: auto 950px; }
+    #pricing      { contain-intrinsic-size: 900px; contain-intrinsic-size: auto 900px; }
+    #faq          { contain-intrinsic-size: 800px; contain-intrinsic-size: auto 800px; }
+    #languages    { contain-intrinsic-size: 320px; contain-intrinsic-size: auto 320px; }
+    /* An anchor jump is where a size estimate stops being harmless: `scroll-behavior:
+       smooth` works out its destination once, at the start, so a click on "Work With Us"
+       at the top of the page aims past five sections whose real heights are still unknown
+       and lands somewhere else by the time they render. The script switches this on at the
+       first anchor click and leaves it on — by then the initial paint, which is what
+       content-visibility was for, has already happened. */
+    body.cv-off #problems, body.cv-off #whatvisitka, body.cv-off #pricing,
+    body.cv-off #faq, body.cv-off #languages { content-visibility: visible; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 0%, var(--blue) 45%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── NAVIGATION ───────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100; padding: 22px 0;
+      /* explicit list, NOT `all`: `all` also animated backdrop-filter, i.e. 18 frames of
+         full-viewport blur re-sampling at the exact moment the user starts scrolling. */
+      transition: background-color 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
+      border-bottom: 1px solid transparent;
+      background-color: rgba(7,11,20,0);
+    }
+    /* backdrop-filter is re-sampled across the full width of the viewport on every scroll
+       frame, and it is the single most expensive thing the page does while scrolling.
+       At 0.88 opacity only 12% of what is behind the bar ever reached the eye, so a 24px
+       radius was buying almost nothing: lifting the fill to 0.94 and halving the radius
+       reads the same and costs roughly half as much per frame. */
+    nav.scrolled {
+      background-color: rgba(7,11,20,0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom-color: var(--border);
+      padding: 14px 0;
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 21px;
+      color: var(--text); text-decoration: none; letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--text-d); text-decoration: none;
+      font-size: 14px; font-weight: 500; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.current { color: var(--blue); }
+    .nav-cta {
+      background: var(--blue) !important;
+      color: #04141A !important;
+      padding: 9px 22px; border-radius: 9px;
+      font-weight: 700 !important;
+      box-shadow: 0 0 20px rgba(34,211,238,0.3);
+    }
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* hamburger button (mobile only) */
+    .nav-toggle {
+      display: none;
+      flex-direction: column; justify-content: center; gap: 5px;
+      width: 42px; height: 42px; padding: 0;
+      background: transparent; border: none; cursor: pointer;
+      z-index: 210;
+    }
+    .nav-toggle span {
+      display: block; width: 24px; height: 2px; border-radius: 2px;
+      background: var(--text); transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.55);
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.3s ease;
+      z-index: 90;
+    }
+    .nav-backdrop.open { opacity: 1; visibility: visible; }
+    .nav-m-only { display: none; }   /* mobile-menu extras: hidden on desktop */
+
+    /* ── HERO ─────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 130px 0 90px;
+      overflow: hidden;
+    }
+    .hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+    .blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px);
+    }
+    .blob-1 {
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(34,211,238,0.16) 0%, transparent 70%);
+      top: -150px; right: -150px;
+      animation: float 9s ease-in-out infinite;
+    }
+    .blob-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(44,138,156,0.16) 0%, transparent 70%);
+      bottom: -80px; left: 50px;
+      animation: float 11s ease-in-out infinite reverse;
+    }
+    .blob-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(34,211,238,0.08) 0%, transparent 70%);
+      top: 40%; left: 40%;
+      animation: float 13s ease-in-out infinite 2s;
+    }
+    /* translate only — scaling a blur(90px) layer forces it to re-rasterize every frame */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-28px); }
+    }
+
+    .hero-inner {
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      max-width: 820px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+
+    /* centered logo showcase */
+    .hero-logo {
+      position: relative;
+      width: 320px; max-width: 76vw;
+      margin: 0 auto 4px;
+    }
+    /* logo.webp carries a real alpha channel, so this is a plain composited layer.
+       It used to be an opaque logo-on-black rectangle hidden behind `mix-blend-mode:
+       screen` plus a two-gradient mask — and a blend mode has to re-read and re-mix the
+       backdrop underneath it on every frame. The backdrop here is the animated glow below
+       plus three blur(90px) blobs, so the LCP element was forcing all of that to be
+       recomposited 60 times a second, for the whole session. The alpha channel was
+       generated to reproduce the screen result exactly (a = max(R,G,B), colour
+       renormalised to full brightness), so the pixels are the same; only the cost is not.
+       drop-shadow stays: it rasterises once into the layer and now follows the logo's
+       actual shape instead of the old rectangle. */
+    .hero-logo img {
+      position: relative; z-index: 1;
+      /* height:auto + width/height attrs on the tag => the browser reserves the box
+         from the intrinsic ratio before the image loads (no layout shift / CLS) */
+      width: 100%; height: auto; display: block;
+      animation: logoFloat 6s ease-in-out infinite;
+      filter: drop-shadow(0 12px 40px rgba(34,211,238,0.18));
+    }
+    .hero-logo-glow {
+      position: absolute; inset: -6% -6% 2%;
+      background: radial-gradient(ellipse at center, rgba(34,211,238,0.22) 0%, transparent 60%);
+      filter: blur(26px); z-index: 0;
+      animation: glow 4s ease-in-out infinite;
+    }
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: rgba(34,211,238,0.1);
+      border: 1px solid rgba(34,211,238,0.28);
+      color: var(--blue);
+      font-size: 13px; font-weight: 500;
+      padding: 6px 16px; border-radius: 100px;
+      margin-bottom: 28px;
+    }
+    .badge-dot {
+      width: 7px; height: 7px;
+      background: #22C55E; border-radius: 50%;
+      box-shadow: 0 0 8px #22C55E;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.75); }
+    }
+
+    .hero-title {
+      /* The 44px floor was tuned for the old, shorter headline. With this copy it left
+         Russian and Turkish at six lines with orphaned words on a phone; 34px is the
+         measured sweet spot across all five languages at 360–390px, and the steeper vw
+         term keeps tablets and desktop where they were. */
+      font-size: clamp(34px, 6.5vw, 68px);
+      letter-spacing: -2.5px;
+      margin-bottom: 22px;
+      /* Evens out the line lengths instead of letting a single short word ("do.",
+         "you.", "находили.") drop onto a line of its own. Unsupported browsers just
+         wrap normally, so there is nothing to fall back to. */
+      text-wrap: balance;
+    }
+    /* Each sentence is its own block so `balance` (inherited from above) evens out that
+       sentence alone. Sharing one block via <br> made the balancer treat both as one
+       run: it tidied the first line pair and left the second ending on a lone word. */
+    .hero-title span { display: block; }
+    .hero-sub {
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: var(--text-d);
+      margin: 0 auto 44px;
+      max-width: 560px;
+      line-height: 1.75;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 600; }
+
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 30px; border-radius: 11px;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.25s ease, background-color 0.25s ease,
+                  box-shadow 0.25s ease, border-color 0.25s ease;
+      cursor: pointer; border: none;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--blue); color: #04141A;
+      box-shadow: 0 4px 28px rgba(34,211,238,0.35);
+    }
+    .btn-primary:hover {
+      background: #5FE6F2;
+      box-shadow: 0 8px 40px rgba(34,211,238,0.5);
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: var(--bg3); color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--border-h);
+      background: rgba(34,211,238,0.06);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex; align-items: center; justify-content: center;
+      gap: 28px; margin-top: 44px;
+    }
+    .stat { display: flex; flex-direction: column; gap: 2px; }
+    .stat-val {
+      font-size: 24px; font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .stat-lab {
+      font-size: 11px; color: var(--text-m);
+      text-transform: uppercase; letter-spacing: 0.6px;
+    }
+    .stat-sep { width: 1px; height: 38px; background: var(--border); }
+
+    /* opacity only — the element carrying this animation also has a blur() filter,
+       and scaling a blurred layer forces it to re-rasterize every frame */
+    @keyframes glow {
+      0%, 100% { opacity: 0.5; }
+      50%       { opacity: 1; }
+    }
+
+    /* ── DIVIDER ──────────────────────────── */
+    .divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+    }
+
+    /* ── SECTION LABELS ───────────────────── */
+    .eyebrow {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 12px;
+    }
+    .sec-title {
+      font-size: clamp(28px, 3.5vw, 44px);
+      letter-spacing: -1.5px; margin-bottom: 16px;
+    }
+    .sec-desc {
+      font-size: 17px; color: var(--text-d);
+      max-width: 540px; line-height: 1.75;
+    }
+
+    /* ── PROJECTS ─────────────────────────── */
+    #projects { padding: 120px 0; }
+    .projects-head { margin-bottom: 60px; }
+    .projects-grid {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 22px;
+      perspective: 1200px;
+    }
+
+    .proj-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      transition: transform 0.32s ease, border-color 0.32s ease, box-shadow 0.32s ease;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column;
+      flex: 1 1 300px; max-width: 360px;
+    }
+    .proj-card:hover {
+      transform: translateY(-7px);
+      border-color: var(--border-h);
+      box-shadow: 0 24px 64px rgba(34,211,238,0.13);
+    }
+
+    .proj-thumb {
+      width: 100%; height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .proj-thumb::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.55));
+    }
+    .pt-birklik  { background: linear-gradient(135deg,#0f2027,#203a43,#2c5364); }
+    .pt-yodin    { background: linear-gradient(135deg,#1a0533,#2d1557,#4a2080); }
+    .pt-nextcargo{ background: linear-gradient(135deg,#0a1628,#0f2a4a,#1a4070); }
+
+    .proj-logo {
+      position: relative; z-index: 1;
+      max-width: 78%; max-height: 78%;
+      object-fit: contain; display: block;
+      filter: drop-shadow(0 6px 22px rgba(0,0,0,0.45));
+    }
+    .pl-birklik  { max-width: 92%; mix-blend-mode: screen; filter: none; }
+    .pl-nextcargo{ max-width: 132px; }
+    .pl-yodin    { max-width: 116px; border-radius: 22px; }
+
+    .proj-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+
+    .proj-name {
+      font-size: 19px; font-weight: 700;
+      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .badge-live {
+      font-size: 10px; font-weight: 600; padding: 2px 9px;
+      border-radius: 5px; text-transform: uppercase; letter-spacing: 0.5px;
+      background: rgba(34,197,94,0.12); color: #4ADE80;
+      border: 1px solid rgba(34,197,94,0.25);
+    }
+    .badge-dev {
+      font-size: 10px; font-weight: 600; padding: 2px 9px;
+      border-radius: 5px; text-transform: uppercase; letter-spacing: 0.5px;
+      background: rgba(245,180,90,0.12); color: #F5B45A;
+      border: 1px solid rgba(245,180,90,0.28);
+    }
+    /* The hook: what was broken before we turned up. It sits ABOVE the description so the
+       first line a visitor reads is their own problem, not our feature list. */
+    .proj-problem {
+      font-size: 15px; font-weight: 600; color: var(--text);
+      line-height: 1.45; margin-bottom: 10px;
+    }
+    .proj-desc {
+      font-size: 14px; color: var(--text-d);
+      line-height: 1.65; margin-bottom: 14px; flex: 1;
+    }
+    /* The proof, and the one line a visitor should still remember tomorrow — so it is the
+       only text in the card carrying the accent colour. */
+    .proj-result {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 13.5px; font-weight: 600; color: var(--cyan);
+      line-height: 1.5; margin-bottom: 16px;
+    }
+    .proj-result::before {
+      content: '';
+      flex-shrink: 0; width: 6px; height: 6px; margin-top: 7px;
+      border-radius: 50%; background: var(--blue);
+      box-shadow: 0 0 8px rgba(34,211,238,0.7);
+    }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+    .tag {
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text-d); font-size: 11px; font-weight: 500;
+      padding: 4px 10px; border-radius: 6px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+    .proj-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--blue);
+      transition: gap 0.2s;
+    }
+    .proj-link:hover { gap: 10px; }
+
+    /* ── PROBLEM → SOLUTION ───────────────── */
+    /* Sits directly under the hero, before any of our work: a visitor recognises their own
+       Tuesday before they are asked to admire ours. */
+    #problems { padding: 110px 0; }
+    .ps-head { text-align: center; max-width: 640px; margin: 0 auto 54px; }
+    .ps-head .sec-desc { margin: 0 auto; }
+    .ps-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 18px; max-width: 900px; margin: 0 auto;
+    }
+    @media (max-width: 760px) { .ps-grid { grid-template-columns: 1fr; max-width: 480px; } }
+    .ps-card {
+      display: flex; flex-direction: column;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 26px 24px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .ps-card:hover { border-color: var(--border-h); transform: translateY(-5px); }
+    /* Their words, not ours — set at --text weight so it reads as someone speaking, with
+       the rule down the side standing in for the quotation marks. */
+    .ps-quote {
+      font-size: 15px; font-weight: 600; color: var(--text);
+      line-height: 1.55; margin-bottom: 16px;
+      padding-left: 16px; border-left: 2px solid rgba(34,211,238,0.35);
+    }
+    .ps-answer {
+      font-size: 14px; color: var(--text-d);
+      line-height: 1.65; margin-bottom: 18px; flex: 1;
+    }
+    /* Only the fourth card carries a second door out of the page, so the row exists just
+       there — the other three end on the pill alone. */
+    .ps-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .ps-more {
+      font-size: 13px; font-weight: 600; color: var(--blue);
+      text-decoration: none; transition: gap 0.2s;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .ps-more::after { content: '→'; }
+    .ps-more:hover { gap: 9px; }
+    .ps-time {
+      align-self: flex-start;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--blue); background: var(--blue-d);
+      border: 1px solid rgba(34,211,238,0.28);
+      padding: 5px 12px; border-radius: 100px;
+    }
+
+    /* ── PROCESS ──────────────────────────── */
+    #process {
+      padding: 120px 0;
+      background: linear-gradient(to bottom, transparent, rgba(12,18,32,0.7), transparent);
+    }
+    .process-head { text-align: center; max-width: 660px; margin: 0 auto 56px; }
+    .process-head .sec-desc { margin: 0 auto; }
+
+    /* One column, not a 2x2 grid. These four are a sequence, and a grid gives no reading
+       order — the eye picks a corner and the steps read as four unrelated features. */
+    .proc-steps {
+      display: flex; flex-direction: column;
+      gap: 14px; max-width: 780px; margin: 0 auto;
+      position: relative;
+    }
+    /* The rail runs behind the cards on the container, NOT on each step: .proc-step lifts
+       5px on hover, and a per-step connector would lift with it and tear the line. The
+       cards are opaque, so only the segments crossing the gaps are ever visible. */
+    .proc-steps::before {
+      content: '';
+      position: absolute; left: 41px; top: 34px; bottom: 34px; width: 2px;
+      background: linear-gradient(to bottom, rgba(34,211,238,0.32), rgba(34,211,238,0.06));
+      z-index: 0;
+    }
+
+    .proc-step {
+      display: flex; gap: 18px;
+      padding: 22px; border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      position: relative; z-index: 1;
+      transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+    }
+    .proc-step:hover {
+      border-color: var(--border-h);
+      transform: translateY(-5px);
+      background: var(--bg3);
+    }
+    .step-num {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border-radius: 10px;
+      background: var(--blue-d);
+      border: 1px solid rgba(34,211,238,0.3);
+      color: var(--blue);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    /* The commitment. It is the reason this section exists, so it sits above the heading
+       and is the only line here in the accent colour. */
+    .step-time {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.3px;
+      color: var(--blue); margin-bottom: 6px;
+    }
+    .step-body h3 { font-size: 16px; font-weight: 700; margin-bottom: 5px; }
+    .step-body p { font-size: 14px; color: var(--text-d); line-height: 1.6; }
+
+    /* ── STACK ────────────────────────────── */
+    #stack { padding: 120px 0; }
+    .stack-head { text-align: center; margin-bottom: 60px; }
+    .stack-head .sec-desc { margin: 0 auto; }
+
+    .stack-grid {
+      display: grid; grid-template-columns: repeat(2,1fr);
+      gap: 20px; max-width: 720px; margin: 0 auto;
+    }
+    .stack-cat {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 18px; padding: 30px 28px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .stack-cat:hover { border-color: var(--border-h); transform: translateY(-5px); }
+    .sc-icon {
+      font-size: 34px; margin-bottom: 16px;
+      width: 60px; height: 60px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--blue-d); border: 1px solid rgba(34,211,238,0.2);
+    }
+    .sc-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; font-weight: 700; line-height: 1.25;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .sc-desc {
+      font-size: 14px; color: var(--text-d);
+      line-height: 1.65; margin-bottom: 10px;
+    }
+    /* Plain-language outcomes. The chips further down name the discipline ("On-page SEO");
+       these say what the client actually ends up with, which is the only half of it most
+       visitors can read. Outcomes first, jargon as a footnote for the few who want it. */
+    .sc-outcomes {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 9px;
+      margin: 16px 0 22px;
+    }
+    .sc-outcome {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13.5px; color: var(--text-d); line-height: 1.55;
+    }
+    .sc-outcome::before {
+      content: '✓';
+      flex-shrink: 0; width: 17px; height: 17px; margin-top: 2px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; line-height: 1;
+      background: var(--blue-d); border: 1px solid rgba(34,211,238,0.3);
+      color: var(--blue); font-size: 9px; font-weight: 700;
+    }
+    .sc-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--text-m); margin-bottom: 12px;
+    }
+    .sc-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    /* Deliberately smaller than the copy above: these are credibility, not the pitch.
+       The colour stays at --text-d — dropping to --text-m would make them unreadable
+       on --bg3 rather than merely quiet. */
+    .sc-tag {
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text-d); font-size: 12px; font-weight: 500;
+      padding: 5px 11px; border-radius: 8px;
+      transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+    .sc-tag:hover {
+      background: var(--blue-d);
+      border-color: rgba(34,211,238,0.4);
+      color: var(--text);
+    }
+
+    /* ── LANGUAGE BAND ────────────────────── */
+    /* Five languages were only ever a technical fact here — five URLs a crawler could see
+       and a visitor could not. The chips are the real links, so this block demonstrates
+       itself instead of claiming: tap Español and you are on the Spanish site. */
+    #languages { padding: 90px 0; }
+    .lang-band {
+      display: flex; align-items: center; gap: 36px; flex-wrap: wrap;
+      max-width: 980px; margin: 0 auto;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 34px 36px;
+    }
+    .lang-band-text { flex: 1 1 340px; }
+    .lang-band-title {
+      font-size: clamp(22px, 2.6vw, 30px);
+      letter-spacing: -1px; margin-bottom: 12px;
+    }
+    .lang-band-desc { font-size: 15px; color: var(--text-d); line-height: 1.7; }
+    .lang-band-links { display: flex; flex-wrap: wrap; gap: 9px; flex: 0 1 280px; }
+    .lang-chip {
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      color: var(--text-d);
+      background: var(--bg3); border: 1px solid var(--border);
+      padding: 9px 16px; border-radius: 100px;
+      transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+    }
+    .lang-chip:hover { color: var(--text); border-color: var(--border-h); }
+    .lang-chip.is-current {
+      background: var(--blue-d); border-color: rgba(34,211,238,0.4); color: var(--blue);
+    }
+    @media (max-width: 640px) {
+      #languages { padding: 70px 0; }
+      .lang-band { padding: 26px 22px; gap: 22px; }
+    }
+
+    /* ── CONTACT ──────────────────────────── */
+    #contact { padding: 120px 0; }
+    .contact-wrap {
+      text-align: center; max-width: 660px;
+      margin: 0 auto; position: relative; z-index: 1;
+    }
+    .contact-glow {
+      position: absolute;
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse, rgba(34,211,238,0.1) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+    #contact .sec-title { font-size: clamp(32px,4vw,54px); margin-bottom: 20px; }
+    #contact .sec-desc { margin: 0 auto 48px; }
+
+    .contact-btns {
+      display: flex; justify-content: center;
+      gap: 14px; margin-bottom: 44px; flex-wrap: wrap;
+    }
+    .contact-socials {
+      display: flex; justify-content: center;
+      align-items: center; gap: 24px; flex-wrap: wrap;
+    }
+    .social-link {
+      display: flex; align-items: center; gap: 8px;
+      color: var(--text-d); text-decoration: none;
+      font-size: 14px; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .social-link:hover { color: var(--blue); }
+    .social-link svg { width: 17px; height: 17px; fill: currentColor; flex-shrink: 0; }
+    .soc-sep { color: var(--text-m); font-size: 18px; }
+
+    /* ── FOOTER ───────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 26px 0;
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .ft { font-size: 13px; color: var(--text-m); }
+    .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
+    .ft a:hover { color: var(--blue); }
+
+    /* ── ANIMATIONS ───────────────────────── */
+    /* Everything the hero animates is infinite, and infinite means "until the tab closes",
+       not "until it scrolls away". Five of them (three blobs, the logo, its glow, the
+       status dot) went on producing compositor frames for the entire session while the
+       visitor read the pricing table — invisible work, and on a phone that is battery and
+       a scheduler competing with the scroll. The observer at the bottom of the page flips
+       .hero-out once the hero clears the viewport, and back when it returns.
+       animation-play-state resumes where it stopped, so nothing jumps on the way back. */
+    body.hero-out .blob,
+    body.hero-out .hero-logo img,
+    body.hero-out .hero-logo-glow,
+    body.hero-out .badge-dot { animation-play-state: paused; }
+
+    /* The reveal runs on `animation`, deliberately NOT on `transition`.
+       `transition` is a shorthand, and several components below (.tilt, .price-card,
+       .faq-item …) declare their own hover transition after this rule — each one
+       silently replaced the whole list and killed the reveal on its elements.
+       `animation` is a separate property, so a component's transition can no longer
+       reach it, and every component keeps its own snappy hover timing.
+       `backwards` holds the start frame during the stagger delay; there is no
+       `forwards`, so once it ends the static .in values below take over — which is what
+       lets the JS tilt keep writing its own inline transform afterwards. */
+    .fade-up { opacity: 0; transform: translateY(38px); }
+    .fade-up.in {
+      opacity: 1; transform: none;
+      /* The stagger comes in through a custom property rather than a separate
+         animation-delay rule. `animation` is a shorthand too, so it would reset any
+         delay declared elsewhere — and .fade-up.in outweighs a bare .d1. Feeding the
+         value into the shorthand makes the order of these rules irrelevant. */
+      animation: fadeUp 0.7s ease var(--reveal-delay, 0s) backwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(38px); }
+    }
+    .d1 { --reveal-delay: 0.1s; }
+    .d2 { --reveal-delay: 0.2s; }
+    .d3 { --reveal-delay: 0.3s; }
+    .d4 { --reveal-delay: 0.4s; }
+
+    /* keeps the hero copy above the blurred blobs behind it */
+    #hero .container { position: relative; z-index: 2; }
+    /* This list MUST keep opacity and transform at the .fade-up reveal speed.
+       `transition` is a shorthand and .tilt is declared after .fade-up with equal
+       specificity, so a shorter list here silently kills the card's reveal — opacity
+       stops transitioning at all. The fast tilt-return timing is applied inline by JS
+       on mouseenter instead, where it can't affect the reveal. */
+    .tilt {
+      transform-style: preserve-3d;
+      transition: transform 0.18s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    /* promote to its own layer only while actually being tilted — a permanent
+       will-change kept 3 compositor layers alive for the whole session */
+    .tilt:hover { will-change: transform; }
+    .tilt-shine {
+      position: absolute; inset: 0;
+      border-radius: inherit; pointer-events: none;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%),
+        rgba(255,255,255,0.12) 0%, transparent 45%);
+      opacity: 0; transition: opacity 0.3s ease; z-index: 3;
+    }
+    .tilt:hover .tilt-shine { opacity: 1; }
+
+    /* ── LANGUAGE DROPDOWN ────────────────── */
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .lang-dd { position: relative; }
+    .lang-dd-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text-d); font-family: inherit;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.3px;
+      padding: 7px 11px; border-radius: 9px; cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .lang-dd-btn:hover { color: var(--text); border-color: var(--border-h); }
+    .lang-dd-btn > svg { width: 15px; height: 15px; }
+    .lang-dd-btn .chev { width: 11px; height: 11px; opacity: 0.7; transition: transform 0.2s; }
+    .lang-dd.open .lang-dd-btn .chev { transform: rotate(180deg); }
+    .lang-dd-menu {
+      position: absolute; top: calc(100% + 8px); right: 0;
+      min-width: 152px; list-style: none;
+      background: rgba(11,15,22,0.98);
+      -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 6px; z-index: 120;
+      opacity: 0; visibility: hidden; transform: translateY(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    }
+    .lang-dd.open .lang-dd-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .lang-dd-menu a {
+      display: block; width: 100%; text-align: left;
+      background: transparent; border: none; cursor: pointer; text-decoration: none;
+      color: var(--text-d); font-family: inherit; font-size: 14px; font-weight: 500;
+      padding: 9px 12px; border-radius: 8px;
+      transition: background-color 0.15s, color 0.15s;
+    }
+    .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
+    .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
+
+    /* ── PRICING ──────────────────────────── */
+    #pricing { padding: 120px 0; }
+    .pricing-head { text-align: center; margin-bottom: 60px; }
+    .pricing-head .sec-desc { margin: 0 auto; }
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 20px; max-width: 1160px; margin: 0 auto;
+    }
+    @media (max-width: 1040px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); max-width: 640px; } }
+    @media (max-width: 560px)  { .pricing-grid { grid-template-columns: 1fr; max-width: 380px; } }
+    .pricing-note {
+      max-width: 760px;
+      margin: 34px auto 0;
+      text-align: center;
+      color: var(--text-d);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .price-card {
+      display: flex; flex-direction: column;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px 28px;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .price-card:hover {
+      transform: translateY(-6px); border-color: var(--border-h);
+      box-shadow: 0 24px 64px rgba(34,211,238,0.13);
+    }
+    .price-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px; font-weight: 700; color: var(--text);
+      margin-bottom: 20px; min-height: 48px;
+    }
+    .price-amount {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 34px; font-weight: 700; line-height: 1.1; margin-bottom: 8px;
+      background: linear-gradient(135deg, #fff 0%, var(--blue) 60%, var(--purple) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .price-time {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 13px; color: var(--text-d); margin-bottom: 26px;
+    }
+    .price-time::before { content: '🕒'; }
+    .price-card .btn { margin-top: auto; justify-content: center; }
+
+    /* The recurring tier, deliberately laid out sideways instead of as a sixth column —
+       a different shape says "different kind of thing" faster than any label would. */
+    .pricing-ongoing {
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+      max-width: 1160px; margin: 20px auto 0;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 26px 30px;
+      transition: border-color 0.3s ease;
+    }
+    .pricing-ongoing:hover { border-color: var(--border-h); }
+    .po-text { flex: 1 1 280px; }
+    .po-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px;
+    }
+    .po-desc { font-size: 14px; color: var(--text-d); line-height: 1.6; }
+    .po-price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px; font-weight: 700; line-height: 1.1; flex-shrink: 0;
+      background: linear-gradient(135deg, #fff 0%, var(--blue) 60%, var(--purple) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .pricing-ongoing .btn { flex-shrink: 0; }
+    @media (max-width: 640px) {
+      .pricing-ongoing {
+        flex-direction: column; align-items: stretch;
+        text-align: center; gap: 16px; padding: 24px 22px;
+      }
+      /* flex-basis follows the main axis, and the main axis just became vertical: the
+         280px that reserved WIDTH on desktop was reserving 280px of HEIGHT here, so the
+         two lines of text sat at the top of an empty box. Back to content height. */
+      .po-text { flex: 0 1 auto; }
+      .pricing-ongoing .btn { justify-content: center; }
+    }
+
+    /* ── SMALL PROJECT CARDS ──────────────── */
+    .projects-grid.small-grid { margin-top: 22px; }
+    .small-grid .proj-card { max-width: 300px; }
+    .small-grid .proj-thumb { height: 132px; }
+    .small-grid .proj-body { padding: 18px; }
+    .small-grid .proj-name { font-size: 16px; }
+    .small-grid .proj-problem { font-size: 14px; }
+    .small-grid .proj-desc { font-size: 13px; }
+    .small-grid .proj-result { font-size: 12.5px; }
+
+    /* ── CONTACT MODAL ────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 300;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      background: rgba(3,5,9,0.72);
+      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.28s ease;
+    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+    .modal {
+      width: 100%; max-width: 460px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px;
+      position: relative;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 0.3s ease;
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      width: 34px; height: 34px; border-radius: 8px;
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text-d); font-size: 20px; line-height: 1;
+      cursor: pointer; transition: color 0.2s, border-color 0.2s;
+    }
+    .modal-close:hover { color: var(--text); border-color: var(--border-h); }
+    .modal h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px; font-weight: 700; margin-bottom: 8px; padding-right: 30px;
+    }
+    .modal-note { font-size: 14px; color: var(--text-d); line-height: 1.6; margin-bottom: 22px; }
+    .modal form { display: flex; flex-direction: column; gap: 12px; }
+    .modal input, .modal textarea, .modal select {
+      width: 100%; background: var(--bg3);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 14px; color: var(--text);
+      font-family: inherit; font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    .modal input:focus, .modal textarea:focus, .modal select:focus { outline: none; border-color: var(--border-h); }
+    /* The native arrow is drawn by the OS and comes out light-on-light in a dark form, so
+       it is replaced with an inline chevron and the room for it made on the right. */
+    .modal select {
+      appearance: none; -webkit-appearance: none;
+      cursor: pointer; padding-right: 38px;
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2393A6B2' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 13px center; background-size: 13px;
+    }
+    /* Until something is picked the field reads as a placeholder, like the inputs above it. */
+    .modal select:invalid { color: var(--text-m); }
+    .modal select option { background: var(--bg2); color: var(--text); }
+    .modal textarea { resize: vertical; min-height: 110px; }
+    .modal input::placeholder, .modal textarea::placeholder { color: var(--text-m); }
+    .modal form .btn { margin-top: 4px; justify-content: center; }
+    /* Quiet on purpose: reassurance for whoever looks for it, not a warning for everyone
+       else. The link is the only part that reads as clickable. */
+    .modal-privacy { font-size: 12px; color: var(--text-m); text-align: center; line-height: 1.5; }
+    .modal-privacy a { color: var(--text-d); text-decoration: underline; text-underline-offset: 2px; }
+    .modal-privacy a:hover { color: var(--blue); }
+    .modal-status { font-size: 13px; text-align: center; min-height: 18px; }
+    .modal-status.ok  { color: #4ADE80; }
+    .modal-status.err { color: #F87171; }
+
+    /* ── FAQ ──────────────────────────────── */
+    #faq { padding: 120px 0; }
+    .faq-head { text-align: center; margin-bottom: 52px; }
+    .faq-head .sec-desc { margin: 0 auto; }
+    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden; transition: border-color 0.3s;
+    }
+    .faq-item.open { border-color: var(--border-h); }
+    .faq-q {
+      width: 100%; text-align: left; cursor: pointer;
+      background: transparent; border: none; color: var(--text);
+      font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 16px;
+      padding: 20px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .faq-icon { flex-shrink: 0; width: 20px; height: 20px; position: relative; }
+    .faq-icon::before, .faq-icon::after {
+      content: ''; position: absolute; background: var(--blue); border-radius: 2px;
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+    }
+    .faq-icon::before { width: 13px; height: 2px; }
+    .faq-icon::after { width: 2px; height: 13px; transition: transform 0.3s ease; }
+    .faq-item.open .faq-icon::after { transform: translate(-50%,-50%) scaleY(0); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-a p { padding: 0 22px 20px; color: var(--text-d); font-size: 14px; line-height: 1.7; }
+    /* When an answer carries a follow-up link, the answer gives up most of its bottom
+       padding so the two do not read as two separate blocks. */
+    .faq-a p:not(:last-child) { padding-bottom: 10px; }
+
+    /* In-content links to the blog. Deliberately not in the nav: they belong at the exact
+       line where the visitor forms the question, not in a menu they were not reading. */
+    .faq-more a, .pricing-more a, .sc-more a {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--blue);
+      text-decoration: none; transition: gap 0.2s;
+    }
+    .faq-more a::after, .pricing-more a::after, .sc-more a::after { content: '→'; }
+    .faq-more a:hover, .pricing-more a:hover, .sc-more a:hover { gap: 10px; }
+    .pricing-more { text-align: center; margin-top: 14px; }
+    .sc-more { margin-top: 16px; }
+
+    /* ── "WHAT'S A BUSINESS-CARD SITE" (static, no jank) ── */
+    #whatvisitka { padding: 110px 0; }
+    .vk-head { text-align: center; max-width: 640px; margin: 0 auto 54px; }
+    .vk-head .sec-desc { margin: 0 auto; }
+    .vk-row {
+      display: flex; justify-content: center; align-items: center;
+      gap: 26px;
+    }
+
+    /* Each phone is themed purely by these four custom properties — a new colourway
+       is one .vk-<name> rule, nothing else needs touching. */
+    .vk-phone {
+      --acc:  #E7B45A;            /* accent (amber, the barber) */
+      --acc-d:#C8922F;
+      --scr:  linear-gradient(180deg, #100E0A, #1A150E);
+      --ink:  #F4EEE4;            /* screen text */
+      --mut:  #B0A493;            /* muted screen text */
+      --on-acc:#1a1509;           /* text sitting on the accent */
+      width: 256px; height: 524px; flex-shrink: 0;
+      border-radius: 42px; background: #14181f; padding: 9px; position: relative;
+      border: 1px solid rgba(255,255,255,0.09);
+    }
+    .vk-rose {
+      --acc: #E9A5BC; --acc-d: #C0687F;
+      --scr: linear-gradient(180deg, #120A0E, #1C1016);
+      --ink: #F6EAEF; --mut: #B39AA3; --on-acc: #1e0d13;
+    }
+    .vk-cyan {
+      --acc: #7FE9F0; --acc-d: #2C8A9C;
+      --scr: linear-gradient(180deg, #08111A, #0D1A24);
+      --ink: #E6F4F7; --mut: #93AAB3; --on-acc: #04141A;
+    }
+    /* the middle one is the hero of the row — bigger box, not a transform, so it
+       can't fight the .fade-up translate */
+    .vk-featured {
+      width: 278px; height: 568px; border-radius: 46px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.5);
+    }
+    .vk-featured .vk-screen { border-radius: 38px; }
+
+    .vk-phone::before {
+      content: ''; position: absolute; top: 11px; left: 50%; transform: translateX(-50%);
+      width: 90px; height: 20px; background: #0a0d12; border-radius: 12px; z-index: 2;
+    }
+    .vk-screen {
+      width: 100%; height: 100%; border-radius: 34px; overflow: hidden;
+      background: var(--scr);
+      color: var(--ink); display: flex; flex-direction: column; text-align: center;
+      padding: 44px 20px 22px;
+    }
+    .vk-ava {
+      width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 12px;
+      background: linear-gradient(140deg, var(--acc), var(--acc-d));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 29px; color: var(--on-acc);
+    }
+    .vk-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; }
+    .vk-role { color: var(--acc); font-size: 11px; font-weight: 600; margin-top: 3px; letter-spacing: 0.4px; }
+    .vk-rating { font-size: 12px; color: var(--acc); font-weight: 600; margin: 7px 0 13px; }
+    .vk-srv {
+      display: flex; justify-content: space-between; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 9px 13px; margin-bottom: 8px; font-size: 13px;
+    }
+    .vk-srv span { text-align: left; }
+    .vk-srv b { font-family: 'Space Grotesk', sans-serif; color: var(--acc); white-space: nowrap; }
+    .vk-hours { font-size: 11.5px; color: var(--mut); margin: 11px 0 12px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .vk-btns { margin-top: auto; display: flex; gap: 8px; }
+    .vk-cta { flex: 1; background: linear-gradient(135deg, var(--acc), var(--acc-d)); color: var(--on-acc); font-weight: 700; font-size: 13px; padding: 11px; border-radius: 11px; }
+    .vk-cta2 { background: transparent; border: 1px solid var(--acc); color: var(--acc); }
+    .vk-caption { font-size: 12px; color: var(--text-m); text-align: center; margin-top: 30px; }
+
+    .vk-swipe { display: none; }
+
+    /* Three phones can't sit side by side below ~900px. Rather than let flex-wrap
+       break them into an ugly 2 + 1, the row becomes a snap-scrolling strip — and the
+       phones shrink, because at full size one alone ate ~60% of a phone screen. */
+    @media (max-width: 900px) {
+      .vk-row {
+        justify-content: flex-start;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: auto;   /* the initial centring must be instant, not animated */
+        gap: 16px;
+        /* half-viewport padding lets the first and last phone snap to the centre
+           instead of getting stuck against the edges */
+        padding: 6px calc(50vw - 112px) 20px;
+        margin: 0 -28px;
+        scrollbar-width: none;
+      }
+      .vk-row::-webkit-scrollbar { display: none; }
+      .vk-phone, .vk-featured {
+        scroll-snap-align: center;
+        width: 224px; height: 466px;
+        border-radius: 36px; padding: 8px;
+        box-shadow: none;
+      }
+      .vk-phone .vk-screen, .vk-featured .vk-screen {
+        border-radius: 30px; padding: 36px 15px 16px;
+      }
+      /* the middle phone carries a fourth service row, and long names ("Наращивание
+         ресниц", "Extensión de pestañas") wrap onto two lines — it needs the extra
+         height here too, not just on desktop */
+      .vk-featured { height: 512px; }
+      .vk-ava { width: 54px; height: 54px; font-size: 24px; margin-bottom: 10px; }
+      .vk-name { font-size: 18px; }
+      .vk-role { font-size: 10px; }
+      .vk-rating { font-size: 11px; margin: 5px 0 11px; }
+      .vk-srv { font-size: 12px; padding: 8px 11px; margin-bottom: 7px; }
+      .vk-hours { font-size: 10.5px; margin: 9px 0 10px; }
+      .vk-cta { font-size: 12px; padding: 10px 6px; }
+
+      .vk-head { margin-bottom: 28px; }
+      .vk-swipe {
+        display: block; text-align: center;
+        font-size: 12px; color: var(--text-m); margin-top: 4px;
+      }
+      .vk-caption { margin-top: 14px; }
+    }
+
+    /* ── RESPONSIVE ───────────────────────── */
+    @media (max-width: 860px) {
+      .stack-grid { grid-template-columns: 1fr; max-width: 460px; }
+      .footer-inner { flex-direction: column; gap: 10px; text-align: center; }
+    }
+    @media (max-width: 640px) {
+      #hero { padding: 116px 0 70px; }
+      .hero-logo { width: 260px; }
+      .hero-stats { gap: 18px; }
+      .stat-val { font-size: 21px; }
+      .stat-lab { font-size: 10px; }
+      .container { padding: 0 20px; }
+      .price-name { min-height: 0; }
+    }
+    /* Three stat tiles instead of two: on the narrowest phones the labels need the room
+       back, or the row breaks into a ragged second line with a separator leading it. */
+    @media (max-width: 400px) {
+      .hero-stats { gap: 13px; }
+      .stat-lab { font-size: 9.5px; letter-spacing: 0.3px; }
+    }
+    /* 820, not 600. The nav gained a fifth link ("Apps & platforms"), and five links plus
+       the CTA plus the language button stopped fitting on one line well before a phone —
+       a tablet in portrait was already overflowing. The slide-out menu takes over early
+       rather than letting the row collapse. */
+    @media (max-width: 820px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        position: fixed; top: 0; right: 0;
+        height: 100vh; width: min(85vw, 340px);
+        flex-direction: column; align-items: stretch;
+        justify-content: flex-start; gap: 0;
+        background: rgba(8,11,18,0.98);
+        -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
+        border-left: 1px solid var(--border);
+        padding: 82px 30px 30px;
+        overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform 0.38s cubic-bezier(.4,0,.2,1);
+      }
+      .nav-links.open { transform: translateX(0); }
+      .nav-links li { width: 100%; }
+      .nav-links a {
+        display: block; font-size: 19px; font-weight: 500;
+        padding: 15px 0; color: var(--text);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links a:hover { color: var(--blue); }
+      .nav-cta {
+        display: block !important; text-align: center;
+        margin-top: 20px; border-bottom: none !important;
+      }
+      .nav-right { gap: 12px; }
+
+      .nav-m-only { display: flex; }
+      .nav-m-brand {
+        flex-direction: column; gap: 5px;
+        padding-bottom: 18px; margin-bottom: 8px;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-m-logo {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700; font-size: 22px; color: var(--text); letter-spacing: -0.5px;
+      }
+      .nav-m-logo span { color: var(--blue); }
+      .nav-m-tag { font-size: 12px; color: var(--text-d); line-height: 1.4; }
+      .nav-m-extra {
+        flex-direction: column; gap: 16px;
+        margin-top: auto; padding-top: 24px; align-items: flex-start;
+      }
+      .nav-m-mail {
+        font-size: 14px; color: var(--text-d) !important;
+        padding: 0 !important; border-bottom: none !important;
+      }
+      .nav-m-mail:hover { color: var(--blue) !important; }
+    }
+
+    /* respect users who prefer reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────── -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">OnlyMaxon<span>.</span></a>
+      <div class="nav-right">
+        <ul class="nav-links" id="navLinks">
+          <li class="nav-m-only nav-m-brand" aria-hidden="true">
+            <span class="nav-m-logo">OnlyMaxon<span>.</span></span>
+            <span class="nav-m-tag" data-i18n="heroBadge">Working worldwide · Taking new projects</span>
+          </li>
+          <li><a href="#projects" data-i18n="navWork">Work</a></li>
+          <li><a href="#process" data-i18n="navProcess">Process</a></li>
+          <li><a href="#stack" data-i18n="navServices">Services</a></li>
+          <!-- the visible door to the founder half of the studio; the two below it in the
+               page body catch whoever scrolls past this without reading it -->
+          <li><a href="/product/" data-page="product" data-i18n="navProduct">Apps &amp; platforms</a></li>
+          <li><a href="#contact" class="nav-cta" data-i18n="navCta">Work With Us</a></li>
+          <li class="nav-m-only nav-m-extra">
+            <a class="nav-m-mail" href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a>
+          </li>
+        </ul>
+        <div class="lang-dd" id="langDD">
+          <button type="button" class="lang-dd-btn" id="langDDBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
+            <span id="langDDCur">EN</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <!-- real links to pre-rendered pages, not client-side DOM rewriting -->
+          <ul class="lang-dd-menu" role="listbox">
+            <li><a role="option" data-lang="pl" hreflang="pl" href="/pl/">Polski</a></li>
+            <li><a role="option" data-lang="ru" hreflang="ru" href="/ru/">Русский</a></li>
+            <li><a role="option" data-lang="en" hreflang="en" href="/" class="active">English</a></li>
+            <li><a role="option" data-lang="tr" hreflang="tr" href="/tr/">Türkçe</a></li>
+            <li><a role="option" data-lang="es" hreflang="es" href="/es/">Español</a></li>
+          </ul>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="nav-backdrop" id="navBackdrop"></div>
+
+<!-- ─── HERO ─────────────────────────────── -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="container">
+    <div class="hero-inner">
+
+      <div class="hero-logo">
+        <div class="hero-logo-glow"></div>
+        <img src="images/logo.webp" alt="OnlyMaxon Studio logo"
+             width="640" height="737" fetchpriority="high" decoding="async">
+      </div>
+
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        <span data-i18n="heroBadge">Working worldwide · Taking new projects</span>
+      </div>
+      <h1 class="hero-title" data-i18n-html="heroTitle">
+        <span>You're great at what you do.</span>
+        <span class="gradient-text">We make the world find you.</span>
+      </h1>
+      <p class="hero-sub" data-i18n-html="heroSub">
+        <strong>OnlyMaxon</strong> is a product studio.
+        We design, build, launch and grow real products —
+        <strong>development and SEO</strong> under one roof.
+      </p>
+        <div class="hero-btns">
+          <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+            </svg>
+            <span data-i18n="heroBtnCall">Send a message</span>
+          </a>
+          <a href="#projects" class="btn btn-secondary">
+            <span data-i18n="heroBtnProjects">See Projects</span>
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-val">4+</span>
+            <span class="stat-lab" data-i18n="heroStatProducts">Products Built</span>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat">
+            <span class="stat-val" data-i18n="heroStatMvpVal">1–6w</span>
+            <span class="stat-lab" data-i18n="heroStatMvp">To launch</span>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat">
+            <span class="stat-val">100%</span>
+            <span class="stat-lab" data-i18n="heroStatOwn">Code is yours</span>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PROBLEM → SOLUTION ────────────────── -->
+<section id="problems">
+  <div class="container">
+    <div class="ps-head">
+      <p class="eyebrow fade-up" data-i18n="psEyebrow">The real problem</p>
+      <h2 class="sec-title fade-up d1" data-i18n="psTitle">One of these probably sounds familiar.</h2>
+      <p class="sec-desc fade-up d2" data-i18n="psDesc">If it does, you already know what the first call is about.</p>
+    </div>
+    <div class="ps-grid">
+
+      <div class="ps-card fade-up">
+        <p class="ps-quote" data-i18n="ps1Quote">Everything runs through my Instagram DMs, and I'm still answering at midnight.</p>
+        <p class="ps-answer" data-i18n="ps1Answer">A site with online booking. Your client picks a free slot themselves — you just watch the calendar fill up.</p>
+        <div class="ps-foot">
+          <span class="ps-time" data-i18n="ps1Time">2 weeks</span>
+          <a class="ps-more" href="/blog/website-or-instagram/" data-page="blog/website-or-instagram" data-i18n="ps1More">Site or Instagram?</a>
+        </div>
+      </div>
+
+      <div class="ps-card fade-up d1">
+        <p class="ps-quote" data-i18n="ps2Quote">People searching nearby find my competitors on the map. They don't find me.</p>
+        <p class="ps-answer" data-i18n="ps2Answer">Your Google profile set up properly, reviews collected automatically after each visit, the site wired into search. You end up where people are already looking.</p>
+        <div class="ps-foot">
+          <span class="ps-time" data-i18n="ps2Time">monthly · ongoing</span>
+          <a class="ps-more" href="/blog/not-in-google/" data-page="blog/not-in-google" data-i18n="ps2More">Why this happens</a>
+        </div>
+      </div>
+
+      <div class="ps-card fade-up d2">
+        <p class="ps-quote" data-i18n="ps3Quote">I have a website. Nobody has ever written to me from it.</p>
+        <p class="ps-answer" data-i18n="ps3Answer">We rebuild it around the one thing it was missing — a reason to get in touch — and then make sure it actually gets found.</p>
+        <span class="ps-time" data-i18n="ps3Time">1–2 weeks</span>
+      </div>
+
+      <div class="ps-card fade-up d3">
+        <p class="ps-quote" data-i18n="ps4Quote">I've had an idea for an app for two years and no idea where to start.</p>
+        <p class="ps-answer" data-i18n="ps4Answer">We take it from a first sketch to something real people can install — and you see it working before you've spent a fortune on it.</p>
+        <div class="ps-foot">
+          <span class="ps-time" data-i18n="ps4Time">4–6 weeks</span>
+          <a class="ps-more" href="/product/" data-page="product" data-i18n="ps4More">How we build products</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PROJECTS ─────────────────────────── -->
+<section id="projects">
+  <div class="container">
+    <div class="projects-head">
+      <p class="eyebrow fade-up" data-i18n="projEyebrow">Our work</p>
+      <h2 class="sec-title fade-up d1" data-i18n="projTitle">Products we've brought to life</h2>
+      <p class="sec-desc fade-up d2" data-i18n="projDesc">Real products used by real people — designed, built, and launched by OnlyMaxon.</p>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- These three used to point straight at the client's own domain, which meant the
+           portfolio's job was to send visitors away. Now they open the case, and the live
+           link sits at the bottom of it. -->
+      <a href="/cases/nextcargo/" data-page="cases/nextcargo" class="proj-card fade-up d1 tilt">
+        <div class="proj-thumb pt-nextcargo">
+          <img class="proj-logo pl-nextcargo" src="images/nextcargo.webp" alt="nextcargo.eu logo"
+               width="300" height="300" loading="lazy" decoding="async">
+        </div>
+        <div class="proj-body">
+          <div class="proj-name">nextcargo.eu <span class="badge-live" data-i18n="badgeLive">Live</span></div>
+          <p class="proj-problem" data-i18n="projNextcargoProblem">A warehouse where nobody could tell whose parcel was whose.</p>
+          <p class="proj-desc" data-i18n="projNextcargo">Now every parcel is identified by its code in seconds. Each client gets a cabinet showing where their cargo is, with a notification at every stage — and the company got the whole site built around it.</p>
+          <p class="proj-result" data-i18n="projNextcargoResult">20–50 orders a week run through the site.</p>
+          <div class="proj-tags">
+            <span class="tag">Full-stack</span>
+            <span class="tag">Real-time</span>
+            <span class="tag">Production</span>
+          </div>
+          <span class="proj-link">
+            <span data-i18n="linkCase">Read the case</span>
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="/cases/birklik/" data-page="cases/birklik" class="proj-card fade-up d2 tilt">
+        <div class="proj-thumb pt-birklik">
+          <img class="proj-logo pl-birklik" src="images/birklik.webp" alt="birklik.az logo"
+               width="700" height="467" loading="lazy" decoding="async">
+        </div>
+        <div class="proj-body">
+          <div class="proj-name">birklik.az <span class="badge-live" data-i18n="badgeLive">Live</span></div>
+          <p class="proj-problem" data-i18n="projBirklikProblem">They had the hotels, the houses and the contacts. No way to take a booking.</p>
+          <p class="proj-desc" data-i18n="projBirklik">We built the site, the booking system and a client cabinet with notifications — then took on Google, so the people looking for somewhere to stay actually find them.</p>
+          <p class="proj-result" data-i18n="projBirklikResult">70 live listings · 2,000 visitors a month from Google — the site now sells its own ad space.</p>
+          <div class="proj-tags">
+            <span class="tag">Next.js</span>
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Firebase</span>
+            <span class="tag">Capacitor</span>
+          </div>
+          <span class="proj-link">
+            <span data-i18n="linkCase">Read the case</span>
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="projects-grid small-grid">
+
+      <a href="/cases/yodin/" data-page="cases/yodin" class="proj-card fade-up d3 tilt">
+        <div class="proj-thumb pt-yodin">
+          <img class="proj-logo pl-yodin" src="images/yodin.webp" alt="yOdin logo"
+               width="280" height="280" loading="lazy" decoding="async">
+        </div>
+        <div class="proj-body">
+          <div class="proj-name">yOdin <span class="badge-dev" data-i18n="badgeDev">In dev</span></div>
+          <p class="proj-problem" data-i18n="projYodinProblem">Agreed directly with the university's dean's office.</p>
+          <p class="proj-desc" data-i18n="projYodin">A social platform for international students — matching by behaviour, not by nationality.</p>
+          <p class="proj-result" data-i18n="projYodinResult">In development, rolling out across universities.</p>
+          <div class="proj-tags">
+            <span class="tag">React Native</span>
+            <span class="tag">Expo</span>
+            <span class="tag">Firebase</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Dart</span>
+          </div>
+          <span class="proj-link">
+            <span data-i18n="linkCase">Read the case</span>
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── WHAT'S A BUSINESS-CARD SITE ──────── -->
+<section id="whatvisitka">
+  <div class="container">
+    <div class="vk-head">
+      <p class="eyebrow fade-up" data-i18n="vkEyebrow">Example · business-card site</p>
+      <h2 class="sec-title fade-up d1" data-i18n="vkTitle">What's a business-card site?</h2>
+      <p class="sec-desc fade-up d2" data-i18n="vkDesc">One clean page — who you are, what you do, your prices and contacts. Like a paper business card, but online: people find you on Google and reach you in one tap. Here's what one looks like:</p>
+    </div>
+
+    <!-- Mock sites, not real businesses — the caption below says so. Every string is
+         localised, so a visitor sees a business from their own market. -->
+    <div class="vk-row">
+
+      <div class="vk-phone fade-up d1">
+        <div class="vk-screen">
+          <div class="vk-ava" data-i18n="vk1Ava">M</div>
+          <div class="vk-name" data-i18n="vk1Name">Mark</div>
+          <div class="vk-role" data-i18n="vk1Role">BARBER · LONDON</div>
+          <div class="vk-rating">★★★★★ <span data-i18n="vk1Rate">4.9 · 120 reviews</span></div>
+          <div class="vk-srv"><span data-i18n="vk1S1">Haircut</span><b data-i18n="vk1P1">€18</b></div>
+          <div class="vk-srv"><span data-i18n="vk1S2">Beard trim</span><b data-i18n="vk1P2">€12</b></div>
+          <div class="vk-srv"><span data-i18n="vk1S3">Cut + beard</span><b data-i18n="vk1P3">€26</b></div>
+          <div class="vk-hours">🕒 <span data-i18n="vk1Hours">Mon–Sat · 10:00–20:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span data-i18n="vkCall">Call</span></div>
+            <div class="vk-cta vk-cta2" data-i18n="vkBook">Book</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vk-phone vk-rose vk-featured fade-up d2">
+        <div class="vk-screen">
+          <div class="vk-ava" data-i18n="vk2Ava">S</div>
+          <div class="vk-name" data-i18n="vk2Name">Sofia</div>
+          <div class="vk-role" data-i18n="vk2Role">BEAUTY STUDIO · LONDON</div>
+          <div class="vk-rating">★★★★★ <span data-i18n="vk2Rate">5.0 · 86 reviews</span></div>
+          <div class="vk-srv"><span data-i18n="vk2S1">Manicure</span><b data-i18n="vk2P1">€25</b></div>
+          <div class="vk-srv"><span data-i18n="vk2S2">Pedicure</span><b data-i18n="vk2P2">€30</b></div>
+          <div class="vk-srv"><span data-i18n="vk2S3">Lash extensions</span><b data-i18n="vk2P3">€40</b></div>
+          <div class="vk-srv"><span data-i18n="vk2S4">Facial</span><b data-i18n="vk2P4">€55</b></div>
+          <div class="vk-hours">🕒 <span data-i18n="vk2Hours">Tue–Sat · 09:00–19:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span data-i18n="vkCall">Call</span></div>
+            <div class="vk-cta vk-cta2" data-i18n="vkBook">Book</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vk-phone vk-cyan fade-up d3">
+        <div class="vk-screen">
+          <div class="vk-ava" data-i18n="vk3Ava">D</div>
+          <div class="vk-name" data-i18n="vk3Name">Daniel</div>
+          <div class="vk-role" data-i18n="vk3Role">PHOTOGRAPHER · LONDON</div>
+          <div class="vk-rating">★★★★★ <span data-i18n="vk3Rate">4.9 · 64 reviews</span></div>
+          <div class="vk-srv"><span data-i18n="vk3S1">Portrait session</span><b data-i18n="vk3P1">€90</b></div>
+          <div class="vk-srv"><span data-i18n="vk3S2">Family shoot</span><b data-i18n="vk3P2">€140</b></div>
+          <div class="vk-srv"><span data-i18n="vk3S3">Wedding</span><b data-i18n="vk3P3">€450</b></div>
+          <div class="vk-hours">🕒 <span data-i18n="vk3Hours">Mon–Fri · 09:00–18:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span data-i18n="vkCall">Call</span></div>
+            <div class="vk-cta vk-cta2" data-i18n="vkBook">Book</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- mobile only: without this nothing tells you the strip scrolls -->
+    <p class="vk-swipe" data-i18n="vkSwipe">← swipe to see all three →</p>
+    <p class="vk-caption fade-up" data-i18n="vkCaption">Three examples — yours can look however you want.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── STACK (Services) ──────────────────── -->
+<!-- Sits after the phone examples on purpose: a visitor who has already seen the
+     thing they want reads the tech list as reassurance instead of as a wall. -->
+<section id="stack">
+  <div class="container">
+    <div class="stack-head">
+      <p class="eyebrow fade-up" data-i18n="servEyebrow">What we do</p>
+      <h2 class="sec-title fade-up d1" data-i18n="servTitle">Everything under one roof</h2>
+      <p class="sec-desc fade-up d2" data-i18n="servDesc">The same hands that build your product bring people to it. No second agency to hire.</p>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-cat fade-up">
+        <div class="sc-icon">💻</div>
+        <div class="sc-name" data-i18n="devName">We build it</div>
+        <p class="sc-desc" data-i18n="devDesc">Your site or app from scratch — made for you, not a template a hundred other businesses already use.</p>
+        <ul class="sc-outcomes">
+          <li class="sc-outcome" data-i18n="devOut1">Online booking — clients pick their own slot instead of messaging you at midnight.</li>
+          <li class="sc-outcome" data-i18n="devOut2">A reminder by SMS or email the day before — fewer empty slots in your week.</li>
+          <li class="sc-outcome" data-i18n="devOut3">A cabinet where your client sees their own orders, bookings or deliveries.</li>
+          <li class="sc-outcome" data-i18n="devOut4">Payments, maps and live data actually wired in — not screenshots of them.</li>
+        </ul>
+        <div class="sc-title" data-i18n="devSub">We build with</div>
+        <div class="sc-tags">
+          <span class="sc-tag">TypeScript</span>
+          <span class="sc-tag">React</span>
+          <span class="sc-tag">Next.js</span>
+          <span class="sc-tag">React Native</span>
+          <span class="sc-tag">Flutter</span>
+          <span class="sc-tag">Node.js</span>
+          <span class="sc-tag">Java</span>
+          <span class="sc-tag">Firebase</span>
+          <span class="sc-tag">Maps &amp; 3D</span>
+        </div>
+      </div>
+      <div class="stack-cat fade-up d1">
+        <div class="sc-icon">🔍</div>
+        <div class="sc-name" data-i18n="mktName">We make people find it</div>
+        <p class="sc-desc" data-i18n="mktDesc">A beautiful site nobody finds is a business card in a drawer. We make Google, the app stores and AI assistants show you to people already looking for you.</p>
+        <ul class="sc-outcomes">
+          <li class="sc-outcome" data-i18n="mktOut1">You show up on Google Maps when someone nearby searches for what you do.</li>
+          <li class="sc-outcome" data-i18n="mktOut2">Your Google profile set up properly — photos, prices, hours, a call button.</li>
+          <li class="sc-outcome" data-i18n="mktOut3">Reviews collected automatically after each visit — reviews are what lifts you above the competition.</li>
+          <li class="sc-outcome" data-i18n="mktOut4">Named inside ChatGPT and Google AI answers, not just in the blue links.</li>
+          <li class="sc-outcome" data-i18n="mktOut5">One number every month: how many people found you, and how many got in touch.</li>
+        </ul>
+        <p class="sc-more">
+          <a href="/blog/google-answers-now/" data-page="blog/google-answers-now" data-i18n="mktMore">How answer engines decide who to name</a>
+        </p>
+        <div class="sc-title" data-i18n="mktSub">We handle</div>
+        <div class="sc-tags">
+          <span class="sc-tag">Google Business Profile</span>
+          <span class="sc-tag">On-page SEO</span>
+          <span class="sc-tag">ASO</span>
+          <span class="sc-tag">AI-SEO / GEO</span>
+          <span class="sc-tag">Search Console</span>
+          <span class="sc-tag">Analytics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PRICING ─────────────────────────── -->
+<section id="pricing">
+  <div class="container">
+    <div class="pricing-head">
+      <p class="eyebrow fade-up" data-i18n="pricingEyebrow">Pricing</p>
+      <h2 class="sec-title fade-up d1" data-i18n="pricingTitle">Simple, upfront pricing</h2>
+      <p class="sec-desc fade-up d2" data-i18n="pricingDesc">Dreaming of a website or app — for your business, your idea, or someone you love? Here's the price and timeline up front, no hidden costs.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card fade-up">
+        <div class="price-name" data-i18n="price1Name">Business-card website</div>
+        <div class="price-amount" data-i18n="price1Amount">from €390</div>
+        <div class="price-time" data-i18n="price1Time">1 week</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
+      </div>
+      <div class="price-card fade-up d1">
+        <div class="price-name" data-i18n="price2Name">Website with online booking</div>
+        <div class="price-amount" data-i18n="price2Amount">from €690</div>
+        <div class="price-time" data-i18n="price2Time">2 weeks</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
+      </div>
+      <div class="price-card fade-up d1">
+        <div class="price-name" data-i18n="price5Name">Ecommerce website</div>
+        <div class="price-amount" data-i18n="price5Amount">from €1090</div>
+        <div class="price-time" data-i18n="price5Time">3-4 weeks</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
+      </div>
+      <div class="price-card fade-up d2">
+        <div class="price-name" data-i18n="price3Name">Mobile app</div>
+        <div class="price-amount" data-i18n="price3Amount">from €1400</div>
+        <div class="price-time" data-i18n="price3Time">4–6 weeks</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
+      </div>
+      <!-- The ceiling. Without it the list topped out at €1400 and the studio read as a
+           €390 shop — while two of the three projects above it are plainly this tier. -->
+      <div class="price-card fade-up d3">
+        <div class="price-name" data-i18n="price6Name">Platform or marketplace</div>
+        <div class="price-amount" data-i18n="price6Amount">from €3000</div>
+        <div class="price-time" data-i18n="price6Time">from 6 weeks</div>
+        <!-- the one price card that does NOT open the form: at this size the visitor has
+             questions the home page deliberately no longer answers -->
+        <a href="/product/" class="btn btn-primary" data-page="product" data-i18n="price6Cta">See how we build it</a>
+      </div>
+    </div>
+
+    <!-- Monthly work, pulled out of the row above: it is not a project, and side by side
+         with them it invited the comparison "€200 or €1400?" — which was never the choice
+         on offer. Down here it reads as what it is: what happens after launch. -->
+    <div class="pricing-ongoing fade-up">
+      <div class="po-text">
+        <div class="po-name" data-i18n="price4Name">Ongoing SEO / ASO / AI</div>
+        <p class="po-desc" data-i18n="price4Desc">What keeps you found after launch — Google profile, reviews, search, AI answers. Monthly, stop whenever you want.</p>
+      </div>
+      <div class="po-price" data-i18n="price4Amount">from €200/mo</div>
+      <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
+    </div>
+
+    <div class="pricing-note fade-up" data-i18n-html="pricingNote">Every number here is a starting point. After a 30-minute call you get the exact price and the exact date in writing, within 48 hours.</div>
+    <p class="pricing-more fade-up">
+      <a href="/blog/what-a-website-costs/" data-page="blog/what-a-website-costs" data-i18n="pricingMore">Why the same brief comes back at €400 and €4000</a>
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PROCESS ───────────────────────────── -->
+<section id="process">
+  <div class="container">
+    <div class="process-head">
+      <p class="eyebrow fade-up" data-i18n="procEyebrow">How we work</p>
+      <h2 class="sec-title fade-up d1" data-i18n-html="procTitle">What happens<br><span class="gradient-text">after you write.</span></h2>
+      <p class="sec-desc fade-up d2" data-i18n="procDesc">Four steps with real times on them. You know the price and the date before anything gets built.</p>
+    </div>
+    <div class="proc-steps">
+      <div class="proc-step fade-up">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <span class="step-time" data-i18n="proc1Time">30 minutes</span>
+          <h3 data-i18n="proc1Title">First call, free</h3>
+          <p data-i18n="proc1Desc">You tell us what isn't working and what's eating your time. No presentation, no questionnaire. If we're not the right fit, we say so on the call.</p>
+        </div>
+      </div>
+      <div class="proc-step fade-up d1">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <span class="step-time" data-i18n="proc2Time">48 hours</span>
+          <h3 data-i18n="proc2Title">Price and date</h3>
+          <p data-i18n="proc2Desc">One page: what we build, what it costs, when it's done. No hidden lines, no “it depends”. Yes or no — either way you know where you stand.</p>
+        </div>
+      </div>
+      <div class="proc-step fade-up d2">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <span class="step-time" data-i18n="proc3Time">1–6 weeks</span>
+          <h3 data-i18n="proc3Title">We build, you keep working</h3>
+          <p data-i18n="proc3Desc">A business-card site takes a week, a booking site two, an app four to six. One update every week — what's done, what's next, whether we're on schedule.</p>
+        </div>
+      </div>
+      <div class="proc-step fade-up d3">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <span class="step-time" data-i18n="proc4Time">Launch day</span>
+          <h3 data-i18n="proc4Title">It goes live, and it's yours</h3>
+          <p data-i18n="proc4Desc">Site, code and every account handed over — 100% yours, no lock-in. From there we keep you found on Google for as long as you want us to.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── FAQ ───────────────────────────────── -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-head">
+      <p class="eyebrow fade-up" data-i18n="faqEyebrow">FAQ</p>
+      <h2 class="sec-title fade-up d1" data-i18n="faqTitle">Frequently asked questions</h2>
+      <p class="sec-desc fade-up d2" data-i18n="faqDesc">Everything you might be wondering — answered up front.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq1Q">How much does a website cost?</span><span class="faq-icon"></span></button>
+        <div class="faq-a">
+          <p data-i18n="faq1A">Websites start at €390 (business-card) and €690 (with online booking). An online shop from €1090, a mobile app from €1400, a full platform from €3000. You get the exact price and date within 48 hours of the first call — no hidden costs.</p>
+          <p class="faq-more"><a href="/blog/what-a-website-costs/" data-page="blog/what-a-website-costs" data-i18n="faq1More">What the difference between quotes actually buys</a></p>
+        </div>
+      </div>
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq2Q">How long does it take?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p data-i18n="faq2A">A simple website takes about 1 week, a booking site around 2 weeks, and a mobile app 4–6 weeks. We agree the timeline up front and send you weekly updates.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq6Q">Who exactly is OnlyMaxon?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p data-i18n="faq6A">A small studio, not an agency with a sales department. You talk directly to the people who build your project — there is no account manager in between. Every project on this page is ours and every one of them is live: click any of them and see for yourself.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq3Q">Do I own the website and the code?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p data-i18n="faq3A">Yes — 100%. Once it's done, the site, the code and all accounts are fully yours. No lock-in, no strings attached.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq7Q">What if you disappear halfway through?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p data-i18n="faq7A">You get the code, the repository and every account from day one — not at the end. Nothing is ever only in our hands. If we vanished tomorrow, any developer could open your project and carry on from where we stopped.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq4Q">What if I need changes later?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p data-i18n="faq4A">No problem. Small tweaks are easy, and for ongoing work (new features, SEO/ASO) we agree a clear rate up front. You're never stuck.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq8Q">What language will we work in?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p data-i18n="faq8A">Whichever of the five you picked at the top of this page. Emails, the brief, the updates and the copy on your own site all come in your language — you never have to switch to English for our convenience.</p></div>
+      </div>
+      <div class="faq-item fade-up">
+        <button type="button" class="faq-q"><span data-i18n="faq5Q">How do we start?</span><span class="faq-icon"></span></button>
+        <div class="faq-a"><p data-i18n="faq5A">Just send a message with your idea. The first call is free — we'll figure out what you need, give you a price and timeline, and start whenever you're ready.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── LANGUAGES ─────────────────────────── -->
+<!-- Placed last before the contact form on purpose: the doubt it removes ("will I even be
+     able to deal with these people?") is the one a visitor has with the cursor already
+     over the button. -->
+<section id="languages">
+  <div class="container">
+    <div class="lang-band fade-up">
+      <div class="lang-band-text">
+        <h2 class="lang-band-title" data-i18n="langTitle">We work in your language.</h2>
+        <p class="lang-band-desc" data-i18n="langDesc">This page is five real sites, not one page run through a translator. Your site gets the same — written properly in the language your customers actually search in.</p>
+      </div>
+      <div class="lang-band-links">
+        <a href="/" class="lang-chip is-current" data-lang="en">English</a>
+        <a href="/pl/" class="lang-chip" data-lang="pl">Polski</a>
+        <a href="/ru/" class="lang-chip" data-lang="ru">Русский</a>
+        <a href="/tr/" class="lang-chip" data-lang="tr">Türkçe</a>
+        <a href="/es/" class="lang-chip" data-lang="es">Español</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── CONTACT ───────────────────────────── -->
+<section id="contact">
+  <div class="contact-glow"></div>
+  <div class="container">
+    <div class="contact-wrap">
+      <p class="eyebrow fade-up" data-i18n="contactEyebrow">Let's talk</p>
+      <h2 class="sec-title fade-up d1" data-i18n-html="contactTitle">
+        Got an idea?<br>
+        <span class="gradient-text">Let's build it.</span>
+      </h2>
+      <p class="sec-desc fade-up d2" data-i18n-html="contactDesc">
+        Tell us what you're building. First call is free.<br>
+        OnlyMaxon is currently taking on new projects and collaborations.
+      </p>
+      <div class="contact-btns fade-up d3">
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M2 7l10 7 10-7"/>
+          </svg>
+          <span data-i18n="contactBtnEmail">Send an Email</span>
+        </a>
+        <a href="https://github.com/OnlyMaxon" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
+      <div class="contact-socials fade-up d4">
+        <a href="mailto:hello@onlymaxon.com" class="social-link">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          hello@onlymaxon.com
+        </a>
+        <span class="soc-sep">·</span>
+        <a href="https://github.com/OnlyMaxon" target="_blank" rel="noopener noreferrer" class="social-link">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          OnlyMaxon
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="ft" data-i18n="footerCopyright">© 2026 OnlyMaxon Studio. All rights reserved.</span>
+      <span class="ft"><a href="/blog/" data-page="blog" data-i18n="footerBlog">Blog</a></span>
+      <span class="ft"><a href="/privacy/" data-page="privacy" data-i18n="footerPrivacy">Privacy</a></span>
+      <span class="ft" data-i18n="footerTagline">🌍 Five languages · Working worldwide</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── CONTACT MODAL ─────────────────────── -->
+<div class="modal-overlay" id="contactModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Close">&times;</button>
+    <h3 id="modalTitle" data-i18n="modalTitle">Let's work together</h3>
+    <p class="modal-note" data-i18n="modalNote">Tell us clearly what you want to build and why you'd like to work with us — the more detail you give, the faster and better we can help.</p>
+    <form id="contactForm">
+      <input type="hidden" name="access_key" value="c98b4381-eb21-4a0f-a150-d462b1530e52">
+      <input type="hidden" name="subject" value="New inquiry from onlymaxon.com">
+      <input type="hidden" name="from_name" value="OnlyMaxon website">
+      <!-- Web3Forms honeypot: real people never see it, bots fill it in and get dropped -->
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off"
+             aria-hidden="true" style="display:none !important">
+      <input type="text"  name="name"  required data-i18n-ph="modalName"  placeholder="Your name">
+      <input type="email" name="email" required data-i18n-ph="modalEmail" placeholder="Your email">
+      <!-- Asks about the job, not the budget. The prices are already on this page, so
+           "how much do you want to spend?" would only invite someone to anchor themselves
+           below a number they have just read. The values stay in English so the inbox is
+           filterable whichever of the five languages the visitor wrote in. -->
+      <select name="need" required>
+        <option value="" disabled selected data-i18n="needPlaceholder">What do you need?</option>
+        <option value="business-card" data-i18n="need1">Business-card website</option>
+        <option value="booking" data-i18n="need2">Website with online booking</option>
+        <option value="shop" data-i18n="need3">Online shop</option>
+        <option value="app" data-i18n="need4">Mobile app</option>
+        <option value="platform" data-i18n="need5">Platform or marketplace</option>
+        <option value="seo" data-i18n="need6">SEO — getting found</option>
+        <option value="unsure" data-i18n="need7">Not sure yet</option>
+      </select>
+      <textarea name="message" required data-i18n-ph="modalMessage" placeholder="Describe your project and why you want to work with us…"></textarea>
+      <button type="submit" class="btn btn-primary" data-i18n="modalSend">Send message</button>
+      <p class="modal-privacy">
+        <span data-i18n="modalPrivacyNote">Your details come to us and nowhere else.</span>
+        <a href="/privacy/" data-page="privacy" data-i18n="modalPrivacyLink">How we handle them</a>
+      </p>
+      <div class="modal-status" id="modalStatus" role="status" aria-live="polite"
+           data-ok="Thanks! We'll get back to you soon."
+           data-err="Something went wrong — please email hello@onlymaxon.com"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // ── Sticky nav ──
+  // passive + only touches the DOM when the state actually flips, instead of
+  // running classList.toggle() on every single scroll event.
+  const nav = document.getElementById('nav');
+  let navScrolled = false;
+  let tiltRectsStale = false;   // see the tilt block at the bottom
+  window.addEventListener('scroll', () => {
+    tiltRectsStale = true;
+    const s = window.scrollY > 50;
+    if (s !== navScrolled) {
+      navScrolled = s;
+      nav.classList.toggle('scrolled', s);
+    }
+  }, { passive: true });
+
+  // ── Mobile menu ──
+  const navToggle   = document.getElementById('navToggle');
+  const navLinks    = document.getElementById('navLinks');
+  const navBackdrop = document.getElementById('navBackdrop');
+  function setMenu(open) {
+    navLinks.classList.toggle('open', open);
+    navBackdrop.classList.toggle('open', open);
+    navToggle.classList.toggle('active', open);
+    navToggle.setAttribute('aria-expanded', open);
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  navToggle.addEventListener('click', () => setMenu(!navLinks.classList.contains('open')));
+  navBackdrop.addEventListener('click', () => setMenu(false));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  window.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+  // ── Language dropdown ──
+  // Every language is its own pre-rendered page (/, /pl/, /ru/, /tr/, /es/), generated by
+  // build/generate.js from build/translations.js. Nothing is translated in the browser:
+  // Google indexes five real pages instead of one, and no translation table is shipped.
+  const langDD    = document.getElementById('langDD');
+  const langDDBtn = document.getElementById('langDDBtn');
+  langDDBtn.addEventListener('click', ev => {
+    ev.stopPropagation();
+    langDDBtn.setAttribute('aria-expanded', langDD.classList.toggle('open'));
+  });
+  document.addEventListener('click', ev => {
+    if (!langDD.contains(ev.target)) {
+      langDD.classList.remove('open');
+      langDDBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Picking a language by hand overrides the auto-routing in <head>, permanently —
+  // otherwise a Polish phone would drag the visitor back to /pl/ every time they asked
+  // for the English page.
+  langDD.querySelectorAll('a[data-lang]').forEach(a => {
+    a.addEventListener('click', () => {
+      try { localStorage.setItem('om_lang', a.dataset.lang); } catch (e) {}
+    });
+  });
+
+  // Links shared before the move to /xx/ URLs still land on the right page.
+  const legacyLang = new URLSearchParams(location.search).get('lang');
+  if (['pl', 'ru', 'tr', 'es'].includes(legacyLang)) location.replace('/' + legacyLang + '/');
+
+  // ── Contact modal (Web3Forms) ──
+  const modal       = document.getElementById('contactModal');
+  const modalForm   = document.getElementById('contactForm');
+  const modalStatus = document.getElementById('modalStatus');
+  function openModal() {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('[data-modal-open]').forEach(el =>
+    el.addEventListener('click', e => { e.preventDefault(); openModal(); }));
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  window.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  modalForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const sendBtn = modalForm.querySelector('button[type="submit"]');
+    modalStatus.className = 'modal-status';
+    modalStatus.textContent = '…';
+    sendBtn.disabled = true;
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(modalForm)
+      });
+      const json = await res.json();
+      if (json.success) {
+        modalStatus.className = 'modal-status ok';
+        modalStatus.textContent = modalStatus.dataset.ok;
+        modalForm.reset();
+      } else {
+        modalStatus.className = 'modal-status err';
+        modalStatus.textContent = modalStatus.dataset.err;
+      }
+    } catch (err) {
+      modalStatus.className = 'modal-status err';
+      modalStatus.textContent = modalStatus.dataset.err;
+    }
+    sendBtn.disabled = false;
+  });
+
+  // ── Nav scrollspy (highlight active section) ──
+  const spyLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  const spyMap = {};
+  spyLinks.forEach(a => { const id = a.getAttribute('href').slice(1); if (id) spyMap[id] = a; });
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        spyLinks.forEach(a => a.classList.remove('current'));
+        if (spyMap[e.target.id]) spyMap[e.target.id].classList.add('current');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  ['projects', 'stack', 'process', 'contact'].forEach(id => {
+    const s = document.getElementById(id);
+    if (s) spyObserver.observe(s);
+  });
+
+  // ── Demo-phone strip: start centred on the middle one ──
+  // On mobile the three phones become a scroll strip. Left at scrollLeft 0 you'd see
+  // phone 1 with one clipped edge on the right, which reads as broken layout. Centring
+  // the middle phone leaves a slice of a neighbour on BOTH sides, which reads as "there
+  // is more here, swipe" — and puts the featured card in front of you first.
+  const vkRow = document.querySelector('.vk-row');
+  const vkMid = document.querySelector('.vk-featured');
+  if (vkRow && vkMid) {
+    // Listen for real input, NOT for 'scroll': centreVk() scrolls the strip itself, so a
+    // scroll listener would immediately flag it as "user touched it" and disable itself.
+    let vkTouched = false;
+    ['touchstart', 'wheel', 'pointerdown', 'keydown'].forEach(ev =>
+      vkRow.addEventListener(ev, () => { vkTouched = true; }, { passive: true, once: true }));
+
+    function centreVk() {
+      if (vkTouched) return;                                   // the visitor is driving now
+      if (vkRow.scrollWidth <= vkRow.clientWidth + 1) return;   // desktop: nothing scrolls
+      // measured from rects, so it doesn't care about offsetParent or current position
+      const row = vkRow.getBoundingClientRect();
+      const mid = vkMid.getBoundingClientRect();
+      vkRow.scrollLeft += (mid.left + mid.width / 2) - (row.left + row.width / 2);
+    }
+
+    // Driven by visibility, not by load. #whatvisitka carries `content-visibility: auto`,
+    // so while it is still far below the fold it has no laid-out contents at all and both
+    // scrollWidth and clientWidth read 0 — centreVk would bail out and never run again.
+    // Firing when the strip actually reaches the viewport also means the measurement
+    // happens after fonts have settled, which is what the old `load` handler was for.
+    new IntersectionObserver((entries, obs) => {
+      if (!entries[0].isIntersecting) return;
+      centreVk();
+      obs.disconnect();
+    }, { rootMargin: '200px' }).observe(vkRow);
+
+    let vkRt;
+    window.addEventListener('resize', () => {
+      clearTimeout(vkRt);
+      vkRt = setTimeout(centreVk, 150);          // e.g. crossing the 900px breakpoint
+    }, { passive: true });
+  }
+
+  // ── FAQ accordion ──
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const ans  = item.querySelector('.faq-a');
+      const open = item.classList.toggle('open');
+      ans.style.maxHeight = open ? ans.scrollHeight + 'px' : '0';
+    });
+  });
+
+  // The height above is measured once, at the moment of the click, and then pinned. Any
+  // reflow after that leaves it stale: turning a phone to portrait, or just a narrower
+  // window, makes the answer taller than the height it is clipped to and the last line
+  // disappears. Re-measure whatever is open.
+  let faqRt;
+  window.addEventListener('resize', () => {
+    clearTimeout(faqRt);
+    faqRt = setTimeout(() => {
+      document.querySelectorAll('.faq-item.open .faq-a').forEach(a => {
+        a.style.maxHeight = a.scrollHeight + 'px';
+      });
+    }, 150);
+  }, { passive: true });
+
+  // ── Scroll reveal ──
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  // ── Make anchor destinations exact ──
+  // See `body.cv-off` in the stylesheet: the skipped sections have to be measured for
+  // real before a smooth scroll can compute where it is going. Capture phase, so the
+  // layout is settled before the browser acts on the navigation. Once is enough.
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || a.getAttribute('href') === '#') return;
+    if (document.body.classList.contains('cv-off')) return;
+    document.body.classList.add('cv-off');
+    void document.body.offsetHeight;        // flush the layout now, not after the scroll
+  }, true);
+
+  // ── Park the hero's infinite animations while it is off screen ──
+  // See `body.hero-out` in the stylesheet. The margin restarts them slightly before the
+  // hero is actually back in view, so scrolling up never catches a frozen frame.
+  const heroEl = document.getElementById('hero');
+  if (heroEl) {
+    new IntersectionObserver(([e]) => {
+      document.body.classList.toggle('hero-out', !e.isIntersecting);
+    }, { rootMargin: '150px' }).observe(heroEl);
+  }
+
+  // ── 3D Tilt (vanilla, no library) ──
+  const isTouch = window.matchMedia('(hover: none)').matches;
+  if (!isTouch) {
+    document.querySelectorAll('.tilt').forEach(el => {
+      // inject shine layer
+      const shine = document.createElement('div');
+      shine.className = 'tilt-shine';
+      el.appendChild(shine);
+
+      const MAX = 9; // max degrees
+      // The rect is measured on enter (and again after a scroll) instead of on every
+      // mousemove — that read used to sit right before a style write, i.e. a forced
+      // reflow up to 120x/second. Writes are coalesced into one rAF per frame.
+      let rect = null, frame = 0, cx = 0, cy = 0;
+
+      el.addEventListener('mouseenter', () => {
+        rect = el.getBoundingClientRect();
+        tiltRectsStale = false;
+      });
+
+      el.addEventListener('mousemove', e => {
+        if (!rect || tiltRectsStale) {
+          rect = el.getBoundingClientRect();
+          tiltRectsStale = false;
+        }
+        cx = e.clientX; cy = e.clientY;
+        if (frame) return;
+        frame = requestAnimationFrame(() => {
+          frame = 0;
+          const px = (cx - rect.left) / rect.width;
+          const py = (cy - rect.top)  / rect.height;
+          const rx = ((0.5 - py) * MAX * 2).toFixed(2);
+          const ry = ((px - 0.5) * MAX * 2).toFixed(2);
+          el.style.transform =
+            `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.02)`;
+          el.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+          el.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+        });
+      });
+
+      el.addEventListener('mouseleave', () => {
+        if (frame) { cancelAnimationFrame(frame); frame = 0; }
+        rect = null;
+        el.style.transform = '';
+      });
+    });
+  }
+</script>
+
+<!-- Cloudflare Web Analytics. Installed by hand rather than through Cloudflare's automatic
+     injection: that only rewrites responses passing through Cloudflare's proxy, and this
+     site is served straight off GitHub Pages, so the automatic setup silently measured
+     nothing. type="module" defers it, so it never competes with first paint. Cookieless
+     and unable to distinguish one visitor from another — which is why /privacy/ can still
+     say this site asks you to accept nothing. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
+
+</body>
+</html>

@@ -1,19 +1,5 @@
 <!DOCTYPE html>
-<!--
-  ENGLISH SOURCE OF TRUTH for /product/.
-  /pl/product/, /ru/product/, /tr/product/, /es/product/ are generated from it.
-
-      node build/generate.js
-
-  This is the other half of the studio, split off from the home page on purpose. The home
-  page sells to someone who owns a barbershop: no stack, no architecture, no acronyms.
-  Everything that spoke to a founder instead was making that page harder to read, so it
-  lives here — and the home page keeps exactly two doors into it: the "platform or
-  marketplace" price card, and the fourth "problem → solution" card about an app idea.
-
-  Asset paths are absolute (/images/, /fonts/) because the English copy already sits one
-  directory deep and is served as written, never rewritten by the build.
--->
+<!-- Generated from build/src/product/index.html by build/generate.js — do not edit. -->
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
@@ -30,7 +16,8 @@
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/images/icon.png">
-
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-700-latin.woff2">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="OnlyMaxon">
   <meta property="og:title" content="OnlyMaxon — Ürünler, MVP'ler ve platformlar">
@@ -41,9 +28,7 @@
   <meta name="twitter:title" content="OnlyMaxon — Ürünler, MVP'ler ve platformlar">
   <meta name="twitter:description" content="Bir ürün fikrini, gerçek insanların kurup kullanabileceği bir şeye taşıyoruz — çeyreklerle değil, haftalarla. Üç canlı ürün ve kod ilk günden senin.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
-
   <style>
-    /* Same four families and weights as the home page, same files. */
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
                  src: url(/fonts/inter-400-latin.woff2) format('woff2');
                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -86,7 +71,6 @@
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
                  src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
@@ -111,21 +95,25 @@
     h1, h2, h3 { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; line-height: 1.1; }
     .container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
     section { position: relative; z-index: 1; }
+    #pricing, #faq, #languages { content-visibility: auto; }
+    #pricing   { contain-intrinsic-size: 800px; contain-intrinsic-size: auto 800px; }
+    #faq       { contain-intrinsic-size: 700px; contain-intrinsic-size: auto 700px; }
+    #languages { contain-intrinsic-size: 320px; contain-intrinsic-size: auto 320px; }
+    body.cv-off #pricing, body.cv-off #faq,
+    body.cv-off #languages { content-visibility: visible; }
     .gradient-text {
       background: linear-gradient(135deg, #fff 0%, var(--blue) 45%, var(--purple) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent); }
-
-    /* ── NAV ──────────────────────────────── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 0;
       transition: background-color 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
       border-bottom: 1px solid transparent; background-color: rgba(7,11,20,0);
     }
     nav.scrolled {
-      background-color: rgba(7,11,20,0.88);
-      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      background-color: rgba(7,11,20,0.94);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border-bottom-color: var(--border); padding: 13px 0;
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
@@ -147,8 +135,6 @@
       transition: opacity 0.2s;
     }
     .nav-cta:hover { opacity: 0.88; }
-
-    /* language dropdown, identical behaviour to the other two pages */
     .lang-dd { position: relative; }
     .lang-dd-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -180,8 +166,6 @@
     }
     .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
     .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
-
-    /* ── HERO ─────────────────────────────── */
     #hero { padding: 170px 0 100px; overflow: hidden; }
     .hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
     .blob { position: absolute; border-radius: 50%; filter: blur(90px); }
@@ -196,6 +180,8 @@
       animation: float 13s ease-in-out infinite reverse;
     }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-26px); } }
+    body.hero-out .blob,
+    body.hero-out .badge-dot { animation-play-state: paused; }
     #hero .container { position: relative; z-index: 2; }
     .hero-inner { max-width: 780px; }
     .hero-badge {
@@ -220,7 +206,6 @@
     }
     .hero-sub strong { color: var(--text); font-weight: 600; }
     .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 14px 30px; border-radius: 11px;
@@ -233,14 +218,11 @@
     .btn-primary:hover { background: #5FE6F2; box-shadow: 0 8px 40px rgba(34,211,238,0.5); transform: translateY(-2px); }
     .btn-secondary { background: var(--bg3); color: var(--text); border: 1px solid var(--border); }
     .btn-secondary:hover { border-color: var(--border-h); background: rgba(34,211,238,0.06); transform: translateY(-2px); }
-
     .hero-stats { display: flex; align-items: center; gap: 26px; margin-top: 44px; flex-wrap: wrap; }
     .stat { display: flex; flex-direction: column; gap: 2px; }
     .stat-val { font-size: 24px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; }
     .stat-lab { font-size: 11px; color: var(--text-m); text-transform: uppercase; letter-spacing: 0.6px; }
     .stat-sep { width: 1px; height: 38px; background: var(--border); }
-
-    /* ── SECTION HEADS ────────────────────── */
     .eyebrow {
       font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
       text-transform: uppercase; color: var(--blue); margin-bottom: 12px;
@@ -249,8 +231,6 @@
     .sec-desc { font-size: 17px; color: var(--text-d); max-width: 560px; line-height: 1.75; }
     .head-center { text-align: center; max-width: 660px; margin: 0 auto 56px; }
     .head-center .sec-desc { margin: 0 auto; }
-
-    /* ── CASES ────────────────────────────── */
     #work { padding: 110px 0; }
     .case-list { display: flex; flex-direction: column; gap: 20px; max-width: 900px; margin: 0 auto; }
     .case {
@@ -289,8 +269,6 @@
       padding: 4px 10px; border-radius: 6px;
       font-family: 'SF Mono', 'Fira Code', monospace;
     }
-
-    /* ── PROCESS ──────────────────────────── */
     #process {
       padding: 110px 0;
       background: linear-gradient(to bottom, transparent, rgba(12,18,32,0.7), transparent);
@@ -322,8 +300,6 @@
     }
     .step-body h3 { font-size: 16px; font-weight: 700; margin-bottom: 5px; }
     .step-body p { font-size: 14px; color: var(--text-d); line-height: 1.6; }
-
-    /* ── STACK ────────────────────────────── */
     #stack { padding: 110px 0; }
     .stack-grid {
       display: grid; grid-template-columns: repeat(2, 1fr);
@@ -350,8 +326,6 @@
       transition: background-color 0.2s, border-color 0.2s, color 0.2s;
     }
     .sc-tag:hover { background: var(--blue-d); border-color: rgba(34,211,238,0.4); color: var(--text); }
-
-    /* ── PRICING ──────────────────────────── */
     #pricing { padding: 110px 0; }
     .pricing-grid {
       display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -398,13 +372,9 @@
     .pricing-note { max-width: 700px; margin: 30px auto 0; text-align: center; color: var(--text-d); font-size: 15px; line-height: 1.7; }
     @media (max-width: 640px) {
       .pricing-ongoing { flex-direction: column; align-items: stretch; text-align: center; gap: 16px; padding: 24px 22px; }
-      /* Same trap as on the home page: flex-basis follows the main axis, and the main axis
-         is vertical now — 280px of reserved width became 280px of reserved height. */
       .po-text { flex: 0 1 auto; }
       .pricing-ongoing .btn { justify-content: center; }
     }
-
-    /* ── FAQ ──────────────────────────────── */
     #faq { padding: 110px 0; }
     .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
     .faq-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color 0.3s; }
@@ -425,8 +395,6 @@
     .faq-item.open .faq-icon::after { transform: translate(-50%,-50%) scaleY(0); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
     .faq-a p { padding: 0 22px 20px; color: var(--text-d); font-size: 14px; line-height: 1.7; }
-
-    /* ── LANGUAGE BAND ────────────────────── */
     #languages { padding: 90px 0; }
     .lang-band {
       display: flex; align-items: center; gap: 36px; flex-wrap: wrap;
@@ -447,8 +415,6 @@
     .lang-chip:hover { color: var(--text); border-color: var(--border-h); }
     .lang-chip.is-current { background: var(--blue-d); border-color: rgba(34,211,238,0.4); color: var(--blue); }
     @media (max-width: 640px) { #languages { padding: 70px 0; } .lang-band { padding: 26px 22px; gap: 22px; } }
-
-    /* ── CONTACT ──────────────────────────── */
     #contact { padding: 110px 0; }
     .contact-wrap { text-align: center; max-width: 660px; margin: 0 auto; position: relative; z-index: 1; }
     .contact-glow {
@@ -459,15 +425,11 @@
     #contact .sec-title { font-size: clamp(30px, 4vw, 50px); margin-bottom: 20px; }
     #contact .sec-desc { margin: 0 auto 40px; }
     .contact-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
-
-    /* ── FOOTER ───────────────────────────── */
     footer { border-top: 1px solid var(--border); padding: 26px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
     .ft a:hover { color: var(--blue); }
-
-    /* ── MODAL ────────────────────────────── */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 300;
       display: flex; align-items: center; justify-content: center; padding: 20px;
@@ -519,15 +481,12 @@
     .modal-status { font-size: 13px; text-align: center; min-height: 18px; }
     .modal-status.ok { color: #4ADE80; }
     .modal-status.err { color: #F87171; }
-
-    /* ── REVEAL ───────────────────────────── */
     .fade-up { opacity: 0; transform: translateY(38px); }
     .fade-up.in { opacity: 1; transform: none; animation: fadeUp 0.7s ease var(--reveal-delay, 0s) backwards; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(38px); } }
     .d1 { --reveal-delay: 0.1s; }
     .d2 { --reveal-delay: 0.2s; }
     .d3 { --reveal-delay: 0.3s; }
-
     @media (max-width: 640px) {
       .container { padding: 0 20px; }
       #hero { padding: 140px 0 76px; }
@@ -536,8 +495,6 @@
       .stat-lab { font-size: 10px; }
       .case { padding: 24px 22px; }
       .nav-back { display: none; }
-      /* Logo + language button + CTA on one line at 360px, with the CTA long in Polish
-         ("Zaczynamy"). Trimming both buys the ~30px that keeps it off a second row. */
       .nav-logo { font-size: 19px; }
       .nav-cta { padding: 8px 15px; font-size: 13px; }
       .nav-right { gap: 10px; }
@@ -551,7 +508,6 @@
   </style>
 </head>
 <body>
-
 <nav id="nav">
   <div class="container">
     <div class="nav-inner">
@@ -577,8 +533,6 @@
     </div>
   </div>
 </nav>
-
-<!-- ─── HERO ─────────────────────────────── -->
 <section id="hero">
   <div class="hero-bg">
     <div class="blob blob-1"></div>
@@ -625,10 +579,7 @@
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
-
-<!-- ─── CASES ────────────────────────────── -->
 <section id="work">
   <div class="container">
     <div class="head-center">
@@ -636,9 +587,7 @@
       <h2 class="sec-title fade-up d1">Şu anda çalışan üç ürün</h2>
       <p class="sec-desc fade-up d2">İkisini yeni bir sekmede açıp kullanabilirsin. Bu, ekran görüntülerinden oluşan bir portfolyodan bambaşka bir iddiadır.</p>
     </div>
-
     <div class="case-list">
-
       <div class="case fade-up">
         <div class="case-head">
           <a href="https://nextcargo.eu" target="_blank" rel="noopener noreferrer" class="case-name">nextcargo.eu</a>
@@ -655,7 +604,6 @@
           <span class="tag">Production</span>
         </div>
       </div>
-
       <div class="case fade-up d1">
         <div class="case-head">
           <a href="https://birklik.az" target="_blank" rel="noopener noreferrer" class="case-name">birklik.az</a>
@@ -674,7 +622,6 @@
           <span class="tag">SEO</span>
         </div>
       </div>
-
       <div class="case fade-up d2">
         <div class="case-head">
           <span class="case-name">yOdin</span>
@@ -691,14 +638,10 @@
           <span class="tag">Dart</span>
         </div>
       </div>
-
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
-
-<!-- ─── PROCESS ──────────────────────────── -->
 <section id="process">
   <div class="container">
     <div class="head-center">
@@ -742,10 +685,7 @@
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
-
-<!-- ─── STACK ────────────────────────────── -->
 <section id="stack">
   <div class="container">
     <div class="head-center">
@@ -801,10 +741,7 @@
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
-
-<!-- ─── PRICING ──────────────────────────── -->
 <section id="pricing">
   <div class="container">
     <div class="head-center">
@@ -837,10 +774,7 @@
     <p class="pricing-note fade-up">Daha küçük bir şey mi? Web siteleri, rezervasyon siteleri ve mağazalar ana sayfada — oradan başla.</p>
   </div>
 </section>
-
 <div class="divider"></div>
-
-<!-- ─── FAQ ──────────────────────────────── -->
 <section id="faq">
   <div class="container">
     <div class="head-center">
@@ -871,10 +805,7 @@
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
-
-<!-- ─── LANGUAGES ────────────────────────── -->
 <section id="languages">
   <div class="container">
     <div class="lang-band fade-up">
@@ -892,10 +823,7 @@
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
-
-<!-- ─── CONTACT ──────────────────────────── -->
 <section id="contact">
   <div class="contact-glow"></div>
   <div class="container">
@@ -920,7 +848,6 @@
     </div>
   </div>
 </section>
-
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -931,8 +858,6 @@
     </div>
   </div>
 </footer>
-
-<!-- ─── CONTACT MODAL ────────────────────── -->
 <div class="modal-overlay" id="contactModal" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <button class="modal-close" id="modalClose" type="button" aria-label="Close">&times;</button>
@@ -940,15 +865,12 @@
     <p class="modal-note">Ne inşa etmek istediğini, kimin için olduğunu ve işe yararsa ne olacağını yaz. Bunlardan ne kadarını şimdi alırsak, ilk görüşme o kadar faydalı olur.</p>
     <form id="contactForm">
       <input type="hidden" name="access_key" value="c98b4381-eb21-4a0f-a150-d462b1530e52">
-      <!-- distinct subject: which of the two audiences wrote is worth knowing before replying -->
       <input type="hidden" name="subject" value="New PRODUCT inquiry from onlymaxon.com/product">
       <input type="hidden" name="from_name" value="OnlyMaxon product page">
       <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off"
              aria-hidden="true" style="display:none !important">
       <input type="text"  name="name"  required  placeholder="Adın">
       <input type="email" name="email" required placeholder="E-postan">
-      <!-- Shorter list than the home page: whoever reached this form has already ruled
-           out a business-card site by getting here. -->
       <select name="need" required>
         <option value="" disabled selected>Neye ihtiyacın var?</option>
         <option value="app">Mobil uygulama</option>
@@ -968,17 +890,13 @@
     </form>
   </div>
 </div>
-
 <script>
-  // ── Sticky nav ──
   const nav = document.getElementById('nav');
   let navScrolled = false;
   window.addEventListener('scroll', () => {
     const s = window.scrollY > 50;
     if (s !== navScrolled) { navScrolled = s; nav.classList.toggle('scrolled', s); }
   }, { passive: true });
-
-  // ── Language dropdown ──
   const langDD    = document.getElementById('langDD');
   const langDDBtn = document.getElementById('langDDBtn');
   langDDBtn.addEventListener('click', ev => {
@@ -996,8 +914,6 @@
       try { localStorage.setItem('om_lang', a.dataset.lang); } catch (e) {}
     });
   });
-
-  // ── Contact modal (Web3Forms) ──
   const modal       = document.getElementById('contactModal');
   const modalForm   = document.getElementById('contactForm');
   const modalStatus = document.getElementById('modalStatus');
@@ -1016,7 +932,6 @@
   document.getElementById('modalClose').addEventListener('click', closeModal);
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   window.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
   modalForm.addEventListener('submit', async e => {
     e.preventDefault();
     const sendBtn = modalForm.querySelector('button[type="submit"]');
@@ -1044,8 +959,6 @@
     }
     sendBtn.disabled = false;
   });
-
-  // ── FAQ accordion ──
   document.querySelectorAll('.faq-q').forEach(q => {
     q.addEventListener('click', () => {
       const item = q.parentElement;
@@ -1054,17 +967,34 @@
       ans.style.maxHeight = open ? ans.scrollHeight + 'px' : '0';
     });
   });
-
-  // ── Scroll reveal ──
+  let faqRt;
+  window.addEventListener('resize', () => {
+    clearTimeout(faqRt);
+    faqRt = setTimeout(() => {
+      document.querySelectorAll('.faq-item.open .faq-a').forEach(a => {
+        a.style.maxHeight = a.scrollHeight + 'px';
+      });
+    }, 150);
+  }, { passive: true });
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || a.getAttribute('href') === '#') return;
+    if (document.body.classList.contains('cv-off')) return;
+    document.body.classList.add('cv-off');
+    void document.body.offsetHeight;
+  }, true);
+  const heroEl = document.getElementById('hero');
+  if (heroEl) {
+    new IntersectionObserver(([e]) => {
+      document.body.classList.toggle('hero-out', !e.isIntersecting);
+    }, { rootMargin: '150px' }).observe(heroEl);
+  }
 </script>
-
-<!-- Cloudflare Web Analytics — same beacon as the rest of the site. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
-
 </body>
 </html>

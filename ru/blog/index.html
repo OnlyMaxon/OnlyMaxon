@@ -1,17 +1,5 @@
 <!DOCTYPE html>
-<!--
-  ENGLISH SOURCE OF TRUTH for /blog/.
-  /pl/blog/, /ru/blog/, /tr/blog/, /es/blog/ are generated from it.
-
-      node build/generate.js
-
-  The blog exists for one reason: this studio sells "getting found", including inside AI
-  answers, and had no page an answer engine could quote. Every article answers one
-  question a real client has asked out loud, in plain language, with the numbers left in.
-
-  Article cards are listed newest first by hand — there are few enough of them that a
-  sorting mechanism would cost more than it saves.
--->
+<!-- Generated from build/src/blog/index.html by build/generate.js — do not edit. -->
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -28,7 +16,8 @@
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/images/icon.png">
-
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-cyrillic.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/space-grotesk-700-latin.woff2">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="OnlyMaxon">
   <meta property="og:title" content="OnlyMaxon — Блог">
@@ -39,7 +28,6 @@
   <meta name="twitter:title" content="OnlyMaxon — Блог">
   <meta name="twitter:description" content="Простые ответы на то, что владельцы малого бизнеса действительно спрашивают: почему Google тебя не находит, сколько на самом деле стоит сайт и что изменили ответы ИИ.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
-
   <style>
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
                  src: url(/fonts/inter-400-latin.woff2) format('woff2');
@@ -65,7 +53,6 @@
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
                  src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
@@ -82,12 +69,10 @@
     ::selection { background: rgba(34,211,238,0.28); color: #fff; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     .container { max-width: 800px; margin: 0 auto; padding: 0 28px; width: 100%; }
-
     header { border-bottom: 1px solid var(--border); padding: 20px 0; }
     .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: var(--text); text-decoration: none; letter-spacing: -0.5px; }
     .brand span { color: var(--blue); }
-
     .lang-dd { position: relative; }
     .lang-dd-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -115,11 +100,9 @@
     .lang-dd-menu a { display: block; text-decoration: none; color: var(--text-d); font-size: 14px; font-weight: 500; padding: 9px 12px; border-radius: 8px; transition: background-color 0.15s, color 0.15s; }
     .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
     .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
-
     main { flex: 1; padding: 64px 0 90px; }
     h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(30px, 5vw, 44px); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 14px; }
     .lede { font-size: 17px; color: var(--text-d); max-width: 620px; margin-bottom: 48px; }
-
     .post-list { display: flex; flex-direction: column; gap: 16px; }
     .post {
       display: block; text-decoration: none;
@@ -135,7 +118,6 @@
     .post-more { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--blue); margin-top: 14px; transition: gap 0.2s; }
     .post-more::after { content: '→'; }
     .post:hover .post-more { gap: 10px; }
-
     .cta-band {
       margin-top: 48px; text-align: center;
       background: var(--bg2); border: 1px solid var(--border);
@@ -151,13 +133,11 @@
       transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
     .btn:hover { background: #5FE6F2; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(34,211,238,0.5); }
-
     footer { border-top: 1px solid var(--border); padding: 26px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
     .ft a:hover { color: var(--blue); }
-
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       main { padding: 44px 0 64px; }
@@ -168,7 +148,6 @@
   </style>
 </head>
 <body>
-
 <header>
   <div class="container">
     <div class="head-inner">
@@ -190,44 +169,36 @@
     </div>
   </div>
 </header>
-
 <main>
   <div class="container">
     <h1>Прямые ответы</h1>
     <p class="lede">Вопросы, которые клиенты действительно задают, и ответы в том же виде, в каком мы даём их по телефону — без жаргона и без попыток сделать вид, что всё сложнее, чем есть.</p>
-
     <div class="post-list">
-
       <a class="post" href="/ru/blog/not-in-google/">
         <div class="post-meta">2026-08-19 · <span>4 мин чтения</span></div>
         <div class="post-title">Почему меня не находят в Google?</div>
         <p class="post-sum">Пять причин в том порядке, в каком они реально важны — и одна, которая в большинстве случаев решает вопрос за один вечер и бесплатно.</p>
         <span class="post-more">Читать</span>
       </a>
-
       <a class="post" href="/ru/blog/what-a-website-costs/">
         <div class="post-meta">2026-08-19 · <span>4 мин чтения</span></div>
         <div class="post-title">Сколько на самом деле стоит сайт и почему сметы отличаются в десять раз?</div>
         <p class="post-sum">Ни смета на 400 €, ни смета на 4000 € не обязательно обман. Разница реальная — как и расходы, о которых не говорит ни одна из них.</p>
         <span class="post-more">Читать</span>
       </a>
-
       <a class="post" href="/ru/blog/google-answers-now/">
         <div class="post-meta">2026-08-19 · <span>4 мин чтения</span></div>
         <div class="post-title">Google теперь отвечает, а не даёт ссылки. Что это значит для малого бизнеса</div>
         <p class="post-sum">Если в ответе наверху тебя не упомянули, этот клиент вообще не узнает, что ты существуешь — и, в отличие от потерянной позиции, ни один отчёт об этом не скажет.</p>
         <span class="post-more">Читать</span>
       </a>
-
       <a class="post" href="/ru/blog/website-or-instagram/">
         <div class="post-meta">2026-08-19 · <span>4 мин чтения</span></div>
         <div class="post-title">Нужен ли сайт, если у меня уже есть инстаграм?</div>
         <p class="post-sum">Мы продаём сайты, так что считай это предвзятым и всё равно прочитай. Инстаграм несколько вещей делает лучше. Двух он не может вообще — и обе стоят тебе клиентов.</p>
         <span class="post-more">Читать</span>
       </a>
-
     </div>
-
     <div class="cta-band">
       <h2>Проще спросить?</h2>
       <p>Первый созвон бесплатный, занимает 30 минут, а цену и дату ты получаешь в течение 48 часов после него.</p>
@@ -235,7 +206,6 @@
     </div>
   </div>
 </main>
-
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -245,7 +215,6 @@
     </div>
   </div>
 </footer>
-
 <script>
   const langDD    = document.getElementById('langDD');
   const langDDBtn = document.getElementById('langDDBtn');
@@ -265,9 +234,7 @@
     });
   });
 </script>
-
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
-
 </body>
 </html>

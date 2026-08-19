@@ -1,19 +1,5 @@
 <!DOCTYPE html>
-<!--
-  ENGLISH SOURCE OF TRUTH for /privacy/.
-  /pl/privacy/, /ru/privacy/, /tr/privacy/, /es/privacy/ are generated from it.
-
-  After changing anything here (or in build/translations.js) run:
-
-      node build/generate.js
-
-  Deliberately short. GDPR Art. 12 asks for "concise, transparent, intelligible" — a
-  wall of legalese is worse compliance, not better, and this site genuinely does very
-  little with anyone's data, which is easier to say in eight short sections than to bury.
-
-  Asset paths here are absolute (/images/, /fonts/) because the English copy already
-  lives one directory deep and is served as-is, never rewritten by the build.
--->
+<!-- Generated from build/src/privacy/index.html by build/generate.js — do not edit. -->
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
@@ -30,7 +16,8 @@
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/images/icon.png">
-
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/space-grotesk-700-latin.woff2">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="OnlyMaxon">
   <meta property="og:title" content="OnlyMaxon — Gizlilik">
@@ -41,9 +28,7 @@
   <meta name="twitter:title" content="OnlyMaxon — Gizlilik">
   <meta name="twitter:description" content="OnlyMaxon verilerinle ne yapıyor: iletişim formu ve çerezsiz bir sayfa sayacı. Takip çerezi yok, reklam yok, seni bu sitenin dışında takip eden hiçbir şey yok.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
-
   <style>
-    /* Only the weights this page uses: Inter 400/600/700, Space Grotesk 700. */
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
                  src: url(/fonts/inter-400-latin.woff2) format('woff2');
                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -68,7 +53,6 @@
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
                  src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
@@ -85,7 +69,6 @@
     ::selection { background: rgba(34,211,238,0.28); color: #fff; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     .container { max-width: 760px; margin: 0 auto; padding: 0 28px; width: 100%; }
-
     header { border-bottom: 1px solid var(--border); padding: 20px 0; }
     .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand {
@@ -93,9 +76,6 @@
       color: var(--text); text-decoration: none; letter-spacing: -0.5px;
     }
     .brand span { color: var(--blue); }
-
-    /* Same dropdown as the main page — the build rewrites both its label and its links,
-       so switching language here lands on this page, not back on the home page. */
     .lang-dd { position: relative; }
     .lang-dd-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -128,7 +108,6 @@
     }
     .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
     .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
-
     main { flex: 1; padding: 64px 0 90px; }
     h1 {
       font-family: 'Space Grotesk', sans-serif; font-weight: 700;
@@ -160,13 +139,11 @@
     strong { color: var(--text); font-weight: 600; }
     main a { color: var(--blue); text-decoration: none; }
     main a:hover { text-decoration: underline; }
-
     footer { border-top: 1px solid var(--border); padding: 26px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; }
     .ft a:hover { color: var(--blue); }
-
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       main { padding: 44px 0 64px; }
@@ -178,7 +155,6 @@
   </style>
 </head>
 <body>
-
 <header>
   <div class="container">
     <div class="head-inner">
@@ -200,56 +176,45 @@
     </div>
   </div>
 </header>
-
 <main>
   <div class="container">
     <h1>Gizlilik</h1>
     <p class="updated"><span>Son güncelleme</span>: 2026-08-19</p>
-
     <p class="lede">Kısacası: verdiğin tek şey, iletişim formuna kendi yazdıkların. Sayfa görüntülemeleri sayılıyor, ama çerezsiz ve seni tanımlayabilecek hiçbir şey olmadan. <strong>Hiçbir şey satılmıyor, reklamcılara verilmiyor ya da bu sitenin dışında seni takip etmek için kullanılmıyor.</strong></p>
-
     <section>
       <h2>Kim sorumlu</h2>
       <p><strong>Max Orucov</strong>, OnlyMaxon adıyla çalışıyor, Polonya merkezli. Burada anlatılan verilere ne olacağına karar veren kişi benim — GDPR'ın deyimiyle veri sorumlusu. Bu sayfayla ilgili her şey için <a href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a> adresine yaz.</p>
     </section>
-
     <section>
       <h2>Ne toplanıyor</h2>
       <p>Yalnızca kendi gönderdiklerin: <strong>adın, e-posta adresin ve mesajının metni.</strong> Arka planda hiçbir şey toplanmıyor. Hakkında profil oluşturulmuyor ve başka hiçbir yerden veri satın alınmıyor.</p>
     </section>
-
     <section>
       <h2>Neden</h2>
       <p>Mesajını okuyup yanıtlamak ve istersen bir fiyat ve süre çıkarmak için. Amacın tamamı bu. GDPR dilinde dayanak, talebinin kendisi — olası bir sözleşme öncesinde kendi girişiminle atılan adımlar.</p>
     </section>
-
     <section>
       <h2>Başka kim görüyor</h2>
       <p>Bir mesaj bana ulaşmadan önce üç servisten geçer: formu <strong>Web3Forms</strong> iletir, e-postayı <strong>Cloudflare</strong> yönlendirir ve düştüğü posta kutusunu <strong>Google</strong> barındırır. Sitenin kendisi <strong>GitHub Pages</strong> üzerindedir ve o da — dünyadaki her web sunucusu gibi — kendi kayıtlarına IP adreslerini yazar; aşağıda anlatılan sayfa sayacını ise <strong>Cloudflare</strong> yürütür. Başka hiç kimseye hiçbir şey gitmez.</p>
     </section>
-
     <section>
       <h2>Ne kadar süre saklanıyor</h2>
       <p>Talebin kapanana kadar ve son yazışmamızdan sonra <strong>en fazla 12 ay</strong>. Birlikte çalışmaya başlarsak, proje yazışmaları yasanın gerektirdiği süre boyunca saklanır. Daha erken silinmesini istersen silinir.</p>
     </section>
-
     <section>
       <h2>Çerezler ve sayma</h2>
       <p>Tarayıcın tek bir şey saklar: seçtiğin dil — bir sonraki ziyaretinde site seni başka bir yere atmasın diye. Sende kalır ve hiçbir yere gönderilmez. Ziyaretleri Cloudflare Web Analytics sayar; hiç çerez koymaz ve bir ziyaretçiyi diğerinden ayırt edemez — <strong>insanları değil, sayfa görüntülemelerini sayar.</strong> Reklam pikseli yok, seni başka yerlerde takip eden hiçbir şey yok — bu site sana hiçbir şeyi kabul ettirmiyorsa tam da bu yüzden.</p>
     </section>
-
     <section>
       <h2>Haklarım</h2>
       <p>Hakkında ne tutulduğunu sorabilir, düzeltilmesini, silinmesini isteyebilir, kullanılmasına itiraz edebilir ya da bir kopyasını talep edebilirsin. <a href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a> adresine tek bir e-posta yeter — form yok, gerekçe gerekmiyor. Ele alınış biçiminden memnun kalmazsan Polonya denetim otoritesi UODO'ya şikâyette bulunabilirsin.</p>
     </section>
-
     <section>
       <h2>Bu değişirse</h2>
       <p>Yukarıdaki tarih de onunla birlikte değişir. Buradaki hiçbir şey, zaten göndermiş olduğun bir mesaja geriye dönük uygulanmaz.</p>
     </section>
   </div>
 </main>
-
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -259,7 +224,6 @@
     </div>
   </div>
 </footer>
-
 <script>
   const langDD    = document.getElementById('langDD');
   const langDDBtn = document.getElementById('langDDBtn');
@@ -273,18 +237,13 @@
       langDDBtn.setAttribute('aria-expanded', 'false');
     }
   });
-  // Same rule as the home page: a language picked by hand wins over the auto-routing.
   langDD.querySelectorAll('a[data-lang]').forEach(a => {
     a.addEventListener('click', () => {
       try { localStorage.setItem('om_lang', a.dataset.lang); } catch (e) {}
     });
   });
 </script>
-
-<!-- Cloudflare Web Analytics — same beacon as the rest of the site. Section 6 above
-     describes exactly what it does, which is the only reason it is allowed on this page. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
-
 </body>
 </html>

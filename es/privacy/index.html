@@ -1,19 +1,5 @@
 <!DOCTYPE html>
-<!--
-  ENGLISH SOURCE OF TRUTH for /privacy/.
-  /pl/privacy/, /ru/privacy/, /tr/privacy/, /es/privacy/ are generated from it.
-
-  After changing anything here (or in build/translations.js) run:
-
-      node build/generate.js
-
-  Deliberately short. GDPR Art. 12 asks for "concise, transparent, intelligible" — a
-  wall of legalese is worse compliance, not better, and this site genuinely does very
-  little with anyone's data, which is easier to say in eight short sections than to bury.
-
-  Asset paths here are absolute (/images/, /fonts/) because the English copy already
-  lives one directory deep and is served as-is, never rewritten by the build.
--->
+<!-- Generated from build/src/privacy/index.html by build/generate.js — do not edit. -->
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -30,7 +16,8 @@
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/images/icon.png">
-
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/space-grotesk-700-latin.woff2">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="OnlyMaxon">
   <meta property="og:title" content="OnlyMaxon — Privacidad">
@@ -41,9 +28,7 @@
   <meta name="twitter:title" content="OnlyMaxon — Privacidad">
   <meta name="twitter:description" content="Qué hace OnlyMaxon con tus datos: el formulario de contacto y un contador de páginas sin cookies. Sin cookies de seguimiento, sin publicidad, sin nada que te siga fuera del sitio.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
-
   <style>
-    /* Only the weights this page uses: Inter 400/600/700, Space Grotesk 700. */
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
                  src: url(/fonts/inter-400-latin.woff2) format('woff2');
                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -68,7 +53,6 @@
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
                  src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
@@ -85,7 +69,6 @@
     ::selection { background: rgba(34,211,238,0.28); color: #fff; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     .container { max-width: 760px; margin: 0 auto; padding: 0 28px; width: 100%; }
-
     header { border-bottom: 1px solid var(--border); padding: 20px 0; }
     .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand {
@@ -93,9 +76,6 @@
       color: var(--text); text-decoration: none; letter-spacing: -0.5px;
     }
     .brand span { color: var(--blue); }
-
-    /* Same dropdown as the main page — the build rewrites both its label and its links,
-       so switching language here lands on this page, not back on the home page. */
     .lang-dd { position: relative; }
     .lang-dd-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -128,7 +108,6 @@
     }
     .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
     .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
-
     main { flex: 1; padding: 64px 0 90px; }
     h1 {
       font-family: 'Space Grotesk', sans-serif; font-weight: 700;
@@ -160,13 +139,11 @@
     strong { color: var(--text); font-weight: 600; }
     main a { color: var(--blue); text-decoration: none; }
     main a:hover { text-decoration: underline; }
-
     footer { border-top: 1px solid var(--border); padding: 26px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; }
     .ft a:hover { color: var(--blue); }
-
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       main { padding: 44px 0 64px; }
@@ -178,7 +155,6 @@
   </style>
 </head>
 <body>
-
 <header>
   <div class="container">
     <div class="head-inner">
@@ -200,56 +176,45 @@
     </div>
   </div>
 </header>
-
 <main>
   <div class="container">
     <h1>Privacidad</h1>
     <p class="updated"><span>Última actualización</span>: 2026-08-19</p>
-
     <p class="lede">Versión corta: lo único que entregas es lo que escribes en el formulario de contacto. Las visitas se cuentan, pero sin cookies y sin nada que pueda identificarte. <strong>Nada se vende, se entrega a anunciantes ni se usa para seguirte fuera de este sitio.</strong></p>
-
     <section>
       <h2>Quién es responsable</h2>
       <p><strong>Max Orucov</strong>, que trabaja como OnlyMaxon, con base en Polonia. Soy quien decide qué ocurre con los datos descritos aquí — el responsable del tratamiento, en términos del RGPD. Para cualquier cosa de esta página, escribe a <a href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a>.</p>
     </section>
-
     <section>
       <h2>Qué se recoge</h2>
       <p>Solo lo que envías tú: <strong>tu nombre, tu correo electrónico y el texto de tu mensaje.</strong> Nada se recoge en segundo plano. No se construye ningún perfil sobre ti ni se compran datos en ningún otro sitio.</p>
     </section>
-
     <section>
       <h2>Para qué</h2>
       <p>Para leer tu mensaje y responderlo, y para preparar un precio y un plazo si los quieres. Ese es todo el propósito. En términos del RGPD la base es tu propia solicitud — actuaciones a petición tuya antes de un posible contrato.</p>
     </section>
-
     <section>
       <h2>Quién más lo ve</h2>
       <p>Un mensaje pasa por tres servicios antes de llegarme: <strong>Web3Forms</strong> entrega el formulario, <strong>Cloudflare</strong> enruta el correo y <strong>Google</strong> aloja el buzón donde acaba. El sitio está alojado en <strong>GitHub Pages</strong>, que — como cualquier servidor web del mundo — registra direcciones IP en sus propios logs, y el contador de páginas descrito más abajo lo lleva <strong>Cloudflare</strong>. Nadie más recibe nada.</p>
     </section>
-
     <section>
       <h2>Cuánto tiempo se conserva</h2>
       <p>Hasta que tu consulta quede cerrada, y <strong>no más de 12 meses</strong> después de nuestro último intercambio. Si acabamos trabajando juntos, la correspondencia del proyecto se guarda el tiempo que exija la ley. Pide que se borre antes y se borrará.</p>
     </section>
-
     <section>
       <h2>Cookies y conteo</h2>
       <p>Tu navegador guarda una cosa: el idioma que elegiste, para que en tu próxima visita el sitio no te mande a otro lado. Se queda contigo y no se envía a ninguna parte. Las visitas las cuenta Cloudflare Web Analytics, que no pone ninguna cookie y no puede distinguir a un visitante de otro — <strong>cuenta páginas vistas, no personas.</strong> Sin píxeles publicitarios, sin nada que te siga a otros sitios, y justamente por eso este sitio nunca te pide que aceptes nada.</p>
     </section>
-
     <section>
       <h2>Tus derechos</h2>
       <p>Puedes preguntar qué se guarda sobre ti, pedir que se corrija, que se borre, oponerte a su uso o pedir una copia. Basta un correo a <a href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a> — sin formulario y sin tener que dar motivos. Si no te convence cómo se gestiona, puedes reclamar ante la autoridad de control polaca, la UODO.</p>
     </section>
-
     <section>
       <h2>Si esto cambia</h2>
       <p>La fecha de arriba cambia con ello. Nada de aquí se aplica retroactivamente a un mensaje que ya has enviado.</p>
     </section>
   </div>
 </main>
-
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -259,7 +224,6 @@
     </div>
   </div>
 </footer>
-
 <script>
   const langDD    = document.getElementById('langDD');
   const langDDBtn = document.getElementById('langDDBtn');
@@ -273,18 +237,13 @@
       langDDBtn.setAttribute('aria-expanded', 'false');
     }
   });
-  // Same rule as the home page: a language picked by hand wins over the auto-routing.
   langDD.querySelectorAll('a[data-lang]').forEach(a => {
     a.addEventListener('click', () => {
       try { localStorage.setItem('om_lang', a.dataset.lang); } catch (e) {}
     });
   });
 </script>
-
-<!-- Cloudflare Web Analytics — same beacon as the rest of the site. Section 6 above
-     describes exactly what it does, which is the only reason it is allowed on this page. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
-
 </body>
 </html>

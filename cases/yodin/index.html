@@ -1,17 +1,5 @@
 <!DOCTYPE html>
-<!--
-  ENGLISH SOURCE OF TRUTH for /cases/yodin/.
-
-      node build/generate.js
-
-  Written by scratchpad/makecases.js. Every English string comes from
-  build/translations.js — edit the copy there, not here.
-
-  These pages exist so the portfolio stops handing its visitors to someone else's domain:
-  the card on the home page used to link straight to the client's live site, and whoever
-  clicked it left and did not come back. Now the story, the numbers and the live link all
-  sit here first.
--->
+<!-- Generated from build/src/cases/yodin/index.html by build/generate.js — do not edit. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -28,7 +16,8 @@
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/images/icon.png">
-
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/space-grotesk-700-latin.woff2">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="OnlyMaxon">
   <meta property="og:title" content="OnlyMaxon — yOdin — a platform agreed with a university">
@@ -39,7 +28,6 @@
   <meta name="twitter:title" content="OnlyMaxon — yOdin — a platform agreed with a university">
   <meta name="twitter:description" content="The dean's office agreed this one with us directly. A platform matching international students by behaviour rather than nationality — in development, and expanding beyond the first university.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -58,7 +46,6 @@
     }
   }
   </script>
-
   <style>
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
                  src: url(/fonts/inter-400-latin.woff2) format('woff2');
@@ -84,7 +71,6 @@
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
                  src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
@@ -101,12 +87,10 @@
     ::selection { background: rgba(34,211,238,0.28); color: #fff; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     .container { max-width: 720px; margin: 0 auto; padding: 0 28px; width: 100%; }
-
     header { border-bottom: 1px solid var(--border); padding: 20px 0; }
     .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: var(--text); text-decoration: none; letter-spacing: -0.5px; }
     .brand span { color: var(--blue); }
-
     .lang-dd { position: relative; }
     .lang-dd-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -134,7 +118,6 @@
     .lang-dd-menu a { display: block; text-decoration: none; color: var(--text-d); font-size: 14px; font-weight: 500; padding: 9px 12px; border-radius: 8px; transition: background-color 0.15s, color 0.15s; }
     .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
     .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
-
     main { flex: 1; padding: 56px 0 90px; }
     .back { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--text-d); text-decoration: none; margin-bottom: 26px; transition: color 0.2s, gap 0.2s; }
     .back::before { content: '←'; }
@@ -161,7 +144,6 @@
     strong { color: var(--text); font-weight: 600; }
     main a { color: var(--blue); text-decoration: none; }
     main a:hover { text-decoration: underline; }
-
     .cta-band { margin-top: 48px; text-align: center; background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 32px 28px; }
     .cta-band h2 { font-size: 22px; justify-content: center; margin-bottom: 10px; }
     .cta-band h2::before { content: none; }
@@ -174,21 +156,17 @@
       transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
     .btn:hover { background: #5FE6F2; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(34,211,238,0.5); }
-
     footer { border-top: 1px solid var(--border); padding: 26px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
     .ft a:hover { color: var(--blue); }
-
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       main { padding: 40px 0 64px; }
       .footer-inner { flex-direction: column; text-align: center; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; } }
-  
-    /* ── case-page additions ───────────────── */
     .case-hook {
       font-size: clamp(19px, 2.6vw, 24px); font-weight: 600; color: var(--text);
       line-height: 1.45; letter-spacing: -0.5px; margin-bottom: 16px;
@@ -200,7 +178,6 @@
     }
     .badge-live { background: rgba(34,197,94,0.12); color: #4ADE80; border: 1px solid rgba(34,197,94,0.25); }
     .badge-dev  { background: rgba(245,180,90,0.12); color: #F5B45A; border: 1px solid rgba(245,180,90,0.28); }
-    /* The one number on the page, so it gets the only accent colour and its own box. */
     .case-result {
       display: flex; align-items: flex-start; gap: 12px;
       background: var(--bg2); border: 1px solid rgba(34,211,238,0.28);
@@ -230,11 +207,10 @@
   </style>
 </head>
 <body>
-
 <header>
   <div class="container">
     <div class="head-inner">
-      <a href="/" class="brand" data-page="">OnlyMaxon<span>.</span></a>
+      <a href="/" class="brand">OnlyMaxon<span>.</span></a>
       <div class="lang-dd" id="langDD">
         <button type="button" class="lang-dd-btn" id="langDDBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
@@ -252,38 +228,31 @@
     </div>
   </div>
 </header>
-
 <main>
   <div class="container">
-    <a class="back" href="/" data-page="" data-i18n="caseBack">All our work</a>
-
-    <p class="meta" data-i18n="caseEyebrow">Case</p>
+    <a class="back" href="/">All our work</a>
+    <p class="meta">Case</p>
     <h1>yOdin</h1>
-    <p class="case-hook" data-i18n="c3Hook">A university's dean's office agreed this project with us directly.</p>
+    <p class="case-hook">A university's dean's office agreed this project with us directly.</p>
     <div class="case-badges">
-      <span class="badge-dev" data-i18n="badgeDev">In dev</span>
+      <span class="badge-dev">In dev</span>
     </div>
-
     <section>
-      <h2 data-i18n="caseS1T">What they came with</h2>
-      <p data-i18n-html="c3S1B">International students arrive somewhere new and end up inside a group from their own country within about a week. It is the easiest thing to do, and it is the thing they later say they regret.</p>
-      <p data-i18n-html="c3S1C">The project was agreed directly with the university's dean's office — <strong>discussed with an institution, not pitched at one.</strong></p>
+      <h2>What they came with</h2>
+      <p>International students arrive somewhere new and end up inside a group from their own country within about a week. It is the easiest thing to do, and it is the thing they later say they regret.</p>
+      <p>The project was agreed directly with the university's dean's office — <strong>discussed with an institution, not pitched at one.</strong></p>
     </section>
-
     <section>
-      <h2 data-i18n="caseS2T">What we built</h2>
-      <p data-i18n-html="c3S2B">A platform that matches students by how they actually behave — what they join, when they turn up, what they keep coming back to — rather than by which passport they hold.</p>
-      <p data-i18n-html="c3S2C">Mobile first, because that is the only screen a student uses for this kind of thing.</p>
+      <h2>What we built</h2>
+      <p>A platform that matches students by how they actually behave — what they join, when they turn up, what they keep coming back to — rather than by which passport they hold.</p>
+      <p>Mobile first, because that is the only screen a student uses for this kind of thing.</p>
     </section>
-
     <section>
-      <h2 data-i18n="caseS3T">What changed</h2>
-      <p data-i18n-html="c3S3B">In active development, and expanding beyond the university it started at.</p>
-      <p data-i18n-html="c3S3C">This is the one project on this site you cannot open yet. It is here because <strong>how it started says something the finished ones cannot: an institution agreed to build it with us.</strong></p>
+      <h2>What changed</h2>
+      <p>In active development, and expanding beyond the university it started at.</p>
+      <p>This is the one project on this site you cannot open yet. It is here because <strong>how it started says something the finished ones cannot: an institution agreed to build it with us.</strong></p>
     </section>
-
-    <p class="case-result" data-i18n="projYodinResult">In development, rolling out across universities.</p>
-
+    <p class="case-result">In development, rolling out across universities.</p>
     <div class="case-tags">
       <span class="case-tag">React Native</span>
       <span class="case-tag">Expo</span>
@@ -291,25 +260,22 @@
       <span class="case-tag">Docker</span>
       <span class="case-tag">Dart</span>
     </div>
-
     <div class="cta-band">
-      <h2 data-i18n="caseCtaTitle">Came here with something similar?</h2>
-      <p data-i18n-html="caseCtaDesc">Tell us what is not working. The first call is free and takes 30 minutes — and within 48 hours of it you have a price and a date.</p>
-      <a class="btn" href="/" data-page="" data-i18n="blCtaBtn">Talk to us</a>
+      <h2>Came here with something similar?</h2>
+      <p>Tell us what is not working. The first call is free and takes 30 minutes — and within 48 hours of it you have a price and a date.</p>
+      <a class="btn" href="/">Talk to us</a>
     </div>
   </div>
 </main>
-
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <span class="ft" data-i18n="footerCopyright">© 2026 OnlyMaxon Studio. All rights reserved.</span>
-      <span class="ft"><a href="/blog/" data-page="blog" data-i18n="footerBlog">Blog</a></span>
-      <span class="ft"><a href="/privacy/" data-page="privacy" data-i18n="footerPrivacy">Privacy</a></span>
+      <span class="ft">© 2026 OnlyMaxon Studio. All rights reserved.</span>
+      <span class="ft"><a href="/blog/">Blog</a></span>
+      <span class="ft"><a href="/privacy/">Privacy</a></span>
     </div>
   </div>
 </footer>
-
 <script>
   const langDD    = document.getElementById('langDD');
   const langDDBtn = document.getElementById('langDDBtn');
@@ -329,9 +295,7 @@
     });
   });
 </script>
-
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
-
 </body>
 </html>

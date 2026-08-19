@@ -12,11 +12,19 @@
 
 const fs = require('fs');
 const path = require('path');
+const vm = require('vm');
 
 const ROOT = path.join(__dirname, '..');
+// Sources live under build/, which robots.txt already disallows, so they are never
+// crawled as a second copy of the site. Nothing here is served as a page: every English
+// URL is built from build/src/ exactly like the other four languages, which is what lets
+// the English pages be stripped of their comments too — they used to be shipped verbatim,
+// and on the home page that was 30% of the file.
+const SRC = path.join('build', 'src');
 const SITE = 'https://onlymaxon.com';
 const SOURCE_LANG = 'en';
 const LANGS = ['pl', 'ru', 'tr', 'es'];
+const ALL_LANGS = [SOURCE_LANG, ...LANGS];
 const NAMES = { en: 'English', pl: 'Polski', ru: 'Русский', tr: 'Türkçe', es: 'Español' };
 
 /*
@@ -132,12 +140,59 @@ const stripTags = s => s.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '').re
 const href = (lang, p) => '/' + (lang === SOURCE_LANG ? '' : lang + '/') + (p ? p + '/' : '');
 const url  = (lang, p) => SITE + href(lang, p);
 
+/*
+ * The sources are commented the way they are on purpose — they are the documentation, and
+ * the reasoning behind a rule is worth more than the rule. None of it has to reach a
+ * browser: on the home page the comments are ~16 KB, an eighth of the file.
+ *
+ * Only unambiguous comments are removed. A `//` that follows code on the same line is
+ * left where it is: telling it apart from the `//` in an URL needs a real tokeniser, and
+ * a few hundred bytes are not worth a build that can quietly corrupt a script. Whatever
+ * this does emit is handed to the JS parser before it is allowed out.
+ */
+function stripComments(html, label) {
+  // Split so that each comment syntax is only applied where it actually means "comment".
+  const parts = html.split(/(<script\b[^>]*>[\s\S]*?<\/script>|<style\b[^>]*>[\s\S]*?<\/style>)/);
+
+  return parts.map(part => {
+    if (part.startsWith('<style')) {
+      return part.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\n[ \t]*(?=\n)/g, '');
+    }
+
+    if (part.startsWith('<script')) {
+      // JSON has no comment syntax and its payload is full of "https://" — hands off.
+      if (/type="application\/ld\+json"/.test(part)) return part;
+      // A template literal spanning lines could carry a line beginning with `//` as data.
+      // Splitting on the backtick puts literal bodies at the odd indices — testing the
+      // gap between any two backticks instead would flag the newline that merely sits
+      // between two separate single-line literals, which is most of them.
+      const segments = part.split('`');
+      if (segments.some((s, i) => i % 2 === 1 && s.includes('\n'))) {
+        console.log(`  note: ${label} has a multi-line template literal, comments kept`);
+        return part;
+      }
+
+      const out = part
+        .replace(/^[ \t]*\/\*[\s\S]*?\*\/[ \t]*\r?\n/gm, '')   // block comment on its own lines
+        .replace(/^[ \t]*\/\/.*\r?\n/gm, '')                   // whole-line // comment
+        .replace(/\n[ \t]*(?=\n)/g, '');
+
+      const body = out.replace(/^<script\b[^>]*>/, '').replace(/<\/script>$/, '');
+      try { new vm.Script(body); }
+      catch (e) { fail(`${label}: stripping comments broke a script — ${e.message}`); }
+      return out;
+    }
+
+    return part.replace(/<!--[\s\S]*?-->/g, '').replace(/\n[ \t]*(?=\n)/g, '');
+  }).join('');
+}
+
 // ── read + validate every source ──────────────────────────────────────────────
 // Normalise to LF. Git is configured to check files out with CRLF on this machine, so
 // after any `git checkout index.html` the source comes back with \r\n — and the
 // structured-data patterns below, which match on \n, silently stop matching.
 for (const page of PAGES) {
-  page.src = path.join(page.path, 'index.html');
+  page.src = path.join(SRC, page.path, 'index.html');
   const file = path.join(ROOT, page.src);
   if (!fs.existsSync(file)) fail(`${page.src} does not exist (declared in PAGES)`);
   page.source = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
@@ -179,10 +234,13 @@ if (drift.length) fail(`English source and translations.en disagree:\n    ` + dr
 
 const usedKeys = new Set(PAGES.flatMap(p => [...p.keys]));
 
+// ALL_LANGS, not LANGS: English is built from this table now too, so a key with no .en
+// would quietly replace the English sentence on the page with nothing at all. Before the
+// English pages were generated, a missing .en only tripped the drift check above.
 const missing = [];
 for (const key of usedKeys) {
   if (!translations[key]) { missing.push(`${key} (no entry at all)`); continue; }
-  for (const lang of LANGS) {
+  for (const lang of ALL_LANGS) {
     if (!translations[key][lang] || !translations[key][lang].trim()) missing.push(`${key}.${lang}`);
   }
 }
@@ -195,6 +253,21 @@ function build(page, lang) {
   const t = key => translations[key][lang];
   let html = page.source;
   let swaps = 0;
+
+  // 0. blocks only the bare domain can act on. The first-visit language router tests
+  //    location.pathname and returns immediately on anything that is not '/', so on
+  //    /pl/, /ru/, /tr/, /es/ and on every sub-page it was ~1.5 KB of blocking script
+  //    that parsed, ran and decided nothing. Exactly one URL keeps it: the English root.
+  const isBareDomain = lang === SOURCE_LANG && page.path === '';
+  const rootOnly = /[ \t]*<!-- build:root-only -->\r?\n?|[ \t]*<!-- \/build:root-only -->\r?\n?/g;
+  const rootOnlyBlock = /[ \t]*<!-- build:root-only -->[\s\S]*?<!-- \/build:root-only -->\r?\n?/g;
+  let rootOnlyBytes = 0;
+  if (isBareDomain) {
+    html = html.replace(rootOnly, '');            // keep the block, drop the markers
+  } else {
+    rootOnlyBytes = (html.match(rootOnlyBlock) || []).reduce((n, b) => n + b.length, 0);
+    html = html.replace(rootOnlyBlock, '');
+  }
 
   // 1. text nodes:  <p data-i18n="key">English</p>
   html = html.replace(
@@ -257,6 +330,17 @@ function build(page, lang) {
 
   // 6. relative asset paths — the page now lives at least one directory deeper
   html = html.replace(/(href|src)="images\//g, '$1="/images/');
+
+  // 6b. the preloaded font subset. The source names the Latin cut, which is what four of
+  //     the five languages draw their first screen with. Russian draws it with the
+  //     Cyrillic cut and would otherwise spend two high-priority requests on files it
+  //     never renders a glyph from, while the ones it needs queue behind them.
+  if (lang === 'ru' && html.includes('<link rel="preload" as="font"')) {
+    const fontRe = /(<link rel="preload" as="font"[^>]*href="\/fonts\/inter-\d00)-latin(\.woff2">)/g;
+    if (!(html.match(fontRe) || []).length)
+      fail(`${page.src}: font preloads present but none point at a Latin Inter cut`);
+    html = html.replace(fontRe, '$1-cyrillic$2');
+  }
 
   // 7. canonical + the hreflang set, both scoped to this page
   const alts = [SOURCE_LANG, ...LANGS]
@@ -341,10 +425,22 @@ function build(page, lang) {
   html = html.replace(anchorRe, '');
   html = html.replace(/\sdata-page="[\w/-]*"/g, '');   // build-only, same as the anchors
 
-  const dir = path.join(ROOT, lang, page.path);
+  // Last, so that everything above could still match on the comments if it needed to.
+  const withComments = html.length;
+  html = stripComments(html, `${lang} ${page.src}`);
+  const commentBytes = withComments - html.length;
+
+  // The source carries a header telling whoever opens it that it is the file to edit.
+  // That header is now stripped along with the rest, and it would have been a lie here
+  // anyway — every one of these files is overwritten on the next build.
+  html = html.replace(/^<!DOCTYPE html>\n?/i,
+    `<!DOCTYPE html>\n<!-- Generated from ${page.src.replace(/\\/g, '/')} by build/generate.js — do not edit. -->\n`);
+
+  // English is the site root, the other four sit one directory down.
+  const dir = path.join(ROOT, lang === SOURCE_LANG ? '' : lang, page.path);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'index.html'), html);
-  return { swaps, bytes: html.length, stripped: anchors.length, saved };
+  return { swaps, bytes: html.length, stripped: anchors.length, saved, commentBytes, rootOnlyBytes };
 }
 
 // ── run ───────────────────────────────────────────────────────────────────────
@@ -352,11 +448,14 @@ for (const page of PAGES) {
   const label = page.path ? `/${page.path}/` : '/';
   console.log(`source: ${page.src} (${(page.source.length / 1024).toFixed(1)} KB, ` +
               `${page.keys.size} keys) → ${label}\n`);
-  for (const lang of LANGS) {
+  for (const lang of ALL_LANGS) {
     const r = build(page, lang);
-    const out = path.join(lang, page.path, 'index.html').replace(/\\/g, '/');
+    const out = path.join(lang === SOURCE_LANG ? '' : lang, page.path, 'index.html').replace(/\\/g, '/');
+    const trimmed = r.saved + r.commentBytes + r.rootOnlyBytes;
     console.log(`  ${out.padEnd(22)} ${r.swaps} substitutions   ${(r.bytes / 1024).toFixed(1)} KB   ` +
-                `(-${r.stripped} build-only attrs, -${r.saved} B)   ${NAMES[lang]}`);
+                `(-${(trimmed / 1024).toFixed(1)} KB: ${r.commentBytes} comments, ` +
+                `${r.saved} attrs${r.rootOnlyBytes ? ', ' + r.rootOnlyBytes + ' root-only' : ''})   ` +
+                `${NAMES[lang]}`);
   }
   console.log('');
 }

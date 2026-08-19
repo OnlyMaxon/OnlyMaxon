@@ -1,12 +1,5 @@
 <!DOCTYPE html>
-<!--
-  ENGLISH SOURCE OF TRUTH for /blog/what-a-website-costs/.
-
-      node build/generate.js
-
-  Written by scratchpad/makearticles.js so every article shares one presentation layer and
-  every English string comes from build/translations.js. Edit the copy there, not here.
--->
+<!-- Generated from build/src/blog/what-a-website-costs/index.html by build/generate.js — do not edit. -->
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
@@ -23,7 +16,8 @@
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/images/icon.png">
-
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/space-grotesk-700-latin.woff2">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="OnlyMaxon">
   <meta property="og:title" content="OnlyMaxon — Bir web sitesi gerçekte ne kadar tutar?">
@@ -34,7 +28,6 @@
   <meta name="twitter:title" content="OnlyMaxon — Bir web sitesi gerçekte ne kadar tutar?">
   <meta name="twitter:description" content="Aynı brief 400 €'ya da 4000 €'ya da dönüyor. İşte bu farkın gerçekte ne satın aldığı ve kimsenin teklife yazmadığı maliyetler.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -53,7 +46,6 @@
     }
   }
   </script>
-
   <style>
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
                  src: url(/fonts/inter-400-latin.woff2) format('woff2');
@@ -79,7 +71,6 @@
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
                  src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
@@ -96,12 +87,10 @@
     ::selection { background: rgba(34,211,238,0.28); color: #fff; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     .container { max-width: 720px; margin: 0 auto; padding: 0 28px; width: 100%; }
-
     header { border-bottom: 1px solid var(--border); padding: 20px 0; }
     .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: var(--text); text-decoration: none; letter-spacing: -0.5px; }
     .brand span { color: var(--blue); }
-
     .lang-dd { position: relative; }
     .lang-dd-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -129,7 +118,6 @@
     .lang-dd-menu a { display: block; text-decoration: none; color: var(--text-d); font-size: 14px; font-weight: 500; padding: 9px 12px; border-radius: 8px; transition: background-color 0.15s, color 0.15s; }
     .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
     .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
-
     main { flex: 1; padding: 56px 0 90px; }
     .back { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--text-d); text-decoration: none; margin-bottom: 26px; transition: color 0.2s, gap 0.2s; }
     .back::before { content: '←'; }
@@ -156,7 +144,6 @@
     strong { color: var(--text); font-weight: 600; }
     main a { color: var(--blue); text-decoration: none; }
     main a:hover { text-decoration: underline; }
-
     .cta-band { margin-top: 48px; text-align: center; background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 32px 28px; }
     .cta-band h2 { font-size: 22px; justify-content: center; margin-bottom: 10px; }
     .cta-band h2::before { content: none; }
@@ -169,13 +156,11 @@
       transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
     .btn:hover { background: #5FE6F2; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(34,211,238,0.5); }
-
     footer { border-top: 1px solid var(--border); padding: 26px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
     .ft a:hover { color: var(--blue); }
-
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       main { padding: 40px 0 64px; }
@@ -183,10 +168,8 @@
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; } }
   </style>
-
 </head>
 <body>
-
 <header>
   <div class="container">
     <div class="head-inner">
@@ -208,46 +191,37 @@
     </div>
   </div>
 </header>
-
 <main>
   <div class="container">
     <a class="back" href="/tr/blog/">Tüm yazılar</a>
-
     <h1>Bir site gerçekte ne kadar tutar ve teklifler neden on kat farklı?</h1>
     <p class="meta">2026-08-19 · <span>4 dk okuma</span></p>
-
     <p class="lede">Aynı brief 400 €'ya da 4000 €'ya da dönüyor ve ikisi de mutlaka bir dolandırıcılık değil. <strong>İşte bu farkın gerçekte ne satın aldığı</strong> — ve iki teklifte de görünmeyen maliyetler.</p>
-
     <section>
       <h2>Aynı brief neden 400 € ve 4000 € olarak dönüyor</h2>
       <p>Ucuz teklif genelde logon yerleştirilmiş bir şablondur. Pahalı olan genelde bir proje yöneticisinin, bir tasarımcının ve bir geliştiricinin saatlerini senin faturana yazdığı bir ajanstır. <strong>İkisi de bir site üretir. Yalnızca biri onu senin için üretmiştir.</strong></p>
       <p>Dürüst orta yol küçük bir stüdyodur: şablon yok ve seninle kodu yazan kişi arasında bir yönetici katmanı yok. İyi küçük işletme işlerinin çoğu aslında orada yapılır.</p>
     </section>
-
     <section>
       <h2>Aslında ne için ödüyorsun</h2>
       <p>Her zaman dört şey için: tasarım, kod, metin ve fotoğraflar, bir de kurulum — alan adı, barındırma, e-posta, arama. <strong>Sadece „web sitesi” yazan bir teklif, dördün üçünü gizlemiştir.</strong></p>
       <p>Bu dördünden hangilerinin dahil olduğunu sor. 400 € ile 4000 € arasındaki fark genelde tam oradadır ve tek bir soru onu açığa çıkarır.</p>
     </section>
-
     <section>
       <h2>Teklifte hiç görünmeyen maliyetler</h2>
       <p>Alan adı, yılda kabaca 10–15 €. Barındırma, küçük bir site için sıfırdan ayda 10 € civarına kadar. Rezervasyon sistemi ya da kartla ödeme kendi aylık ücretini getirebilir.</p>
       <p>Hiçbiri büyük değil. Ama kalıcılar — ve bunları yayına girdikten sonra öğrenmek, iyi bir projenin kötü bir anıya dönüşme biçimidir.</p>
     </section>
-
     <section>
       <h2>Ucuz iki kez ödenir</h2>
       <p>Şablon bir site ilk gün daha az, altmışıncı gün daha çok tutar — tam da yapılmadığı o tek şeye ihtiyacın olduğunda. O zaman düzgün yapılsın diye ikinci kez ödersin.</p>
       <p>Bu, pahalının savunusu değil. Bir değişikliğe ihtiyacın olduğunda ne olacağını sormanın savunusu — <strong>imzalamadan önce, sonra değil.</strong></p>
     </section>
-
     <section>
       <h2>İmzalamadan önce dört soru</h2>
       <p>İş bittiğinde kod ve hesaplar kimin? Kesin fiyat ve kesin tarih ne? Kapsam dışında bilerek ne bırakıldı? Ve yayından sonra bir değişiklik ne tutar?</p>
       <p>Dördüne de yazılı yanıt veren biriyle çalışmaya değer. <strong>Dördüne de „duruma göre” diyen biri, sana sonradan değiştirmeye niyetli olduğu bir rakam söylüyordur.</strong></p>
     </section>
-
     <div class="cta-band">
       <h2>Kendi durumun için rakamı ister misin?</h2>
       <p>Fiyatlarımız sitede, açıkça duruyor. 30 dakikalık bir görüşmenin ardından kesin tutarı ve kesin tarihi 48 saat içinde yazılı alırsın.</p>
@@ -255,7 +229,6 @@
     </div>
   </div>
 </main>
-
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -265,7 +238,6 @@
     </div>
   </div>
 </footer>
-
 <script>
   const langDD    = document.getElementById('langDD');
   const langDDBtn = document.getElementById('langDDBtn');
@@ -285,9 +257,7 @@
     });
   });
 </script>
-
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
-
 </body>
 </html>

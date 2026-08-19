@@ -1,12 +1,5 @@
 <!DOCTYPE html>
-<!--
-  ENGLISH SOURCE OF TRUTH for /blog/website-or-instagram/.
-
-      node build/generate.js
-
-  Written by scratchpad/makearticles.js so every article shares one presentation layer and
-  every English string comes from build/translations.js. Edit the copy there, not here.
--->
+<!-- Generated from build/src/blog/website-or-instagram/index.html by build/generate.js — do not edit. -->
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
@@ -23,7 +16,8 @@
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="/images/icon.png">
-
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/space-grotesk-700-latin.woff2">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="OnlyMaxon">
   <meta property="og:title" content="OnlyMaxon — Instagram'ım varsa siteye ihtiyacım var mı?">
@@ -34,7 +28,6 @@
   <meta name="twitter:title" content="OnlyMaxon — Instagram'ım varsa siteye ihtiyacım var mı?">
   <meta name="twitter:description" content="Site satan insanlardan dürüst bir yanıt: Instagram neyi daha iyi yapar, neyi hiç yapamaz ve bunu düzelten en ucuz sürüm nedir.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -53,7 +46,6 @@
     }
   }
   </script>
-
   <style>
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
                  src: url(/fonts/inter-400-latin.woff2) format('woff2');
@@ -79,7 +71,6 @@
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
                  src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg: #06080C; --bg2: #0B0F16; --bg3: #121824;
@@ -96,12 +87,10 @@
     ::selection { background: rgba(34,211,238,0.28); color: #fff; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
     .container { max-width: 720px; margin: 0 auto; padding: 0 28px; width: 100%; }
-
     header { border-bottom: 1px solid var(--border); padding: 20px 0; }
     .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: var(--text); text-decoration: none; letter-spacing: -0.5px; }
     .brand span { color: var(--blue); }
-
     .lang-dd { position: relative; }
     .lang-dd-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -129,7 +118,6 @@
     .lang-dd-menu a { display: block; text-decoration: none; color: var(--text-d); font-size: 14px; font-weight: 500; padding: 9px 12px; border-radius: 8px; transition: background-color 0.15s, color 0.15s; }
     .lang-dd-menu a:hover { background: var(--bg3); color: var(--text); }
     .lang-dd-menu a.active { background: var(--blue-d); color: var(--blue); }
-
     main { flex: 1; padding: 56px 0 90px; }
     .back { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--text-d); text-decoration: none; margin-bottom: 26px; transition: color 0.2s, gap 0.2s; }
     .back::before { content: '←'; }
@@ -156,7 +144,6 @@
     strong { color: var(--text); font-weight: 600; }
     main a { color: var(--blue); text-decoration: none; }
     main a:hover { text-decoration: underline; }
-
     .cta-band { margin-top: 48px; text-align: center; background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 32px 28px; }
     .cta-band h2 { font-size: 22px; justify-content: center; margin-bottom: 10px; }
     .cta-band h2::before { content: none; }
@@ -169,13 +156,11 @@
       transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
     .btn:hover { background: #5FE6F2; transform: translateY(-2px); box-shadow: 0 8px 40px rgba(34,211,238,0.5); }
-
     footer { border-top: 1px solid var(--border); padding: 26px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
     .ft a:hover { color: var(--blue); }
-
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       main { padding: 40px 0 64px; }
@@ -183,10 +168,8 @@
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; } }
   </style>
-
 </head>
 <body>
-
 <header>
   <div class="container">
     <div class="head-inner">
@@ -208,46 +191,37 @@
     </div>
   </div>
 </header>
-
 <main>
   <div class="container">
     <a class="back" href="/tr/blog/">Tüm yazılar</a>
-
     <h1>Zaten Instagram'ım varsa siteye ihtiyacım var mı?</h1>
     <p class="meta">2026-08-19 · <span>4 dk okuma</span></p>
-
     <p class="lede">Biz site satıyoruz, o yüzden bunu taraflı say ve yine de oku. Instagram bazı şeyleri hiçbir sitenin yapamayacağı kadar iyi yapar. <strong>Ama iki şeyi hiç yapamaz ve ikisi de sana müşteriye mal olur.</strong></p>
-
     <section>
       <h2>Instagram kiralık bir arsadır</h2>
       <p>Hesap senin değil. Erişim habersiz değişir ve hesaplar kimsenin açıklamadığı nedenlerle kısıtlanır. Bir gecede hesabını kaybeden işletmeler, onunla birlikte tüm müşteri listesini de kaybetti.</p>
       <p><strong>Bir site, kimsenin senden alamayacağı tek adrestir.</strong></p>
     </section>
-
     <section>
       <h2>Instagram'ın yapamadıkları</h2>
       <p>Seni Google'a koyamaz. „Yakınımda berber” arayan birine Instagram akışın hiç gösterilmez — ona harita ve siteler gösterilir.</p>
       <p>Ve sen çalışırken bir randevu alamaz. Her randevu, elle yanıtladığın bir mesajdan geçer — <strong>genelde akşamın geç saatlerinde.</strong></p>
     </section>
-
     <section>
       <h2>Bir sitenin yapamadıkları</h2>
       <p>Takipçi kitlesi kuramaz, bu sabah ne yaptığını gösteremez ve kimse keyfine oraya girmez. Instagram bunu çok daha iyi yapar ve onu bırakmak hata olur.</p>
       <p>İkisi rakip değil. <strong>Farklı işler yaparlar.</strong></p>
     </section>
-
     <section>
       <h2>Dürüst yanıt ikisi de, şu sırayla</h2>
       <p>Önce basit bir site, ki aramada var olasın ve yazışmadan randevu alabilesin. Instagram ikinci sırada, insanların ziyaretler arasında seni izlediği yer olarak.</p>
       <p>Bu ay tek bir şey yapabileceksen, <strong>sen bir müşteriyleyken çalışmaya devam edeni</strong> yap.</p>
     </section>
-
     <section>
       <h2>İşe yarayan en ucuz sürüm</h2>
       <p>Tek sayfa: kim olduğun, ne yaptığın, fiyatlar, saatler, bir arama butonu, bir randevu formu ve Instagram bağlantın. Gerçekten hepsi bu.</p>
       <p>390 €'dan başlar ve bir hafta kadar sürer. <strong>Tam olarak buna çok daha fazlasını isteyen biri, sana hiç kullanmayacağın sayfalar satıyordur.</strong></p>
     </section>
-
     <div class="cta-band">
       <h2>Hangisine ihtiyacın olduğundan emin değil misin?</h2>
       <p>Haftanın nasıl geçtiğini anlat, bir sitenin bir şeyi değiştirip değiştirmeyeceğini açıkça söyleyelim. İlk görüşme ücretsiz.</p>
@@ -255,7 +229,6 @@
     </div>
   </div>
 </main>
-
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -265,7 +238,6 @@
     </div>
   </div>
 </footer>
-
 <script>
   const langDD    = document.getElementById('langDD');
   const langDDBtn = document.getElementById('langDDBtn');
@@ -285,9 +257,7 @@
     });
   });
 </script>
-
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "9a8a17c3b56e407d945436e8a748eda5"}'></script>
-
 </body>
 </html>
