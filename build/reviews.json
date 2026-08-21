@@ -14,12 +14,83 @@
     "  text    the review, verbatim. Newlines survive, nothing else is interpreted.",
     "  lang    what it was written in. Informational for now.",
     "",
+    "Names are already shortened to a surname initial here, the same way fetch-reviews.js",
+    "will shorten them — so the day the cron takes over, no card silently changes name.",
+    "",
+    "total counts every review on the profile, including the one with stars but no text:",
+    "that one is deliberately not in the list, because a card with no words in it is an",
+    "empty card. rating is the profile average, not the average of what is shown.",
+    "",
     "After editing: node build/generate.js"
   ],
   "placeId": "ChIJxbFOEIWx3qYRf1jzy-9btro",
   "profileUrl": "https://www.google.com/maps?cid=13454042022292969599",
-  "rating": null,
-  "total": 0,
-  "updated": null,
-  "reviews": []
+  "rating": 4.9,
+  "total": 10,
+  "updated": "2026-08-21",
+  "reviews": [
+    {
+      "author": "Mammed S.",
+      "rating": 5,
+      "time": "2026-08-21",
+      "text": "Really smooth process from start to finish. Fast communication, great attention to detail, and a website I’m genuinely happy with. Highly recommend!",
+      "lang": "en"
+    },
+    {
+      "author": "aisha g.",
+      "rating": 5,
+      "time": "2026-08-21",
+      "text": "Great experience working with OnlyMaxon. The team was professional, responsive, and delivered everything on time. Really happy with the final result!",
+      "lang": "en"
+    },
+    {
+      "author": "Maxpro228 K.",
+      "rating": 5,
+      "time": "2026-08-21",
+      "text": "Everything went very well, delivered really fast and professionally!",
+      "lang": "en"
+    },
+    {
+      "author": "Emil S.",
+      "rating": 5,
+      "time": "2026-08-21",
+      "text": "Заказывал приложение для кофейни, парни сделали максимально быстро  как и обещали и еще от себя туда добавили полезные функции.",
+      "lang": "ru"
+    },
+    {
+      "author": "admin t.",
+      "rating": 5,
+      "time": "2026-08-21",
+      "text": "Очень приятно было сотрудничать, все выполнено на высшем уровне",
+      "lang": "ru"
+    },
+    {
+      "author": "Ярослав С.",
+      "rating": 5,
+      "time": "2026-08-21",
+      "text": "Great experience with OnlyMaxon! Professional, responsive, and very easy to work with. The team communicates clearly, understands the client’s needs, and pays attention to both design and functionality.\n\nEverything feels well-organized and modern, and you can see that they genuinely care about the quality of the final product. Definitely a strong choice if you need a website, app, or digital product built professionally.\n\nHighly recommended!",
+      "lang": "en"
+    },
+    {
+      "author": "Tariq S.",
+      "rating": 4,
+      "time": "2026-08-21",
+      "text": "We tried to communicate with them only is the second attempt they answered to us . Overall, the price is good and the work that they did for us was even more than expected!. Love it",
+      "lang": "en"
+    },
+    {
+      "author": "Denis",
+      "rating": 5,
+      "time": "2026-08-21",
+      "text": "Пацаны вообще ребята, классно, особенно тот который мне сайт делал, Макс его зовут; что могу ещё сказать, чётко, умеете, могёте",
+      "lang": "ru"
+    },
+    {
+      "author": "Rick M.",
+      "rating": 5,
+      "time": "2026-08-20",
+      "text": "It was a fast connection and everything was clear and perfect . I like it",
+      "lang": "en"
+    }
+  ]
 }

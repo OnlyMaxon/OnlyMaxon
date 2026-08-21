@@ -1,0 +1,58 @@
+# Fails the push if the committed pages are not what the generator produces.
+#
+# Everything outside build/ is output: 55 files written by build/generate.js from
+# build/src/ and build/translations.js. Nothing enforced that. Editing a source and
+# pushing without running the generator left the live site on the old copy — silently,
+# because the source is never served and nobody reads the output before Google does.
+#
+# So: regenerate on a clean checkout and ask git whether anything moved. If it did, the
+# push carries a source edit that was never built, and the diff names the exact files.
+#
+# It also runs the generator's own guards on every push rather than only on the machine
+# that happened to build last — a translation missing in any of the five languages, an
+# English string that survived substitution, an English source that has drifted from
+# translations.en, a relative image path, a comment strip that broke a script. Each of
+# those already exits 1; this is what makes anyone hear it.
+#
+# Note this only works because sitemap.xml is stable: a page's lastmod moves when its
+# bytes move, not when the build ran. Were it still stamped with the build date, every
+# run of this job would "differ" and the check would have to be switched off within a day.
+
+name: Build check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      # v5 for the same reason as the reviews workflow: the v4 actions still declare the
+      # Node 20 runtime GitHub deprecated, and the runners warn on every single run.
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+
+      - name: Regenerate the site
+        run: node build/generate.js
+
+      - name: Is the committed output up to date?
+        run: |
+          if git diff --quiet; then
+            echo "Output matches the sources."
+            exit 0
+          fi
+          echo "::error::Committed pages are stale — run 'node build/generate.js' and commit the result."
+          git diff --stat
+          # Capped: a forgotten rebuild of the home page is 55 files, and the first
+          # screenful already says which ones and why.
+          git diff | head -200
+          exit 1

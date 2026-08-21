@@ -271,6 +271,20 @@ for (const page of PAGES) {
   }
 }
 
+// The studio's Google profile is named in two files that have to agree: build/reviews.json,
+// which the reviews block and the cron both read, and the "sameAs" array in the structured
+// data, which is what tells Google the profile and this site are one business rather than
+// two strangers. Nothing would notice them drifting apart — the page would still render and
+// the link would still work, while the connection they exist to make quietly stopped being
+// made.
+for (const page of PAGES) {
+  const sameAs = page.source.match(/"sameAs": \[([\s\S]*?)\]/);
+  if (!sameAs || !/google\.com\/maps/.test(sameAs[1])) continue;
+  if (REVIEWS.profileUrl && !sameAs[1].includes(REVIEWS.profileUrl))
+    fail(`${page.src}: the Google profile in "sameAs" is not the one in build/reviews.json\n` +
+         `      reviews.json says: ${REVIEWS.profileUrl}`);
+}
+
 // English lives in two places at once — inline in the page source, which is what visitors
 // actually read, and as the .en entry in translations.js, which is what the "still
 // English" guard below compares against. Nothing kept them in step: editing only the
@@ -309,6 +323,72 @@ for (const key of usedKeys) {
 if (missing.length) fail(`missing translations:\n    ` + missing.join('\n    '));
 
 const unused = Object.keys(translations).filter(k => !usedKeys.has(k));
+
+/*
+ * ── reading time ─────────────────────────────────────────────────────────────
+ *
+ * Counted, not typed. Every article carried a hand-written "4 min read" in all five
+ * languages — wrong in every one of the twenty (the longest is three minutes, the
+ * shortest under two) and wrong in a way a reader can see: four different articles
+ * showing one identical number reads as decoration, not as a fact. The studio sells
+ * being the people who put real numbers in writing, so a made-up one is worse here
+ * than none at all.
+ *
+ * The number is measured per article AND per language, because the same article is
+ * 616 words in Spanish and 436 in Turkish — one figure could not be true for both.
+ *
+ * This runs before anything is built: the /blog/ index shows the time for four articles
+ * that are generated after it, so the figures have to exist before the first page is
+ * written. The body text is reconstructed from the source and the translation table
+ * rather than from a built page, for the same reason.
+ *
+ * Rounded up, never down, and never below one minute — the number sets an expectation,
+ * and it is better for an article to be shorter than promised than longer.
+ */
+const WPM = 200;
+const readingTime = new Map();   // `${lang} ${path}` → minutes
+
+for (const page of PAGES) {
+  const main = page.source.match(/<main>([\s\S]*?)<\/main>/);
+  if (!main) continue;                       // no article body, nothing to time
+  for (const lang of ALL_LANGS) {
+    const body = main[1].replace(
+      /<([a-z0-9]+)[^>]*\bdata-i18n(?:-html)?="([\w]+)"[^>]*>[\s\S]*?<\/\1>/g,
+      (all, tag, key) => ' ' + (translations[key] ? translations[key][lang] : '') + ' ');
+    const words = stripTags(body).split(/\s+/).filter(Boolean).length;
+    readingTime.set(`${lang} ${page.path}`, Math.max(1, Math.ceil(words / WPM)));
+  }
+}
+
+/*
+ * ── lastmod ──────────────────────────────────────────────────────────────────
+ *
+ * The sitemap used to stamp the build date onto all 55 URLs at once, so every rebuild
+ * announced that the privacy page and four blog posts had changed today — when all that
+ * had happened was the reviews cron picking up a new review on the home page. A crawler
+ * told that everything changed daily stops reading the field, and then it is worth
+ * nothing on the day a page genuinely does change.
+ *
+ * So a page's date only moves when its bytes move. Each file is compared with the copy
+ * already on disk before it is overwritten; if they are identical the date carries over
+ * from the previous sitemap, which is the only place it is kept. There is no second file
+ * to hold dates in and therefore nothing that can fall out of step — the sitemap is its
+ * own record.
+ *
+ * The comparison normalises line endings. Git is configured with autocrlf on this
+ * machine, so a fresh checkout hands these files back with \r\n while the generator
+ * writes \n; without this, the first build after a clone would call all 55 pages changed.
+ */
+const today = new Date().toISOString().slice(0, 10);
+const SITEMAP = path.join(ROOT, 'sitemap.xml');
+
+const prevLastmod = new Map();
+if (fs.existsSync(SITEMAP)) {
+  const xml = fs.readFileSync(SITEMAP, 'utf8');
+  for (const m of xml.matchAll(/<loc>([^<]*)<\/loc>\s*<lastmod>([^<]*)<\/lastmod>/g))
+    prevLastmod.set(m[1], m[2]);
+}
+const lastmod = new Map();   // URL → date, filled in by build() as each page is written
 
 // ── per page, per language ────────────────────────────────────────────────────
 function build(page, lang) {
@@ -415,6 +495,15 @@ function build(page, lang) {
     /(<a href=")[^"]*(" class="lang-chip[^"]*" data-lang="(\w\w)")/g,
     (m, a, b, l) => a + href(l, page.path) + b);
 
+  // 5a. reading time. The span carries the path of the article it is timing, so the four
+  //     cards on /blog/ each get their own figure rather than sharing one — and moving a
+  //     card in the source moves its number with it. See ── reading time ── above.
+  html = html.replace(/(<span data-read="([\w/-]*)">)[^<]*(<\/span>)/g, (all, open, p, close) => {
+    const mins = readingTime.get(`${lang} ${p}`);
+    if (mins == null) fail(`${page.src}: data-read="${p}" names a page that has no <main>`);
+    return open + mins + close;
+  });
+
   // 5b. cross-page links. Any <a> carrying data-page="<path>" is pointed at the current
   //     language's copy of that page — otherwise the footer's privacy link would drop a
   //     Polish reader onto the English text. Runs after the text substitutions above, so
@@ -519,6 +608,7 @@ function build(page, lang) {
   html = html.replace(anchorRe, '');
   html = html.replace(/\sdata-page="[\w/-]*"/g, '');   // build-only, same as the anchors
   html = html.replace(/\sdata-rv="[\w-]*"/g, '');      // ditto — hooks for the reviews fill
+  html = html.replace(/\sdata-read="[\w/-]*"/g, '');   // ditto — hooks for the reading time
 
   // Last, so that everything above could still match on the comments if it needed to.
   const withComments = html.length;
@@ -533,31 +623,59 @@ function build(page, lang) {
 
   // English is the site root, the other four sit one directory down.
   const dir = path.join(ROOT, lang === SOURCE_LANG ? '' : lang, page.path);
+  const file = path.join(dir, 'index.html');
+
+  // Read before writing, or there is nothing left to compare against. See ── lastmod ──.
+  const previous = fs.existsSync(file)
+    ? fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n')
+    : null;
+
+  // dateModified is written FROM the date decided here, so it must not take part in
+  // deciding it. Left in, the page on disk would carry the stamp of the last change,
+  // never match a freshly generated one, and be called changed — and therefore
+  // re-stamped — on every build for the rest of its life.
+  const DATE_MOD = /("dateModified": ")[^"]*(")/;
+  const undated = s => s === null ? null : s.replace(DATE_MOD, '$1$2');
+  const changed = undated(previous) !== undated(html);
+  const loc = url(lang, page.path);
+  const modified = changed ? today : (prevLastmod.get(loc) || today);
+  lastmod.set(loc, modified);
+
+  // An article that says it was last touched on the day it was written, forever, is a
+  // claim that quietly stops being true the first time it is edited. Same date the
+  // sitemap reports, from the same measurement, so the two can never disagree.
+  if (page.article) {
+    if (!DATE_MOD.test(html)) fail(`${page.src}: BlogPosting "dateModified" not found`);
+    html = html.replace(DATE_MOD, `$1${modified}$2`);
+  }
+
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, 'index.html'), html);
+  fs.writeFileSync(file, html);
   return { swaps, bytes: html.length, stripped: anchors.length, saved, commentBytes,
-           rootOnlyBytes, reviewsShown };
+           rootOnlyBytes, reviewsShown, changed };
 }
 
 // ── run ───────────────────────────────────────────────────────────────────────
+let changedPages = 0;
 for (const page of PAGES) {
   const label = page.path ? `/${page.path}/` : '/';
   console.log(`source: ${page.src} (${(page.source.length / 1024).toFixed(1)} KB, ` +
               `${page.keys.size} keys) → ${label}\n`);
   for (const lang of ALL_LANGS) {
     const r = build(page, lang);
+    if (r.changed) changedPages++;
     const out = path.join(lang === SOURCE_LANG ? '' : lang, page.path, 'index.html').replace(/\\/g, '/');
     const trimmed = r.saved + r.commentBytes + r.rootOnlyBytes;
     console.log(`  ${out.padEnd(22)} ${r.swaps} substitutions   ${(r.bytes / 1024).toFixed(1)} KB   ` +
                 `(-${(trimmed / 1024).toFixed(1)} KB: ${r.commentBytes} comments, ` +
                 `${r.saved} attrs${r.rootOnlyBytes ? ', ' + r.rootOnlyBytes + ' root-only' : ''})   ` +
-                `${r.reviewsShown ? r.reviewsShown + ' reviews   ' : ''}${NAMES[lang]}`);
+                `${r.reviewsShown ? r.reviewsShown + ' reviews   ' : ''}` +
+                `${NAMES[lang].padEnd(8)}${r.changed ? '  ← changed' : ''}`);
   }
   console.log('');
 }
 
 // ── sitemap covering every page in every language ─────────────────────────────
-const today = new Date().toISOString().slice(0, 10);
 const entries = [];
 for (const page of PAGES) {
   const alternates = [SOURCE_LANG, ...LANGS]
@@ -567,7 +685,7 @@ for (const page of PAGES) {
   for (const lang of [SOURCE_LANG, ...LANGS]) {
     entries.push(`  <url>
     <loc>${url(lang, page.path)}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${lastmod.get(url(lang, page.path)) || today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${lang === SOURCE_LANG ? page.priority.source : page.priority.translated}</priority>
 ${alternates}
@@ -575,13 +693,14 @@ ${alternates}
   }
 }
 
-fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
+fs.writeFileSync(SITEMAP,
 `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${entries.join('\n')}
 </urlset>
 `);
-console.log(`  sitemap.xml      ${entries.length} URLs, hreflang on each`);
+console.log(`  sitemap.xml      ${entries.length} URLs, hreflang on each   ` +
+            `(${changedPages ? changedPages + ' dated ' + today : 'no page changed, every date carried over'})`);
 if (unused.length) console.log(`\n  note: ${unused.length} unused translation keys: ${unused.join(', ')}`);
 console.log('\ndone.\n');

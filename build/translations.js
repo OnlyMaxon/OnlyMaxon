@@ -249,7 +249,7 @@ const translations = {
     footerCopyright: { en: "© 2026 OnlyMaxon Studio. All rights reserved.", pl: "© 2026 OnlyMaxon Studio. Wszelkie prawa zastrzeżone.", ru: "© 2026 OnlyMaxon Studio. Все права защищены.", tr: "© 2026 OnlyMaxon Studio. Tüm hakları saklıdır.", es: "© 2026 OnlyMaxon Studio. Todos los derechos reservados." },
     footerBlog:      { en: "Blog", pl: "Blog", ru: "Блог", tr: "Blog", es: "Blog" },
     footerPrivacy:   { en: "Privacy", pl: "Prywatność", ru: "Конфиденциальность", tr: "Gizlilik", es: "Privacidad" },
-    footerTagline:   { en: "🌍 Five languages · Working worldwide", pl: "🌍 Pięć języków · Pracujemy na całym świecie", ru: "🌍 Пять языков · Работаем по всему миру", tr: "🌍 Beş dil · Tüm dünyada çalışıyoruz", es: "🌍 Cinco idiomas · Trabajamos en todo el mundo" },
+    footerTagline: { en: "🌍 Warsaw · Working worldwide", pl: "🌍 Warszawa · Pracujemy na całym świecie", ru: "🌍 Варшава · Работаем по всему миру", tr: "🌍 Varşova · Tüm dünyada çalışıyoruz", es: "🌍 Varsovia · Trabajamos en todo el mundo" },
 
     // ── LANGUAGE BAND ────────────────────────────────────────────────────────
     // The claim is deliberately about the work, not about conversation: five real sites
@@ -395,7 +395,15 @@ Object.assign(translations, {
   blMetaDesc:  { en: "Plain answers to what small business owners actually ask: why Google can't find you, what a website really costs, and what AI answers changed.", pl: "Proste odpowiedzi na to, o co naprawdę pytają właściciele małych firm: dlaczego Google Cię nie znajduje, ile naprawdę kosztuje strona i co zmieniły odpowiedzi AI.", ru: "Простые ответы на то, что владельцы малого бизнеса действительно спрашивают: почему Google тебя не находит, сколько на самом деле стоит сайт и что изменили ответы ИИ.", tr: "Küçük işletme sahiplerinin gerçekten sorduğu şeylere sade yanıtlar: Google seni neden bulamıyor, bir site gerçekte ne kadar tutar ve yapay zekâ yanıtları neyi değiştirdi.", es: "Respuestas claras a lo que de verdad preguntan los dueños de pequeños negocios: por qué Google no te encuentra, cuánto cuesta realmente una web y qué cambiaron las respuestas de IA." },
   blTitle:   { en: "Straight answers", pl: "Konkretne odpowiedzi", ru: "Прямые ответы", tr: "Net yanıtlar", es: "Respuestas directas" },
   blLede:    { en: "Questions clients actually ask us, answered the way we answer them on the phone — without the jargon and without pretending anything is more complicated than it is.", pl: "Pytania, które klienci naprawdę nam zadają, odpowiedziane tak, jak odpowiadamy przez telefon — bez żargonu i bez udawania, że cokolwiek jest trudniejsze, niż jest.", ru: "Вопросы, которые клиенты действительно задают, и ответы в том же виде, в каком мы даём их по телефону — без жаргона и без попыток сделать вид, что всё сложнее, чем есть.", tr: "Müşterilerin gerçekten sorduğu sorular, telefonda nasıl yanıtlıyorsak öyle yanıtlandı — jargon yok ve hiçbir şeyi olduğundan karmaşık göstermek yok.", es: "Preguntas que los clientes nos hacen de verdad, respondidas como las respondemos por teléfono — sin jerga y sin fingir que algo es más complicado de lo que es." },
-  blReadTime:{ en: "4 min read", pl: "4 min czytania", ru: "4 мин чтения", tr: "4 dk okuma", es: "4 min de lectura" },
+  // The unit only — the number in front of it is counted per article per language by
+  // generate.js and written into the <span data-read> beside this one. It used to read
+  // "4 min read" on all four articles in all five languages, which is both wrong (the
+  // longest is three minutes, the shortest under two) and visibly wrong: four different
+  // articles carrying one identical number reads as a decoration rather than a fact.
+  // Every language happens to put the number first, so splitting the two needs no
+  // placeholder. All five are abbreviated, so none of them has to agree with the number
+  // grammatically — "1 мин", "2 мин", "5 мин" are all correct.
+  blReadTime:{ en: "min read", pl: "min czytania", ru: "мин чтения", tr: "dk okuma", es: "min de lectura" },
   blRead:    { en: "Read", pl: "Czytaj", ru: "Читать", tr: "Oku", es: "Leer" },
   blCtaTitle:{ en: "Rather just ask?", pl: "Wolisz po prostu zapytać?", ru: "Проще спросить?", tr: "Sormayı mı tercih edersin?", es: "¿Prefieres preguntar?" },
   blCtaDesc: { en: "The first call is free, takes 30 minutes, and you get a price and a date within 48 hours of it.", pl: "Pierwsza rozmowa jest bezpłatna, trwa 30 minut, a cenę i termin dostajesz w ciągu 48 godzin po niej.", ru: "Первый созвон бесплатный, занимает 30 минут, а цену и дату ты получаешь в течение 48 часов после него.", tr: "İlk görüşme ücretsiz, 30 dakika sürer ve ardından 48 saat içinde fiyatı ve tarihi alırsın.", es: "La primera llamada es gratis, dura 30 minutos, y en 48 horas tienes precio y fecha." },

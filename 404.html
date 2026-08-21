@@ -5,18 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 — Page not found · OnlyMaxon</title>
   <meta name="robots" content="noindex">
-  <link rel="icon" type="image/png" href="/images/icon.png">
+  <link rel="icon" type="image/jpeg" href="/images/logoW.jpg">
   <style>
-    /* Self-hosted from /fonts/, same as the main page. This one is English-only and uses
-       just two weights, so it takes the latin subsets and nothing else. */
+    /* Self-hosted from /fonts/, same as the main page. This page is not generated, so it
+       carries all five languages at once and therefore needs every subset they draw from:
+       latin everywhere, latin-ext for Polish, Turkish and Spanish, cyrillic for Russian.
+       unicode-range means a visitor still downloads only the cut their own text is written
+       in — a Spanish 404 never fetches the Cyrillic file. */
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
-                 src: url(/fonts/inter-400-latin.woff2) format('woff2'); }
+                 src: url(/fonts/inter-400-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
     @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
-                 src: url(/fonts/inter-700-latin.woff2) format('woff2'); }
+                 src: url(/fonts/inter-700-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/inter-700-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/inter-700-cyrillic.woff2) format('woff2');
+                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+    /* Space Grotesk has no Cyrillic upstream, which is why the heading falls back to
+       system-ui in Russian — the same trade the rest of the site already makes. */
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: swap;
-                 src: url(/fonts/space-grotesk-600-latin.woff2) format('woff2'); }
+                 src: url(/fonts/space-grotesk-600-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/space-grotesk-600-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
     @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
-                 src: url(/fonts/space-grotesk-700-latin.woff2) format('woff2'); }
+                 src: url(/fonts/space-grotesk-700-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -75,16 +102,70 @@
   <div class="blob blob-2"></div>
   <div class="wrap">
     <div class="code">404</div>
-    <h1>This page took a wrong turn.</h1>
-    <p>The page you're looking for doesn't exist or has moved.</p>
-    <a href="/" class="btn">
+    <h1 id="t">This page took a wrong turn.</h1>
+    <p id="d">The page you're looking for doesn't exist or has moved.</p>
+    <a href="/" class="btn" id="b">
       <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path d="M19 12H5M12 19l-7-7 7-7"/>
       </svg>
-      Back to home
+      <span id="bt">Back to home</span>
     </a>
-    <div><a href="/" class="brand">OnlyMaxon<span>.</span></a></div>
+    <div><a href="/" class="brand" id="br">OnlyMaxon<span>.</span></a></div>
   </div>
+
+  <!-- ── Which language is this 404 in? ──────────────────────────────────────────
+       GitHub Pages serves this one file for every missing URL on the site — /pl/ cannot be
+       given a 404 of its own. So the language is decided here instead of at build time,
+       which makes this the only page on the site whose text is not baked in.
+
+       The URL is asked first, and it is the better witness: somebody who followed a broken
+       /ru/blog/… link was reading Russian a moment ago, whatever their browser is set to.
+       Only when the path says nothing does it fall back to the browser's own preference,
+       in the same order the front page uses.
+
+       Inline and immediately after the markup on purpose: it runs during parsing, before
+       the first paint, so nobody watches English turn into Polish. With JavaScript off the
+       English above simply stays — which is the right thing for this to degrade to. -->
+  <script>
+  (function () {
+    var T = {
+      pl: ['Ta strona skręciła w złą stronę.',
+           'Strona, której szukasz, nie istnieje albo została przeniesiona.',
+           'Wróć na stronę główną', '404 — Nie znaleziono strony · OnlyMaxon'],
+      ru: ['Эта страница свернула не туда.',
+           'Страницы, которую ты ищешь, не существует — или она переехала.',
+           'На главную', '404 — Страница не найдена · OnlyMaxon'],
+      tr: ['Bu sayfa yanlış bir dönüş yaptı.',
+           'Aradığın sayfa yok ya da taşınmış.',
+           'Ana sayfaya dön', '404 — Sayfa bulunamadı · OnlyMaxon'],
+      es: ['Esta página se equivocó de camino.',
+           'La página que buscas no existe o se ha movido.',
+           'Volver al inicio', '404 — Página no encontrada · OnlyMaxon']
+    };
+
+    var lang = (location.pathname.split('/')[1] || '').toLowerCase();
+    if (!T[lang]) {
+      lang = '';
+      var prefs = navigator.languages || [navigator.language || ''];
+      for (var i = 0; i < prefs.length; i++) {
+        var tag = String(prefs[i]).toLowerCase().split('-')[0];
+        if (tag === 'en') break;               // English outranks the rest, as on the front page
+        if (T[tag]) { lang = tag; break; }
+      }
+    }
+    if (!lang) return;                         // English is already on the page
+
+    var t = T[lang];
+    document.documentElement.lang = lang;
+    document.getElementById('t').textContent  = t[0];
+    document.getElementById('d').textContent  = t[1];
+    document.getElementById('bt').textContent = t[2];
+    document.title = t[3];
+    // Home in the language they were actually reading, not back to English.
+    document.getElementById('b').href  = '/' + lang + '/';
+    document.getElementById('br').href = '/' + lang + '/';
+  })();
+  </script>
 
   <!-- Cloudflare Web Analytics. Worth having here above all: a spike of 404s is how you
        find out a shared link is broken, and this page is the only place that shows it. -->

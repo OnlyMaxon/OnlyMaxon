@@ -73,8 +73,8 @@
 
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
-  <link rel="icon" type="image/png" href="images/icon.png">
-  <link rel="apple-touch-icon" href="images/icon.png">
+  <link rel="icon" type="image/jpeg" href="images/logoW.jpg">
+  <link rel="apple-touch-icon" href="images/logoW.jpg">
   <!-- hero logo is the LCP element — start fetching it before the parser reaches <body> -->
   <link rel="preload" as="image" href="images/logo.webp" fetchpriority="high">
 
@@ -103,20 +103,37 @@
   <meta name="twitter:description" content="A product studio — development and SEO under one roof. Working with clients worldwide.">
   <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
 
-  <!-- Structured data for Google (Organization) -->
+  <!-- Structured data for Google (the studio itself)
+       ProfessionalService, not plain Organization: an Organization has no place, and a
+       search engine cannot show a business it cannot locate to somebody standing nearby.
+       Nothing here narrows the studio to Poland — `address` says where it is and
+       `areaServed` says who it serves, and those are two different fields precisely so a
+       business can be in one place and work everywhere.
+       The Google Maps URL in sameAs is the important line. The profile and this site were
+       two unconnected things: the profile collected the reviews, the site displayed them,
+       and nothing told Google they were the same people. generate.js checks that URL
+       against build/reviews.json, so the two cannot drift apart. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "ProfessionalService",
     "name": "OnlyMaxon",
     "legalName": "OnlyMaxon Studio",
     "url": "https://onlymaxon.com",
     "logo": "https://onlymaxon.com/images/logo.jpg",
     "email": "hello@onlymaxon.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Warsaw",
+      "addressCountry": "PL"
+    },
+    "areaServed": "Worldwide",
+    "knowsLanguage": ["en", "pl", "ru", "tr", "es"],
     "description": "A product studio that builds apps and websites and ranks them on Google — development and SEO under one roof.",
     "sameAs": [
       "https://github.com/OnlyMaxon",
-      "https://www.instagram.com/0nlyMaxon"
+      "https://www.instagram.com/0nlyMaxon",
+      "https://www.google.com/maps?cid=13454042022292969599"
     ]
   }
   </script>
@@ -2129,7 +2146,7 @@
       <span class="ft" data-i18n="footerCopyright">© 2026 OnlyMaxon Studio. All rights reserved.</span>
       <span class="ft"><a href="/blog/" data-page="blog" data-i18n="footerBlog">Blog</a></span>
       <span class="ft"><a href="/privacy/" data-page="privacy" data-i18n="footerPrivacy">Privacy</a></span>
-      <span class="ft" data-i18n="footerTagline">🌍 Five languages · Working worldwide</span>
+      <span class="ft" data-i18n="footerTagline">🌍 Warsaw · Working worldwide</span>
     </div>
   </div>
 </footer>
