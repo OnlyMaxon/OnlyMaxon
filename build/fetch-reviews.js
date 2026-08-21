@@ -39,18 +39,33 @@ const die = msg => { console.error('\n  ERROR: ' + msg + '\n'); process.exit(1);
  * Waiting for the allowlist is not a failure.
  *
  * Access to the v4 API is granted by hand by Google, and the wait is measured in business
- * days. Until it lands every call comes back 403 SERVICE_DISABLED — which is the correct
- * answer to the question being asked, not a broken build. Exiting 1 on it would paint the
- * Actions tab red every morning for a fortnight, and a cron that cries wolf daily is one
- * you stop reading right before the day it has something to say.
+ * days. Until it lands the calls fail — which is the correct answer to the question being
+ * asked, not a broken build. Exiting 1 on it would paint the Actions tab red every morning
+ * for a fortnight, and a cron that cries wolf daily is one you stop reading right before
+ * the day it has something to say.
+ *
+ * It arrives as one of two errors depending on how far the Cloud project has got:
+ *
+ *   403 SERVICE_DISABLED    the APIs are not switched on in the console yet.
+ *   429 RATE_LIMIT_EXCEEDED they are switched on, but an ungranted project gets a quota of
+ *                           zero requests per minute — so the first call of the day is
+ *                           "too many requests". Same wait, louder error.
+ *
+ * The second one has to be told apart from a genuine rate limit, and the payload says which
+ * it is: a real limit names the ceiling you hit, quota_limit_value "0" means there was
+ * never a ceiling to hit.
  */
-const notYetAllowlisted = body =>
-  /SERVICE_DISABLED|has not been used in project|accessNotConfigured/.test(body);
+const notYetAllowlisted = (status, body) => {
+  if (status === 403)
+    return /SERVICE_DISABLED|has not been used in project|accessNotConfigured/.test(body);
+  if (status === 429) return /"quota_limit_value":\s*"0"/.test(body);
+  return false;
+};
 
 async function api(url, token) {
   const res = await fetch(url, { headers: { Authorization: 'Bearer ' + token } });
   const body = await res.text();
-  if (res.status === 403 && notYetAllowlisted(body)) {
+  if (notYetAllowlisted(res.status, body)) {
     console.log('\n  Business Profile API access has not been granted to this project yet.');
     console.log('  Nothing to do until it is — the credentials themselves are fine, or this');
     console.log('  request would have failed at the token, not at the endpoint.');
