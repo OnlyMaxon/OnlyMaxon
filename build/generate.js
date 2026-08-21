@@ -135,6 +135,68 @@ const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&
 const escAttr = s => esc(s).replace(/"/g, '&quot;');
 const stripTags = s => s.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 
+/*
+ * ── Google reviews ───────────────────────────────────────────────────────────
+ *
+ * From build/reviews.json, which a human fills in today and build/fetch-reviews.js
+ * overwrites on a cron once the Business Profile API grants access. One file, one shape,
+ * so the temporary way and the permanent way reach the page through the same code.
+ *
+ * They pointedly do NOT go through the translation table. Every key there must exist in
+ * five languages or the build fails — the right rule for the studio's own copy, and an
+ * impossible one for other people's words: the first review the cron pulled would break
+ * the build until someone translated a stranger into Turkish. So reviews arrive as data,
+ * and only the frame around them is translated.
+ */
+const REVIEWS_FILE = path.join(__dirname, 'reviews.json');
+const REVIEWS = fs.existsSync(REVIEWS_FILE)
+  ? JSON.parse(fs.readFileSync(REVIEWS_FILE, 'utf8'))
+  : { reviews: [] };
+
+// Past this the section stops reading as proof and starts reading as a wall of text.
+// The profile can hold three hundred; the page shows the newest handful.
+const MAX_REVIEWS = 12;
+const shownReviews = (REVIEWS.reviews || []).slice(0, MAX_REVIEWS);
+
+// Checked here rather than at render time: a malformed entry would otherwise emit a card
+// reading "undefined" into all five languages and only be noticed in production.
+shownReviews.forEach((r, i) => {
+  const bad = !r.author || !r.text || !Number.isInteger(r.rating) ||
+              r.rating < 1 || r.rating > 5 || !/^\d{4}-\d{2}-\d{2}$/.test(r.time || '');
+  if (bad) fail(`build/reviews.json entry #${i + 1}: needs author, text, an integer ` +
+                `rating 1-5, and time as YYYY-MM-DD`);
+});
+
+const avgRating = REVIEWS.rating != null ? REVIEWS.rating
+  : shownReviews.length ? shownReviews.reduce((s, r) => s + r.rating, 0) / shownReviews.length
+  : 5;
+
+const initials = name =>
+  name.trim().split(/\s+/).slice(0, 2).map(w => [...w][0]).join('').toUpperCase();
+const starRow = n => '★'.repeat(n) + '☆'.repeat(5 - n);
+
+// "July 2026", "lipiec 2026". No day number: it makes a perfectly good review from the
+// 3rd look staler than the same one from the 28th, and nobody picks a studio by date.
+// Russian ICU appends " г." — correct in a document, noise in a 42px card.
+const reviewMonth = (iso, lang) => new Date(iso + 'T00:00:00Z')
+  .toLocaleDateString(lang, { year: 'numeric', month: 'long', timeZone: 'UTC' })
+  .replace(/\s*г\.$/, '');
+
+function reviewCards(lang) {
+  return shownReviews.map((r, i) => `
+        <article class="rv-card fade-up${i % 3 ? ' d' + (i % 3) : ''}">
+          <div class="rv-top">
+            <div class="rv-ava" aria-hidden="true">${esc(initials(r.author))}</div>
+            <div class="rv-who">
+              <div class="rv-name">${esc(r.author)}</div>
+              <div class="rv-date">${esc(reviewMonth(r.time, lang))}</div>
+            </div>
+          </div>
+          <div class="rv-rating" role="img" aria-label="${r.rating}/5">${starRow(r.rating)}</div>
+          <p class="rv-text">${esc(r.text).replace(/\r?\n+/g, '<br>')}</p>
+        </article>`).join('') + '\n      ';
+}
+
 // Where a page lives, as a root-relative href and as an absolute URL. The source
 // language sits at the top level (/, /product/), the rest one directory deeper.
 const href = (lang, p) => '/' + (lang === SOURCE_LANG ? '' : lang + '/') + (p ? p + '/' : '');
@@ -267,6 +329,38 @@ function build(page, lang) {
   } else {
     rootOnlyBytes = (html.match(rootOnlyBlock) || []).reduce((n, b) => n + b.length, 0);
     html = html.replace(rootOnlyBlock, '');
+  }
+
+  // 0a. the reviews section — all of it or none of it. An empty proof block is worse than
+  //     no proof block, so until reviews.json has something in it the section, its divider
+  //     and its heading are cut from every generated page.
+  //     The markup and its CSS are marked off separately — the CSS lives inside <style>,
+  //     where an HTML comment would be shipped verbatim rather than stripped, so that half
+  //     is fenced with CSS comments instead.
+  const rvBlock = /[ \t]*<!-- build:reviews -->[\s\S]*?<!-- \/build:reviews -->\r?\n?/;
+  const rvCss   = /[ \t]*\/\* build:reviews \*\/\r?\n[\s\S]*?\/\* \/build:reviews \*\/\r?\n?/;
+  let reviewsShown = 0;
+  if (rvBlock.test(html)) {
+    if (!shownReviews.length) {
+      html = html.replace(rvBlock, '').replace(rvCss, '');
+    } else {
+      html = html.replace(/[ \t]*<!-- build:reviews -->\r?\n?|[ \t]*<!-- \/build:reviews -->\r?\n?/g, '');
+      html = html.replace(/[ \t]*\/\* build:reviews \*\/\r?\n|[ \t]*\/\* \/build:reviews \*\/\r?\n?/g, '');
+      html = html.replace('<div class="rv-grid" data-rv="grid"></div>',
+                          `<div class="rv-grid">${reviewCards(lang)}</div>`);
+      html = html.replace(/(<span class="rv-stars" data-rv="stars">)[^<]*(<\/span>)/,
+                          `$1${starRow(Math.round(avgRating))}$2`);
+      // 4.9, but 4,9 everywhere else — the same split the vk-* rating strings already make.
+      html = html.replace(/(<span class="rv-score-num" data-rv="rating">)[^<]*(<\/span>)/,
+                          `$1${avgRating.toFixed(1).replace('.', lang === 'en' ? '.' : ',')}$2`);
+      html = html.replace(/(<span data-rv="total">)[^<]*(<\/span>)/,
+                          `$1${REVIEWS.total || shownReviews.length}$2`);
+      if (!REVIEWS.profileUrl) fail('build/reviews.json has reviews but no profileUrl to link them to');
+      html = html.replace(/(<a [^>]*\bdata-rv="link"[^>]*\bhref=")[^"]*(")/g,
+                          `$1${escAttr(REVIEWS.profileUrl)}$2`);
+      if (html.includes('data-rv="grid"')) fail(`${page.src}: the rv-grid placeholder did not match`);
+      reviewsShown = shownReviews.length;
+    }
   }
 
   // 1. text nodes:  <p data-i18n="key">English</p>
@@ -424,6 +518,7 @@ function build(page, lang) {
   const saved = anchors.reduce((n, a) => n + a.length, 0);
   html = html.replace(anchorRe, '');
   html = html.replace(/\sdata-page="[\w/-]*"/g, '');   // build-only, same as the anchors
+  html = html.replace(/\sdata-rv="[\w-]*"/g, '');      // ditto — hooks for the reviews fill
 
   // Last, so that everything above could still match on the comments if it needed to.
   const withComments = html.length;
@@ -440,7 +535,8 @@ function build(page, lang) {
   const dir = path.join(ROOT, lang === SOURCE_LANG ? '' : lang, page.path);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'index.html'), html);
-  return { swaps, bytes: html.length, stripped: anchors.length, saved, commentBytes, rootOnlyBytes };
+  return { swaps, bytes: html.length, stripped: anchors.length, saved, commentBytes,
+           rootOnlyBytes, reviewsShown };
 }
 
 // ── run ───────────────────────────────────────────────────────────────────────
@@ -455,7 +551,7 @@ for (const page of PAGES) {
     console.log(`  ${out.padEnd(22)} ${r.swaps} substitutions   ${(r.bytes / 1024).toFixed(1)} KB   ` +
                 `(-${(trimmed / 1024).toFixed(1)} KB: ${r.commentBytes} comments, ` +
                 `${r.saved} attrs${r.rootOnlyBytes ? ', ' + r.rootOnlyBytes + ' root-only' : ''})   ` +
-                `${NAMES[lang]}`);
+                `${r.reviewsShown ? r.reviewsShown + ' reviews   ' : ''}${NAMES[lang]}`);
   }
   console.log('');
 }

@@ -1,0 +1,25 @@
+{
+  "_comment": [
+    "Google reviews shown on the home page. Two things write this file: a human, today,",
+    "and build/fetch-reviews.js on a cron once Business Profile API access is granted.",
+    "Same shape either way, so nothing downstream has to know which one it was.",
+    "",
+    "While \"reviews\" is empty the whole section is dropped from every generated page —",
+    "the site stays valid, it just has no reviews block yet.",
+    "",
+    "  author  display name. Keep it as Google shows it, or shortened to a surname",
+    "          initial; fetch-reviews.js shortens automatically.",
+    "  rating  1-5, integer.",
+    "  time    ISO date. Rendered per language, so 2026-07-14 reads July 2026 / lipiec 2026.",
+    "  text    the review, verbatim. Newlines survive, nothing else is interpreted.",
+    "  lang    what it was written in. Informational for now.",
+    "",
+    "After editing: node build/generate.js"
+  ],
+  "placeId": "ChIJxbFOEIWx3qYRf1jzy-9btro",
+  "profileUrl": "https://www.google.com/maps?cid=13454042022292969599",
+  "rating": null,
+  "total": 0,
+  "updated": null,
+  "reviews": []
+}

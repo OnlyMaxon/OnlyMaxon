@@ -1,0 +1,85 @@
+# Keeps the reviews on the home page in step with the Google profile.
+#
+# Once a day: pull the profile's reviews, rebuild the 56 pages, commit only if something
+# actually changed. Pages publishes from the branch, so the commit is the deploy.
+#
+# Until the four secrets exist the job exits cleanly instead of failing — a red cross every
+# morning while access is still pending trains you to ignore the one that matters.
+#
+# Secrets to add under Settings → Secrets and variables → Actions:
+#   GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN
+#   GBP_LOCATION  — optional, only when the account has more than one location
+
+name: Refresh Google reviews
+
+on:
+  schedule:
+    # 04:17 UTC. Off the hour on purpose: everything scheduled at :00 queues behind
+    # everything else scheduled at :00.
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reviews
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check credentials
+        id: creds
+        env:
+          RT: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          if [ -z "$RT" ]; then
+            echo "No GOOGLE_REFRESH_TOKEN set yet — nothing to do."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Fetch reviews
+        if: steps.creds.outputs.ready == 'true'
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          GBP_LOCATION: ${{ secrets.GBP_LOCATION }}
+        run: node build/fetch-reviews.js
+
+      # Asked before the rebuild, never after: generate.js stamps today's date into
+      # sitemap.xml, so after it runs the working tree is always dirty and "did anything
+      # change" can no longer be answered.
+      - name: Did the reviews change?
+        id: changed
+        if: steps.creds.outputs.ready == 'true'
+        run: |
+          if git diff --quiet -- build/reviews.json; then
+            echo "No new reviews."
+            echo "yes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "yes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Rebuild the site
+        if: steps.changed.outputs.yes == 'true'
+        run: node build/generate.js
+
+      - name: Commit
+        if: steps.changed.outputs.yes == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Refresh Google reviews"
+          git push

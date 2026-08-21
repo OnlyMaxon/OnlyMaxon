@@ -125,6 +125,19 @@ const translations = {
     vk3S3:    { en: "Wedding", pl: "Wesele", ru: "Свадьба", tr: "Düğün", es: "Boda" },
     vk3P3:    { en: "€450", pl: "450 €", ru: "450 €", tr: "450 €", es: "450 €" },
     vk3Hours: { en: "Mon–Fri · 09:00–18:00", pl: "Pn–Pt · 09:00–18:00", ru: "Пн–Пт · 09:00–18:00", tr: "Pzt–Cum · 09:00–18:00", es: "Lun–Vie · 09:00–18:00" },
+    // ── GOOGLE REVIEWS ───────────────────────────────────────────────────────
+    // Only the frame around the reviews lives here. The reviews themselves are in
+    // build/reviews.json and are never translated — a visitor can open the same words on
+    // Google in two clicks, and a "translation" that does not match what is on the map is
+    // worse than a review in a language they have to squint at.
+    // rvCount is the words only; the number in front of it is written in by the build,
+    // because it changes on its own and a hard-coded "11" would go stale silently.
+    rvEyebrow: { en: "Reviews", pl: "Opinie", ru: "Отзывы", tr: "Yorumlar", es: "Opiniones" },
+    rvTitle:   { en: "What clients actually said", pl: "Co naprawdę powiedzieli klienci", ru: "Что клиенты сказали на самом деле", tr: "Müşteriler gerçekte ne dedi", es: "Lo que dijeron los clientes de verdad" },
+    rvDesc:    { en: "Real reviews from our Google profile — we did not write a word of them. Every one is one click away on the map.", pl: "Prawdziwe opinie z naszego profilu Google — nie napisaliśmy w nich ani słowa. Każdą sprawdzisz jednym kliknięciem na mapie.", ru: "Настоящие отзывы из нашего профиля в Google — мы не написали в них ни слова. Любой можно проверить одним кликом на карте.", tr: "Google profilimizdeki gerçek yorumlar — tek kelimesini biz yazmadık. Her birini haritada tek tıkla görebilirsin.", es: "Opiniones reales de nuestro perfil de Google — no escribimos ni una palabra. Puedes comprobar cada una con un clic en el mapa." },
+    rvCount:   { en: "reviews on Google", pl: "opinii w Google", ru: "отзывов в Google", tr: "yorum · Google", es: "opiniones en Google" },
+    rvAll:     { en: "Read them all on Google", pl: "Przeczytaj wszystkie w Google", ru: "Читать все в Google", tr: "Hepsini Google'da oku", es: "Leerlas todas en Google" },
+
     pricingEyebrow: { en: "Pricing",              pl: "Cennik",              ru: "Цены", tr: "Fiyatlar", es: "Precios" },
     pricingTitle:   { en: "Simple, upfront pricing", pl: "Proste, jasne ceny", ru: "Простые, прозрачные цены", tr: "Basit, şeffaf fiyatlar", es: "Precios simples y claros" },
     pricingDesc:    { en: "Dreaming of a website or app — for your business, your idea, or someone you love? Here's the price and timeline up front, no hidden costs.", pl: "Marzysz o stronie lub aplikacji — dla swojego biznesu, pomysłu albo kogoś bliskiego? Oto cena i termin z góry, bez ukrytych kosztów.", ru: "Мечтаешь о сайте или приложении — для бизнеса, своей идеи или близкого человека? Вот цена и сроки сразу, без скрытых расходов.", tr: "Bir web sitesi veya uygulama mı hayal ediyorsun — işin, fikrin ya da sevdiğin biri için? İşte fiyat ve süre baştan, gizli maliyet yok.", es: "¿Sueñas con una web o una app — para tu negocio, tu idea o alguien a quien quieres? Aquí tienes el precio y el plazo por adelantado, sin costes ocultos." },

@@ -1315,6 +1315,71 @@
       .vk-caption { margin-top: 14px; }
     }
 
+    /* build:reviews */
+    /* ── GOOGLE REVIEWS ───────────────────────
+       Dropped from the file, along with the section itself, whenever reviews.json is
+       empty — a page that ships the styling for a block it does not contain is exactly
+       the dead weight the comment stripping above exists to avoid.
+
+       The cards are written in by build/generate.js from build/reviews.json — the same
+       file a human edits today and the cron writes later, so both paths reach the page
+       through one code path instead of two that drift.
+
+       Nothing in a card carries data-i18n. A review is one person's words in one language;
+       running it through a table that fails the build unless all five languages exist
+       would mean either translating strangers or never shipping a new review. */
+    .rv-head { text-align: center; max-width: 640px; margin: 0 auto 26px; }
+    .rv-head .sec-desc { margin: 0 auto; }
+    .rv-score {
+      display: flex; align-items: center; justify-content: center;
+      gap: 9px; flex-wrap: wrap; margin-bottom: 46px;
+    }
+    .rv-stars { color: var(--blue); font-size: 17px; letter-spacing: 2px; }
+    .rv-score-num { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; }
+    .rv-score-sep { color: var(--text-m); }
+    .rv-score-link { color: var(--text-d); font-size: 13.5px; border-bottom: 1px solid var(--border); }
+    .rv-score-link:hover { color: var(--blue); border-bottom-color: var(--border-h); }
+    .rv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start; }
+    .rv-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 22px 22px 20px;
+      transition: border-color .3s, transform .3s;
+    }
+    .rv-card:hover { border-color: var(--border-h); transform: translateY(-3px); }
+    .rv-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    /* Initials rather than the Google avatar. Those URLs are rotated by Google without
+       warning, and each one would be a third-party request on the page we spend the most
+       effort keeping cheap. */
+    .rv-ava {
+      width: 42px; height: 42px; flex: none; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      color: var(--bg); font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .rv-who { min-width: 0; }
+    .rv-name {
+      font-weight: 600; font-size: 14.5px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .rv-date { font-size: 11.5px; color: var(--text-m); margin-top: 2px; }
+    .rv-rating { color: var(--blue); font-size: 12.5px; letter-spacing: 1.5px; margin-bottom: 9px; }
+    .rv-text { font-size: 14px; line-height: 1.62; color: var(--text-d); }
+    .rv-foot { text-align: center; margin-top: 36px; }
+    .rv-cta {
+      display: inline-block; border: 1px solid var(--blue); color: var(--blue);
+      font-weight: 600; font-size: 14px; padding: 12px 26px; border-radius: 12px;
+      transition: background .3s, color .3s;
+    }
+    .rv-cta:hover { background: var(--blue); color: var(--bg); }
+    @media (max-width: 980px) { .rv-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) {
+      .rv-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
+      .rv-score { margin-bottom: 30px; }
+      .rv-head { margin-bottom: 20px; }
+    }
+    /* /build:reviews */
+
     /* ── RESPONSIVE ───────────────────────── */
     @media (max-width: 860px) {
       .stack-grid { grid-template-columns: 1fr; max-width: 460px; }
@@ -1794,6 +1859,35 @@
     </div>
   </div>
 </section>
+
+<!-- ─── GOOGLE REVIEWS ───────────────────
+     Everything between the build:reviews markers is deleted outright when
+     build/reviews.json holds no reviews, so the page is never shipped with an empty
+     proof section. The cards, the average and the count are all written in by
+     build/generate.js — the numbers below are only what the source shows in a browser. -->
+<!-- build:reviews -->
+<div class="divider"></div>
+
+<section id="reviews">
+  <div class="container">
+    <div class="rv-head">
+      <p class="eyebrow fade-up" data-i18n="rvEyebrow">Reviews</p>
+      <h2 class="sec-title fade-up d1" data-i18n="rvTitle">What clients actually said</h2>
+      <p class="sec-desc fade-up d2" data-i18n="rvDesc">Real reviews from our Google profile — we did not write a word of them. Every one is one click away on the map.</p>
+    </div>
+    <div class="rv-score fade-up d2">
+      <span class="rv-stars" data-rv="stars">★★★★★</span>
+      <span class="rv-score-num" data-rv="rating">5.0</span>
+      <span class="rv-score-sep">·</span>
+      <a class="rv-score-link" data-rv="link" href="https://www.google.com/maps" target="_blank" rel="noopener nofollow"><span data-rv="total">0</span> <span data-i18n="rvCount">reviews on Google</span></a>
+    </div>
+    <div class="rv-grid" data-rv="grid"></div>
+    <div class="rv-foot fade-up">
+      <a class="rv-cta" data-rv="link" href="https://www.google.com/maps" target="_blank" rel="noopener nofollow" data-i18n="rvAll">Read them all on Google</a>
+    </div>
+  </div>
+</section>
+<!-- /build:reviews -->
 
 <div class="divider"></div>
 
