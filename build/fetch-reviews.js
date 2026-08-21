@@ -35,9 +35,29 @@ const STARS = { ONE: 1, TWO: 2, THREE: 3, FOUR: 4, FIVE: 5 };
 
 const die = msg => { console.error('\n  ERROR: ' + msg + '\n'); process.exit(1); };
 
+/*
+ * Waiting for the allowlist is not a failure.
+ *
+ * Access to the v4 API is granted by hand by Google, and the wait is measured in business
+ * days. Until it lands every call comes back 403 SERVICE_DISABLED — which is the correct
+ * answer to the question being asked, not a broken build. Exiting 1 on it would paint the
+ * Actions tab red every morning for a fortnight, and a cron that cries wolf daily is one
+ * you stop reading right before the day it has something to say.
+ */
+const notYetAllowlisted = body =>
+  /SERVICE_DISABLED|has not been used in project|accessNotConfigured/.test(body);
+
 async function api(url, token) {
   const res = await fetch(url, { headers: { Authorization: 'Bearer ' + token } });
   const body = await res.text();
+  if (res.status === 403 && notYetAllowlisted(body)) {
+    console.log('\n  Business Profile API access has not been granted to this project yet.');
+    console.log('  Nothing to do until it is — the credentials themselves are fine, or this');
+    console.log('  request would have failed at the token, not at the endpoint.');
+    console.log('\n  Check https://console.cloud.google.com/iam-admin/quotas — 0 QPM means');
+    console.log('  still queued, 300 QPM means granted and the next run will pick it up.\n');
+    process.exit(0);
+  }
   if (!res.ok) die(`${res.status} ${res.statusText} on ${url}\n  ${body.slice(0, 600)}`);
   return JSON.parse(body);
 }
