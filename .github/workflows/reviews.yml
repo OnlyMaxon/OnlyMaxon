@@ -30,11 +30,13 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # v5, not v4: the v4 actions still declare the Node 20 runtime GitHub deprecated in
+      # September 2025, and the runners now force them onto 24 with a warning on every run.
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Check credentials
         id: creds
