@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 — Page not found · OnlyMaxon</title>
   <meta name="robots" content="noindex">
-  <link rel="icon" type="image/jpeg" href="/images/logoW.jpg">
+  <!-- The .ico is what a browser tab draws: three square PNGs at 16, 32 and 48,
+       cut from the mark itself. The 512px file stays declared beside it because
+       Google wants a favicon larger than 48px and will pick the biggest on offer. -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/jpeg" sizes="512x512" href="/images/logoW.jpg">
   <style>
     /* Self-hosted from /fonts/, same as the main page. This page is not generated, so it
        carries all five languages at once and therefore needs every subset they draw from:

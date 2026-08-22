@@ -25,7 +25,11 @@
   <link rel="alternate" hreflang="x-default" href="https://onlymaxon.com/blog/not-in-google/">
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
-  <link rel="icon" type="image/jpeg" href="/images/logoW.jpg">
+  <!-- The .ico is what a browser tab draws: three square PNGs at 16, 32 and 48,
+       cut from the mark itself. The 512px file stays declared beside it because
+       Google wants a favicon larger than 48px and will pick the biggest on offer. -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/jpeg" sizes="512x512" href="/images/logoW.jpg">
 
   <!-- Body copy at 400 and every heading at 700 — the two faces that draw the first
        screen. Without this they are only discovered once the first text is styled.

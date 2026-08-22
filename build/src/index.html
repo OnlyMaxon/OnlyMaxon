@@ -25,9 +25,6 @@
   <link rel="alternate" hreflang="tr" href="https://onlymaxon.com/tr/">
   <link rel="alternate" hreflang="es" href="https://onlymaxon.com/es/">
   <link rel="alternate" hreflang="x-default" href="https://onlymaxon.com/">
-  <link rel="icon" type="image/png" sizes="32x32" href="/logo-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/logo-16x16.png">
-  <link rel="shortcut icon" href="/favicon.ico">
 
   <!-- build:root-only -->
   <!-- ── First-visit language routing ────────────────────────────────────────────
@@ -76,7 +73,11 @@
 
   <meta name="theme-color" content="#06080C">
   <meta name="robots" content="index, follow">
-  <link rel="icon" type="image/jpeg" href="images/logoW.jpg">
+  <!-- The .ico is what a browser tab draws: three square PNGs at 16, 32 and 48,
+       cut from the mark itself. The 512px file stays declared beside it because
+       Google wants a favicon larger than 48px and will pick the biggest on offer. -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/jpeg" sizes="512x512" href="images/logoW.jpg">
   <link rel="apple-touch-icon" href="images/logoW.jpg">
   <!-- No image preload any more. The logo used to be the LCP element and was worth
        fetching before the parser reached <body>; the first screen now draws entirely from
