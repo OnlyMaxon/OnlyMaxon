@@ -1426,7 +1426,15 @@
     }
     @media (max-width: 640px) {
       #hero { padding: 116px 0 70px; }
-      .hero-stats { gap: 18px; }
+      /* A grid, not a wrapping flex row. Three tiles and two rules stopped fitting a
+         narrow phone once the first label became "10 reviews on Google" — longer than the
+         "Products built" it replaced — and a wrapping row solves that by starting its
+         second line with a separator, a rule standing on its own with no number beside it.
+         Three equal columns cannot produce that, and the rules are not needed once each
+         tile has its own column. */
+      .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .hero-stats .stat-sep { display: none; }
+      .hero-stats .stat { align-items: center; text-align: center; }
       .stat-val { font-size: 21px; }
       .stat-lab { font-size: 10px; }
       .container { padding: 0 20px; }
