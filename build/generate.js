@@ -445,23 +445,30 @@ function build(page, lang) {
   //     The markup and its CSS are marked off separately — the CSS lives inside <style>,
   //     where an HTML comment would be shipped verbatim rather than stripped, so that half
   //     is fenced with CSS comments instead.
-  const rvBlock = /[ \t]*<!-- build:reviews -->[\s\S]*?<!-- \/build:reviews -->\r?\n?/;
+  // Two marked blocks now, not one: the section itself, and the rating tile in the hero.
+  // Hence the global variant for removing them — the first `replace` used to take the
+  // section out and leave the tile behind, claiming a rating out of an empty file.
+  const rvBlock    = /[ \t]*<!-- build:reviews -->[\s\S]*?<!-- \/build:reviews -->\r?\n?/;
+  const rvBlockAll = /[ \t]*<!-- build:reviews -->[\s\S]*?<!-- \/build:reviews -->\r?\n?/g;
   const rvCss   = /[ \t]*\/\* build:reviews \*\/\r?\n[\s\S]*?\/\* \/build:reviews \*\/\r?\n?/;
   let reviewsShown = 0;
   if (rvBlock.test(html)) {
     if (!shownReviews.length) {
-      html = html.replace(rvBlock, '').replace(rvCss, '');
+      html = html.replace(rvBlockAll, '').replace(rvCss, '');
     } else {
       html = html.replace(/[ \t]*<!-- build:reviews -->\r?\n?|[ \t]*<!-- \/build:reviews -->\r?\n?/g, '');
       html = html.replace(/[ \t]*\/\* build:reviews \*\/\r?\n|[ \t]*\/\* \/build:reviews \*\/\r?\n?/g, '');
       html = html.replace('<div class="rv-grid" data-rv="grid"></div>',
                           `<div class="rv-grid">${reviewCards(lang)}</div>`);
-      html = html.replace(/(<span class="rv-stars" data-rv="stars">)[^<]*(<\/span>)/,
+      // Matched on the data-rv hook alone rather than on a class, and globally: the same
+      // three numbers now appear twice on the home page — once in the reviews section and
+      // once in the hero — and they are not free to disagree with each other.
+      html = html.replace(/(<span[^>]*\bdata-rv="stars"[^>]*>)[^<]*(<\/span>)/g,
                           `$1${starRow(Math.round(avgRating))}$2`);
       // 4.9, but 4,9 everywhere else — the same split the vk-* rating strings already make.
-      html = html.replace(/(<span class="rv-score-num" data-rv="rating">)[^<]*(<\/span>)/,
+      html = html.replace(/(<span[^>]*\bdata-rv="rating"[^>]*>)[^<]*(<\/span>)/g,
                           `$1${avgRating.toFixed(1).replace('.', lang === 'en' ? '.' : ',')}$2`);
-      html = html.replace(/(<span data-rv="total">)[^<]*(<\/span>)/,
+      html = html.replace(/(<span[^>]*\bdata-rv="total"[^>]*>)[^<]*(<\/span>)/g,
                           `$1${REVIEWS.total || shownReviews.length}$2`);
       if (!REVIEWS.profileUrl) fail('build/reviews.json has reviews but no profileUrl to link them to');
       html = html.replace(/(<a [^>]*\bdata-rv="link"[^>]*\bhref=")[^"]*(")/g,
