@@ -122,6 +122,66 @@
       <xhtml:link rel="alternate" hreflang="x-default" href="https://onlymaxon.com/product/"/>
   </url>
   <url>
+    <loc>https://onlymaxon.com/services/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://onlymaxon.com/services/"/>
+      <xhtml:link rel="alternate" hreflang="pl" href="https://onlymaxon.com/pl/services/"/>
+      <xhtml:link rel="alternate" hreflang="ru" href="https://onlymaxon.com/ru/services/"/>
+      <xhtml:link rel="alternate" hreflang="tr" href="https://onlymaxon.com/tr/services/"/>
+      <xhtml:link rel="alternate" hreflang="es" href="https://onlymaxon.com/es/services/"/>
+      <xhtml:link rel="alternate" hreflang="x-default" href="https://onlymaxon.com/services/"/>
+  </url>
+  <url>
+    <loc>https://onlymaxon.com/pl/services/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://onlymaxon.com/services/"/>
+      <xhtml:link rel="alternate" hreflang="pl" href="https://onlymaxon.com/pl/services/"/>
+      <xhtml:link rel="alternate" hreflang="ru" href="https://onlymaxon.com/ru/services/"/>
+      <xhtml:link rel="alternate" hreflang="tr" href="https://onlymaxon.com/tr/services/"/>
+      <xhtml:link rel="alternate" hreflang="es" href="https://onlymaxon.com/es/services/"/>
+      <xhtml:link rel="alternate" hreflang="x-default" href="https://onlymaxon.com/services/"/>
+  </url>
+  <url>
+    <loc>https://onlymaxon.com/ru/services/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://onlymaxon.com/services/"/>
+      <xhtml:link rel="alternate" hreflang="pl" href="https://onlymaxon.com/pl/services/"/>
+      <xhtml:link rel="alternate" hreflang="ru" href="https://onlymaxon.com/ru/services/"/>
+      <xhtml:link rel="alternate" hreflang="tr" href="https://onlymaxon.com/tr/services/"/>
+      <xhtml:link rel="alternate" hreflang="es" href="https://onlymaxon.com/es/services/"/>
+      <xhtml:link rel="alternate" hreflang="x-default" href="https://onlymaxon.com/services/"/>
+  </url>
+  <url>
+    <loc>https://onlymaxon.com/tr/services/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://onlymaxon.com/services/"/>
+      <xhtml:link rel="alternate" hreflang="pl" href="https://onlymaxon.com/pl/services/"/>
+      <xhtml:link rel="alternate" hreflang="ru" href="https://onlymaxon.com/ru/services/"/>
+      <xhtml:link rel="alternate" hreflang="tr" href="https://onlymaxon.com/tr/services/"/>
+      <xhtml:link rel="alternate" hreflang="es" href="https://onlymaxon.com/es/services/"/>
+      <xhtml:link rel="alternate" hreflang="x-default" href="https://onlymaxon.com/services/"/>
+  </url>
+  <url>
+    <loc>https://onlymaxon.com/es/services/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+      <xhtml:link rel="alternate" hreflang="en" href="https://onlymaxon.com/services/"/>
+      <xhtml:link rel="alternate" hreflang="pl" href="https://onlymaxon.com/pl/services/"/>
+      <xhtml:link rel="alternate" hreflang="ru" href="https://onlymaxon.com/ru/services/"/>
+      <xhtml:link rel="alternate" hreflang="tr" href="https://onlymaxon.com/tr/services/"/>
+      <xhtml:link rel="alternate" hreflang="es" href="https://onlymaxon.com/es/services/"/>
+      <xhtml:link rel="alternate" hreflang="x-default" href="https://onlymaxon.com/services/"/>
+  </url>
+  <url>
     <loc>https://onlymaxon.com/services/websites/</loc>
     <lastmod>2026-08-22</lastmod>
     <changefreq>weekly</changefreq>

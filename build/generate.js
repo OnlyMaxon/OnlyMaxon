@@ -64,6 +64,13 @@ const PAGES = [
    * search, these are the front door.
    */
   {
+    path: 'services',
+    titleKey: 'svMetaTitle',
+    descKey: 'svMetaDesc',
+    faq: false,
+    priority: { source: '0.9', translated: '0.8' },
+  },
+  {
     path: 'services/websites',
     titleKey: 'swMetaTitle',
     descKey: 'swMetaDesc',
