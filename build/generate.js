@@ -45,7 +45,10 @@ const PAGES = [
   {
     path: '',
     titleKey: 'metaTitle',
-    descKey: 'heroSub',
+    // Its own key, not the on-screen sentence. Those two want different things: the one
+    // on the page wants to be as short as it can be and still be true, and this one wants
+    // the ~155 characters Google will show. Same reason titleKey is not the headline.
+    descKey: 'metaDesc',
     faq: true,
     priority: { source: '1.0', translated: '0.9' },
   },

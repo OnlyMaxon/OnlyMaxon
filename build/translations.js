@@ -21,7 +21,19 @@ const translations = {
     // emotional promise with no keywords in it; this stays descriptive and under the
     // ~60 characters Google shows. Editing the headline no longer rewrites the <title>.
     metaTitle:     { en: "We turn ideas into working products.", pl: "Zamieniamy pomysły w działające produkty.", ru: "Превращаем идеи в работающие продукты.", tr: "Fikirleri çalışan ürünlere dönüştürüyoruz.", es: "Convertimos ideas en productos que funcionan." },
-    heroSub:       { en: "<strong>OnlyMaxon</strong> is a product studio. We design, build, launch and grow real products — <strong>development and SEO</strong> under one roof.", pl: "<strong>OnlyMaxon</strong> to studio produktowe. Projektujemy, budujemy, wdrażamy i rozwijamy prawdziwe produkty — <strong>development i SEO</strong> pod jednym dachem.", ru: "<strong>OnlyMaxon</strong> — продуктовая студия. Проектируем, разрабатываем, запускаем и развиваем реальные продукты — <strong>разработка и SEO</strong> под одной крышей.", tr: "<strong>OnlyMaxon</strong> bir ürün stüdyosudur. Gerçek ürünleri tasarlar, geliştirir, yayınlar ve büyütürüz — <strong>geliştirme ve SEO</strong> tek çatı altında.", es: "<strong>OnlyMaxon</strong> es un estudio de producto. Diseñamos, construimos, lanzamos y hacemos crecer productos reales — <strong>desarrollo y SEO</strong> bajo un mismo techo." },
+    // On screen only. It used to open with "OnlyMaxon is a product studio" — a phrase the
+    // person who needs a booking page has never used, sitting in the one sentence that has
+    // to explain the business. In Russian it ran to six lines on a phone, between the
+    // headline and the buttons, where nobody was going to read it. The search description
+    // is metaDesc now, so this is free to be as short as it can be and still be true.
+    heroSub:       { en: "We build websites and apps — and make sure they get found. <strong>Development and SEO</strong> under one roof.", pl: "Budujemy strony i aplikacje — i sprawiamy, że ludzie je znajdują. <strong>Development i SEO</strong> pod jednym dachem.", ru: "Делаем сайты и приложения — и делаем так, чтобы их находили. <strong>Разработка и SEO</strong> под одной крышей.", tr: "Web siteleri ve uygulamalar yapıyoruz — ve bulunmalarını sağlıyoruz. <strong>Geliştirme ve SEO</strong> tek çatı altında.", es: "Hacemos webs y apps — y hacemos que la gente las encuentre. <strong>Desarrollo y SEO</strong> bajo un mismo techo." },
+
+    // Search result description, deliberately separate from the sentence above — the same
+    // split metaTitle already makes with the headline. On screen the shortest true sentence
+    // wins; in a result Google shows around 155 characters, and stopping at 90 wastes the
+    // only line of prose the site gets in the index. This one also names the city, which
+    // the on-screen copy has no reason to.
+    metaDesc:      { en: "OnlyMaxon builds websites and mobile apps and gets them found on Google — development and SEO under one roof. Based in Warsaw, working worldwide.", pl: "OnlyMaxon buduje strony i aplikacje mobilne i sprawia, że Google je znajduje — development i SEO pod jednym dachem. Warszawa, pracujemy na całym świecie.", ru: "OnlyMaxon делает сайты и мобильные приложения и выводит их в Google — разработка и SEO под одной крышей. Варшава, работаем по всему миру.", tr: "OnlyMaxon web siteleri ve mobil uygulamalar yapar ve onları Google’da bulunur kılar — geliştirme ve SEO tek çatı altında. Varşova, tüm dünyada çalışıyoruz.", es: "OnlyMaxon crea webs y apps móviles y hace que Google las encuentre — desarrollo y SEO bajo un mismo techo. Varsovia, trabajamos en todo el mundo." },
     heroBtnCall:     { en: "Send a message", pl: "Napisz do nas",  ru: "Написать нам", tr: "Mesaj gönder", es: "Enviar mensaje" },
     heroBtnProjects: { en: "See Projects", pl: "Zobacz projekty", ru: "Смотреть проекты", tr: "Projeleri gör", es: "Ver proyectos" },
     heroStatProducts:{ en: "Products Built", pl: "Zbudowanych produktów", ru: "Продуктов создано", tr: "Yapılan ürün", es: "Productos creados" },
