@@ -56,6 +56,27 @@ const PAGES = [
     faq: false,
     priority: { source: '0.9', translated: '0.8' },
   },
+  /*
+   * The service pages. The home page is about the studio and ranks for its own name;
+   * these are each about one service and are the only pages on the site written for
+   * somebody who has never heard of OnlyMaxon and is typing what they need into Google.
+   * Priority sits alongside /product/ rather than below it — for a stranger arriving from
+   * search, these are the front door.
+   */
+  {
+    path: 'services/websites',
+    titleKey: 'swMetaTitle',
+    descKey: 'swMetaDesc',
+    faq: false,
+    priority: { source: '0.9', translated: '0.8' },
+  },
+  {
+    path: 'services/seo',
+    titleKey: 'ssMetaTitle',
+    descKey: 'ssMetaDesc',
+    faq: false,
+    priority: { source: '0.9', translated: '0.8' },
+  },
   {
     path: 'blog',
     titleKey: 'blMetaTitle',
