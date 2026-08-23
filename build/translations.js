@@ -11,7 +11,12 @@ const translations = {
     navCta:        { en: "Work With Us", pl: "Współpraca",  ru: "Сотрудничество", tr: "Bizimle Çalış", es: "Trabaja con nosotros" },
 
     // HERO
-    heroBadge:     { en: "Working worldwide · Taking new projects", pl: "Pracujemy na całym świecie · Przyjmujemy nowe projekty", ru: "Работаем по всему миру · Берём новые проекты", tr: "Tüm dünyada çalışıyoruz · Yeni projeler alıyoruz", es: "Trabajamos en todo el mundo · Aceptando nuevos proyectos" },
+    // The green dot means the studio is open for work, so the first half has to be a
+    // status. The second half is the part worth reading: "working worldwide · taking
+    // new projects" is what every agency writes, and the worldwide half is in the footer
+    // anyway. This one says the thing an agency structurally cannot — the same promise
+    // faq6A makes further down, that nobody sits between the client and the builder.
+    heroBadge:     { en: "Taking projects · you talk to the builders", pl: "Przyjmujemy projekty · rozmawiasz z wykonawcami", ru: "Берём проекты · говоришь с теми, кто делает", tr: "Proje alıyoruz · yapanlarla konuşursun", es: "Aceptamos proyectos · hablas con quien construye" },
     // On-screen headline. Translations are idiomatic rather than literal, and every
     // language avoids gendered adjectives — the audience includes beauty studios and
     // barbers alike, and "Jesteś świetny" / "Eres bueno" would address only half of it.

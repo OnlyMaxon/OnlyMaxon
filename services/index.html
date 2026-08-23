@@ -176,20 +176,30 @@
     }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-26px); } }
     body.hero-out .blob,
-    body.hero-out .badge-dot { animation-play-state: paused; }
+    body.hero-out .badge-dot::after { animation-play-state: paused; }
+    .badge-dot::after {
+      content: ""; position: absolute; inset: -5px;
+      border: 1px solid #22C55E; border-radius: 50%;
+      opacity: 0; animation: ping 2.6s ease-out infinite;
+    }
+    @keyframes ping {
+      0%   { transform: scale(0.5); opacity: 0.7; }
+      70%  { transform: scale(1.4); opacity: 0; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
     #hero .container { position: relative; z-index: 2; }
     .hero-inner { max-width: 780px; }
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 9px;
-      background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.28);
-      color: var(--blue); font-size: 13px; font-weight: 500;
-      padding: 6px 16px; border-radius: 100px; margin-bottom: 26px;
+      display: inline-flex; align-items: center; gap: 11px;
+      color: var(--text-d);
+      font-size: 13px; font-weight: 500;
+      margin-bottom: 26px;
     }
     .badge-dot {
-      width: 7px; height: 7px; background: #22C55E; border-radius: 50%;
-      box-shadow: 0 0 8px #22C55E; animation: pulse 2s ease-in-out infinite;
+      position: relative; flex-shrink: 0;
+      width: 6px; height: 6px;
+      background: #22C55E; border-radius: 50%;
     }
-    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.75); } }
     .hero-title {
       font-size: clamp(34px, 6vw, 62px); letter-spacing: -2.2px;
       margin-bottom: 22px; text-wrap: balance;
@@ -546,7 +556,7 @@
     <div class="hero-inner">
       <div class="hero-badge">
         <div class="badge-dot"></div>
-        <span>Working worldwide · Taking new projects</span>
+        <span>Taking projects · you talk to the builders</span>
       </div>
       <h1 class="hero-title"><span>Three things, done properly.</span><span class="gradient-text">Not twenty, done somehow.</span></h1>
       <p class="hero-sub">We build the thing and we make people find it. <strong>The same hands, under one roof</strong> — which is why nobody here gets to blame the other agency.</p>

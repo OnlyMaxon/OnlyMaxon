@@ -220,20 +220,39 @@
        The observer at the bottom of the page flips .hero-out; play-state resumes where it
        stopped, so nothing jumps on the way back. Same as on the home page. */
     body.hero-out .blob,
-    body.hero-out .badge-dot { animation-play-state: paused; }
+    body.hero-out .badge-dot::after { animation-play-state: paused; }
+    /* The ring is drawn by a pseudo-element so the dot itself never moves. Scaling the dot
+       would nudge the text beside it by a fraction of a pixel on every frame, which is the
+       kind of thing you cannot point at but can feel. */
+    .badge-dot::after {
+      content: ""; position: absolute; inset: -5px;
+      border: 1px solid #22C55E; border-radius: 50%;
+      opacity: 0; animation: ping 2.6s ease-out infinite;
+    }
+    @keyframes ping {
+      0%   { transform: scale(0.5); opacity: 0.7; }
+      70%  { transform: scale(1.4); opacity: 0; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
     #hero .container { position: relative; z-index: 2; }
     .hero-inner { max-width: 780px; }
+    /* Not a pill.
+       A tinted capsule with a border, a 100px radius and a glowing dot inside it is the
+       badge every product site has shipped since about 2021 — and on this hero it was also
+       the third glowing thing competing with the two beside it. What is left is a status
+       line: the dot carries the colour, the words carry the meaning, and neither is dressed
+       up as a button it is not. */
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 9px;
-      background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.28);
-      color: var(--blue); font-size: 13px; font-weight: 500;
-      padding: 6px 16px; border-radius: 100px; margin-bottom: 26px;
+      display: inline-flex; align-items: center; gap: 11px;
+      color: var(--text-d);
+      font-size: 13px; font-weight: 500;
+      margin-bottom: 26px;
     }
     .badge-dot {
-      width: 7px; height: 7px; background: #22C55E; border-radius: 50%;
-      box-shadow: 0 0 8px #22C55E; animation: pulse 2s ease-in-out infinite;
+      position: relative; flex-shrink: 0;
+      width: 6px; height: 6px;
+      background: #22C55E; border-radius: 50%;
     }
-    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.75); } }
     .hero-title {
       font-size: clamp(34px, 6vw, 62px); letter-spacing: -2.2px;
       margin-bottom: 22px; text-wrap: balance;
@@ -625,7 +644,7 @@
     <div class="hero-inner">
       <div class="hero-badge">
         <div class="badge-dot"></div>
-        <span data-i18n="heroBadge">Working worldwide · Taking new projects</span>
+        <span data-i18n="heroBadge">Taking projects · you talk to the builders</span>
       </div>
       <h1 class="hero-title" data-i18n-html="svTitle"><span>Three things, done properly.</span><span class="gradient-text">Not twenty, done somehow.</span></h1>
       <p class="hero-sub" data-i18n-html="svSub">We build the thing and we make people find it. <strong>The same hands, under one roof</strong> — which is why nobody here gets to blame the other agency.</p>

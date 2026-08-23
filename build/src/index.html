@@ -433,24 +433,35 @@
       text-transform: uppercase; letter-spacing: 1.4px;
     }
 
+    /* Not a pill.
+       A tinted capsule with a border, a 100px radius and a glowing dot inside it is the
+       badge every product site has shipped since about 2021 — and on this hero it was also
+       the third glowing thing competing with the two beside it. What is left is a status
+       line: the dot carries the colour, the words carry the meaning, and neither is dressed
+       up as a button it is not. */
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 9px;
-      background: rgba(34,211,238,0.1);
-      border: 1px solid rgba(34,211,238,0.28);
-      color: var(--blue);
+      display: inline-flex; align-items: center; gap: 11px;
+      color: var(--text-d);
       font-size: 13px; font-weight: 500;
-      padding: 6px 16px; border-radius: 100px;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
     }
     .badge-dot {
-      width: 7px; height: 7px;
+      position: relative; flex-shrink: 0;
+      width: 6px; height: 6px;
       background: #22C55E; border-radius: 50%;
-      box-shadow: 0 0 8px #22C55E;
-      animation: pulse 2s ease-in-out infinite;
     }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.5; transform: scale(0.75); }
+    /* The ring is drawn by a pseudo-element so the dot itself never moves. Scaling the dot
+       would nudge the text beside it by a fraction of a pixel on every frame, which is the
+       kind of thing you cannot point at but can feel. */
+    .badge-dot::after {
+      content: ""; position: absolute; inset: -5px;
+      border: 1px solid #22C55E; border-radius: 50%;
+      opacity: 0; animation: ping 2.6s ease-out infinite;
+    }
+    @keyframes ping {
+      0%   { transform: scale(0.5); opacity: 0.7; }
+      70%  { transform: scale(1.4); opacity: 0; }
+      100% { transform: scale(1.4); opacity: 0; }
     }
 
     .hero-title {
@@ -937,7 +948,7 @@
        returns. animation-play-state resumes where it stopped, so nothing jumps on the way
        back. The logo and its glow used to be on this list; both are gone from the hero. */
     body.hero-out .blob,
-    body.hero-out .badge-dot { animation-play-state: paused; }
+    body.hero-out .badge-dot::after { animation-play-state: paused; }
 
     /* The reveal runs on `animation`, deliberately NOT on `transition`.
        `transition` is a shorthand, and several components below (.tilt, .price-card,
@@ -1528,7 +1539,7 @@
         <ul class="nav-links" id="navLinks">
           <li class="nav-m-only nav-m-brand" aria-hidden="true">
             <span class="nav-m-logo">OnlyMaxon<span>.</span></span>
-            <span class="nav-m-tag" data-i18n="heroBadge">Working worldwide · Taking new projects</span>
+            <span class="nav-m-tag" data-i18n="heroBadge">Taking projects · you talk to the builders</span>
           </li>
           <li><a href="#projects" data-i18n="navWork">Work</a></li>
           <li><a href="#process" data-i18n="navProcess">Process</a></li>
@@ -1582,7 +1593,7 @@
 
       <div class="hero-badge">
         <div class="badge-dot"></div>
-        <span data-i18n="heroBadge">Working worldwide · Taking new projects</span>
+        <span data-i18n="heroBadge">Taking projects · you talk to the builders</span>
       </div>
       <h1 class="hero-title" data-i18n-html="heroTitle">
         <span>You're great at what you do.</span>
