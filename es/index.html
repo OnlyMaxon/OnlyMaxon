@@ -284,27 +284,6 @@
       font-size: 11px; color: var(--text-m); text-align: center; margin-top: 16px;
       text-transform: uppercase; letter-spacing: 1.4px;
     }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 11px;
-      color: var(--text-d);
-      font-size: 13px; font-weight: 500;
-      margin-bottom: 26px;
-    }
-    .badge-dot {
-      position: relative; flex-shrink: 0;
-      width: 6px; height: 6px;
-      background: #22C55E; border-radius: 50%;
-    }
-    .badge-dot::after {
-      content: ""; position: absolute; inset: -5px;
-      border: 1px solid #22C55E; border-radius: 50%;
-      opacity: 0; animation: ping 2.6s ease-out infinite;
-    }
-    @keyframes ping {
-      0%   { transform: scale(0.5); opacity: 0.7; }
-      70%  { transform: scale(1.4); opacity: 0; }
-      100% { transform: scale(1.4); opacity: 0; }
-    }
     .hero-title {
       font-size: clamp(34px, 4.4vw, 54px);
       letter-spacing: -2px;
@@ -705,8 +684,7 @@
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; transition: color 0.2s; }
     .ft a:hover { color: var(--blue); }
-    body.hero-out .blob,
-    body.hero-out .badge-dot::after { animation-play-state: paused; }
+    body.hero-out .blob { animation-play-state: paused; }
     .fade-up { opacity: 0; transform: translateY(38px); }
     .fade-up.in {
       opacity: 1; transform: none;
@@ -1222,10 +1200,6 @@
   <div class="container">
     <div class="hero-inner">
       <div class="hero-copy">
-      <div class="hero-badge">
-        <div class="badge-dot"></div>
-        <span>Aceptamos proyectos · hablas con quien construye</span>
-      </div>
       <h1 class="hero-title"><span>Eres genial en lo que haces.</span><span class="gradient-text">Hacemos que el mundo te encuentre.</span></h1>
       <p class="hero-sub">Hacemos webs y apps — y hacemos que la gente las encuentre. <strong>Desarrollo y SEO</strong> bajo un mismo techo.</p>
         <div class="hero-btns">
