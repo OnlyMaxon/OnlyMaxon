@@ -1,0 +1,54 @@
+{
+  "_comment": [
+    "The NFC card pages. Each entry becomes onlymaxon.com/u/<slug>/ plus the",
+    "contact.vcf that the 'save contact' button hands to the phone.",
+    "",
+    "One entry is one client, NOT one client per language: a profile carries somebody's",
+    "own name and phone number, and five copies of that under noindex would only be five",
+    "times the work per order. The 'lang' field picks the language the buttons speak.",
+    "",
+    "  slug      the URL: onlymaxon.com/u/<slug>/. Lowercase letters, digits, dashes.",
+    "            It is printed on a card that cannot be reprinted — never change one.",
+    "  lang      en | pl | ru | tr | es. Button labels only; everything else is typed here.",
+    "  name      shown big, and used as the contact name when the card is saved.",
+    "  role      the line under the name. Kept short — it sits on one line on a phone.",
+    "  location  optional, one line.",
+    "  bio       optional, one or two sentences. Longer than that stops being a card.",
+    "  phone     international form, spaces allowed: +48 576 925 110.",
+    "  email     optional.",
+    "  website   optional, full URL.",
+    "  services  optional list of { name, price }. Price is free text — '€18', 'from €390'.",
+    "  links     optional list of { label, url } shown as a quiet row at the bottom.",
+    "  accent    amber | rose | cyan. Same three colourways the home-page mocks use.",
+    "",
+    "Nothing here goes through build/translations.js: it is somebody else's words, and a",
+    "table where every key must exist in five languages is the wrong home for those —",
+    "the same reason build/reviews.json exists.",
+    "",
+    "These pages are noindex and are deliberately absent from sitemap.xml."
+  ],
+
+  "profiles": [
+    {
+      "slug": "max",
+      "lang": "ru",
+      "name": "Max",
+      "role": "OnlyMaxon · Product Studio",
+      "location": "Варшава · Работаем по всему миру",
+      "bio": "Делаем сайты, приложения и выводим их в Google. Пишите — отвечу сам.",
+      "phone": "+48 576 925 110",
+      "email": "hello@onlymaxon.com",
+      "website": "https://onlymaxon.com",
+      "services": [
+        { "name": "Сайт", "price": "от €390" },
+        { "name": "Интернет-магазин", "price": "от €690" },
+        { "name": "Приложение", "price": "от €1400" },
+        { "name": "SEO / ASO", "price": "от €200/мес" }
+      ],
+      "links": [
+        { "label": "onlymaxon.com", "url": "https://onlymaxon.com" }
+      ],
+      "accent": "amber"
+    }
+  ]
+}

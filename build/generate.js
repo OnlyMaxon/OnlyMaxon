@@ -740,5 +740,14 @@ ${entries.join('\n')}
 `);
 console.log(`  sitemap.xml      ${entries.length} URLs, hreflang on each   ` +
             `(${changedPages ? changedPages + ' dated ' + today : 'no page changed, every date carried over'})`);
+
+// ── the NFC card pages ────────────────────────────────────────────────────────
+// Written after the sitemap on purpose: /u/ pages are noindex and belong in neither the
+// sitemap nor the hreflang set, and running them here makes that impossible to forget.
+// They are one page per client rather than one per language, so none of the machinery
+// above applies to them at all. See build/profiles.js.
+console.log('');
+require('./profiles.js').build();
+
 if (unused.length) console.log(`\n  note: ${unused.length} unused translation keys: ${unused.join(', ')}`);
 console.log('\ndone.\n');
