@@ -1,0 +1,6 @@
+# vCard is the one format on this site whose line endings are part of the spec: RFC 2426
+# says CRLF, and build/profiles.js writes CRLF. core.autocrlf is on for this repo, so
+# without this line git normalises those to LF on commit — and then the build check, which
+# regenerates on a Linux runner and diffs, reports all eleven lines of every contact.vcf as
+# changed on every push. -text stores the bytes exactly as written, on both platforms.
+*.vcf -text
