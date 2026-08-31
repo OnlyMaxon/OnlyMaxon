@@ -65,6 +65,10 @@ const dial = s => s.replace(/[^\d+]/g, '');
 const initials = name =>
   name.trim().split(/\s+/).slice(0, 2).map(w => [...w][0]).join('').toUpperCase();
 
+// #E7B45A → "231,180,90", so the accent can be reused at low opacity for the glow behind
+// the avatar without a second colour having to be picked and kept in step with it.
+const rgb = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16)).join(',');
+
 /*
  * vCard 3.0, not 4.0: 3.0 is what iOS and Android both read without argument, and this
  * file is only ever opened by a phone. RFC 2426 wants CRLF between lines — plenty of
@@ -98,18 +102,28 @@ function css(c) {
 html{-webkit-text-size-adjust:100%}
 body{
   min-height:100vh;padding:34px 20px 26px;
-  background:linear-gradient(180deg,${c.s1},${c.s2});color:var(--ink);
+  /* The accent, very faint, pooled behind the avatar. One gradient, no image: the flat
+     panel it replaces read as a form rather than as somebody's card. */
+  background:
+    radial-gradient(60% 42% at 50% 6%,rgba(${rgb(c.a)},.14),transparent 72%),
+    linear-gradient(180deg,${c.s1},${c.s2});
+  color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
   font-size:15px;line-height:1.5;text-align:center;
   display:flex;align-items:center;justify-content:center;
 }
 .card{width:100%;max-width:400px}
 .ava{
-  width:82px;height:82px;border-radius:50%;margin:0 auto 16px;
+  width:82px;height:82px;border-radius:50%;margin:0 auto 16px;overflow:hidden;
   background:linear-gradient(140deg,var(--a),var(--d));color:var(--on);
   display:flex;align-items:center;justify-content:center;
   font-size:34px;font-weight:700;letter-spacing:-.5px;
+  box-shadow:0 10px 30px rgba(${rgb(c.a)},.22);
 }
+/* A logo usually sits in its own padding, a face does not — so the zoom is per profile.
+   The disc loses its gradient here: behind a photo it would only show as a rim. */
+.ava.pic{background:${c.s1};box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.07)}
+.ava img{width:100%;height:100%;object-fit:cover;display:block}
 h1{font-size:27px;font-weight:700;letter-spacing:-.4px;line-height:1.15}
 .role{color:var(--a);font-size:12px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;margin-top:6px}
 .loc{color:var(--mut);font-size:13px;margin-top:8px}
@@ -125,9 +139,13 @@ h1{font-size:27px;font-weight:700;letter-spacing:-.4px;line-height:1.15}
 .btn{
   display:block;padding:14px;border-radius:12px;font-size:15px;font-weight:700;
   text-decoration:none;background:linear-gradient(135deg,var(--a),var(--d));color:var(--on);
+  box-shadow:0 8px 22px rgba(${rgb(c.a)},.20);transition:transform .12s ease;
 }
-.btn2{background:none;border:1px solid var(--a);color:var(--a)}
-.btn3{background:none;border:1px solid rgba(255,255,255,.14);color:var(--ink)}
+.btn2{background:none;border:1px solid var(--a);color:var(--a);box-shadow:none}
+.btn3{background:none;border:1px solid rgba(255,255,255,.14);color:var(--ink);box-shadow:none}
+/* Touch has no hover, so a button that does not visibly react to a press reads as broken
+   for the half-second before the phone acts on it. */
+.btn:active{transform:scale(.975)}
 .lnk{list-style:none;margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center}
 .lnk a{color:var(--mut);font-size:13px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.12)}
 .credit{
@@ -135,6 +153,18 @@ h1{font-size:27px;font-weight:700;letter-spacing:-.4px;line-height:1.15}
   letter-spacing:1.1px;text-transform:uppercase;text-decoration:none;
 }
 .credit:hover,.lnk a:hover{color:var(--a)}
+/* The page arrives all at once because it is 5 KB — which made it land like a printout.
+   A short stagger reads as it assembling itself, and costs no request and no script. */
+@keyframes in{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+.card>*{animation:in .45s cubic-bezier(.2,.7,.3,1) both}
+.card>*:nth-child(2){animation-delay:.05s}
+.card>*:nth-child(3){animation-delay:.09s}
+.card>*:nth-child(4){animation-delay:.13s}
+.card>*:nth-child(5){animation-delay:.17s}
+.card>*:nth-child(6){animation-delay:.21s}
+.card>*:nth-child(7){animation-delay:.25s}
+.card>*:nth-child(n+8){animation-delay:.29s}
+@media(prefers-reduced-motion:reduce){.card>*{animation:none}.btn{transition:none}}
 @media(min-width:520px){body{padding:56px 20px}h1{font-size:30px}}
 `.replace(/\n\s*/g, '\n').trim();
 }
@@ -154,6 +184,13 @@ ${p.services.map(s => `      <li><span>${esc(s.name)}</span><b>${esc(s.price)}</
     <ul class="lnk">
 ${p.links.map(l => `      <li><a href="${escAttr(l.url)}" rel="noopener">${esc(l.label)}</a></li>`).join('\n')}
     </ul>` : '';
+
+  // A photo, or the initial. The initial is not a placeholder waiting to be replaced —
+  // it is what a client with no usable picture should ship with, and it looks deliberate.
+  const zoom = p.photoScale && p.photoScale !== 1 ? ` style="transform:scale(${p.photoScale})"` : '';
+  const avatar = p.photo
+    ? `<div class="ava pic"><img src="${escAttr(p.photo)}" alt="${escAttr(p.name)}" width="82" height="82"${zoom}></div>`
+    : `<div class="ava" aria-hidden="true">${esc(initials(p.name))}</div>`;
 
   const write = p.email
     ? `      <a class="btn btn2" href="mailto:${escAttr(p.email)}">${esc(L('write'))}</a>\n`
@@ -183,7 +220,7 @@ ${css(ACCENTS[p.accent || 'amber'])}
 </head>
 <body>
   <main class="card">
-    <div class="ava" aria-hidden="true">${esc(initials(p.name))}</div>
+    ${avatar}
     <h1>${esc(p.name)}</h1>
     <p class="role">${esc(p.role)}</p>
 ${p.location ? `    <p class="loc">${esc(p.location)}</p>\n` : ''}${p.bio ? `    <p class="bio">${esc(p.bio)}</p>\n` : ''}${services}
@@ -209,6 +246,12 @@ function validate(p, i) {
     if (!p[field] || !String(p[field]).trim()) fail(`${at} (${p.slug}): "${field}" is required`);
   if (!/^\+\d[\d ]{6,}$/.test(p.phone))
     fail(`${at} (${p.slug}): "phone" must be international and start with + — got ${JSON.stringify(p.phone)}`);
+  if (p.photo && !/^(\/|https?:\/\/)/.test(p.photo))
+    fail(`${at} (${p.slug}): "photo" must start with / or http — got ${JSON.stringify(p.photo)}`);
+  if (p.photoScale != null && !(typeof p.photoScale === 'number' && p.photoScale >= 1 && p.photoScale <= 4))
+    fail(`${at} (${p.slug}): "photoScale" must be a number between 1 and 4`);
+  if (p.photoScale != null && !p.photo)
+    fail(`${at} (${p.slug}): "photoScale" without a "photo" does nothing`);
   if (p.accent && !ACCENTS[p.accent])
     fail(`${at} (${p.slug}): "accent" must be one of ${Object.keys(ACCENTS).join(', ')}`);
   for (const s of p.services || [])
