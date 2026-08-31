@@ -6,9 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Max — OnlyMaxon · Product Studio</title>
   <meta name="description" content="Делаем сайты, приложения и выводим их в Google. Пишите — отвечу сам.">
-  <!-- A directory of one-screen pages carrying other people's phone numbers is neither
-       something Google should rank nor something the privacy page promises to publish.
-       follow, not nofollow: the credit link at the bottom is meant to be counted. -->
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://onlymaxon.com/u/max/">
   <meta property="og:type" content="profile">
@@ -18,15 +15,14 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--a:#E7B45A;--d:#C8922F;--on:#1a1509;--ink:#F4EEE4;--mut:#B0A493}
-html{-webkit-text-size-adjust:100%}
+:root{--a:#22D3EE;--d:#2C8A9C;--on:#04141A;--ink:#EAF2F6;--mut:#93A6B2}
+html{
+-webkit-text-size-adjust:100%;color-scheme:dark;
+background:linear-gradient(180deg,#06080C,#0B0F16) #06080C fixed;
+}
 body{
 min-height:100vh;padding:34px 20px 26px;
-/* The accent, very faint, pooled behind the avatar. One gradient, no image: the flat
-panel it replaces read as a form rather than as somebody's card. */
-background:
-radial-gradient(60% 42% at 50% 6%,rgba(231,180,90,.14),transparent 72%),
-linear-gradient(180deg,#100E0A,#1A150E);
+background:radial-gradient(60% 42% at 50% 6%,rgba(34,211,238,.14),transparent 72%);
 color:var(--ink);
 font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
 font-size:15px;line-height:1.5;text-align:center;
@@ -38,11 +34,9 @@ width:82px;height:82px;border-radius:50%;margin:0 auto 16px;overflow:hidden;
 background:linear-gradient(140deg,var(--a),var(--d));color:var(--on);
 display:flex;align-items:center;justify-content:center;
 font-size:34px;font-weight:700;letter-spacing:-.5px;
-box-shadow:0 10px 30px rgba(231,180,90,.22);
+box-shadow:0 10px 30px rgba(34,211,238,.22);
 }
-/* A logo usually sits in its own padding, a face does not — so the zoom is per profile.
-The disc loses its gradient here: behind a photo it would only show as a rim. */
-.ava.pic{background:#100E0A;box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.07)}
+.ava.pic{background:#06080C;box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.07)}
 .ava img{width:100%;height:100%;object-fit:cover;display:block}
 h1{font-size:27px;font-weight:700;letter-spacing:-.4px;line-height:1.15}
 .role{color:var(--a);font-size:12px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;margin-top:6px}
@@ -59,12 +53,10 @@ border-radius:11px;padding:11px 14px;margin-bottom:8px;font-size:14px;text-align
 .btn{
 display:block;padding:14px;border-radius:12px;font-size:15px;font-weight:700;
 text-decoration:none;background:linear-gradient(135deg,var(--a),var(--d));color:var(--on);
-box-shadow:0 8px 22px rgba(231,180,90,.20);transition:transform .12s ease;
+box-shadow:0 8px 22px rgba(34,211,238,.20);transition:transform .12s ease;
 }
 .btn2{background:none;border:1px solid var(--a);color:var(--a);box-shadow:none}
 .btn3{background:none;border:1px solid rgba(255,255,255,.14);color:var(--ink);box-shadow:none}
-/* Touch has no hover, so a button that does not visibly react to a press reads as broken
-for the half-second before the phone acts on it. */
 .btn:active{transform:scale(.975)}
 .lnk{list-style:none;margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center}
 .lnk a{color:var(--mut);font-size:13px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.12)}
@@ -73,8 +65,6 @@ display:inline-block;margin-top:30px;color:var(--mut);font-size:11px;
 letter-spacing:1.1px;text-transform:uppercase;text-decoration:none;
 }
 .credit:hover,.lnk a:hover{color:var(--a)}
-/* The page arrives all at once because it is 5 KB — which made it land like a printout.
-A short stagger reads as it assembling itself, and costs no request and no script. */
 @keyframes in{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
 .card>*{animation:in .45s cubic-bezier(.2,.7,.3,1) both}
 .card>*:nth-child(2){animation-delay:.05s}
@@ -86,11 +76,14 @@ A short stagger reads as it assembling itself, and costs no request and no scrip
 .card>*:nth-child(n+8){animation-delay:.29s}
 @media(prefers-reduced-motion:reduce){.card>*{animation:none}.btn{transition:none}}
 @media(min-width:520px){body{padding:56px 20px}h1{font-size:30px}}
+// The reasoning above is for whoever opens this file, not for the phone downloading the
+// page — the same call generate.js makes when it strips the comments out of the other
+// fourteen. Blank lines left behind by the strip go with them.
   </style>
 </head>
 <body>
   <main class="card">
-    <div class="ava pic"><img src="/images/logoW.jpg" alt="Max" width="82" height="82" style="transform:scale(2)"></div>
+    <div class="ava pic"><img src="/images/logoW.jpg" alt="Max" width="82" height="82" style="transform:scale(2) translate(-2.3%,6.4%)"></div>
     <h1>Max</h1>
     <p class="role">OnlyMaxon · Product Studio</p>
     <p class="loc">Варшава · Работаем по всему миру</p>

@@ -47,7 +47,16 @@ const LABELS = {
   credit: { en: 'Made by OnlyMaxon', pl: 'Zrobione przez OnlyMaxon', ru: 'Сделано в OnlyMaxon', tr: 'OnlyMaxon yapımı', es: 'Hecho por OnlyMaxon' },
 };
 
+/*
+ * "studio" is the site's own palette, lifted straight from :root in build/src/index.html —
+ * --blue, --purple, --bg, --bg2, --text, --text-d. It is the default, so a card that says
+ * nothing about colour comes out looking like the rest of OnlyMaxon, and the logo (a silver
+ * M with a cyan arrow on near-black) sits on its own background rather than on a stranger's.
+ * The other three exist for clients: a barber's card should carry the barber's colour, not
+ * the studio's. They are the same colourways as the phone mocks on the home page.
+ */
 const ACCENTS = {
+  studio:{ a: '#22D3EE', d: '#2C8A9C', on: '#04141A', s1: '#06080C', s2: '#0B0F16', ink: '#EAF2F6', mut: '#93A6B2' },
   amber: { a: '#E7B45A', d: '#C8922F', on: '#1a1509', s1: '#100E0A', s2: '#1A150E', ink: '#F4EEE4', mut: '#B0A493' },
   rose:  { a: '#E9A5BC', d: '#C0687F', on: '#1e0d13', s1: '#120A0E', s2: '#1C1016', ink: '#F6EAEF', mut: '#B39AA3' },
   cyan:  { a: '#7FE9F0', d: '#2C8A9C', on: '#04141A', s1: '#08111A', s2: '#0D1A24', ink: '#E6F4F7', mut: '#93AAB3' },
@@ -99,14 +108,20 @@ function css(c) {
   return `
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--a:${c.a};--d:${c.d};--on:${c.on};--ink:${c.ink};--mut:${c.mut}}
-html{-webkit-text-size-adjust:100%}
+/* The page background belongs on <html>, not only on <body>. Painted on the body alone it
+   stops at the body box, and everything outside it — the rubber-band area a phone shows
+   when you drag past the end, and the scrollbar track on a desktop — falls back to the
+   browser's own white. "fixed" sizes the gradient to the viewport so both ends of an
+   overscroll stay dark; color-scheme tells the browser the rest of its chrome is dark too. */
+html{
+  -webkit-text-size-adjust:100%;color-scheme:dark;
+  background:linear-gradient(180deg,${c.s1},${c.s2}) ${c.s1} fixed;
+}
 body{
   min-height:100vh;padding:34px 20px 26px;
   /* The accent, very faint, pooled behind the avatar. One gradient, no image: the flat
      panel it replaces read as a form rather than as somebody's card. */
-  background:
-    radial-gradient(60% 42% at 50% 6%,rgba(${rgb(c.a)},.14),transparent 72%),
-    linear-gradient(180deg,${c.s1},${c.s2});
+  background:radial-gradient(60% 42% at 50% 6%,rgba(${rgb(c.a)},.14),transparent 72%);
   color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
   font-size:15px;line-height:1.5;text-align:center;
@@ -166,9 +181,22 @@ h1{font-size:27px;font-weight:700;letter-spacing:-.4px;line-height:1.15}
 .card>*:nth-child(n+8){animation-delay:.29s}
 @media(prefers-reduced-motion:reduce){.card>*{animation:none}.btn{transition:none}}
 @media(min-width:520px){body{padding:56px 20px}h1{font-size:30px}}
-`.replace(/\n\s*/g, '\n').trim();
+// The reasoning above is for whoever opens this file, not for the phone downloading the
+// page — the same call generate.js makes when it strips the comments out of the other
+// fourteen. Blank lines left behind by the strip go with them.
+`.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\n\s*/g, '\n').replace(/\n+/g, '\n').trim();
 }
 
+/*
+ * The page itself. Two decisions worth knowing before editing it:
+ *
+ *   noindex — a directory of one-screen pages carrying other people's phone numbers is
+ *   neither something Google should rank (it is the textbook shape of thin content, and
+ *   the penalty lands on the whole domain) nor something the privacy page promises to
+ *   publish. But follow, not nofollow: the credit link at the bottom is meant to count.
+ *
+ *   No webfont, no script, no comment in the output — see the header of this file.
+ */
 function page(p) {
   const L = k => LABELS[k][p.lang];
   const title = `${p.name} — ${p.role}`;
@@ -187,7 +215,15 @@ ${p.links.map(l => `      <li><a href="${escAttr(l.url)}" rel="noopener">${esc(l
 
   // A photo, or the initial. The initial is not a placeholder waiting to be replaced —
   // it is what a client with no usable picture should ship with, and it looks deliberate.
-  const zoom = p.photoScale && p.photoScale !== 1 ? ` style="transform:scale(${p.photoScale})"` : '';
+  // object-position cannot help here: a square image in a square box under object-fit:cover
+  // has no overflow to reposition. So the centring is done in the transform, and it has to
+  // happen BEFORE the scale — the rightmost function applies first — or the zoom multiplies
+  // the offset instead of leaving it alone.
+  const [fx, fy] = p.photoFocus || [50, 50];
+  const moves = [];
+  if (p.photoScale && p.photoScale !== 1) moves.push(`scale(${p.photoScale})`);
+  if (fx !== 50 || fy !== 50) moves.push(`translate(${(50 - fx).toFixed(1)}%,${(50 - fy).toFixed(1)}%)`);
+  const zoom = moves.length ? ` style="transform:${moves.join(' ')}"` : '';
   const avatar = p.photo
     ? `<div class="ava pic"><img src="${escAttr(p.photo)}" alt="${escAttr(p.name)}" width="82" height="82"${zoom}></div>`
     : `<div class="ava" aria-hidden="true">${esc(initials(p.name))}</div>`;
@@ -204,9 +240,6 @@ ${p.links.map(l => `      <li><a href="${escAttr(l.url)}" rel="noopener">${esc(l
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(title)}</title>
   <meta name="description" content="${escAttr(desc)}">
-  <!-- A directory of one-screen pages carrying other people's phone numbers is neither
-       something Google should rank nor something the privacy page promises to publish.
-       follow, not nofollow: the credit link at the bottom is meant to be counted. -->
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="${here}">
   <meta property="og:type" content="profile">
@@ -215,7 +248,7 @@ ${p.links.map(l => `      <li><a href="${escAttr(l.url)}" rel="noopener">${esc(l
   <meta property="og:url" content="${here}">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <style>
-${css(ACCENTS[p.accent || 'amber'])}
+${css(ACCENTS[p.accent || 'studio'])}
   </style>
 </head>
 <body>
@@ -252,6 +285,12 @@ function validate(p, i) {
     fail(`${at} (${p.slug}): "photoScale" must be a number between 1 and 4`);
   if (p.photoScale != null && !p.photo)
     fail(`${at} (${p.slug}): "photoScale" without a "photo" does nothing`);
+  if (p.photoFocus != null) {
+    if (!p.photo) fail(`${at} (${p.slug}): "photoFocus" without a "photo" does nothing`);
+    const ok = Array.isArray(p.photoFocus) && p.photoFocus.length === 2 &&
+               p.photoFocus.every(n => typeof n === 'number' && n >= 0 && n <= 100);
+    if (!ok) fail(`${at} (${p.slug}): "photoFocus" must be two numbers 0-100, e.g. [52.3, 43.6]`);
+  }
   if (p.accent && !ACCENTS[p.accent])
     fail(`${at} (${p.slug}): "accent" must be one of ${Object.keys(ACCENTS).join(', ')}`);
   for (const s of p.services || [])

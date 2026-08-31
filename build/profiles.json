@@ -19,12 +19,18 @@
     "            the circle shows the first letter of the name, which is a finished look,",
     "            not a placeholder.",
     "  photoScale optional zoom, 1-4, for a logo that sits in its own padding. A face wants 1.",
+    "  photoFocus optional [x, y] in percent: the point of the image that should land in the",
+    "            middle of the circle. Defaults to [50, 50]. Needed when the subject is not",
+    "            centred in its own file — the zoom multiplies any offset, so a logo that",
+    "            looks slightly high in the source looks clearly high at 2x.",
     "  phone     international form, spaces allowed: +48 576 925 110.",
     "  email     optional.",
     "  website   optional, full URL.",
     "  services  optional list of { name, price }. Price is free text — '€18', 'from €390'.",
     "  links     optional list of { label, url } shown as a quiet row at the bottom.",
-    "  accent    amber | rose | cyan. Same three colourways the home-page mocks use.",
+    "  accent    studio (default — the site's own cyan) | amber | rose | cyan. The last",
+    "            three are the home-page mock colourways, for clients whose card should",
+    "            carry their colour rather than ours.",
     "",
     "Nothing here goes through build/translations.js: it is somebody else's words, and a",
     "table where every key must exist in five languages is the wrong home for those —",
@@ -43,6 +49,7 @@
       "bio": "Делаем сайты, приложения и выводим их в Google. Пишите — отвечу сам.",
       "photo": "/images/logoW.jpg",
       "photoScale": 2,
+      "photoFocus": [52.3, 43.6],
       "phone": "+48 576 925 110",
       "email": "hello@onlymaxon.com",
       "website": "https://onlymaxon.com",
@@ -55,7 +62,7 @@
       "links": [
         { "label": "onlymaxon.com", "url": "https://onlymaxon.com" }
       ],
-      "accent": "amber"
+      "accent": "studio"
     }
   ]
 }
