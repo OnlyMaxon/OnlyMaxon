@@ -749,5 +749,12 @@ console.log(`  sitemap.xml      ${entries.length} URLs, hreflang on each   ` +
 console.log('');
 require('./profiles.js').build();
 
+// ── the legal pages of the apps this studio builds ────────────────────────────
+// Here for the same reason as the line above: noindex, one language, outside the sitemap
+// and the hreflang set. Google Play will not accept a listing without them.
+// See build/apps.js.
+console.log('');
+require('./apps.js').build();
+
 if (unused.length) console.log(`\n  note: ${unused.length} unused translation keys: ${unused.join(', ')}`);
 console.log('\ndone.\n');
