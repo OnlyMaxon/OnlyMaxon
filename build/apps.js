@@ -38,9 +38,6 @@ const DIR = 'apps';
 const APPS = {
   yodin: {
     name: 'yOdin',
-    // The app's own repository, kept from the original footer: for a document about how an
-    // app handles data, the source of that app is the most useful link there is.
-    repo: 'https://github.com/nikitashep/yOdin',
     /*
      * yOdin's palette, carried over verbatim from the pages this replaces. Both schemes are
      * declared because a legal document is read at whatever hour the reader happens to be
@@ -107,7 +104,10 @@ function page(app, meta, body) {
   const nav = app.pages
     .map(p => p.slug === meta.slug
       ? `<span aria-current="page">${SHORT[p.slug]}</span>`
-      : `<a href="/${DIR}/${app.key}/${p.slug}/">${SHORT[p.slug]}</a>`)
+      // Absolute, like every link inside the documents themselves: these pages are the
+      // addresses a Play reviewer opens and an app links out to, and an absolute href
+      // survives being mirrored, mailed or opened from a file:// copy.
+      : `<a href="${SITE}/${DIR}/${app.key}/${p.slug}/">${SHORT[p.slug]}</a>`)
     .join('\n    ');
 
   return `<!DOCTYPE html>
@@ -171,8 +171,10 @@ function page(app, meta, body) {
     ${nav}
   </nav>
 ${body}
-  <footer>${app.name} · <a href="${app.repo}">${app.repo.replace(/^https:\/\//, '')}</a><br>
-  Built by <a href="/">OnlyMaxon</a></footer>
+  <!-- The original footer linked the app's GitHub repository. It was dropped on 2026-10-04:
+       the point of moving these documents here was that they stop depending on a personal
+       account, and a legal page that sends the reader back to one argues against itself. -->
+  <footer>${app.name} · Built by <a href="${SITE}/">OnlyMaxon</a></footer>
 </main>
 </body>
 </html>
