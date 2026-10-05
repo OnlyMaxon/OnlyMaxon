@@ -1,5 +1,5 @@
 /*
- * The pages an app needs to exist on the open web: the three Google Play demands, and the
+ * The pages an app needs to exist on the open web: the four Google Play demands, and the
  * one its sign-in emails point at.
  *
  * Called at the end of build/generate.js. Reads build/src/apps/<app>/<slug>.html — body
@@ -16,10 +16,12 @@
  *     not a courtesy, because a mistranslated retention period is still a promise. The
  *     five-language key check would also block the build until every section existed in
  *     five languages, and the app's own interface is English.
- *   - noindex, and therefore no sitemap entry and no hreflang. These pages exist because
- *     Play Console demands three URLs, not because anyone should find them in search, and
- *     they carry a client's brand on this domain. Play's review fetches a URL directly;
- *     noindex does not hide a page from it. One line to reverse.
+ *   - noindex by default, and therefore no sitemap entry and no hreflang. These pages
+ *     exist because Play Console demands the URLs, not because anyone should find them in
+ *     search, and they carry a client's brand on this domain. Play's review fetches a URL
+ *     directly; noindex does not hide a page from it. The one exception is the child
+ *     safety document, where Google's policy asks for a publicly available page and
+ *     noindex would argue against that — it sets `index: true`.
  *   - Their own ~2 KB stylesheet, no webfont, no script. The person opening the deletion
  *     page has usually already uninstalled the app and wants one instruction.
  *
@@ -106,6 +108,18 @@ const APPS = {
         title: 'Delete your yOdin account',
         desc: 'How to delete your yOdin account from inside the app or by email, exactly what is erased, and the few things that are kept afterwards and why.',
       },
+      {
+        slug: 'child-safety-standards',
+        title: 'Child Safety Standards — yOdin',
+        desc: 'yOdin prohibits child sexual abuse and exploitation absolutely: how to report it, how reports are handled, and who to contact. The service is for adults only.',
+        /*
+         * The one page here that is indexable, and it has to be. Google Play rejected the
+         * app for the want of this document, and its Child Safety Standards policy asks
+         * for one that is publicly available — not a PDF, not behind a login, not hidden
+         * from search. Every other page in this directory stays noindex.
+         */
+        index: true,
+      },
     ],
   },
 };
@@ -116,6 +130,7 @@ const SHORT = {
   privacy: 'Privacy policy',
   terms: 'Terms of use',
   'delete-account': 'Delete your account',
+  'child-safety-standards': 'Child safety',
 };
 
 /*
@@ -149,7 +164,7 @@ function page(app, meta, body) {
 <title>${meta.title}</title>
 <meta name="description" content="${meta.desc}">
 <link rel="canonical" href="${SITE}/${DIR}/${app.key}/${meta.slug}/">
-<meta name="robots" content="noindex, follow">
+<meta name="robots" content="${meta.index ? 'index, follow' : 'noindex, follow'}">
 <meta name="theme-color" content="${app.theme.light}" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="${app.theme.dark}" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -486,7 +501,7 @@ function build() {
       const src = path.join(ROOT, 'build', 'src', 'apps', key, `${meta.slug}.html`);
       const body = wrapTables(fs.readFileSync(src, 'utf8'));
       const r = emit(path.join(ROOT, DIR, key, meta.slug, 'index.html'), page(app, meta, body));
-      console.log(`  ${r.rel}`.padEnd(40) + `${r.kb} KB   noindex${r.state}`);
+      console.log(`  ${r.rel}`.padEnd(46) + `${r.kb} KB   ${meta.index ? 'indexed' : 'noindex'}${r.state}`);
     }
 
     if (!app.firebase) continue;
@@ -509,7 +524,7 @@ function build() {
       path.join(ROOT, DIR, key, 'auth', 'action.html'),
     ]) {
       const r = emit(file, html);
-      console.log(`  ${r.rel}`.padEnd(40) + `${r.kb} KB   noindex, Firebase SDK ${app.sdk}${r.state}`);
+      console.log(`  ${r.rel}`.padEnd(46) + `${r.kb} KB   noindex, Firebase SDK ${app.sdk}${r.state}`);
     }
   }
 }
