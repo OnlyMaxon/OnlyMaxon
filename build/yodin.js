@@ -181,8 +181,10 @@ const FAQ = [
   ],
   [
     'How do I delete my account?',
-    'In the app: Profile → Settings → Delete account. What is erased and what is kept is ' +
-    'spelled out on the <a href="/apps/yodin/delete-account/">account deletion page</a>.',
+    'In the app: open the Profile tab, tap the menu button (☰) in the top right corner, ' +
+    'and choose Delete account at the bottom of the panel that slides in. What is erased ' +
+    'and what is kept is spelled out on the ' +
+    '<a href="/apps/yodin/delete-account/">account deletion page</a>.',
   ],
   [
     'Who makes it?',
