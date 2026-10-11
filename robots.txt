@@ -2,4 +2,9 @@ User-agent: *
 Allow: /
 Disallow: /build/
 
+# Two sitemaps on purpose. The first is the 14-page site in five languages, every URL
+# carrying a full hreflang set. The second is the indexable pages under /apps/ — one
+# language, no translations — which is why they are not in the first. Submit both in
+# Search Console. Written by hand; the files themselves are generated.
 Sitemap: https://onlymaxon.com/sitemap.xml
+Sitemap: https://onlymaxon.com/sitemap-apps.xml

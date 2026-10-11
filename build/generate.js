@@ -754,7 +754,13 @@ require('./profiles.js').build();
 // and the hreflang set. Google Play will not accept a listing without them.
 // See build/apps.js.
 console.log('');
-require('./apps.js').build();
+const appPages = require('./apps.js').build();
+
+// ── and the one page under /apps/ that is meant to be found ───────────────────
+// The yOdin landing page: indexed, illustrated, and in its own sitemap-apps.xml together
+// with whichever app documents build() just reported as indexable. Last because it needs
+// that list. See build/yodin.js.
+require('./yodin.js').build(appPages);
 
 if (unused.length) console.log(`\n  note: ${unused.length} unused translation keys: ${unused.join(', ')}`);
 console.log('\ndone.\n');

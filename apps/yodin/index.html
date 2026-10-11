@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<!--
+  GENERATED — edit build/yodin.js, not this file, then run:
+
+      node build/generate.js
+
+  The front door of the yOdin app on this domain. The legal pages beside it are built by
+  build/apps.js and are noindex; this one is the opposite and is meant to rank. Every
+  number in the copy was checked against the app's own source in D:\VS\yOdin.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>yOdin — find your people abroad</title>
+  <meta name="description" content="A free Android app for people living far from home: the news, events and places of the city you moved to, filtered to the community you came from. 27 languages, no ads.">
+  <link rel="canonical" href="https://onlymaxon.com/apps/yodin/">
+  <meta name="robots" content="index, follow">
+
+  <!-- The app is violet in both schemes; the browser chrome should not announce a page
+       that is about to be lilac by painting itself white first. -->
+  <meta name="theme-color" content="#6C35DE" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0F0A1E" media="(prefers-color-scheme: dark)">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <!-- The app's own icon, so a page saved to a phone's home screen keeps the app's face. -->
+  <link rel="apple-touch-icon" href="/images/yodin/icon-180.png">
+
+  <!-- The two faces the first screen draws: the headline at 700 and the lede at 400.
+       crossorigin is required even same-origin or the preload is thrown away and the font
+       fetched a second time. The hero screenshot is the largest element on that screen,
+       so it is fetched at the same priority rather than discovered when the CSS lands. -->
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-700-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="image" href="/images/yodin/screen-feed.webp" fetchpriority="high">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OnlyMaxon">
+  <meta property="og:title" content="yOdin — find your people abroad">
+  <meta property="og:description" content="A free Android app for people living far from home: the news, events and places of the city you moved to, filtered to the community you came from. 27 languages, no ads.">
+  <meta property="og:url" content="https://onlymaxon.com/apps/yodin/">
+  <meta property="og:image" content="https://onlymaxon.com/images/yodin/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="yOdin — find your people abroad">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="yOdin — find your people abroad">
+  <meta name="twitter:description" content="A free Android app for people living far from home: the news, events and places of the city you moved to, filtered to the community you came from. 27 languages, no ads.">
+  <meta name="twitter:image" content="https://onlymaxon.com/images/yodin/og.jpg">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://onlymaxon.com/apps/yodin/#app",
+      "name": "yOdin",
+      "url": "https://onlymaxon.com/apps/yodin/",
+      "description": "A free Android app for people living far from home: the news, events and places of the city you moved to, filtered to the community you came from. 27 languages, no ads.",
+      "applicationCategory": "SocialNetworkingApplication",
+      "operatingSystem": "Android 7.0 and later",
+      "softwareVersion": "1.1.0",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=app.yodin",
+      "installUrl": "https://play.google.com/store/apps/details?id=app.yodin",
+      "image": "https://onlymaxon.com/images/yodin/og.jpg",
+      "screenshot": [
+        "https://onlymaxon.com/images/yodin/screen-feed.webp",
+        "https://onlymaxon.com/images/yodin/screen-nationality.webp",
+        "https://onlymaxon.com/images/yodin/screen-create.webp"
+      ],
+      "inLanguage": [
+        "ar",
+        "az",
+        "bn",
+        "cs",
+        "de",
+        "en",
+        "es",
+        "fa",
+        "fr",
+        "he",
+        "hi",
+        "id",
+        "it",
+        "ja",
+        "ko",
+        "ms",
+        "nl",
+        "pl",
+        "pt",
+        "ro",
+        "ru",
+        "sv",
+        "th",
+        "tr",
+        "uk",
+        "vi",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "EA DIGITAL GROUP, MMC"
+      },
+      "author": {
+        "@id": "https://onlymaxon.com/#org"
+      },
+      "privacyPolicy": "https://onlymaxon.com/apps/yodin/privacy/"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://onlymaxon.com/#org",
+      "name": "OnlyMaxon",
+      "url": "https://onlymaxon.com/",
+      "logo": "https://onlymaxon.com/images/logo.jpg",
+      "email": "hello@onlymaxon.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Chmielna 69",
+        "addressLocality": "Warsaw",
+        "addressCountry": "PL"
+      }
+    }
+  ]
+}
+  </script>
+
+  <style>
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
+                 src: url(/fonts/inter-400-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
+                 src: url(/fonts/inter-600-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/inter-700-latin.woff2) format('woff2');
+                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
+                 src: url(/fonts/inter-700-latin-ext.woff2) format('woff2');
+                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --violet: #6C35DE; --violet-l: #8B5CF6; --coral: #FF6B6B;
+      /* The app's textSecondary is #7B6FA0, and it stays that in the app, where it is only
+         ever drawn on white cards. On this page's lilac background it measures 4.04:1 —
+         under AA for body copy — so the page runs it a shade darker at 4.90:1. */
+      --bg: #F3F0FB; --surface: #FFFFFF; --text: #18132A; --dim: #6F628D;
+      --rule: #E2DCF3; --tint: #EDE8F9; --link: #6C35DE;
+      --grad: linear-gradient(135deg, #6C35DE 0%, #8B5CF6 100%);
+      --shadow: 0 24px 60px rgba(32, 14, 78, 0.16);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --violet: #8B5CF6; --violet-l: #A78BFA;
+        --bg: #0F0A1E; --surface: #1C1530; --text: #F0ECF9; --dim: #9B8FC4;
+        --rule: #2E2248; --tint: #231A3A; --link: #C4B5F7;
+        --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      }
+    }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg); color: var(--text);
+      font-size: 17px; line-height: 1.65; letter-spacing: -0.004em;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ── top bar ─────────────────────────────────────────────────────────── */
+    .bar { padding: 20px 0; }
+    .bar .wrap { display: flex; align-items: center; gap: 12px; }
+    .bar img { width: 34px; height: 34px; border-radius: 9px; }
+    .bar b { font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
+    .bar .by { margin-left: auto; font-size: 15px; color: var(--dim); }
+
+    /* ── hero ────────────────────────────────────────────────────────────── */
+    /*
+     * The brand gradient, plus a scrim over whichever part of it the copy sits on.
+     *
+     * White text on the light end of #6C35DE → #8B5CF6 measures 4.59:1 at best and worse
+     * than that on a narrow screen, where the copy spans the full width and reaches
+     * further along the gradient. Rather than darken the gradient itself — the cropped
+     * screenshots carry a sliver of this exact violet at their edges, which is the only
+     * reason they sit on it invisibly — the scrim fades out before it reaches the phone.
+     * It runs top-to-bottom while the copy is stacked above the phone, and left-to-right
+     * once they are side by side.
+     */
+    .hero {
+      background:
+        linear-gradient(180deg, rgba(10,4,30,0.26) 0%, rgba(10,4,30,0.10) 52%,
+                                rgba(10,4,30,0) 72%),
+        var(--grad);
+      color: #fff; position: relative; overflow: hidden;
+      border-radius: 28px; margin: 0 24px; padding: 64px 0 0;
+    }
+    .hero::before, .hero::after {
+      content: ''; position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,0.07); pointer-events: none;
+    }
+    .hero::before { width: 720px; height: 720px; right: -220px; top: -260px; }
+    .hero::after  { width: 420px; height: 420px; right: -70px;  top: -110px; }
+    .hero .wrap { position: relative; display: grid; gap: 40px; align-items: end;
+                  grid-template-columns: 1fr; }
+    h1 { font-size: clamp(38px, 6.4vw, 62px); line-height: 1.03; font-weight: 700;
+         letter-spacing: -0.035em; }
+    /* Both of these are pure white rather than the 90%-ish white a hero lede usually gets.
+       Measured against the gradient they actually land on, 90% white drops to 4.1:1 around
+       768px wide — under AA — and the hierarchy they were buying with opacity is already
+       carried by size and weight. */
+    .lede { font-size: clamp(18px, 2.2vw, 21px); line-height: 1.5; margin-top: 20px;
+            color: #fff; max-width: 30em; }
+    /* Google's badge guidelines ask for clear space of at least a quarter of the badge's
+       height on every side. At 75px tall that is 18.75px, so the gap is 24. */
+    .cta { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 24px; }
+    .cta img { width: 194px; height: 75px; }
+    .cta a { display: inline-block; border-radius: 8px; }
+    .cta a:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+    /* The iPhone counterpart, drawn here rather than taken from Apple. It copies the
+       Play badge's proportions and two-line structure so the pair reads as a set, and
+       none of Apple's artwork, logo or wording. See the note above the markup. */
+    .soon { display: flex; flex-direction: column; justify-content: center;
+            height: 75px; padding: 0 22px; border-radius: 10px; color: #fff;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45); }
+    .soon b { font-size: 10px; font-weight: 600; letter-spacing: 0.09em;
+              text-transform: uppercase; }
+    .soon i { font-style: normal; font-size: 21px; font-weight: 600;
+              letter-spacing: -0.01em; line-height: 1.15; }
+    .terms-line { font-size: 15px; color: #fff; margin-top: 18px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
+    /* A dark fill, not a light one: a translucent white pill lightens the violet under the
+       label and takes the contrast down, which is the opposite of what a pill is for. */
+    .chip { font-size: 14px; font-weight: 600; padding: 5px 13px; border-radius: 999px;
+            color: #fff; background: rgba(13,5,32,0.30);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.20); }
+    .chip i { font-style: normal; display: inline-block; width: 8px; height: 8px;
+              border-radius: 50%; margin-right: 7px; vertical-align: 1px; }
+    .shot { margin: 0 auto -2px; width: min(300px, 72vw); }
+    @media (min-width: 860px) {
+      .hero {
+        padding-top: 76px;
+        background:
+          linear-gradient(100deg, rgba(10,4,30,0.26) 0%, rgba(10,4,30,0.12) 46%,
+                                  rgba(10,4,30,0) 64%),
+          var(--grad);
+      }
+      /* The phone is meant to run off the bottom edge, so the two columns are bottom
+         aligned — which left the category chips flush against that same edge. The copy
+         column keeps its own floor. */
+      .hero .wrap { grid-template-columns: 1fr auto; gap: 56px; }
+      .hero .copy { padding-bottom: 62px; }
+      .shot { margin: 0; width: 320px; }
+    }
+
+    /* ── features ────────────────────────────────────────────────────────── */
+    section { padding: 76px 0 0; }
+    h2 { font-size: clamp(26px, 3.4vw, 34px); line-height: 1.15; font-weight: 700;
+         letter-spacing: -0.028em; }
+    .feature { display: grid; gap: 30px; align-items: center; margin-top: 44px;
+               grid-template-columns: 1fr; }
+    .feature p { margin-top: 14px; color: var(--dim); max-width: 34em; }
+    .feature .pane {
+      background: var(--grad); border-radius: 24px; padding: 34px 0 0;
+      display: flex; justify-content: center; box-shadow: var(--shadow); overflow: hidden;
+    }
+    .feature .pane img { width: min(252px, 62vw); margin-bottom: -2px; }
+    @media (min-width: 860px) {
+      .feature.paired { grid-template-columns: 1fr 380px; gap: 56px; }
+      .feature.paired.flip { grid-template-columns: 380px 1fr; }
+      .feature.paired.flip .text { order: 2; }
+    }
+
+    /* ── reach ───────────────────────────────────────────────────────────── */
+    .reach { margin-top: 44px; background: var(--surface); border: 1px solid var(--rule);
+             border-radius: 24px; padding: 34px; }
+    .nums { display: flex; flex-wrap: wrap; gap: 14px 56px; }
+    .num b { display: block; font-size: 42px; line-height: 1.1; font-weight: 700;
+             letter-spacing: -0.03em; color: var(--violet); }
+    .num span { font-size: 15px; color: var(--dim); }
+    .langs { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--rule);
+             font-size: 15px; color: var(--dim); line-height: 1.9; }
+
+    /* ── faq ─────────────────────────────────────────────────────────────── */
+    .faq { margin-top: 36px; display: grid; gap: 2px; }
+    .qa { background: var(--surface); border: 1px solid var(--rule); padding: 24px 26px; }
+    .qa:first-child { border-radius: 18px 18px 0 0; }
+    .qa:last-child { border-radius: 0 0 18px 18px; }
+    .qa + .qa { border-top: 0; }
+    .qa h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+    .qa p { margin-top: 7px; color: var(--dim); }
+
+    /* ── footer ──────────────────────────────────────────────────────────── */
+    footer { margin-top: 80px; padding: 34px 0 54px; border-top: 1px solid var(--rule);
+             font-size: 15px; color: var(--dim); }
+    footer ul { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 24px; }
+    footer .meta { margin-top: 18px; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      a, .cta a { transition: opacity .15s ease; }
+      .cta a:hover { opacity: .88; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bar">
+    <div class="wrap">
+      <img src="/images/yodin/icon-180.png" alt="" width="180" height="180">
+      <b>yOdin</b>
+      <span class="by">Built by <a href="/">OnlyMaxon</a></span>
+    </div>
+  </div>
+
+  <main>
+    <div class="hero">
+      <div class="wrap">
+        <div class="copy">
+          <h1>Find your people abroad</h1>
+          <p class="lede">yOdin is a community for everyone living far from home — the news,
+            events and places of the city you moved to, filtered to the people you came
+            from.</p>
+          <div class="cta">
+            <a href="https://play.google.com/store/apps/details?id=app.yodin">
+              <img src="/images/yodin/badge-google-play.png"
+                   alt="Get yOdin on Google Play" width="646" height="250">
+            </a>
+            <!-- Not Apple's badge, and not a link. The iPhone build exists but has never
+                 been submitted, so there is nothing on the App Store to point at; Apple's
+                 badge may only be used for an app that is actually listed there. This one
+                 borrows the Play badge's proportions so the pair looks deliberate, says
+                 plainly that it is not out, and is inert rather than a button that does
+                 nothing when tapped. Swap it for the real badge once the app is listed. -->
+            <span class="soon"><b>Coming soon for</b><i>iPhone</i></span>
+          </div>
+          <p class="terms-line">Free, no ads. Android 7.0 and later.<br>
+            The iPhone version is in development and not on the App Store yet.</p>
+          <div class="chips">
+            <span class="chip"><i style="background:#4F46E5"></i>News</span>
+            <span class="chip"><i style="background:#FF6B6B"></i>Events</span>
+            <span class="chip"><i style="background:#10B981"></i>Worth Visiting</span>
+            <span class="chip"><i style="background:#F59E0B"></i>Lifestyle</span>
+          </div>
+        </div>
+        <img class="shot" src="/images/yodin/screen-feed.webp" alt="The yOdin feed on a phone, showing a news post from Warsaw with category and nationality filters above it" width="662" height="1296">
+      </div>
+    </div>
+
+    <section>
+      <div class="wrap">
+      <div class="feature paired"><div class="text"><h2>Filter by nationality</h2><p>A feed from the city you live in is only worth reading if it is about your life in it. Choose the nationalities you want to hear from and everything else goes quiet. 45 countries are on the list, and “All nationalities” is one tap away when you want the whole city back.</p></div><div class="pane"><img class="" src="/images/yodin/screen-nationality.webp" alt="The yOdin nationality filter open over the feed, with a searchable list of countries" width="662" height="1296"></div></div>
+      <div class="feature paired flip"><div class="text"><h2>Post what is happening, in a few taps</h2><p>A category, a topic, a description, a photo or a video. Events carry their date, so a concert someone posted three weeks ago is still findable on the right evening rather than buried under this morning.</p></div><div class="pane"><img class="" src="/images/yodin/screen-create.webp" alt="The yOdin new-post sheet, with category chips, a topic field and media buttons" width="662" height="1296"></div></div>
+      <div class="feature"><div class="text"><h2>A forum where one answer is marked right</h2><p>Questions about residence cards, landlords, doctors and paperwork get asked in every diaspora in the world, and the answer is usually already known by someone two streets away. In the yOdin forum whoever asked can mark the reply that actually solved it, so the next person who searches the same question reads the answer first and the thread second.</p></div></div>
+      <div class="feature"><div class="text"><h2>Profiles, following and notifications</h2><p>An @username, a nationality, the city you are in. Follow the people worth following and the app tells you when someone replies to you, mentions you, joins a discussion you are in, or accepts your answer.</p></div></div>
+      <div class="feature"><div class="text"><h2>Moderated, and the block button is yours</h2><p>Every post, discussion, comment and reply has a Report action, and reports are read by people. Enforcement escalates rather than jumping to a ban — except for the cases that deserve no warning, which are set out in the <a href="/apps/yodin/child-safety-standards/">Child Safety Standards</a>. You can block anyone, for any reason, without explaining it to us or to them.</p></div></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Wherever you moved, in whatever language you read</h2>
+        <div class="reach">
+          <div class="nums">
+            <div class="num"><b>27</b><span>interface languages</span></div>
+            <div class="num"><b>45</b><span>nationalities to filter by</span></div>
+            <div class="num"><b>0</b><span>ads, trackers, paid tiers</span></div>
+          </div>
+          <p class="langs">Arabic · Azerbaijani · Bengali · Chinese · Czech · Dutch ·
+            English · Farsi · French · German · Hebrew · Hindi · Indonesian · Italian ·
+            Japanese · Korean · Malay · Polish · Portuguese · Romanian · Russian ·
+            Spanish · Swedish · Thai · Turkish · Ukrainian · Vietnamese</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Questions</h2>
+        <div class="faq">
+          <div class="qa"><h3>Who is yOdin for?</h3><p>Anyone living away from the country they are from — students, workers, families who moved. It is most useful where there are enough people from one place to make a conversation, which in practice means cities.</p></div>
+          <div class="qa"><h3>Does it cost anything?</h3><p>No. yOdin is free, there is no paid tier, and there is no advertising of any kind in the app.</p></div>
+          <div class="qa"><h3>Is there an iPhone version?</h3><p>It is in development, and it is not on the App Store yet — so there is nothing to install on an iPhone today. Android is the released one.</p></div>
+          <div class="qa"><h3>What does it need to run?</h3><p>Android 7.0 or later. The interface is translated into 27 languages and picks the one your phone is set to.</p></div>
+          <div class="qa"><h3>Is my location tracked?</h3><p>No. yOdin does not collect location, does not use analytics, and carries no advertising identifiers. What it does hold is listed in the <a href="/apps/yodin/privacy/">privacy policy</a>.</p></div>
+          <div class="qa"><h3>How do I delete my account?</h3><p>In the app: Profile → Settings → Delete account. What is erased and what is kept is spelled out on the <a href="/apps/yodin/delete-account/">account deletion page</a>.</p></div>
+          <div class="qa"><h3>Who makes it?</h3><p>The app is built by <a href="/">OnlyMaxon</a>, a product studio in Warsaw, and published on Google Play by EA DIGITAL GROUP, MMC. Support and anything else: <a href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a>.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <ul>
+        <li><a href="/apps/yodin/terms/">Terms of use</a></li>
+        <li><a href="/apps/yodin/privacy/">Privacy policy</a></li>
+        <li><a href="/apps/yodin/delete-account/">Delete your account</a></li>
+        <li><a href="/apps/yodin/child-safety-standards/">Child safety</a></li>
+        <li><a href="mailto:hello@onlymaxon.com">hello@onlymaxon.com</a></li>
+      </ul>
+      <p class="meta">yOdin is built by <a href="/">OnlyMaxon</a> and published on Google
+        Play by EA DIGITAL GROUP, MMC.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

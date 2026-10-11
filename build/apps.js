@@ -8,6 +8,13 @@
  *   apps/<app>/<slug>/index.html      the legal documents
  *   apps/<app>/auth/action[/index].html   the Firebase email-action handler
  *
+ * It is not the only writer in that directory. apps/yodin/index.html — the landing page,
+ * which is indexed, illustrated and in a sitemap, and so inverts nearly every rule below —
+ * is built by build/yodin.js, which runs straight after this file and receives the list of
+ * indexable pages that build() returns. Neither generator deletes anything, so the two
+ * cannot collide; the split is by purpose, a reviewer's documents against a visitor's
+ * first page.
+ *
  * Deliberately NOT part of the PAGES pipeline in generate.js, for the same reasons the
  * /u/ cards are not:
  *
@@ -494,6 +501,14 @@ function emit(file, html) {
 function build() {
   console.log('app pages (build/apps.js)');
 
+  /*
+   * The pages here that are allowed into a sitemap — today only the child safety document.
+   * Collected rather than recomputed by the caller so that `index: true` above stays the
+   * single place the question is answered. build/yodin.js writes them into
+   * sitemap-apps.xml alongside the landing page; `changed` lets it keep a lastmod honest.
+   */
+  const indexable = [];
+
   for (const [key, app] of Object.entries(APPS)) {
     app.key = key;
 
@@ -502,6 +517,7 @@ function build() {
       const body = wrapTables(fs.readFileSync(src, 'utf8'));
       const r = emit(path.join(ROOT, DIR, key, meta.slug, 'index.html'), page(app, meta, body));
       console.log(`  ${r.rel}`.padEnd(46) + `${r.kb} KB   ${meta.index ? 'indexed' : 'noindex'}${r.state}`);
+      if (meta.index) indexable.push({ loc: `${SITE}/${DIR}/${key}/${meta.slug}/`, changed: !!r.state });
     }
 
     if (!app.firebase) continue;
@@ -527,6 +543,8 @@ function build() {
       console.log(`  ${r.rel}`.padEnd(46) + `${r.kb} KB   noindex, Firebase SDK ${app.sdk}${r.state}`);
     }
   }
+
+  return indexable;
 }
 
 module.exports = { build };
