@@ -38,16 +38,16 @@ const EVENT = {
 
 /*
  * ─────────────────────────────────────────────────────────────────────────────
- * THE FIREBASE WEB CONFIG FOR THE NEW `onlymaxon` PROJECT GOES HERE.
+ * THE FIREBASE WEB CONFIG FOR THE `onlymaxon-b4c02` PROJECT.
  *
- * Max created the project and the Firestore database on 2026-10-11 and has not sent the
- * config yet. Until the three fields below are filled in, the page builds and renders
- * perfectly but the Save button reports that sign-up is not open — deliberately, because
- * a form that silently drops what a student typed is worse than a form that says no.
+ * Max created the project and the Firestore database on 2026-10-11 and sent the config
+ * the same day. If these fields are ever blanked, the page still builds and renders but
+ * the Save button says sign-up is not open — deliberately, because a form that silently
+ * drops what a student typed is worse than a form that says no.
  *
- * Firebase console → Project settings → General → Your apps → Web app → SDK setup.
- * Only these three fields are needed; databaseURL, storageBucket, messagingSenderId and
- * appId belong to products this page never touches.
+ * Only three of the six fields he sent are here. storageBucket, messagingSenderId and
+ * appId belong to products this page never touches, and a config is a thing to keep
+ * minimal — the same call as the yOdin auth handler.
  *
  * The apiKey is public by design — it names the project, it authorises nothing, and the
  * rules below are what actually protect the data. Same reasoning as the yOdin auth
@@ -55,9 +55,9 @@ const EVENT = {
  * ─────────────────────────────────────────────────────────────────────────────
  */
 const FIREBASE = {
-  apiKey: '',
-  authDomain: '',
-  projectId: '',
+  apiKey: 'AIzaSyA8gysvTW9Y8EbaLz9Ix9_3oCpruBTSrZ8',
+  authDomain: 'onlymaxon-b4c02.firebaseapp.com',
+  projectId: 'onlymaxon-b4c02',
 };
 
 const SDK = '12.19.0';
@@ -236,12 +236,12 @@ ${fonts}
         <div>
           <label for="name">Your name</label>
           <input id="name" name="name" type="text" autocomplete="name"
-                 placeholder="Max" maxlength="60" required>
+                 placeholder="Name" maxlength="60" required>
         </div>
         <div>
           <label for="code">Student code</label>
           <input id="code" name="code" type="text" inputmode="numeric"
-                 autocomplete="off" placeholder="73743" maxlength="20" required>
+                 autocomplete="off" placeholder="12345" maxlength="20" required>
         </div>
         <button id="go" type="submit">Register</button>
       </form>

@@ -137,12 +137,12 @@
         <div>
           <label for="name">Your name</label>
           <input id="name" name="name" type="text" autocomplete="name"
-                 placeholder="Max" maxlength="60" required>
+                 placeholder="Name" maxlength="60" required>
         </div>
         <div>
           <label for="code">Student code</label>
           <input id="code" name="code" type="text" inputmode="numeric"
-                 autocomplete="off" placeholder="73743" maxlength="20" required>
+                 autocomplete="off" placeholder="12345" maxlength="20" required>
         </div>
         <button id="go" type="submit">Register</button>
       </form>
@@ -166,9 +166,16 @@
 
 <script type="module">
 
-// Sign-up is not wired yet: the Firebase config in build/event.js is still blank.
-// The form stays visible and says so rather than pretending to save.
-const db = null;
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js';
+import { getFirestore, doc, setDoc, serverTimestamp }
+  from 'https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js';
+
+const app = initializeApp({
+    "apiKey": "AIzaSyA8gysvTW9Y8EbaLz9Ix9_3oCpruBTSrZ8",
+    "authDomain": "onlymaxon-b4c02.firebaseapp.com",
+    "projectId": "onlymaxon-b4c02"
+  });
+const db = getFirestore(app);
 
 
 const form = document.getElementById('f');
