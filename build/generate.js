@@ -762,5 +762,10 @@ const appPages = require('./apps.js').build();
 // that list. See build/yodin.js.
 require('./yodin.js').build(appPages);
 
+// ── the E-GAMES sign-up page ──────────────────────────────────────────────────
+// One evening, one form, one language, noindex — a sign-up sheet holding students' names
+// belongs in neither the sitemap nor a search result. See build/event.js.
+require('./event.js').build();
+
 if (unused.length) console.log(`\n  note: ${unused.length} unused translation keys: ${unused.join(', ')}`);
 console.log('\ndone.\n');
