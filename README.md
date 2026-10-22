@@ -27,7 +27,7 @@ Websites, apps, and the visibility to get them found — from first sketch to la
 
 ### 🛠 Tech we build with
 
-[![Skills](https://skillicons.dev/icons?i=ts,react,nextjs,nodejs,js,flutter,dart,kotlin,java,python,firebase,postgres,docker,vercel&theme=dark)](https://skillicons.dev)
+[![Skills](https://skillicons.dev/icons?i=ts,react,nextjs,cloudflare,nodejs,js,flutter,dart,kotlin,java,python,firebase,postgres,docker,vercel&theme=dark)](https://skillicons.dev)
 
 ---
 
