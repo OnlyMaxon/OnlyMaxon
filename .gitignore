@@ -1,0 +1,15 @@
+# The site itself has no build dependencies and nothing to ignore — build/generate.js is
+# plain Node and every page it writes is committed on purpose. These entries are all from
+# card/, which is the one part of this repository that talks to a package manager.
+
+# Wrangler's local emulator state: a copy of D1 and R2 on this machine. It holds whatever
+# test data was last typed into the local editor, which is nobody's business but this
+# laptop's, and it is rebuilt by `wrangler d1 execute --local` whenever it is needed.
+.wrangler/
+
+node_modules/
+
+# Written by `wrangler secret put`, or by hand during setup. Keys for Resend and anything
+# else live here or in Cloudflare — never in wrangler.toml, which is committed.
+.dev.vars
+.env

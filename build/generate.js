@@ -557,7 +557,7 @@ function build(page, lang) {
   //     Cyrillic cut and would otherwise spend two high-priority requests on files it
   //     never renders a glyph from, while the ones it needs queue behind them.
   if (lang === 'ru' && html.includes('<link rel="preload" as="font"')) {
-    const fontRe = /(<link rel="preload" as="font"[^>]*href="\/fonts\/inter-\d00)-latin(\.woff2">)/g;
+    const fontRe = /(<link rel="preload" as="font"[^>]*href="\/fonts\/inter)-latin(\.woff2">)/g;
     if (!(html.match(fontRe) || []).length)
       fail(`${page.src}: font preloads present but none point at a Latin Inter cut`);
     html = html.replace(fontRe, '$1-cyrillic$2');

@@ -75,3 +75,16 @@ relative image path slipped through, or if removing comments broke a script. If 
 
 Add a line to `PAGES` in `generate.js` and write its English source under `build/src/`.
 Canonical, hreflang, the language menus and the sitemap all follow from that.
+
+## The NFC cards are moving out
+
+`profiles.js` still writes `u/<slug>/` from `profiles.json`, and it still runs at the end
+of `generate.js`. That is temporary. Those pages are becoming a Cloudflare Worker backed by
+a database — see [`card/`](../card/) — so that a card's owner can edit their own page
+instead of asking us to edit a JSON file and push.
+
+Until the Worker's route is live, nothing changes here. Once it is, `/u/*` is served by the
+Worker and these files stop being reachable; they stay in the repository for a week as the
+rollback, because the URL is printed on plastic. After that, delete `profiles.json`,
+`profiles.js`, the `require('./profiles.js')` line at the bottom of `generate.js`, and the
+`u/` tree.

@@ -26,12 +26,13 @@
   <!-- The app's own icon, so a page saved to a phone's home screen keeps the app's face. -->
   <link rel="apple-touch-icon" href="/images/yodin/icon-180.png">
 
-  <!-- The two faces the first screen draws: the headline at 700 and the lede at 400.
+  <!-- One file draws the whole first screen: Inter is variable, so the headline at 700 and
+       the lede at 400 are two instances of the same 48 KB. This used to preload them as
+       two URLs, which fetched those bytes twice at the highest priority there is.
        crossorigin is required even same-origin or the preload is thrown away and the font
        fetched a second time. The hero screenshot is the largest element on that screen,
        so it is fetched at the same priority rather than discovered when the CSS lands. -->
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-700-latin.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-latin.woff2">
   <link rel="preload" as="image" href="/images/yodin/screen-feed.webp" fetchpriority="high">
 
   <meta property="og:type" content="website">
@@ -117,7 +118,7 @@
       "@id": "https://onlymaxon.com/#org",
       "name": "OnlyMaxon",
       "url": "https://onlymaxon.com/",
-      "logo": "https://onlymaxon.com/images/logo.jpg",
+      "logo": "https://onlymaxon.com/images/logoW.jpg",
       "email": "hello@onlymaxon.com",
       "address": {
         "@type": "PostalAddress",
@@ -131,23 +132,11 @@
   </script>
 
   <style>
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
-                 src: url(/fonts/inter-400-latin.woff2) format('woff2');
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap;
+                 src: url(/fonts/inter-latin.woff2) format('woff2');
                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
-                 src: url(/fonts/inter-400-latin-ext.woff2) format('woff2');
-                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
-                 src: url(/fonts/inter-600-latin.woff2) format('woff2');
-                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
-                 src: url(/fonts/inter-600-latin-ext.woff2) format('woff2');
-                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
-                 src: url(/fonts/inter-700-latin.woff2) format('woff2');
-                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
-                 src: url(/fonts/inter-700-latin-ext.woff2) format('woff2');
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap;
+                 src: url(/fonts/inter-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }

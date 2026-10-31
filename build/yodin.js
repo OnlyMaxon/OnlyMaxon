@@ -233,11 +233,18 @@ const LATIN_EXT =
   'U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, ' +
   'U+2113, U+2C60-2C7F, U+A720-A7FF';
 
-const fonts = [400, 600, 700]
-  .flatMap(w => [['latin', LATIN], ['latin-ext', LATIN_EXT]].map(([cut, range]) =>
-    `    @font-face { font-family: 'Inter'; font-style: normal; font-weight: ${w}; font-display: swap;
-                 src: url(/fonts/inter-${w}-${cut}.woff2) format('woff2');
-                 unicode-range: ${range}; }`))
+/*
+ * One face per subset, not one per weight. Inter ships as a single variable file covering
+ * wght 100–900, and the four "weights" this used to emit were four URLs serving the same
+ * 48 KB of bytes — the browser has no way to know that and fetched each one it was asked
+ * for. A `font-weight` range on the descriptor is what tells it there is only one file and
+ * that every weight in between is an instance of it.
+ */
+const fonts = [['latin', LATIN], ['latin-ext', LATIN_EXT]]
+  .map(([cut, range]) =>
+    `    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap;
+                 src: url(/fonts/inter-${cut}.woff2) format('woff2');
+                 unicode-range: ${range}; }`)
   .join('\n');
 
 /*
@@ -448,7 +455,9 @@ function jsonld() {
         '@id': `${SITE}/#org`,
         name: 'OnlyMaxon',
         url: `${SITE}/`,
-        logo: `${SITE}/images/logo.jpg`,
+        // The square mark, not the wordmark file: that one carries "OnlyMaxon Ltd", which
+        // is not what this business is called, and a logo field is a claim about identity.
+        logo: `${SITE}/images/logoW.jpg`,
         email: 'hello@onlymaxon.com',
         address: {
           '@type': 'PostalAddress',
@@ -504,12 +513,13 @@ function page() {
   <!-- The app's own icon, so a page saved to a phone's home screen keeps the app's face. -->
   <link rel="apple-touch-icon" href="/images/yodin/icon-180.png">
 
-  <!-- The two faces the first screen draws: the headline at 700 and the lede at 400.
+  <!-- One file draws the whole first screen: Inter is variable, so the headline at 700 and
+       the lede at 400 are two instances of the same 48 KB. This used to preload them as
+       two URLs, which fetched those bytes twice at the highest priority there is.
        crossorigin is required even same-origin or the preload is thrown away and the font
        fetched a second time. The hero screenshot is the largest element on that screen,
        so it is fetched at the same priority rather than discovered when the CSS lands. -->
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-700-latin.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-latin.woff2">
   <link rel="preload" as="image" href="/images/yodin/screen-feed.webp" fetchpriority="high">
 
   <meta property="og:type" content="website">

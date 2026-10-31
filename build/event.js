@@ -96,11 +96,13 @@ const LATIN =
   'U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, ' +
   'U+FEFF, U+FFFD';
 
-const fonts = [400, 600, 700]
-  .map(w => `    @font-face { font-family: 'Inter'; font-style: normal; font-weight: ${w}; font-display: swap;
-                 src: url(/fonts/inter-${w}-latin.woff2) format('woff2');
-                 unicode-range: ${LATIN}; }`)
-  .join('\n');
+// One face, not three: Inter is a single variable file covering wght 100–900, so the
+// three weights this page draws with are three instances of one download. See the same
+// note in build/yodin.js.
+const fonts =
+  `    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap;
+                 src: url(/fonts/inter-latin.woff2) format('woff2');
+                 unicode-range: ${LATIN}; }`;
 
 function page() {
   const live = Boolean(FIREBASE.apiKey && FIREBASE.projectId);
@@ -126,8 +128,7 @@ function page() {
   <meta name="theme-color" content="#2B1259">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/images/yodin/icon-180.png">
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-700-latin.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-latin.woff2">
   <style>
 ${fonts}
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }

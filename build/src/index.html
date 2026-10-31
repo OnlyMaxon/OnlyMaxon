@@ -84,16 +84,16 @@
        text and CSS, so there is no image on it to hurry — and preloading one that is no
        longer there would be a high-priority request for a file nobody sees. -->
 
-  <!-- The two faces that draw the first screen: body copy at 400 and every heading at 700.
-       Without this they are only discovered once the first text is styled, which is a
-       needless wait for a file we already know is coming. Deliberately just these two —
-       500, 600, Space Grotesk and the latin-ext subset are left to normal discovery, since
-       preloading a font that turns out not to be needed costs the same bandwidth as one
-       that is. `crossorigin` is required even same-origin: fonts are fetched in CORS mode,
-       and without it the preload is thrown away and fetched a second time.
-       generate.js rewrites `latin` to `cyrillic` for /ru/. -->
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-400-latin.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-700-latin.woff2">
+  <!-- The file that draws the first screen. Inter is a variable font covering wght
+       100–900, so the body copy at 400 and every heading at 700 are instances of one
+       48 KB download — this used to preload `inter-400-latin` and `inter-700-latin`,
+       which are byte-identical files under two names, and so fetched those bytes twice
+       at the highest priority the browser has. Space Grotesk and the latin-ext subset are
+       left to normal discovery: preloading a font that turns out not to be needed costs
+       the same bandwidth as one that is. `crossorigin` is required even same-origin:
+       fonts are fetched in CORS mode, and without it the preload is thrown away and
+       fetched a second time. generate.js rewrites `latin` to `cyrillic` for /ru/. -->
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-latin.woff2">
 
   <!-- Open Graph (Facebook, WhatsApp, Telegram, LinkedIn) -->
   <meta property="og:type" content="website">
@@ -101,13 +101,16 @@
   <meta property="og:title" content="OnlyMaxon — We turn ideas into working products.">
   <meta property="og:description" content="A product studio — development and SEO under one roof. Working with clients worldwide.">
   <meta property="og:url" content="https://onlymaxon.com/">
-  <meta property="og:image" content="https://onlymaxon.com/images/logo.jpg">
+  <meta property="og:image" content="https://onlymaxon.com/images/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="OnlyMaxon">
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="OnlyMaxon — We turn ideas into working products.">
   <meta name="twitter:description" content="A product studio — development and SEO under one roof. Working with clients worldwide.">
-  <meta name="twitter:image" content="https://onlymaxon.com/images/logo.jpg">
+  <meta name="twitter:image" content="https://onlymaxon.com/images/og.jpg">
 
   <!-- Structured data for Google (the studio itself)
        ProfessionalService, not plain Organization: an Organization has no place, and a
@@ -126,7 +129,7 @@
     "name": "OnlyMaxon",
     "legalName": "OnlyMaxon Studio",
     "url": "https://onlymaxon.com",
-    "logo": "https://onlymaxon.com/images/logo.jpg",
+    "logo": "https://onlymaxon.com/images/logoW.jpg",
     "email": "hello@onlymaxon.com",
     "telephone": "+48 576 925 110",
     "address": {
@@ -166,57 +169,32 @@
     /* Self-hosted, so the page talks to exactly one origin. Google served these same
        files, but from two extra hosts that each cost a DNS lookup and a TLS handshake
        before a single glyph moved. Only the subsets these five languages actually use
-       were taken: latin + latin-ext everywhere, cyrillic for Inter. Space Grotesk has no
-       Cyrillic at all upstream, which is why Russian headings fall back to system-ui —
-       that was already true, it is just now visible in the file rather than hidden in a
-       CDN response. font-display: swap keeps first paint in system-ui, same as before. */
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
-                 src: url(/fonts/inter-400-latin.woff2) format('woff2');
+       were taken: latin + latin-ext everywhere, cyrillic for Inter.
+
+       One @font-face per subset, with a weight RANGE rather than a number. Both families
+       are variable fonts: Google's API hands back the same file whichever weight you ask
+       it for, and downloading it once per weight is the whole saving here — the home page
+       declares four Inter weights and used to fetch 193 KB where 48 KB was the file.
+       A single-value `font-weight` descriptor is what made the browser treat them as four
+       separate faces; `100 900` tells it the truth.
+
+       Space Grotesk has no Cyrillic at all upstream, which is why Russian headings fall
+       back to system-ui — that was already true, it is just now visible in the file rather
+       than hidden in a CDN response. font-display: swap keeps first paint in system-ui. */
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap;
+                 src: url(/fonts/inter-latin.woff2) format('woff2');
                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
-                 src: url(/fonts/inter-400-latin-ext.woff2) format('woff2');
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap;
+                 src: url(/fonts/inter-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap;
-                 src: url(/fonts/inter-400-cyrillic.woff2) format('woff2');
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap;
+                 src: url(/fonts/inter-cyrillic.woff2) format('woff2');
                  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap;
-                 src: url(/fonts/inter-500-latin.woff2) format('woff2');
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 300 700; font-display: swap;
+                 src: url(/fonts/space-grotesk-latin.woff2) format('woff2');
                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap;
-                 src: url(/fonts/inter-500-latin-ext.woff2) format('woff2');
-                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap;
-                 src: url(/fonts/inter-500-cyrillic.woff2) format('woff2');
-                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
-                 src: url(/fonts/inter-600-latin.woff2) format('woff2');
-                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
-                 src: url(/fonts/inter-600-latin-ext.woff2) format('woff2');
-                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap;
-                 src: url(/fonts/inter-600-cyrillic.woff2) format('woff2');
-                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
-                 src: url(/fonts/inter-700-latin.woff2) format('woff2');
-                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
-                 src: url(/fonts/inter-700-latin-ext.woff2) format('woff2');
-                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap;
-                 src: url(/fonts/inter-700-cyrillic.woff2) format('woff2');
-                 unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
-    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: swap;
-                 src: url(/fonts/space-grotesk-600-latin.woff2) format('woff2');
-                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: swap;
-                 src: url(/fonts/space-grotesk-600-latin-ext.woff2) format('woff2');
-                 unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
-                 src: url(/fonts/space-grotesk-700-latin.woff2) format('woff2');
-                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap;
-                 src: url(/fonts/space-grotesk-700-latin-ext.woff2) format('woff2');
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 300 700; font-display: swap;
+                 src: url(/fonts/space-grotesk-latin-ext.woff2) format('woff2');
                  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
