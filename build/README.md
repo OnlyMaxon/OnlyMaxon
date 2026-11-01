@@ -76,15 +76,12 @@ relative image path slipped through, or if removing comments broke a script. If 
 Add a line to `PAGES` in `generate.js` and write its English source under `build/src/`.
 Canonical, hreflang, the language menus and the sitemap all follow from that.
 
-## The NFC cards are moving out
+## The NFC cards have moved out
 
-`profiles.js` still writes `u/<slug>/` from `profiles.json`, and it still runs at the end
-of `generate.js`. That is temporary. Those pages are becoming a Cloudflare Worker backed by
-a database — see [`card/`](../card/) — so that a card's owner can edit their own page
-instead of asking us to edit a JSON file and push.
+They used to live here: `profiles.js` wrote `u/<slug>/index.html` from `profiles.json` at
+the end of every build. That meant a client changing their phone number cost a commit, a CI
+run and a deploy of the whole site — for a card already in somebody's pocket.
 
-Until the Worker's route is live, nothing changes here. Once it is, `/u/*` is served by the
-Worker and these files stop being reachable; they stay in the repository for a week as the
-rollback, because the URL is printed on plastic. After that, delete `profiles.json`,
-`profiles.js`, the `require('./profiles.js')` line at the bottom of `generate.js`, and the
-`u/` tree.
+They are their own project now, in `Onlymaxon-mobile`: an Expo app that reads and writes the
+chips, and a server with its own database behind it. The only thing the two share is the
+domain. Nothing in this repository generates, links to or knows about `/u/` any more.

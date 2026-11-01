@@ -741,13 +741,12 @@ ${entries.join('\n')}
 console.log(`  sitemap.xml      ${entries.length} URLs, hreflang on each   ` +
             `(${changedPages ? changedPages + ' dated ' + today : 'no page changed, every date carried over'})`);
 
-// ── the NFC card pages ────────────────────────────────────────────────────────
-// Written after the sitemap on purpose: /u/ pages are noindex and belong in neither the
-// sitemap nor the hreflang set, and running them here makes that impossible to forget.
-// They are one page per client rather than one per language, so none of the machinery
-// above applies to them at all. See build/profiles.js.
-console.log('');
-require('./profiles.js').build();
+// ── the NFC card pages are no longer built here ───────────────────────────────
+// They used to be: build/profiles.js wrote u/<slug>/index.html from a JSON file, which
+// meant changing a phone number was a commit, a CI run and a deploy of the whole site.
+// A card in somebody's pocket cannot wait for that, and the site has no business knowing
+// who owns a card. They live in their own project now, with their own database, and the
+// only thing the two share is the domain.
 
 // ── the legal pages of the apps this studio builds ────────────────────────────
 // Here for the same reason as the line above: noindex, one language, outside the sitemap
