@@ -131,7 +131,7 @@ const APPS = {
   },
 
   /*
-   * Maxon: the studio's own NFC business cards. Added 2026-11-02, for the App Store
+   * OnlyMaxon: the studio's own NFC business cards. Added 2026-11-02, for the App Store
    * submission — Apple will not accept a build without a privacy policy URL, and these are
    * the addresses that field points at.
    *
@@ -147,7 +147,7 @@ const APPS = {
    * to be worried about something, so both schemes are declared.
    */
   cards: {
-    name: 'Maxon',
+    name: 'OnlyMaxon',
     theme: { light: '#ffffff', dark: '#06080C' },
     css: `
   :root {
@@ -171,18 +171,18 @@ const APPS = {
     pages: [
       {
         slug: 'privacy',
-        title: 'Privacy Policy — Maxon',
-        desc: 'What Maxon collects, where it is stored, who else sees it, and how long it is kept. No location, no analytics, no advertising identifiers, nothing sold.',
+        title: 'Privacy Policy — OnlyMaxon',
+        desc: 'What OnlyMaxon collects, where it is stored, who else sees it, and how long it is kept. No location, no analytics, no advertising identifiers, nothing sold.',
       },
       {
         slug: 'terms',
-        title: 'Terms of Use — Maxon',
+        title: 'Terms of Use — OnlyMaxon',
         desc: 'The agreement between you and OnlyMaxon Studio about your NFC card: what you may publish on it, what the service promises, how the chip is protected, and how to end it.',
       },
       {
         slug: 'delete-account',
-        title: 'Delete your Maxon account',
-        desc: 'How to delete your Maxon account from inside the app, exactly what is erased, and why the card itself keeps working afterwards.',
+        title: 'Delete your OnlyMaxon account',
+        desc: 'How to delete your OnlyMaxon account from inside the app, exactly what is erased, and why the card itself keeps working afterwards.',
       },
     ],
   },
@@ -280,7 +280,9 @@ ${body}
   <!-- The original footer linked the app's GitHub repository. It was dropped on 2026-10-04:
        the point of moving these documents here was that they stop depending on a personal
        account, and a legal page that sends the reader back to one argues against itself. -->
-  <footer>${app.name} · Built by <a href="${SITE}/">OnlyMaxon</a></footer>
+  <!-- The studio's own app is called OnlyMaxon, so naming the app and then its maker
+       would read "OnlyMaxon · Built by OnlyMaxon". A client's app still gets both. -->
+  <footer>${app.name === 'OnlyMaxon' ? '' : `${app.name} · `}Built by <a href="${SITE}/">OnlyMaxon</a></footer>
 </main>
 </body>
 </html>
