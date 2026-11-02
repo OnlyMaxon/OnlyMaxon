@@ -129,6 +129,63 @@ const APPS = {
       },
     ],
   },
+
+  /*
+   * Maxon Cards: the studio's own NFC business cards. Added 2026-11-02, for the App Store
+   * submission — Apple will not accept a build without a privacy policy URL, and these are
+   * the addresses that field points at.
+   *
+   * No `firebase` key, deliberately, so build() writes no auth/action page for this app.
+   * The cards app has its own domain, and Firebase's email links land on
+   * cards.onlymaxon.com/__/auth/action — Firebase's own handler, passed through by the
+   * worker in that project. A second handler here would be a second thing to keep working.
+   *
+   * These documents are ours rather than a client's, so unlike yOdin's they wear the
+   * studio's own colours, lifted from the app's src/theme.ts so that a client who taps
+   * through from the app does not arrive somewhere that looks like a different company.
+   * The site itself is dark-only; a legal page is read at whatever hour the reader happens
+   * to be worried about something, so both schemes are declared.
+   */
+  cards: {
+    name: 'Maxon Cards',
+    theme: { light: '#ffffff', dark: '#06080C' },
+    css: `
+  :root {
+    --bg: #ffffff;
+    --text: #0E131A;
+    --dim: #55656F;
+    --rule: #E3E9ED;
+    --accent: #15646F;
+    --code-bg: #F2F6F8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #06080C;
+      --text: #E6F4F7;
+      --dim: #93AAB3;
+      --rule: #1B242E;
+      --accent: #7FE9F0;
+      --code-bg: #0E131A;
+    }
+  }`,
+    pages: [
+      {
+        slug: 'privacy',
+        title: 'Privacy Policy — Maxon Cards',
+        desc: 'What Maxon Cards collects, where it is stored, who else sees it, and how long it is kept. No location, no analytics, no advertising identifiers, nothing sold.',
+      },
+      {
+        slug: 'terms',
+        title: 'Terms of Use — Maxon Cards',
+        desc: 'The agreement between you and OnlyMaxon Studio about your NFC card: what you may publish on it, what the service promises, how the chip is protected, and how to end it.',
+      },
+      {
+        slug: 'delete-account',
+        title: 'Delete your Maxon Cards account',
+        desc: 'How to delete your Maxon Cards account from inside the app, exactly what is erased, and why the card itself keeps working afterwards.',
+      },
+    ],
+  },
 };
 
 // The document's name for the nav, which wants a label rather than a headline: "Privacy
