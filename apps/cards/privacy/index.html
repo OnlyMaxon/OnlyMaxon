@@ -80,16 +80,18 @@
   </nav>
   <h1 id="privacy-policy-for-maxon">Privacy Policy for OnlyMaxon</h1>
 
-<p><strong>Last updated:</strong> 2 November 2026
-<strong>Effective date:</strong> 2 November 2026</p>
+<p><strong>Last updated:</strong> 9 November 2026
+<strong>Effective date:</strong> 9 November 2026</p>
 
 <p>The OnlyMaxon app (“the App”, “we”, “us”) is made and run by
 <strong>OnlyMaxon Studio</strong>, based in Poland. We decide what happens to the personal
 data described here — the data controller, in the wording of the GDPR. For anything on this
 page, write to <strong>hello@onlymaxon.com</strong>.</p>
 
-<p>This policy covers the iOS application <code>com.onlymaxon.cards</code> and the pages it
-publishes at <code>cards.onlymaxon.com</code>. By creating an account you agree to it and to
+<p>This policy covers the OnlyMaxon app on both platforms — <code>com.onlymaxon.cards</code>
+on iOS and <code>com.onlymaxon.nfc</code> on Android, which are the same app under two
+names for reasons that have nothing to do with you — and the pages it publishes at
+<code>cards.onlymaxon.com</code>. By creating an account you agree to it and to
 the <a href="https://onlymaxon.com/apps/cards/terms/">terms of use</a>.</p>
 
 <hr />
@@ -140,7 +142,28 @@ language the card opens in, and its colour</strong>.</p>
 you would not hand to a stranger in a café, and do not put somebody else's personal data
 there without their agreement.</p>
 
-<h3 id="23-the-record-of-the-card-itself">2.3 The record of the card itself</h3>
+<h3 id="23-your-photograph">2.3 Your photograph</h3>
+
+<p>You may put a picture of yourself on the card. It is optional and the card is finished
+without one — a card with no photograph shows the first letter of your name, which is how it
+is meant to look rather than a gap waiting to be filled.</p>
+
+<p>If you choose one, the App asks for your photo library or your camera at that moment and
+for nothing else: it does not read, index or upload anything else you have, and it does not
+keep the permission open for any other purpose. The picture you pick is cropped to a square
+and reduced to 512 pixels on your own phone, and only that small copy is sent to us. We store
+it in Google Cloud Storage, in a bucket that is closed to the public; the only thing that
+serves it is the page your own card opens.</p>
+
+<p><strong>That page is public.</strong> Anybody who taps your card, and anybody who is given
+its address, sees your face. This is the point of a business card, but it is worth saying
+plainly, because a photograph is not the same kind of thing as a phone number.</p>
+
+<p>You can replace the picture or take it off at any time from the same screen. Removing it
+deletes the file — not just the link to it — and the card goes back to the letter. Deleting
+your account does the same thing before it does anything else.</p>
+
+<h3 id="24-the-record-of-the-card-itself">2.4 The record of the card itself</h3>
 
 <p>Separately from your account we keep, for every card we produce: its address
 (<code>cards.onlymaxon.com/your-name</code>), the email address it was issued to, the serial
@@ -148,18 +171,18 @@ number the chip's manufacturer burned into it, and the password that protects th
 being rewritten. This is our production record rather than your profile — you never see it
 in the App, and it is what makes a lost or damaged card replaceable.</p>
 
-<h3 id="24-technical-records">2.4 Technical records</h3>
+<h3 id="25-technical-records">2.5 Technical records</h3>
 
 <p>Firebase Authentication records when an account was created and when it last signed in.
 Google Cloud keeps short-lived request logs for the service that renders your public page,
 which include IP addresses, as any web server does. We do not read these except when
 something is broken.</p>
 
-<h3 id="25-what-we-do-not-collect">2.5 What we do not collect</h3>
+<h3 id="26-what-we-do-not-collect">2.6 What we do not collect</h3>
 
-<p>No location. No contacts. No photographs — the App has no camera or photo library access
-at all. No advertising identifiers, no analytics product, no tracking across other apps or
-sites, and no cookies on your public card page. We do not sell anything to anybody, and
+<p>No location. No contacts. Nothing from your photo library or your camera beyond the one
+picture you choose for your card, described above. No advertising identifiers, no
+analytics product, no tracking across other apps or sites, and no cookies on your public card page. We do not sell anything to anybody, and
 there is nothing here to sell.</p>
 
 <hr />
@@ -198,19 +221,20 @@ again at any moment with one switch in the App.</p>
 <h2 id="5-who-else-sees-it">5. Who else sees it</h2>
 
 <p>One company, in one role: <strong>Google</strong>, as our processor, through Firebase and
-Google Cloud. Accounts live in Firebase Authentication, cards in Firestore, and the page a
-visitor sees is rendered by a Google Cloud function. Google acts on our instructions under
-its Data Processing Addendum.</p>
+Google Cloud. Accounts live in Firebase Authentication, cards in Firestore, photographs in
+Cloud Storage, and the page a visitor sees is rendered by a Google Cloud function. Google
+acts on our instructions under its Data Processing Addendum.</p>
 
 <p><strong>Where the data physically is.</strong> Our Firestore database is in Google's
-<code>nam5</code> multi-region, which is in the <strong>United States</strong>; the service
-that renders your public page runs in Belgium. So your card content is stored outside the
-European Economic Area, transferred under the European Commission's Standard Contractual
-Clauses as incorporated into Google's terms. We would rather it sat in Europe, and we are
-saying plainly that today it does not.</p>
+<code>nam5</code> multi-region and your photograph is in a Cloud Storage bucket in
+<code>us-east1</code>, both in the <strong>United States</strong>; the service that renders
+your public page runs in Belgium. So your card content and your picture are stored outside
+the European Economic Area, transferred under the European Commission's Standard
+Contractual Clauses as incorporated into Google's terms. We would rather all of it sat in
+Europe, and we are saying plainly that today it does not.</p>
 
-<p>Apple knows you downloaded the App, on its own terms, and we receive nothing about you
-from Apple. Nobody else gets anything. We have never had a government request for this data;
+<p>Apple and Google know you downloaded the App, on their own terms, and we receive nothing
+about you from either. Nobody else gets anything. We have never had a government request for this data;
 if we receive one we will comply only with a lawful order and, where the law allows it, tell
 you.</p>
 
