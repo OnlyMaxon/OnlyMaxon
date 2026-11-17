@@ -270,6 +270,8 @@ const translations = {
     // FOOTER
     footerCopyright: { en: "© 2026 OnlyMaxon Studio. All rights reserved.", pl: "© 2026 OnlyMaxon Studio. Wszelkie prawa zastrzeżone.", ru: "© 2026 OnlyMaxon Studio. Все права защищены.", tr: "© 2026 OnlyMaxon Studio. Tüm hakları saklıdır.", es: "© 2026 OnlyMaxon Studio. Todos los derechos reservados." },
     footerBlog:      { en: "Blog", pl: "Blog", ru: "Блог", tr: "Blog", es: "Blog" },
+    // The two store links beside it are brand names and stay as they are.
+    footerApp:       { en: "Our app:", pl: "Nasza aplikacja:", ru: "Наше приложение:", tr: "Uygulamamız:", es: "Nuestra app:" },
     footerPrivacy:   { en: "Privacy", pl: "Prywatność", ru: "Конфиденциальность", tr: "Gizlilik", es: "Privacidad" },
     footerTagline: { en: "🌍 Warsaw · Working worldwide", pl: "🌍 Warszawa · Pracujemy na całym świecie", ru: "🌍 Варшава · Работаем по всему миру", tr: "🌍 Varşova · Tüm dünyada çalışıyoruz", es: "🌍 Varsovia · Trabajamos en todo el mundo" },
 
