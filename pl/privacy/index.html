@@ -139,6 +139,20 @@
     .ft { font-size: 13px; color: var(--text-m); }
     .ft a { color: var(--text-m); text-decoration: none; }
     .ft a:hover { color: var(--blue); }
+    .ft-stores { display: inline-flex; gap: 8px; align-items: center; }
+    .store {
+      display: inline-block;
+      padding: 5px 12px;
+      border: 1px solid var(--text-m);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .store:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-d); }
     @media (max-width: 600px) {
       .container { padding: 0 20px; }
       main { padding: 44px 0 64px; }
@@ -215,9 +229,9 @@
     <div class="footer-inner">
       <span class="ft">© 2026 OnlyMaxon Studio. Wszelkie prawa zastrzeżone.</span>
       <span class="ft"><a href="tel:+48576925110">+48 576 925 110</a></span>
-      <span class="ft"><span>Nasza aplikacja:</span>
-        <a href="https://play.google.com/store/apps/details?id=com.onlymaxon.nfc" target="_blank" rel="noopener">Google Play</a> ·
-        <a href="https://apps.apple.com/app/onlymaxon/id6829927122" target="_blank" rel="noopener">App Store</a></span>
+      <span class="ft ft-stores"><span>Nasza aplikacja:</span>
+        <a class="store" href="https://apps.apple.com/app/onlymaxon/id6829927122" target="_blank" rel="noopener">App&nbsp;Store</a>
+        <a class="store" href="https://play.google.com/store/apps/details?id=com.onlymaxon.nfc" target="_blank" rel="noopener">Google&nbsp;Play</a></span>
       <span class="ft"><a href="/pl/blog/">Blog</a></span>
       <span class="ft"><a href="/pl/">Powrót na stronę</a></span>
     </div>
