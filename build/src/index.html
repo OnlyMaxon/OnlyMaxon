@@ -156,7 +156,7 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "How much does a website cost?", "acceptedAnswer": { "@type": "Answer", "text": "Websites start at €690 (with online booking). An online shop from €1090, a mobile app from €1400, a full platform from €3000. You get the exact price and date within 48 hours of the first call — no hidden costs." } },
+      { "@type": "Question", "name": "How much does a website cost?", "acceptedAnswer": { "@type": "Answer", "text": "Websites start at €250 (business-card) and €390 (with online booking). An online shop from €1090, a mobile app from €1400, a full platform from €3000. You get the exact price and date within 48 hours of the first call — no hidden costs." } },
       { "@type": "Question", "name": "How long does it take?", "acceptedAnswer": { "@type": "Answer", "text": "A simple website takes about 1 week, a booking site around 2 weeks, and a mobile app 4–6 weeks. We agree the timeline up front and send you weekly updates." } },
       { "@type": "Question", "name": "Who exactly is OnlyMaxon?", "acceptedAnswer": { "@type": "Answer", "text": "A small studio, not an agency with a sales department. You talk directly to the people who build your project — there is no account manager in between. Every project on this page is ours and every one of them is live: click any of them and see for yourself." } },
       { "@type": "Question", "name": "Do I own the website and the code?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — 100%. Once it's done, the site, the code and all accounts are fully yours. No lock-in, no strings attached." } },
@@ -221,6 +221,13 @@
     /* `clip` clips exactly like `hidden` but does NOT create a scroll container,
        so it can't break position:sticky or scroll anchoring. `hidden` stays as fallback. */
     html { scroll-behavior: smooth; overflow-x: hidden; overflow-x: clip; }
+    /*
+     * The header is fixed and about 70px tall, so a jump to #pricing used to put the word
+     * "Pricing" behind it — every nav link has always done this, and the rail down the
+     * side made it eight times more visible. The browser leaves this much room above a
+     * section it scrolls to; nothing else about the layout changes.
+     */
+    section[id] { scroll-margin-top: 92px; }
 
     body {
       background: var(--bg);
@@ -410,6 +417,54 @@
       text-transform: uppercase; letter-spacing: 1.4px;
     }
 
+    /*
+     * The rail: where you are in the page, down the left edge.
+     *
+     * Dots only until you need it — a column of eight labels standing permanently beside
+     * the text is furniture. Hovering the rail, or being inside a section, brings the word
+     * back. The labels are the sections' own eyebrows rather than a second set of names
+     * invented here, so there is nothing extra to translate and nothing that can disagree
+     * with the heading it points at.
+     *
+     * Hidden below 1240px: narrower than that and it sits on top of the words.
+     */
+    .rail {
+      position: fixed; left: 26px; top: 50%; transform: translateY(-50%);
+      z-index: 40; display: flex; flex-direction: column; gap: 15px;
+    }
+    .rail a { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .rail-dot {
+      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+      background: var(--border-h); transition: background .25s, transform .25s;
+    }
+    .rail-label {
+      font-size: 10.5px; letter-spacing: 1.1px; text-transform: uppercase;
+      color: var(--text-m); white-space: nowrap;
+      opacity: 0; transform: translateX(-5px);
+      transition: opacity .25s, transform .25s, color .25s;
+    }
+    .rail:hover .rail-label { opacity: .85; transform: none; }
+    .rail a:hover .rail-dot { background: var(--text-m); }
+    .rail a.on .rail-dot { background: var(--blue); transform: scale(1.45); }
+    .rail a.on .rail-label { opacity: 1; color: var(--text); transform: none; }
+    /*
+     * On a narrow screen the rail stays, as dots alone — and it moves to the right edge.
+     * The left edge of a phone is where iOS listens for the swipe back, and a fixed strip
+     * sitting in that band eats the gesture. A reader losing the back swipe would be a
+     * worse trade than a navigation that changed sides.
+     *
+     * The words are hidden from the eye, not from a screen reader: `display: none` would
+     * leave eight links reading "link, link, link".
+     */
+    @media (max-width: 1240px) {
+      .rail { left: auto; right: 11px; gap: 12px; }
+      .rail-dot { width: 6px; height: 6px; }
+      .rail-label {
+        position: absolute; width: 1px; height: 1px;
+        overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+      }
+    }
+
     /* ── The card, in CSS ─────────────────────────────────────────────────────────
        Matte black, because the plastic is matte black: no gloss, no gradient anybody
        would call a gradient, and the accent appears only as a hairline and in the
@@ -419,6 +474,12 @@
        object, and it looks the same wherever it is put.
        The float is slow on purpose. It is something resting in the air, not a banner. */
     .mcard {
+      /* Left, explicitly. Below 900px .hero-inner centres its text so the headline reads
+         as a block on a phone, and that centring leaked straight into the card: the name
+         sat centred over the role and the address drifted away from the rule under it.
+         Nothing is printed centred on a business card. Found in a photograph of a real
+         phone — on a desktop the hero is left-aligned and this was invisible. */
+      text-align: left;
       width: 352px; max-width: 100%; aspect-ratio: 1.62 / 1;
       border-radius: 20px; padding: 26px 26px 22px;
       display: flex; flex-direction: column; justify-content: space-between;
@@ -454,8 +515,17 @@
       font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
       color: #8699A4; margin-top: 3px;
     }
+    .mcard-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; }
     .mcard-rule { display: block; width: 30px; height: 2px; background: #22D3EE; border-radius: 2px; }
     .mcard-url { font-size: 11.5px; color: #8699A4; margin-top: 10px; }
+    /* Quiet, in the corner, the way a maker's name sits on an object — and the same
+       wordmark the nav carries, down to the cyan full stop. It is also what fills the
+       middle of the card: a business card is mostly empty, but not empty on one side. */
+    .mcard-mark {
+      font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 600;
+      color: #4E6069; white-space: nowrap;
+    }
+    .mcard-mark span { color: #22D3EE; }
 
     /* Somebody who finds this page from a card they are holding should meet the card.
        A phone mock was dropped on narrow screens because it was 524px of somebody
@@ -540,7 +610,6 @@
     a.stat { text-decoration: none; color: inherit; }
     a.stat .stat-val { color: var(--blue); }
     a.stat:hover .stat-lab { color: var(--text-d); }
-    .stat-stars { font-size: 15px; letter-spacing: 1px; color: var(--blue); }
     .stat { display: flex; flex-direction: column; gap: 2px; }
     .stat-val {
       font-size: 24px; font-weight: 700;
@@ -685,37 +754,56 @@
     .proj-link:hover { gap: 10px; }
 
     /* ── PROBLEM → SOLUTION ───────────────── */
-    /* Sits directly under the hero, before any of our work: a visitor recognises their own
-       Tuesday before they are asked to admire ours. */
+    /* Second, after the card is explained and before any of our work: a visitor recognises
+       their own Tuesday before they are asked to admire ours. It used to sit directly under
+       the hero, which was right while the hero was about the studio — now the hero holds a
+       card, and the thing that has to come next is what that card is. */
     #problems { padding: 110px 0; }
     .ps-head { text-align: center; max-width: 640px; margin: 0 auto 54px; }
     .ps-head .sec-desc { margin: 0 auto; }
-    .ps-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 18px; max-width: 900px; margin: 0 auto;
-    }
-    @media (max-width: 760px) { .ps-grid { grid-template-columns: 1fr; max-width: 480px; } }
-    .ps-card {
-      display: flex; flex-direction: column;
+    /*
+     * A conversation, not a grid of four.
+     *
+     * These are things clients actually say, and they were sitting in four equal rounded
+     * boxes with the same rhythm inside each — quote, paragraph, pill — arriving on a
+     * 0.1s stagger. That geometry is the default any tool reaches for when asked to lay
+     * out "four benefits", and a reader recognises it before reading a word of it.
+     *
+     * So they are set as what they are: somebody saying something, and us answering.
+     * Theirs on the left in the page's own grey, ours on the right carrying the accent,
+     * each bubble a different width because sentences are different lengths. The answer
+     * arrives a beat after the question, which is the one place on this page where the
+     * reveal delay means something rather than decorating.
+     *
+     * The first line is literally about Instagram DMs. Drawing it as a message is not a
+     * metaphor we invented — it is where that sentence was typed.
+     */
+    .ps-talk { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 52px; }
+    .ps-turn { display: flex; flex-direction: column; gap: 14px; }
+
+    /* The corner nearest the speaker is squared off, the way a tail would sit. */
+    .ps-them {
+      align-self: flex-start; max-width: 78%;
       background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 16px; padding: 26px 24px;
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      border-radius: 20px 20px 20px 5px;
+      padding: 16px 21px;
+      font-size: 16px; font-weight: 500; color: var(--text); line-height: 1.5;
     }
-    .ps-card:hover { border-color: var(--border-h); transform: translateY(-5px); }
-    /* Their words, not ours — set at --text weight so it reads as someone speaking, with
-       the rule down the side standing in for the quotation marks. */
-    .ps-quote {
-      font-size: 15px; font-weight: 600; color: var(--text);
-      line-height: 1.55; margin-bottom: 16px;
-      padding-left: 16px; border-left: 2px solid rgba(34,211,238,0.35);
+    .ps-us {
+      align-self: flex-end; max-width: 84%;
+      background: rgba(34,211,238,0.055);
+      border: 1px solid rgba(34,211,238,0.2);
+      border-radius: 20px 20px 5px 20px;
+      padding: 18px 22px;
     }
-    .ps-answer {
-      font-size: 14px; color: var(--text-d);
-      line-height: 1.65; margin-bottom: 18px; flex: 1;
+    .ps-us p { font-size: 15px; color: var(--text-d); line-height: 1.65; }
+    @media (max-width: 760px) {
+      .ps-talk { gap: 40px; }
+      .ps-them { max-width: 92%; }
+      .ps-us { max-width: 94%; }
     }
-    /* Only the fourth card carries a second door out of the page, so the row exists just
-       there — the other three end on the pill alone. */
-    .ps-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+    .ps-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
     .ps-more {
       font-size: 13px; font-weight: 600; color: var(--blue);
       text-decoration: none; transition: gap 0.2s;
@@ -1065,7 +1153,7 @@
     .pricing-head { text-align: center; margin-bottom: 60px; }
     .pricing-head .sec-desc { margin: 0 auto; }
     .pricing-grid {
-      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 20px; max-width: 1160px; margin: 0 auto;
     }
     @media (max-width: 1040px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); max-width: 640px; } }
@@ -1260,7 +1348,12 @@
     .sc-more { margin-top: 16px; }
 
     /* ── "WHAT'S A BUSINESS-CARD SITE" (static, no jank) ── */
-    #whatvisitka { padding: 110px 0; }
+    #magiccard { padding: 110px 0; }
+    .vk-foot {
+      margin-top: 44px; display: flex; flex-direction: column; align-items: center;
+      gap: 20px; text-align: center;
+    }
+
     .vk-head { text-align: center; max-width: 640px; margin: 0 auto 54px; }
     .vk-head .sec-desc { margin: 0 auto; }
     .vk-row {
@@ -1444,7 +1537,14 @@
     .rv-date { font-size: 11.5px; color: var(--text-m); margin-top: 2px; }
     .rv-rating { color: var(--blue); font-size: 12.5px; letter-spacing: 1.5px; margin-bottom: 9px; }
     .rv-text { font-size: 14px; line-height: 1.62; color: var(--text-d); }
-    .rv-foot { text-align: center; margin-top: 36px; }
+    /* The ask sits under the proof, which is the one place on the page where somebody has
+       just finished reading nine reviews and might write the tenth. Reading all of them
+       stays available underneath, as a line rather than a second button: two bordered
+       buttons side by side to the same address is a choice nobody wanted to make. */
+    .rv-foot { text-align: center; margin-top: 36px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .rv-ask { font-size: 15px; color: var(--text-d); max-width: 440px; line-height: 1.6; }
+    .rv-read { font-size: 13.5px; color: var(--text-d); border-bottom: 1px solid var(--border); }
+    .rv-read:hover { color: var(--blue); border-bottom-color: var(--border-h); }
     .rv-cta {
       display: inline-block; border: 1px solid var(--blue); color: var(--blue);
       font-weight: 600; font-size: 14px; padding: 12px 26px; border-radius: 12px;
@@ -1605,6 +1705,21 @@
 <div class="nav-backdrop" id="navBackdrop"></div>
 
 <!-- ─── HERO ─────────────────────────────── -->
+<!-- Order matches the page; see the styles for why the labels are the section eyebrows. -->
+<!-- No aria-label: the generator translates text, rich text and placeholders, but not
+     attributes, so a label here would read "Sections" on the Russian page too. The eight
+     links carry their own words, and those are translated. -->
+<nav class="rail">
+  <a href="#magiccard"><span class="rail-dot"></span><span class="rail-label" data-i18n="vkEyebrow">Our card</span></a>
+  <a href="#problems"><span class="rail-dot"></span><span class="rail-label" data-i18n="psEyebrow">The real problem</span></a>
+  <a href="#projects"><span class="rail-dot"></span><span class="rail-label" data-i18n="projEyebrow">Our work</span></a>
+  <a href="#reviews"><span class="rail-dot"></span><span class="rail-label" data-i18n="rvEyebrow">Reviews</span></a>
+  <a href="#pricing"><span class="rail-dot"></span><span class="rail-label" data-i18n="pricingEyebrow">Pricing</span></a>
+  <a href="#process"><span class="rail-dot"></span><span class="rail-label" data-i18n="procEyebrow">How we work</span></a>
+  <a href="#faq"><span class="rail-dot"></span><span class="rail-label" data-i18n="faqEyebrow">FAQ</span></a>
+  <a href="#contact"><span class="rail-dot"></span><span class="rail-label" data-i18n="contactEyebrow">Let's talk</span></a>
+</nav>
+
 <section id="hero">
   <div class="hero-bg">
     <div class="blob blob-1"></div>
@@ -1687,14 +1802,101 @@
               </div>
             </div>
             <div class="mcard-foot">
-              <span class="mcard-rule"></span>
-              <p class="mcard-url">cards.onlymaxon.com/max</p>
+              <div>
+                <span class="mcard-rule"></span>
+                <p class="mcard-url">cards.onlymaxon.com/max</p>
+              </div>
+              <span class="mcard-mark">OnlyMaxon<span>.</span></span>
             </div>
           </div>
           <p class="hero-visual-cap" data-i18n="heroCardCap">Magic Card · one tap</p>
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PROBLEM → SOLUTION ────────────────── -->
+<section id="magiccard">
+  <div class="container">
+    <div class="vk-head">
+      <p class="eyebrow fade-up" data-i18n="vkEyebrow">Our card</p>
+      <h2 class="sec-title fade-up d1" data-i18n="vkTitle">What is Magic Card?</h2>
+      <p class="sec-desc fade-up d2" data-i18n="vkDesc">Matte black plastic with nothing written on it. Somebody holds a phone to it and sees you: your name, what you do, your prices, buttons to call and to book. No app to install, no QR code, no "scan this, please". Change a price at midnight and whoever taps the card in the morning sees the new one.</p>
+    </div>
+
+    <!-- What a tap actually opens. These were labelled "example business-card sites" and
+         looked exactly like what the app produces — which was the bug, not the drawing:
+         they ARE what the app produces. Said plainly now. Three people rather than one so
+         nobody reads it as a single template, three colourways out of the eight.
+         Every string is localised, so a visitor sees a business from their own market. -->
+    <div class="vk-row">
+
+      <div class="vk-phone fade-up d1">
+        <div class="vk-screen">
+          <div class="vk-ava" data-i18n="vk1Ava">M</div>
+          <div class="vk-name" data-i18n="vk1Name">Mark</div>
+          <div class="vk-role" data-i18n="vk1Role">BARBER · LONDON</div>
+          <div class="vk-rating">★★★★★ <span data-i18n="vk1Rate">4.9 · 120 reviews</span></div>
+          <div class="vk-srv"><span data-i18n="vk1S1">Haircut</span><b data-i18n="vk1P1">€18</b></div>
+          <div class="vk-srv"><span data-i18n="vk1S2">Beard trim</span><b data-i18n="vk1P2">€12</b></div>
+          <div class="vk-srv"><span data-i18n="vk1S3">Cut + beard</span><b data-i18n="vk1P3">€26</b></div>
+          <div class="vk-hours">🕒 <span data-i18n="vk1Hours">Mon–Sat · 10:00–20:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span data-i18n="vkCall">Call</span></div>
+            <div class="vk-cta vk-cta2" data-i18n="vkBook">Book</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vk-phone vk-rose vk-featured fade-up d2">
+        <div class="vk-screen">
+          <div class="vk-ava" data-i18n="vk2Ava">S</div>
+          <div class="vk-name" data-i18n="vk2Name">Sofia</div>
+          <div class="vk-role" data-i18n="vk2Role">BEAUTY STUDIO · LONDON</div>
+          <div class="vk-rating">★★★★★ <span data-i18n="vk2Rate">5.0 · 86 reviews</span></div>
+          <div class="vk-srv"><span data-i18n="vk2S1">Manicure</span><b data-i18n="vk2P1">€25</b></div>
+          <div class="vk-srv"><span data-i18n="vk2S2">Pedicure</span><b data-i18n="vk2P2">€30</b></div>
+          <div class="vk-srv"><span data-i18n="vk2S3">Lash extensions</span><b data-i18n="vk2P3">€40</b></div>
+          <div class="vk-srv"><span data-i18n="vk2S4">Facial</span><b data-i18n="vk2P4">€55</b></div>
+          <div class="vk-hours">🕒 <span data-i18n="vk2Hours">Tue–Sat · 09:00–19:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span data-i18n="vkCall">Call</span></div>
+            <div class="vk-cta vk-cta2" data-i18n="vkBook">Book</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vk-phone vk-cyan fade-up d3">
+        <div class="vk-screen">
+          <div class="vk-ava" data-i18n="vk3Ava">D</div>
+          <div class="vk-name" data-i18n="vk3Name">Daniel</div>
+          <div class="vk-role" data-i18n="vk3Role">PHOTOGRAPHER · LONDON</div>
+          <div class="vk-rating">★★★★★ <span data-i18n="vk3Rate">4.9 · 64 reviews</span></div>
+          <div class="vk-srv"><span data-i18n="vk3S1">Portrait session</span><b data-i18n="vk3P1">€90</b></div>
+          <div class="vk-srv"><span data-i18n="vk3S2">Family shoot</span><b data-i18n="vk3P2">€140</b></div>
+          <div class="vk-srv"><span data-i18n="vk3S3">Wedding</span><b data-i18n="vk3P3">€450</b></div>
+          <div class="vk-hours">🕒 <span data-i18n="vk3Hours">Mon–Fri · 09:00–18:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span data-i18n="vkCall">Call</span></div>
+            <div class="vk-cta vk-cta2" data-i18n="vkBook">Book</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- mobile only: without this nothing tells you the strip scrolls -->
+    <p class="vk-swipe" data-i18n="vkSwipe">← swipe to see all three →</p>
+    <p class="vk-caption fade-up" data-i18n="vkCaption">This is what opens on a tap. Three people, three colourways — there are eight.</p>
+
+    <!-- The section explained the thing and showed three of them; this is where somebody
+         decides. The button carries data-need, so the form opens with "business-card
+         website" already chosen — the same mechanism the card button in the hero uses. -->
+    <div class="vk-foot fade-up">
+      <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-need="magic-card" data-i18n="vkCta">Order a Magic Card</a>
     </div>
   </div>
 </section>
@@ -1709,41 +1911,50 @@
       <h2 class="sec-title fade-up d1" data-i18n="psTitle">One of these probably sounds familiar.</h2>
       <p class="sec-desc fade-up d2" data-i18n="psDesc">If it does, you already know what the first call is about.</p>
     </div>
-    <div class="ps-grid">
+    <div class="ps-talk">
 
-      <div class="ps-card fade-up">
-        <p class="ps-quote" data-i18n="ps1Quote">Everything runs through my Instagram DMs, and I'm still answering at midnight.</p>
-        <p class="ps-answer" data-i18n="ps1Answer">A site with online booking. Your client picks a free slot themselves — you just watch the calendar fill up.</p>
-        <div class="ps-foot">
-          <span class="ps-time" data-i18n="ps1Time">2 weeks</span>
-          <a class="ps-more" href="/blog/website-or-instagram/" data-page="blog/website-or-instagram" data-i18n="ps1More">Site or Instagram?</a>
+      <div class="ps-turn">
+        <p class="ps-them fade-up" data-i18n="ps1Quote">Everything runs through my Instagram DMs, and I'm still answering at midnight.</p>
+        <div class="ps-us fade-up d1">
+          <p data-i18n="ps1Answer">A site with online booking. Your client picks a free slot themselves — you just watch the calendar fill up.</p>
+          <div class="ps-foot">
+            <span class="ps-time" data-i18n="ps1Time">2 weeks</span>
+            <a class="ps-more" href="/blog/website-or-instagram/" data-page="blog/website-or-instagram" data-i18n="ps1More">Site or Instagram?</a>
+          </div>
         </div>
       </div>
 
-      <div class="ps-card fade-up d1">
-        <p class="ps-quote" data-i18n="ps2Quote">People searching nearby find my competitors on the map. They don't find me.</p>
-        <p class="ps-answer" data-i18n="ps2Answer">Your Google profile set up properly, reviews collected automatically after each visit, the site wired into search. You end up where people are already looking.</p>
-        <div class="ps-foot">
-          <span class="ps-time" data-i18n="ps2Time">monthly · ongoing</span>
-          <a class="ps-more" href="/blog/not-in-google/" data-page="blog/not-in-google" data-i18n="ps2More">Why this happens</a>
+      <div class="ps-turn">
+        <p class="ps-them fade-up" data-i18n="ps2Quote">People searching nearby find my competitors on the map. They don't find me.</p>
+        <div class="ps-us fade-up d1">
+          <p data-i18n="ps2Answer">Your Google profile set up properly, reviews collected automatically after each visit, the site wired into search. You end up where people are already looking.</p>
+          <div class="ps-foot">
+            <span class="ps-time" data-i18n="ps2Time">monthly · ongoing</span>
+            <a class="ps-more" href="/blog/not-in-google/" data-page="blog/not-in-google" data-i18n="ps2More">Why this happens</a>
+          </div>
         </div>
       </div>
 
-      <div class="ps-card fade-up d2">
-        <p class="ps-quote" data-i18n="ps3Quote">I have a website. Nobody has ever written to me from it.</p>
-        <p class="ps-answer" data-i18n="ps3Answer">We rebuild it around the one thing it was missing — a reason to get in touch — and then make sure it actually gets found.</p>
-        <span class="ps-time" data-i18n="ps3Time">1–2 weeks</span>
-      </div>
-
-      <div class="ps-card fade-up d3">
-        <p class="ps-quote" data-i18n="ps4Quote">I've had an idea for an app for two years and no idea where to start.</p>
-        <p class="ps-answer" data-i18n="ps4Answer">We take it from a first sketch to something real people can install — and you see it working before you've spent a fortune on it.</p>
-        <div class="ps-foot">
-          <span class="ps-time" data-i18n="ps4Time">4–6 weeks</span>
-          <a class="ps-more" href="/product/" data-page="product" data-i18n="ps4More">How we build products</a>
+      <div class="ps-turn">
+        <p class="ps-them fade-up" data-i18n="ps3Quote">I have a website. Nobody has ever written to me from it.</p>
+        <div class="ps-us fade-up d1">
+          <p data-i18n="ps3Answer">We rebuild it around the one thing it was missing — a reason to get in touch — and then make sure it actually gets found.</p>
+          <div class="ps-foot">
+            <span class="ps-time" data-i18n="ps3Time">1–2 weeks</span>
+          </div>
         </div>
       </div>
 
+      <div class="ps-turn">
+        <p class="ps-them fade-up" data-i18n="ps4Quote">I've had an idea for an app for two years and no idea where to start.</p>
+        <div class="ps-us fade-up d1">
+          <p data-i18n="ps4Answer">We take it from a first sketch to something real people can install — and you see it working before you've spent a fortune on it.</p>
+          <div class="ps-foot">
+            <span class="ps-time" data-i18n="ps4Time">4–6 weeks</span>
+            <a class="ps-more" href="/product/" data-page="product" data-i18n="ps4More">How we build products</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1845,78 +2056,6 @@
 <div class="divider"></div>
 
 <!-- ─── WHAT'S A BUSINESS-CARD SITE ──────── -->
-<section id="whatvisitka">
-  <div class="container">
-    <div class="vk-head">
-      <p class="eyebrow fade-up" data-i18n="vkEyebrow">Example · business-card site</p>
-      <h2 class="sec-title fade-up d1" data-i18n="vkTitle">What's a business-card site?</h2>
-      <p class="sec-desc fade-up d2" data-i18n="vkDesc">One clean page — who you are, what you do, your prices and contacts. Like a paper business card, but online: people find you on Google and reach you in one tap. Here's what one looks like:</p>
-    </div>
-
-    <!-- Mock sites, not real businesses — the caption below says so. Every string is
-         localised, so a visitor sees a business from their own market. -->
-    <div class="vk-row">
-
-      <div class="vk-phone fade-up d1">
-        <div class="vk-screen">
-          <div class="vk-ava" data-i18n="vk1Ava">M</div>
-          <div class="vk-name" data-i18n="vk1Name">Mark</div>
-          <div class="vk-role" data-i18n="vk1Role">BARBER · LONDON</div>
-          <div class="vk-rating">★★★★★ <span data-i18n="vk1Rate">4.9 · 120 reviews</span></div>
-          <div class="vk-srv"><span data-i18n="vk1S1">Haircut</span><b data-i18n="vk1P1">€18</b></div>
-          <div class="vk-srv"><span data-i18n="vk1S2">Beard trim</span><b data-i18n="vk1P2">€12</b></div>
-          <div class="vk-srv"><span data-i18n="vk1S3">Cut + beard</span><b data-i18n="vk1P3">€26</b></div>
-          <div class="vk-hours">🕒 <span data-i18n="vk1Hours">Mon–Sat · 10:00–20:00</span></div>
-          <div class="vk-btns">
-            <div class="vk-cta">📞 <span data-i18n="vkCall">Call</span></div>
-            <div class="vk-cta vk-cta2" data-i18n="vkBook">Book</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="vk-phone vk-rose vk-featured fade-up d2">
-        <div class="vk-screen">
-          <div class="vk-ava" data-i18n="vk2Ava">S</div>
-          <div class="vk-name" data-i18n="vk2Name">Sofia</div>
-          <div class="vk-role" data-i18n="vk2Role">BEAUTY STUDIO · LONDON</div>
-          <div class="vk-rating">★★★★★ <span data-i18n="vk2Rate">5.0 · 86 reviews</span></div>
-          <div class="vk-srv"><span data-i18n="vk2S1">Manicure</span><b data-i18n="vk2P1">€25</b></div>
-          <div class="vk-srv"><span data-i18n="vk2S2">Pedicure</span><b data-i18n="vk2P2">€30</b></div>
-          <div class="vk-srv"><span data-i18n="vk2S3">Lash extensions</span><b data-i18n="vk2P3">€40</b></div>
-          <div class="vk-srv"><span data-i18n="vk2S4">Facial</span><b data-i18n="vk2P4">€55</b></div>
-          <div class="vk-hours">🕒 <span data-i18n="vk2Hours">Tue–Sat · 09:00–19:00</span></div>
-          <div class="vk-btns">
-            <div class="vk-cta">📞 <span data-i18n="vkCall">Call</span></div>
-            <div class="vk-cta vk-cta2" data-i18n="vkBook">Book</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="vk-phone vk-cyan fade-up d3">
-        <div class="vk-screen">
-          <div class="vk-ava" data-i18n="vk3Ava">D</div>
-          <div class="vk-name" data-i18n="vk3Name">Daniel</div>
-          <div class="vk-role" data-i18n="vk3Role">PHOTOGRAPHER · LONDON</div>
-          <div class="vk-rating">★★★★★ <span data-i18n="vk3Rate">4.9 · 64 reviews</span></div>
-          <div class="vk-srv"><span data-i18n="vk3S1">Portrait session</span><b data-i18n="vk3P1">€90</b></div>
-          <div class="vk-srv"><span data-i18n="vk3S2">Family shoot</span><b data-i18n="vk3P2">€140</b></div>
-          <div class="vk-srv"><span data-i18n="vk3S3">Wedding</span><b data-i18n="vk3P3">€450</b></div>
-          <div class="vk-hours">🕒 <span data-i18n="vk3Hours">Mon–Fri · 09:00–18:00</span></div>
-          <div class="vk-btns">
-            <div class="vk-cta">📞 <span data-i18n="vkCall">Call</span></div>
-            <div class="vk-cta vk-cta2" data-i18n="vkBook">Book</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <!-- mobile only: without this nothing tells you the strip scrolls -->
-    <p class="vk-swipe" data-i18n="vkSwipe">← swipe to see all three →</p>
-    <p class="vk-caption fade-up" data-i18n="vkCaption">Three examples — yours can look however you want.</p>
-  </div>
-</section>
-
-<div class="divider"></div>
 
 <!-- ─── STACK (Services) ──────────────────── -->
 <!-- Sits after the phone examples on purpose: a visitor who has already seen the
@@ -2009,7 +2148,9 @@
     </div>
     <div class="rv-grid" data-rv="grid"></div>
     <div class="rv-foot fade-up">
-      <a class="rv-cta" data-rv="link" href="https://www.google.com/maps" target="_blank" rel="noopener nofollow" data-i18n="rvAll">Read them all on Google</a>
+      <p class="rv-ask" data-i18n="rvAsk">Your review helps us more than any advertising. We read every one and answer it.</p>
+      <a class="rv-cta" data-rv="link" href="https://www.google.com/maps" target="_blank" rel="noopener nofollow" data-i18n="rvAskBtn">Leave a review on Google</a>
+      <a class="rv-read" data-rv="link" href="https://www.google.com/maps" target="_blank" rel="noopener nofollow" data-i18n="rvAll">Read them all on Google</a>
     </div>
   </div>
 </section>
@@ -2027,8 +2168,14 @@
     </div>
     <div class="pricing-grid">
       <div class="price-card fade-up">
+        <div class="price-name" data-i18n="price1Name">Business-card website</div>
+        <div class="price-amount" data-i18n="price1Amount">from €250</div>
+        <div class="price-time" data-i18n="price1Time">1 week</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
+      </div>
+      <div class="price-card fade-up d1">
         <div class="price-name" data-i18n="price2Name">Website with online booking</div>
-        <div class="price-amount" data-i18n="price2Amount">from €690</div>
+        <div class="price-amount" data-i18n="price2Amount">from €390</div>
         <div class="price-time" data-i18n="price2Time">2 weeks</div>
         <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-i18n="priceCta">Get in touch</a>
       </div>
@@ -2136,7 +2283,7 @@
       <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span data-i18n="faq1Q">How much does a website cost?</span><span class="faq-icon"></span></button>
         <div class="faq-a">
-          <p data-i18n="faq1A">Websites start at €690 (with online booking). An online shop from €1090, a mobile app from €1400, a full platform from €3000. You get the exact price and date within 48 hours of the first call — no hidden costs.</p>
+          <p data-i18n="faq1A">Websites start at €250 (business-card) and €390 (with online booking). An online shop from €1090, a mobile app from €1400, a full platform from €3000. You get the exact price and date within 48 hours of the first call — no hidden costs.</p>
           <p class="faq-more"><a href="/blog/what-a-website-costs/" data-page="blog/what-a-website-costs" data-i18n="faq1More">What the difference between quotes actually buys</a></p>
         </div>
       </div>
@@ -2279,7 +2426,7 @@
            filterable whichever of the five languages the visitor wrote in. -->
       <select name="need" required>
         <option value="" disabled selected data-i18n="needPlaceholder">What do you need?</option>
-        <option value="magic-card" data-i18n="need0">Magic Card — NFC business card</option>
+        <option value="magic-card" data-i18n="need0">Magic Card — NFC card</option>
         <option value="business-card" data-i18n="need1">Business-card website</option>
         <option value="booking" data-i18n="need2">Website with online booking</option>
         <option value="shop" data-i18n="need3">Online shop</option>
@@ -2439,6 +2586,27 @@
     const s = document.getElementById(id);
     if (s) spyObserver.observe(s);
   });
+
+  // ── The rail down the left edge ──
+  // Its own observer rather than a branch inside the one above: that one lights four
+  // links in the nav, this one lights eight dots, and the two lists are allowed to differ.
+  // The margins leave a band across the middle of the screen, so the lit dot is whichever
+  // section the reader is actually looking at rather than whichever one touched the edge.
+  const rail = document.querySelector('.rail');
+  if (rail) {
+    const railMap = {};
+    rail.querySelectorAll('a[href^="#"]').forEach(a => { railMap[a.getAttribute('href').slice(1)] = a; });
+    const railObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const a = railMap[e.target.id];
+        if (a) a.classList.toggle('on', e.isIntersecting);
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    Object.keys(railMap).forEach(id => {
+      const s = document.getElementById(id);
+      if (s) railObserver.observe(s);
+    });
+  }
 
   // ── Demo-phone strip: start centred on the middle one ──
   // On mobile the three phones become a scroll strip. Left at scrollLeft 0 you'd see

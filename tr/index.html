@@ -65,7 +65,7 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "Web sitesi ne kadar?", "acceptedAnswer": { "@type": "Answer", "text": "Web siteleri 690 €'dan (online rezervasyonlu) başlar. Online mağaza 1090 €'dan, mobil uygulama 1400 €'dan, tam bir platform 3000 €'dan. Kesin fiyatı ve tarihi ilk görüşmeden sonraki 48 saat içinde alırsın — gizli maliyet yok." } },
+      { "@type": "Question", "name": "Web sitesi ne kadar?", "acceptedAnswer": { "@type": "Answer", "text": "Web siteleri 250 €'dan (kartvizit) ve 390 €'dan (online rezervasyonlu) başlar. Online mağaza 1090 €'dan, mobil uygulama 1400 €'dan, tam bir platform 3000 €'dan. Kesin fiyatı ve tarihi ilk görüşmeden sonraki 48 saat içinde alırsın — gizli maliyet yok." } },
       { "@type": "Question", "name": "Ne kadar sürer?", "acceptedAnswer": { "@type": "Answer", "text": "Basit bir site yaklaşık 1 hafta, rezervasyonlu site ~2 hafta, mobil uygulama 4–6 hafta sürer. Süreyi baştan belirler, haftalık güncelleme göndeririz." } },
       { "@type": "Question", "name": "OnlyMaxon tam olarak kim?", "acceptedAnswer": { "@type": "Answer", "text": "Satış departmanı olan bir ajans değil, küçük bir stüdyo. Projeni yapan kişilerle doğrudan konuşursun — aranızda müşteri temsilcisi yok. Bu sayfadaki her proje bizim ve hepsi yayında: herhangi birine tıkla ve kendin gör." } },
       { "@type": "Question", "name": "Site ve kod bana mı ait?", "acceptedAnswer": { "@type": "Answer", "text": "Evet — %100. Bittiğinde site, kod ve tüm hesaplar tamamen senindir. Bağlılık yok, gizli şart yok." } },
@@ -110,6 +110,7 @@
       --r:      16px;
     }
     html { scroll-behavior: smooth; overflow-x: hidden; overflow-x: clip; }
+    section[id] { scroll-margin-top: 92px; }
     body {
       background: var(--bg);
       color: var(--text);
@@ -255,7 +256,35 @@
       font-size: 11px; color: var(--text-m); text-align: center; margin-top: 18px;
       text-transform: uppercase; letter-spacing: 1.4px;
     }
+    .rail {
+      position: fixed; left: 26px; top: 50%; transform: translateY(-50%);
+      z-index: 40; display: flex; flex-direction: column; gap: 15px;
+    }
+    .rail a { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .rail-dot {
+      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+      background: var(--border-h); transition: background .25s, transform .25s;
+    }
+    .rail-label {
+      font-size: 10.5px; letter-spacing: 1.1px; text-transform: uppercase;
+      color: var(--text-m); white-space: nowrap;
+      opacity: 0; transform: translateX(-5px);
+      transition: opacity .25s, transform .25s, color .25s;
+    }
+    .rail:hover .rail-label { opacity: .85; transform: none; }
+    .rail a:hover .rail-dot { background: var(--text-m); }
+    .rail a.on .rail-dot { background: var(--blue); transform: scale(1.45); }
+    .rail a.on .rail-label { opacity: 1; color: var(--text); transform: none; }
+    @media (max-width: 1240px) {
+      .rail { left: auto; right: 11px; gap: 12px; }
+      .rail-dot { width: 6px; height: 6px; }
+      .rail-label {
+        position: absolute; width: 1px; height: 1px;
+        overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+      }
+    }
     .mcard {
+      text-align: left;
       width: 352px; max-width: 100%; aspect-ratio: 1.62 / 1;
       border-radius: 20px; padding: 26px 26px 22px;
       display: flex; flex-direction: column; justify-content: space-between;
@@ -290,8 +319,14 @@
       font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
       color: #8699A4; margin-top: 3px;
     }
+    .mcard-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; }
     .mcard-rule { display: block; width: 30px; height: 2px; background: #22D3EE; border-radius: 2px; }
     .mcard-url { font-size: 11.5px; color: #8699A4; margin-top: 10px; }
+    .mcard-mark {
+      font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 600;
+      color: #4E6069; white-space: nowrap;
+    }
+    .mcard-mark span { color: #22D3EE; }
     @media (max-width: 900px) {
       .hero-visual { display: flex; order: -1; margin-bottom: 34px; }
       .mcard { width: 306px; }
@@ -350,7 +385,6 @@
     a.stat { text-decoration: none; color: inherit; }
     a.stat .stat-val { color: var(--blue); }
     a.stat:hover .stat-lab { color: var(--text-d); }
-    .stat-stars { font-size: 15px; letter-spacing: 1px; color: var(--blue); }
     .stat { display: flex; flex-direction: column; gap: 2px; }
     .stat-val {
       font-size: 24px; font-weight: 700;
@@ -478,28 +512,29 @@
     #problems { padding: 110px 0; }
     .ps-head { text-align: center; max-width: 640px; margin: 0 auto 54px; }
     .ps-head .sec-desc { margin: 0 auto; }
-    .ps-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 18px; max-width: 900px; margin: 0 auto;
-    }
-    @media (max-width: 760px) { .ps-grid { grid-template-columns: 1fr; max-width: 480px; } }
-    .ps-card {
-      display: flex; flex-direction: column;
+    .ps-talk { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 52px; }
+    .ps-turn { display: flex; flex-direction: column; gap: 14px; }
+    .ps-them {
+      align-self: flex-start; max-width: 78%;
       background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 16px; padding: 26px 24px;
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      border-radius: 20px 20px 20px 5px;
+      padding: 16px 21px;
+      font-size: 16px; font-weight: 500; color: var(--text); line-height: 1.5;
     }
-    .ps-card:hover { border-color: var(--border-h); transform: translateY(-5px); }
-    .ps-quote {
-      font-size: 15px; font-weight: 600; color: var(--text);
-      line-height: 1.55; margin-bottom: 16px;
-      padding-left: 16px; border-left: 2px solid rgba(34,211,238,0.35);
+    .ps-us {
+      align-self: flex-end; max-width: 84%;
+      background: rgba(34,211,238,0.055);
+      border: 1px solid rgba(34,211,238,0.2);
+      border-radius: 20px 20px 5px 20px;
+      padding: 18px 22px;
     }
-    .ps-answer {
-      font-size: 14px; color: var(--text-d);
-      line-height: 1.65; margin-bottom: 18px; flex: 1;
+    .ps-us p { font-size: 15px; color: var(--text-d); line-height: 1.65; }
+    @media (max-width: 760px) {
+      .ps-talk { gap: 40px; }
+      .ps-them { max-width: 92%; }
+      .ps-us { max-width: 94%; }
     }
-    .ps-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .ps-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
     .ps-more {
       font-size: 13px; font-weight: 600; color: var(--blue);
       text-decoration: none; transition: gap 0.2s;
@@ -779,7 +814,7 @@
     .pricing-head { text-align: center; margin-bottom: 60px; }
     .pricing-head .sec-desc { margin: 0 auto; }
     .pricing-grid {
-      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 20px; max-width: 1160px; margin: 0 auto;
     }
     @media (max-width: 1040px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); max-width: 640px; } }
@@ -950,7 +985,11 @@
     .faq-more a:hover, .pricing-more a:hover, .sc-more a:hover { gap: 10px; }
     .pricing-more { text-align: center; margin-top: 14px; }
     .sc-more { margin-top: 16px; }
-    #whatvisitka { padding: 110px 0; }
+    #magiccard { padding: 110px 0; }
+    .vk-foot {
+      margin-top: 44px; display: flex; flex-direction: column; align-items: center;
+      gap: 20px; text-align: center;
+    }
     .vk-head { text-align: center; max-width: 640px; margin: 0 auto 54px; }
     .vk-head .sec-desc { margin: 0 auto; }
     .vk-row {
@@ -1088,7 +1127,10 @@
     .rv-date { font-size: 11.5px; color: var(--text-m); margin-top: 2px; }
     .rv-rating { color: var(--blue); font-size: 12.5px; letter-spacing: 1.5px; margin-bottom: 9px; }
     .rv-text { font-size: 14px; line-height: 1.62; color: var(--text-d); }
-    .rv-foot { text-align: center; margin-top: 36px; }
+    .rv-foot { text-align: center; margin-top: 36px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .rv-ask { font-size: 15px; color: var(--text-d); max-width: 440px; line-height: 1.6; }
+    .rv-read { font-size: 13.5px; color: var(--text-d); border-bottom: 1px solid var(--border); }
+    .rv-read:hover { color: var(--blue); border-bottom-color: var(--border-h); }
     .rv-cta {
       display: inline-block; border: 1px solid var(--blue); color: var(--blue);
       font-weight: 600; font-size: 14px; padding: 12px 26px; border-radius: 12px;
@@ -1221,6 +1263,16 @@
   </div>
 </nav>
 <div class="nav-backdrop" id="navBackdrop"></div>
+<nav class="rail">
+  <a href="#magiccard"><span class="rail-dot"></span><span class="rail-label">Bizim kartımız</span></a>
+  <a href="#problems"><span class="rail-dot"></span><span class="rail-label">Asıl sorun</span></a>
+  <a href="#projects"><span class="rail-dot"></span><span class="rail-label">İşlerimiz</span></a>
+  <a href="#reviews"><span class="rail-dot"></span><span class="rail-label">Yorumlar</span></a>
+  <a href="#pricing"><span class="rail-dot"></span><span class="rail-label">Fiyatlar</span></a>
+  <a href="#process"><span class="rail-dot"></span><span class="rail-label">Nasıl çalışıyoruz</span></a>
+  <a href="#faq"><span class="rail-dot"></span><span class="rail-label">SSS</span></a>
+  <a href="#contact"><span class="rail-dot"></span><span class="rail-label">Konuşalım</span></a>
+</nav>
 <section id="hero">
   <div class="hero-bg">
     <div class="blob blob-1"></div>
@@ -1277,13 +1329,82 @@
               </div>
             </div>
             <div class="mcard-foot">
-              <span class="mcard-rule"></span>
-              <p class="mcard-url">cards.onlymaxon.com/max</p>
+              <div>
+                <span class="mcard-rule"></span>
+                <p class="mcard-url">cards.onlymaxon.com/max</p>
+              </div>
+              <span class="mcard-mark">OnlyMaxon<span>.</span></span>
             </div>
           </div>
           <p class="hero-visual-cap">Magic Card · tek dokunuş</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<section id="magiccard">
+  <div class="container">
+    <div class="vk-head">
+      <p class="eyebrow fade-up">Bizim kartımız</p>
+      <h2 class="sec-title fade-up d1">Magic Card nedir?</h2>
+      <p class="sec-desc fade-up d2">Üzerinde hiçbir şey yazmayan mat siyah plastik. Biri telefonunu yaklaştırır ve seni görür: adın, ne yaptığın, fiyatların, aramak ve randevu almak için düğmeler. Uygulama yok, QR kod yok, „şunu okutur musunuz” yok. Gece yarısı bir fiyatı değiştirirsin — sabah kartı okutan yenisini görür.</p>
+    </div>
+    <div class="vk-row">
+      <div class="vk-phone fade-up d1">
+        <div class="vk-screen">
+          <div class="vk-ava">E</div>
+          <div class="vk-name">Emre</div>
+          <div class="vk-role">BERBER · İSTANBUL</div>
+          <div class="vk-rating">★★★★★ <span>4,9 · 120 yorum</span></div>
+          <div class="vk-srv"><span>Saç kesimi</span><b>18 €</b></div>
+          <div class="vk-srv"><span>Sakal</span><b>12 €</b></div>
+          <div class="vk-srv"><span>Saç + sakal</span><b>26 €</b></div>
+          <div class="vk-hours">🕒 <span>Pzt–Cmt · 10:00–20:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span>Ara</span></div>
+            <div class="vk-cta vk-cta2">Randevu</div>
+          </div>
+        </div>
+      </div>
+      <div class="vk-phone vk-rose vk-featured fade-up d2">
+        <div class="vk-screen">
+          <div class="vk-ava">E</div>
+          <div class="vk-name">Elif</div>
+          <div class="vk-role">GÜZELLİK · İSTANBUL</div>
+          <div class="vk-rating">★★★★★ <span>5,0 · 86 yorum</span></div>
+          <div class="vk-srv"><span>Manikür</span><b>25 €</b></div>
+          <div class="vk-srv"><span>Pedikür</span><b>30 €</b></div>
+          <div class="vk-srv"><span>Kirpik uygulaması</span><b>40 €</b></div>
+          <div class="vk-srv"><span>Cilt bakımı</span><b>55 €</b></div>
+          <div class="vk-hours">🕒 <span>Sal–Cmt · 09:00–19:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span>Ara</span></div>
+            <div class="vk-cta vk-cta2">Randevu</div>
+          </div>
+        </div>
+      </div>
+      <div class="vk-phone vk-cyan fade-up d3">
+        <div class="vk-screen">
+          <div class="vk-ava">K</div>
+          <div class="vk-name">Kerem</div>
+          <div class="vk-role">FOTOĞRAFÇI · İSTANBUL</div>
+          <div class="vk-rating">★★★★★ <span>4,9 · 64 yorum</span></div>
+          <div class="vk-srv"><span>Portre çekimi</span><b>90 €</b></div>
+          <div class="vk-srv"><span>Aile çekimi</span><b>140 €</b></div>
+          <div class="vk-srv"><span>Düğün</span><b>450 €</b></div>
+          <div class="vk-hours">🕒 <span>Pzt–Cum · 09:00–18:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span>Ara</span></div>
+            <div class="vk-cta vk-cta2">Randevu</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="vk-swipe">← üçünü de görmek için kaydır →</p>
+    <p class="vk-caption fade-up">Dokunuşta açılan şey bu. Üç kişi, üç renk — toplamda sekiz tane.</p>
+    <div class="vk-foot fade-up">
+      <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-need="magic-card">Magic Card sipariş et</a>
     </div>
   </div>
 </section>
@@ -1295,34 +1416,44 @@
       <h2 class="sec-title fade-up d1">Muhtemelen bunlardan biri sana tanıdık geliyor.</h2>
       <p class="sec-desc fade-up d2">Öyleyse, ilk görüşmenin ne hakkında olacağını zaten biliyorsun.</p>
     </div>
-    <div class="ps-grid">
-      <div class="ps-card fade-up">
-        <p class="ps-quote">Her şey Instagram mesajlarından yürüyor ve gece yarısı hâlâ cevap yazıyorum.</p>
-        <p class="ps-answer">Online rezervasyonlu bir site. Müşteri boş saati kendi seçer — sen sadece takvimin dolmasını izlersin.</p>
-        <div class="ps-foot">
-          <span class="ps-time">2 hafta</span>
-          <a class="ps-more" href="/tr/blog/website-or-instagram/">Site mi Instagram mı?</a>
+    <div class="ps-talk">
+      <div class="ps-turn">
+        <p class="ps-them fade-up">Her şey Instagram mesajlarından yürüyor ve gece yarısı hâlâ cevap yazıyorum.</p>
+        <div class="ps-us fade-up d1">
+          <p>Online rezervasyonlu bir site. Müşteri boş saati kendi seçer — sen sadece takvimin dolmasını izlersin.</p>
+          <div class="ps-foot">
+            <span class="ps-time">2 hafta</span>
+            <a class="ps-more" href="/tr/blog/website-or-instagram/">Site mi Instagram mı?</a>
+          </div>
         </div>
       </div>
-      <div class="ps-card fade-up d1">
-        <p class="ps-quote">Yakınlarda arayanlar haritada rakiplerimi buluyor. Beni bulmuyor.</p>
-        <p class="ps-answer">Google profilin olması gerektiği gibi kurulur, her ziyaretten sonra yorumlar otomatik toplanır, site aramaya bağlanır. Sonunda insanların zaten baktığı yerde olursun.</p>
-        <div class="ps-foot">
-          <span class="ps-time">aylık · sürekli</span>
-          <a class="ps-more" href="/tr/blog/not-in-google/">Bu neden oluyor</a>
+      <div class="ps-turn">
+        <p class="ps-them fade-up">Yakınlarda arayanlar haritada rakiplerimi buluyor. Beni bulmuyor.</p>
+        <div class="ps-us fade-up d1">
+          <p>Google profilin olması gerektiği gibi kurulur, her ziyaretten sonra yorumlar otomatik toplanır, site aramaya bağlanır. Sonunda insanların zaten baktığı yerde olursun.</p>
+          <div class="ps-foot">
+            <span class="ps-time">aylık · sürekli</span>
+            <a class="ps-more" href="/tr/blog/not-in-google/">Bu neden oluyor</a>
+          </div>
         </div>
       </div>
-      <div class="ps-card fade-up d2">
-        <p class="ps-quote">Bir sitem var. Oradan bana bugüne kadar kimse yazmadı.</p>
-        <p class="ps-answer">Onu, eksik olan tek şeyin — iletişime geçmek için bir sebebin — etrafında yeniden kurarız, sonra da gerçekten bulunmasını sağlarız.</p>
-        <span class="ps-time">1–2 hafta</span>
+      <div class="ps-turn">
+        <p class="ps-them fade-up">Bir sitem var. Oradan bana bugüne kadar kimse yazmadı.</p>
+        <div class="ps-us fade-up d1">
+          <p>Onu, eksik olan tek şeyin — iletişime geçmek için bir sebebin — etrafında yeniden kurarız, sonra da gerçekten bulunmasını sağlarız.</p>
+          <div class="ps-foot">
+            <span class="ps-time">1–2 hafta</span>
+          </div>
+        </div>
       </div>
-      <div class="ps-card fade-up d3">
-        <p class="ps-quote">İki yıldır aklımda bir uygulama fikri var ve nereden başlayacağımı bilmiyorum.</p>
-        <p class="ps-answer">Onu ilk taslaktan gerçek insanların kurabileceği bir şeye taşırız — ve ona servet harcamadan önce çalıştığını görürsün.</p>
-        <div class="ps-foot">
-          <span class="ps-time">4–6 hafta</span>
-          <a class="ps-more" href="/tr/product/">Ürünleri nasıl yapıyoruz</a>
+      <div class="ps-turn">
+        <p class="ps-them fade-up">İki yıldır aklımda bir uygulama fikri var ve nereden başlayacağımı bilmiyorum.</p>
+        <div class="ps-us fade-up d1">
+          <p>Onu ilk taslaktan gerçek insanların kurabileceği bir şeye taşırız — ve ona servet harcamadan önce çalıştığını görürsün.</p>
+          <div class="ps-foot">
+            <span class="ps-time">4–6 hafta</span>
+            <a class="ps-more" href="/tr/product/">Ürünleri nasıl yapıyoruz</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1407,69 +1538,6 @@
         </div>
       </a>
     </div>
-  </div>
-</section>
-<div class="divider"></div>
-<section id="whatvisitka">
-  <div class="container">
-    <div class="vk-head">
-      <p class="eyebrow fade-up">Örnek · kartvizit sitesi</p>
-      <h2 class="sec-title fade-up d1">Kartvizit sitesi nedir?</h2>
-      <p class="sec-desc fade-up d2">Tek temiz sayfa — kim olduğun, ne yaptığın, fiyatların ve iletişimin. Kâğıt kartvizit gibi ama online: insanlar seni Google'da bulur ve tek dokunuşla ulaşır. İşte böyle görünür:</p>
-    </div>
-    <div class="vk-row">
-      <div class="vk-phone fade-up d1">
-        <div class="vk-screen">
-          <div class="vk-ava">E</div>
-          <div class="vk-name">Emre</div>
-          <div class="vk-role">BERBER · İSTANBUL</div>
-          <div class="vk-rating">★★★★★ <span>4,9 · 120 yorum</span></div>
-          <div class="vk-srv"><span>Saç kesimi</span><b>18 €</b></div>
-          <div class="vk-srv"><span>Sakal</span><b>12 €</b></div>
-          <div class="vk-srv"><span>Saç + sakal</span><b>26 €</b></div>
-          <div class="vk-hours">🕒 <span>Pzt–Cmt · 10:00–20:00</span></div>
-          <div class="vk-btns">
-            <div class="vk-cta">📞 <span>Ara</span></div>
-            <div class="vk-cta vk-cta2">Randevu</div>
-          </div>
-        </div>
-      </div>
-      <div class="vk-phone vk-rose vk-featured fade-up d2">
-        <div class="vk-screen">
-          <div class="vk-ava">E</div>
-          <div class="vk-name">Elif</div>
-          <div class="vk-role">GÜZELLİK · İSTANBUL</div>
-          <div class="vk-rating">★★★★★ <span>5,0 · 86 yorum</span></div>
-          <div class="vk-srv"><span>Manikür</span><b>25 €</b></div>
-          <div class="vk-srv"><span>Pedikür</span><b>30 €</b></div>
-          <div class="vk-srv"><span>Kirpik uygulaması</span><b>40 €</b></div>
-          <div class="vk-srv"><span>Cilt bakımı</span><b>55 €</b></div>
-          <div class="vk-hours">🕒 <span>Sal–Cmt · 09:00–19:00</span></div>
-          <div class="vk-btns">
-            <div class="vk-cta">📞 <span>Ara</span></div>
-            <div class="vk-cta vk-cta2">Randevu</div>
-          </div>
-        </div>
-      </div>
-      <div class="vk-phone vk-cyan fade-up d3">
-        <div class="vk-screen">
-          <div class="vk-ava">K</div>
-          <div class="vk-name">Kerem</div>
-          <div class="vk-role">FOTOĞRAFÇI · İSTANBUL</div>
-          <div class="vk-rating">★★★★★ <span>4,9 · 64 yorum</span></div>
-          <div class="vk-srv"><span>Portre çekimi</span><b>90 €</b></div>
-          <div class="vk-srv"><span>Aile çekimi</span><b>140 €</b></div>
-          <div class="vk-srv"><span>Düğün</span><b>450 €</b></div>
-          <div class="vk-hours">🕒 <span>Pzt–Cum · 09:00–18:00</span></div>
-          <div class="vk-btns">
-            <div class="vk-cta">📞 <span>Ara</span></div>
-            <div class="vk-cta vk-cta2">Randevu</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p class="vk-swipe">← üçünü de görmek için kaydır →</p>
-    <p class="vk-caption fade-up">Üç örnek — seninki nasıl istersen öyle görünebilir.</p>
   </div>
 </section>
 <div class="divider"></div>
@@ -1653,7 +1721,9 @@
         </article>
       </div>
     <div class="rv-foot fade-up">
-      <a class="rv-cta" href="https://www.google.com/maps?cid=13454042022292969599" target="_blank" rel="noopener nofollow">Hepsini Google'da oku</a>
+      <p class="rv-ask">Yorumun bize her reklamdan daha çok yardım eder. Hepsini okuyup yanıtlıyoruz.</p>
+      <a class="rv-cta" href="https://www.google.com/maps?cid=13454042022292969599" target="_blank" rel="noopener nofollow">Google'da yorum bırak</a>
+      <a class="rv-read" href="https://www.google.com/maps?cid=13454042022292969599" target="_blank" rel="noopener nofollow">Hepsini Google'da oku</a>
     </div>
   </div>
 </section>
@@ -1667,8 +1737,14 @@
     </div>
     <div class="pricing-grid">
       <div class="price-card fade-up">
+        <div class="price-name">Kartvizit web sitesi</div>
+        <div class="price-amount">250 €'dan</div>
+        <div class="price-time">1 hafta</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>İletişime geç</a>
+      </div>
+      <div class="price-card fade-up d1">
         <div class="price-name">Online rezervasyonlu site</div>
-        <div class="price-amount">690 €'dan</div>
+        <div class="price-amount">390 €'dan</div>
         <div class="price-time">2 hafta</div>
         <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>İletişime geç</a>
       </div>
@@ -1761,7 +1837,7 @@
       <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span>Web sitesi ne kadar?</span><span class="faq-icon"></span></button>
         <div class="faq-a">
-          <p>Web siteleri 690 €'dan (online rezervasyonlu) başlar. Online mağaza 1090 €'dan, mobil uygulama 1400 €'dan, tam bir platform 3000 €'dan. Kesin fiyatı ve tarihi ilk görüşmeden sonraki 48 saat içinde alırsın — gizli maliyet yok.</p>
+          <p>Web siteleri 250 €'dan (kartvizit) ve 390 €'dan (online rezervasyonlu) başlar. Online mağaza 1090 €'dan, mobil uygulama 1400 €'dan, tam bir platform 3000 €'dan. Kesin fiyatı ve tarihi ilk görüşmeden sonraki 48 saat içinde alırsın — gizli maliyet yok.</p>
           <p class="faq-more"><a href="/tr/blog/what-a-website-costs/">Teklifler arasındaki fark gerçekte ne satın alıyor</a></p>
         </div>
       </div>
@@ -1880,7 +1956,7 @@
       <input type="email" name="email" required placeholder="E-postan">
       <select name="need" required>
         <option value="" disabled selected>Neye ihtiyacın var?</option>
-        <option value="magic-card">Magic Card — NFC kartvizit</option>
+        <option value="magic-card">Magic Card — NFC kart</option>
         <option value="business-card">Kartvizit web sitesi</option>
         <option value="booking">Online rezervasyonlu site</option>
         <option value="shop">Online mağaza</option>
@@ -2015,6 +2091,21 @@
     const s = document.getElementById(id);
     if (s) spyObserver.observe(s);
   });
+  const rail = document.querySelector('.rail');
+  if (rail) {
+    const railMap = {};
+    rail.querySelectorAll('a[href^="#"]').forEach(a => { railMap[a.getAttribute('href').slice(1)] = a; });
+    const railObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const a = railMap[e.target.id];
+        if (a) a.classList.toggle('on', e.isIntersecting);
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    Object.keys(railMap).forEach(id => {
+      const s = document.getElementById(id);
+      if (s) railObserver.observe(s);
+    });
+  }
   const vkRow = document.querySelector('.vk-row');
   const vkMid = document.querySelector('.vk-featured');
   if (vkRow && vkMid) {

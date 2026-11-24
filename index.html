@@ -86,7 +86,7 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "How much does a website cost?", "acceptedAnswer": { "@type": "Answer", "text": "Websites start at €690 (with online booking). An online shop from €1090, a mobile app from €1400, a full platform from €3000. You get the exact price and date within 48 hours of the first call — no hidden costs." } },
+      { "@type": "Question", "name": "How much does a website cost?", "acceptedAnswer": { "@type": "Answer", "text": "Websites start at €250 (business-card) and €390 (with online booking). An online shop from €1090, a mobile app from €1400, a full platform from €3000. You get the exact price and date within 48 hours of the first call — no hidden costs." } },
       { "@type": "Question", "name": "How long does it take?", "acceptedAnswer": { "@type": "Answer", "text": "A simple website takes about 1 week, a booking site around 2 weeks, and a mobile app 4–6 weeks. We agree the timeline up front and send you weekly updates." } },
       { "@type": "Question", "name": "Who exactly is OnlyMaxon?", "acceptedAnswer": { "@type": "Answer", "text": "A small studio, not an agency with a sales department. You talk directly to the people who build your project — there is no account manager in between. Every project on this page is ours and every one of them is live: click any of them and see for yourself." } },
       { "@type": "Question", "name": "Do I own the website and the code?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — 100%. Once it's done, the site, the code and all accounts are fully yours. No lock-in, no strings attached." } },
@@ -131,6 +131,7 @@
       --r:      16px;
     }
     html { scroll-behavior: smooth; overflow-x: hidden; overflow-x: clip; }
+    section[id] { scroll-margin-top: 92px; }
     body {
       background: var(--bg);
       color: var(--text);
@@ -276,7 +277,35 @@
       font-size: 11px; color: var(--text-m); text-align: center; margin-top: 18px;
       text-transform: uppercase; letter-spacing: 1.4px;
     }
+    .rail {
+      position: fixed; left: 26px; top: 50%; transform: translateY(-50%);
+      z-index: 40; display: flex; flex-direction: column; gap: 15px;
+    }
+    .rail a { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .rail-dot {
+      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+      background: var(--border-h); transition: background .25s, transform .25s;
+    }
+    .rail-label {
+      font-size: 10.5px; letter-spacing: 1.1px; text-transform: uppercase;
+      color: var(--text-m); white-space: nowrap;
+      opacity: 0; transform: translateX(-5px);
+      transition: opacity .25s, transform .25s, color .25s;
+    }
+    .rail:hover .rail-label { opacity: .85; transform: none; }
+    .rail a:hover .rail-dot { background: var(--text-m); }
+    .rail a.on .rail-dot { background: var(--blue); transform: scale(1.45); }
+    .rail a.on .rail-label { opacity: 1; color: var(--text); transform: none; }
+    @media (max-width: 1240px) {
+      .rail { left: auto; right: 11px; gap: 12px; }
+      .rail-dot { width: 6px; height: 6px; }
+      .rail-label {
+        position: absolute; width: 1px; height: 1px;
+        overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+      }
+    }
     .mcard {
+      text-align: left;
       width: 352px; max-width: 100%; aspect-ratio: 1.62 / 1;
       border-radius: 20px; padding: 26px 26px 22px;
       display: flex; flex-direction: column; justify-content: space-between;
@@ -311,8 +340,14 @@
       font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
       color: #8699A4; margin-top: 3px;
     }
+    .mcard-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; }
     .mcard-rule { display: block; width: 30px; height: 2px; background: #22D3EE; border-radius: 2px; }
     .mcard-url { font-size: 11.5px; color: #8699A4; margin-top: 10px; }
+    .mcard-mark {
+      font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 600;
+      color: #4E6069; white-space: nowrap;
+    }
+    .mcard-mark span { color: #22D3EE; }
     @media (max-width: 900px) {
       .hero-visual { display: flex; order: -1; margin-bottom: 34px; }
       .mcard { width: 306px; }
@@ -371,7 +406,6 @@
     a.stat { text-decoration: none; color: inherit; }
     a.stat .stat-val { color: var(--blue); }
     a.stat:hover .stat-lab { color: var(--text-d); }
-    .stat-stars { font-size: 15px; letter-spacing: 1px; color: var(--blue); }
     .stat { display: flex; flex-direction: column; gap: 2px; }
     .stat-val {
       font-size: 24px; font-weight: 700;
@@ -499,28 +533,29 @@
     #problems { padding: 110px 0; }
     .ps-head { text-align: center; max-width: 640px; margin: 0 auto 54px; }
     .ps-head .sec-desc { margin: 0 auto; }
-    .ps-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 18px; max-width: 900px; margin: 0 auto;
-    }
-    @media (max-width: 760px) { .ps-grid { grid-template-columns: 1fr; max-width: 480px; } }
-    .ps-card {
-      display: flex; flex-direction: column;
+    .ps-talk { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 52px; }
+    .ps-turn { display: flex; flex-direction: column; gap: 14px; }
+    .ps-them {
+      align-self: flex-start; max-width: 78%;
       background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 16px; padding: 26px 24px;
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      border-radius: 20px 20px 20px 5px;
+      padding: 16px 21px;
+      font-size: 16px; font-weight: 500; color: var(--text); line-height: 1.5;
     }
-    .ps-card:hover { border-color: var(--border-h); transform: translateY(-5px); }
-    .ps-quote {
-      font-size: 15px; font-weight: 600; color: var(--text);
-      line-height: 1.55; margin-bottom: 16px;
-      padding-left: 16px; border-left: 2px solid rgba(34,211,238,0.35);
+    .ps-us {
+      align-self: flex-end; max-width: 84%;
+      background: rgba(34,211,238,0.055);
+      border: 1px solid rgba(34,211,238,0.2);
+      border-radius: 20px 20px 5px 20px;
+      padding: 18px 22px;
     }
-    .ps-answer {
-      font-size: 14px; color: var(--text-d);
-      line-height: 1.65; margin-bottom: 18px; flex: 1;
+    .ps-us p { font-size: 15px; color: var(--text-d); line-height: 1.65; }
+    @media (max-width: 760px) {
+      .ps-talk { gap: 40px; }
+      .ps-them { max-width: 92%; }
+      .ps-us { max-width: 94%; }
     }
-    .ps-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .ps-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
     .ps-more {
       font-size: 13px; font-weight: 600; color: var(--blue);
       text-decoration: none; transition: gap 0.2s;
@@ -800,7 +835,7 @@
     .pricing-head { text-align: center; margin-bottom: 60px; }
     .pricing-head .sec-desc { margin: 0 auto; }
     .pricing-grid {
-      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 20px; max-width: 1160px; margin: 0 auto;
     }
     @media (max-width: 1040px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); max-width: 640px; } }
@@ -971,7 +1006,11 @@
     .faq-more a:hover, .pricing-more a:hover, .sc-more a:hover { gap: 10px; }
     .pricing-more { text-align: center; margin-top: 14px; }
     .sc-more { margin-top: 16px; }
-    #whatvisitka { padding: 110px 0; }
+    #magiccard { padding: 110px 0; }
+    .vk-foot {
+      margin-top: 44px; display: flex; flex-direction: column; align-items: center;
+      gap: 20px; text-align: center;
+    }
     .vk-head { text-align: center; max-width: 640px; margin: 0 auto 54px; }
     .vk-head .sec-desc { margin: 0 auto; }
     .vk-row {
@@ -1109,7 +1148,10 @@
     .rv-date { font-size: 11.5px; color: var(--text-m); margin-top: 2px; }
     .rv-rating { color: var(--blue); font-size: 12.5px; letter-spacing: 1.5px; margin-bottom: 9px; }
     .rv-text { font-size: 14px; line-height: 1.62; color: var(--text-d); }
-    .rv-foot { text-align: center; margin-top: 36px; }
+    .rv-foot { text-align: center; margin-top: 36px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .rv-ask { font-size: 15px; color: var(--text-d); max-width: 440px; line-height: 1.6; }
+    .rv-read { font-size: 13.5px; color: var(--text-d); border-bottom: 1px solid var(--border); }
+    .rv-read:hover { color: var(--blue); border-bottom-color: var(--border-h); }
     .rv-cta {
       display: inline-block; border: 1px solid var(--blue); color: var(--blue);
       font-weight: 600; font-size: 14px; padding: 12px 26px; border-radius: 12px;
@@ -1242,6 +1284,16 @@
   </div>
 </nav>
 <div class="nav-backdrop" id="navBackdrop"></div>
+<nav class="rail">
+  <a href="#magiccard"><span class="rail-dot"></span><span class="rail-label">Our card</span></a>
+  <a href="#problems"><span class="rail-dot"></span><span class="rail-label">The real problem</span></a>
+  <a href="#projects"><span class="rail-dot"></span><span class="rail-label">Our work</span></a>
+  <a href="#reviews"><span class="rail-dot"></span><span class="rail-label">Reviews</span></a>
+  <a href="#pricing"><span class="rail-dot"></span><span class="rail-label">Pricing</span></a>
+  <a href="#process"><span class="rail-dot"></span><span class="rail-label">How we work</span></a>
+  <a href="#faq"><span class="rail-dot"></span><span class="rail-label">FAQ</span></a>
+  <a href="#contact"><span class="rail-dot"></span><span class="rail-label">Let's talk</span></a>
+</nav>
 <section id="hero">
   <div class="hero-bg">
     <div class="blob blob-1"></div>
@@ -1298,13 +1350,82 @@
               </div>
             </div>
             <div class="mcard-foot">
-              <span class="mcard-rule"></span>
-              <p class="mcard-url">cards.onlymaxon.com/max</p>
+              <div>
+                <span class="mcard-rule"></span>
+                <p class="mcard-url">cards.onlymaxon.com/max</p>
+              </div>
+              <span class="mcard-mark">OnlyMaxon<span>.</span></span>
             </div>
           </div>
           <p class="hero-visual-cap">Magic Card · one tap</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<section id="magiccard">
+  <div class="container">
+    <div class="vk-head">
+      <p class="eyebrow fade-up">Our card</p>
+      <h2 class="sec-title fade-up d1">What is Magic Card?</h2>
+      <p class="sec-desc fade-up d2">Matte black plastic with nothing written on it. Somebody holds a phone to it and sees you: your name, what you do, your prices, buttons to call and to book. No app to install, no QR code, no "scan this, please". Change a price at midnight and whoever taps the card in the morning sees the new one.</p>
+    </div>
+    <div class="vk-row">
+      <div class="vk-phone fade-up d1">
+        <div class="vk-screen">
+          <div class="vk-ava">M</div>
+          <div class="vk-name">Mark</div>
+          <div class="vk-role">BARBER · LONDON</div>
+          <div class="vk-rating">★★★★★ <span>4.9 · 120 reviews</span></div>
+          <div class="vk-srv"><span>Haircut</span><b>€18</b></div>
+          <div class="vk-srv"><span>Beard trim</span><b>€12</b></div>
+          <div class="vk-srv"><span>Cut + beard</span><b>€26</b></div>
+          <div class="vk-hours">🕒 <span>Mon–Sat · 10:00–20:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span>Call</span></div>
+            <div class="vk-cta vk-cta2">Book</div>
+          </div>
+        </div>
+      </div>
+      <div class="vk-phone vk-rose vk-featured fade-up d2">
+        <div class="vk-screen">
+          <div class="vk-ava">S</div>
+          <div class="vk-name">Sofia</div>
+          <div class="vk-role">BEAUTY STUDIO · LONDON</div>
+          <div class="vk-rating">★★★★★ <span>5.0 · 86 reviews</span></div>
+          <div class="vk-srv"><span>Manicure</span><b>€25</b></div>
+          <div class="vk-srv"><span>Pedicure</span><b>€30</b></div>
+          <div class="vk-srv"><span>Lash extensions</span><b>€40</b></div>
+          <div class="vk-srv"><span>Facial</span><b>€55</b></div>
+          <div class="vk-hours">🕒 <span>Tue–Sat · 09:00–19:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span>Call</span></div>
+            <div class="vk-cta vk-cta2">Book</div>
+          </div>
+        </div>
+      </div>
+      <div class="vk-phone vk-cyan fade-up d3">
+        <div class="vk-screen">
+          <div class="vk-ava">D</div>
+          <div class="vk-name">Daniel</div>
+          <div class="vk-role">PHOTOGRAPHER · LONDON</div>
+          <div class="vk-rating">★★★★★ <span>4.9 · 64 reviews</span></div>
+          <div class="vk-srv"><span>Portrait session</span><b>€90</b></div>
+          <div class="vk-srv"><span>Family shoot</span><b>€140</b></div>
+          <div class="vk-srv"><span>Wedding</span><b>€450</b></div>
+          <div class="vk-hours">🕒 <span>Mon–Fri · 09:00–18:00</span></div>
+          <div class="vk-btns">
+            <div class="vk-cta">📞 <span>Call</span></div>
+            <div class="vk-cta vk-cta2">Book</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="vk-swipe">← swipe to see all three →</p>
+    <p class="vk-caption fade-up">This is what opens on a tap. Three people, three colourways — there are eight.</p>
+    <div class="vk-foot fade-up">
+      <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-need="magic-card">Order a Magic Card</a>
     </div>
   </div>
 </section>
@@ -1316,34 +1437,44 @@
       <h2 class="sec-title fade-up d1">One of these probably sounds familiar.</h2>
       <p class="sec-desc fade-up d2">If it does, you already know what the first call is about.</p>
     </div>
-    <div class="ps-grid">
-      <div class="ps-card fade-up">
-        <p class="ps-quote">Everything runs through my Instagram DMs, and I'm still answering at midnight.</p>
-        <p class="ps-answer">A site with online booking. Your client picks a free slot themselves — you just watch the calendar fill up.</p>
-        <div class="ps-foot">
-          <span class="ps-time">2 weeks</span>
-          <a class="ps-more" href="/blog/website-or-instagram/">Site or Instagram?</a>
+    <div class="ps-talk">
+      <div class="ps-turn">
+        <p class="ps-them fade-up">Everything runs through my Instagram DMs, and I'm still answering at midnight.</p>
+        <div class="ps-us fade-up d1">
+          <p>A site with online booking. Your client picks a free slot themselves — you just watch the calendar fill up.</p>
+          <div class="ps-foot">
+            <span class="ps-time">2 weeks</span>
+            <a class="ps-more" href="/blog/website-or-instagram/">Site or Instagram?</a>
+          </div>
         </div>
       </div>
-      <div class="ps-card fade-up d1">
-        <p class="ps-quote">People searching nearby find my competitors on the map. They don't find me.</p>
-        <p class="ps-answer">Your Google profile set up properly, reviews collected automatically after each visit, the site wired into search. You end up where people are already looking.</p>
-        <div class="ps-foot">
-          <span class="ps-time">monthly · ongoing</span>
-          <a class="ps-more" href="/blog/not-in-google/">Why this happens</a>
+      <div class="ps-turn">
+        <p class="ps-them fade-up">People searching nearby find my competitors on the map. They don't find me.</p>
+        <div class="ps-us fade-up d1">
+          <p>Your Google profile set up properly, reviews collected automatically after each visit, the site wired into search. You end up where people are already looking.</p>
+          <div class="ps-foot">
+            <span class="ps-time">monthly · ongoing</span>
+            <a class="ps-more" href="/blog/not-in-google/">Why this happens</a>
+          </div>
         </div>
       </div>
-      <div class="ps-card fade-up d2">
-        <p class="ps-quote">I have a website. Nobody has ever written to me from it.</p>
-        <p class="ps-answer">We rebuild it around the one thing it was missing — a reason to get in touch — and then make sure it actually gets found.</p>
-        <span class="ps-time">1–2 weeks</span>
+      <div class="ps-turn">
+        <p class="ps-them fade-up">I have a website. Nobody has ever written to me from it.</p>
+        <div class="ps-us fade-up d1">
+          <p>We rebuild it around the one thing it was missing — a reason to get in touch — and then make sure it actually gets found.</p>
+          <div class="ps-foot">
+            <span class="ps-time">1–2 weeks</span>
+          </div>
+        </div>
       </div>
-      <div class="ps-card fade-up d3">
-        <p class="ps-quote">I've had an idea for an app for two years and no idea where to start.</p>
-        <p class="ps-answer">We take it from a first sketch to something real people can install — and you see it working before you've spent a fortune on it.</p>
-        <div class="ps-foot">
-          <span class="ps-time">4–6 weeks</span>
-          <a class="ps-more" href="/product/">How we build products</a>
+      <div class="ps-turn">
+        <p class="ps-them fade-up">I've had an idea for an app for two years and no idea where to start.</p>
+        <div class="ps-us fade-up d1">
+          <p>We take it from a first sketch to something real people can install — and you see it working before you've spent a fortune on it.</p>
+          <div class="ps-foot">
+            <span class="ps-time">4–6 weeks</span>
+            <a class="ps-more" href="/product/">How we build products</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1428,69 +1559,6 @@
         </div>
       </a>
     </div>
-  </div>
-</section>
-<div class="divider"></div>
-<section id="whatvisitka">
-  <div class="container">
-    <div class="vk-head">
-      <p class="eyebrow fade-up">Example · business-card site</p>
-      <h2 class="sec-title fade-up d1">What's a business-card site?</h2>
-      <p class="sec-desc fade-up d2">One clean page — who you are, what you do, your prices and contacts. Like a paper business card, but online: people find you on Google and reach you in one tap. Here's what one looks like:</p>
-    </div>
-    <div class="vk-row">
-      <div class="vk-phone fade-up d1">
-        <div class="vk-screen">
-          <div class="vk-ava">M</div>
-          <div class="vk-name">Mark</div>
-          <div class="vk-role">BARBER · LONDON</div>
-          <div class="vk-rating">★★★★★ <span>4.9 · 120 reviews</span></div>
-          <div class="vk-srv"><span>Haircut</span><b>€18</b></div>
-          <div class="vk-srv"><span>Beard trim</span><b>€12</b></div>
-          <div class="vk-srv"><span>Cut + beard</span><b>€26</b></div>
-          <div class="vk-hours">🕒 <span>Mon–Sat · 10:00–20:00</span></div>
-          <div class="vk-btns">
-            <div class="vk-cta">📞 <span>Call</span></div>
-            <div class="vk-cta vk-cta2">Book</div>
-          </div>
-        </div>
-      </div>
-      <div class="vk-phone vk-rose vk-featured fade-up d2">
-        <div class="vk-screen">
-          <div class="vk-ava">S</div>
-          <div class="vk-name">Sofia</div>
-          <div class="vk-role">BEAUTY STUDIO · LONDON</div>
-          <div class="vk-rating">★★★★★ <span>5.0 · 86 reviews</span></div>
-          <div class="vk-srv"><span>Manicure</span><b>€25</b></div>
-          <div class="vk-srv"><span>Pedicure</span><b>€30</b></div>
-          <div class="vk-srv"><span>Lash extensions</span><b>€40</b></div>
-          <div class="vk-srv"><span>Facial</span><b>€55</b></div>
-          <div class="vk-hours">🕒 <span>Tue–Sat · 09:00–19:00</span></div>
-          <div class="vk-btns">
-            <div class="vk-cta">📞 <span>Call</span></div>
-            <div class="vk-cta vk-cta2">Book</div>
-          </div>
-        </div>
-      </div>
-      <div class="vk-phone vk-cyan fade-up d3">
-        <div class="vk-screen">
-          <div class="vk-ava">D</div>
-          <div class="vk-name">Daniel</div>
-          <div class="vk-role">PHOTOGRAPHER · LONDON</div>
-          <div class="vk-rating">★★★★★ <span>4.9 · 64 reviews</span></div>
-          <div class="vk-srv"><span>Portrait session</span><b>€90</b></div>
-          <div class="vk-srv"><span>Family shoot</span><b>€140</b></div>
-          <div class="vk-srv"><span>Wedding</span><b>€450</b></div>
-          <div class="vk-hours">🕒 <span>Mon–Fri · 09:00–18:00</span></div>
-          <div class="vk-btns">
-            <div class="vk-cta">📞 <span>Call</span></div>
-            <div class="vk-cta vk-cta2">Book</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p class="vk-swipe">← swipe to see all three →</p>
-    <p class="vk-caption fade-up">Three examples — yours can look however you want.</p>
   </div>
 </section>
 <div class="divider"></div>
@@ -1674,7 +1742,9 @@
         </article>
       </div>
     <div class="rv-foot fade-up">
-      <a class="rv-cta" href="https://www.google.com/maps?cid=13454042022292969599" target="_blank" rel="noopener nofollow">Read them all on Google</a>
+      <p class="rv-ask">Your review helps us more than any advertising. We read every one and answer it.</p>
+      <a class="rv-cta" href="https://www.google.com/maps?cid=13454042022292969599" target="_blank" rel="noopener nofollow">Leave a review on Google</a>
+      <a class="rv-read" href="https://www.google.com/maps?cid=13454042022292969599" target="_blank" rel="noopener nofollow">Read them all on Google</a>
     </div>
   </div>
 </section>
@@ -1688,8 +1758,14 @@
     </div>
     <div class="pricing-grid">
       <div class="price-card fade-up">
+        <div class="price-name">Business-card website</div>
+        <div class="price-amount">from €250</div>
+        <div class="price-time">1 week</div>
+        <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>Get in touch</a>
+      </div>
+      <div class="price-card fade-up d1">
         <div class="price-name">Website with online booking</div>
-        <div class="price-amount">from €690</div>
+        <div class="price-amount">from €390</div>
         <div class="price-time">2 weeks</div>
         <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>Get in touch</a>
       </div>
@@ -1782,7 +1858,7 @@
       <div class="faq-item fade-up">
         <button type="button" class="faq-q"><span>How much does a website cost?</span><span class="faq-icon"></span></button>
         <div class="faq-a">
-          <p>Websites start at €690 (with online booking). An online shop from €1090, a mobile app from €1400, a full platform from €3000. You get the exact price and date within 48 hours of the first call — no hidden costs.</p>
+          <p>Websites start at €250 (business-card) and €390 (with online booking). An online shop from €1090, a mobile app from €1400, a full platform from €3000. You get the exact price and date within 48 hours of the first call — no hidden costs.</p>
           <p class="faq-more"><a href="/blog/what-a-website-costs/">What the difference between quotes actually buys</a></p>
         </div>
       </div>
@@ -1901,7 +1977,7 @@
       <input type="email" name="email" required placeholder="Your email">
       <select name="need" required>
         <option value="" disabled selected>What do you need?</option>
-        <option value="magic-card">Magic Card — NFC business card</option>
+        <option value="magic-card">Magic Card — NFC card</option>
         <option value="business-card">Business-card website</option>
         <option value="booking">Website with online booking</option>
         <option value="shop">Online shop</option>
@@ -2036,6 +2112,21 @@
     const s = document.getElementById(id);
     if (s) spyObserver.observe(s);
   });
+  const rail = document.querySelector('.rail');
+  if (rail) {
+    const railMap = {};
+    rail.querySelectorAll('a[href^="#"]').forEach(a => { railMap[a.getAttribute('href').slice(1)] = a; });
+    const railObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const a = railMap[e.target.id];
+        if (a) a.classList.toggle('on', e.isIntersecting);
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    Object.keys(railMap).forEach(id => {
+      const s = document.getElementById(id);
+      if (s) railObserver.observe(s);
+    });
+  }
   const vkRow = document.querySelector('.vk-row');
   const vkMid = document.querySelector('.vk-featured');
   if (vkRow && vkMid) {
