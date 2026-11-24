@@ -394,24 +394,80 @@
     .hero-visual { display: flex; justify-content: center; }
 
     /* Below this the two columns cannot both have room, so the copy goes back to a single
-       centred stack — and the phone is dropped rather than pushed under it. On a phone the
-       fold is tighter than anywhere else, and the same mock is shown three times over a
-       few screens further down. */
+       centred stack. What goes in the right column goes above it — see .mcard. */
     @media (max-width: 900px) {
       .hero-inner {
         grid-template-columns: 1fr; gap: 0;
         max-width: 820px; text-align: center;
       }
-      .hero-visual { display: none; }
       .hero-btns, .hero-stats { justify-content: center; }
       .hero-sub { margin-left: auto; margin-right: auto; }
     }
 
-    /* The mock in the right column says what it is, in the same words the three further
-       down use. Quiet, because it is a label and not a claim. */
+    /* The line under the card. Quiet, because it is a label and not a claim. */
     .hero-visual-cap {
-      font-size: 11px; color: var(--text-m); text-align: center; margin-top: 16px;
+      font-size: 11px; color: var(--text-m); text-align: center; margin-top: 18px;
       text-transform: uppercase; letter-spacing: 1.4px;
+    }
+
+    /* ── The card, in CSS ─────────────────────────────────────────────────────────
+       Matte black, because the plastic is matte black: no gloss, no gradient anybody
+       would call a gradient, and the accent appears only as a hairline and in the
+       letter — the way foil sits on black plastic. Drawn rather than photographed so
+       it ships no bytes, stays sharp on every screen, and cannot go out of date with
+       the stock. It keeps its own colours rather than the page's variables: this is an
+       object, and it looks the same wherever it is put.
+       The float is slow on purpose. It is something resting in the air, not a banner. */
+    .mcard {
+      width: 352px; max-width: 100%; aspect-ratio: 1.62 / 1;
+      border-radius: 20px; padding: 26px 26px 22px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      background: linear-gradient(157deg, #0E131A 0%, #070A0E 52%, #0C1118 100%);
+      border: 1px solid rgba(255,255,255,0.09);
+      box-shadow: 0 34px 70px -24px rgba(0,0,0,0.85);
+      position: relative; overflow: hidden;
+      transform: perspective(1000px) rotateX(7deg) rotateY(-10deg);
+      animation: mcard-float 8s ease-in-out infinite;
+    }
+    /* The one catch of light the plastic does have: the top edge. */
+    .mcard::before {
+      content: ''; position: absolute; inset: 0 0 auto 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    }
+    @keyframes mcard-float {
+      0%, 100% { transform: perspective(1000px) rotateX(7deg) rotateY(-10deg) translateY(0); }
+      50%      { transform: perspective(1000px) rotateX(5deg) rotateY(-8deg) translateY(-12px); }
+    }
+    .mcard-head { display: flex; align-items: center; gap: 14px; }
+    .mcard-ava {
+      width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(34,211,238,0.07); border: 1px solid rgba(34,211,238,0.22);
+      color: #22D3EE; font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; font-weight: 700;
+    }
+    .mcard-name {
+      font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 600;
+      color: #EAF2F6; line-height: 1.2;
+    }
+    .mcard-role {
+      font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
+      color: #8699A4; margin-top: 3px;
+    }
+    .mcard-rule { display: block; width: 30px; height: 2px; background: #22D3EE; border-radius: 2px; }
+    .mcard-url { font-size: 11.5px; color: #8699A4; margin-top: 10px; }
+
+    /* Somebody who finds this page from a card they are holding should meet the card.
+       A phone mock was dropped on narrow screens because it was 524px of somebody
+       else's website; this is 200px of the thing itself, so it moves above the words
+       instead of disappearing. */
+    @media (max-width: 900px) {
+      .hero-visual { display: flex; order: -1; margin-bottom: 34px; }
+      .mcard { width: 306px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mcard { animation: none; }
     }
 
 
@@ -1568,14 +1624,18 @@
         We build websites and apps — and make sure they get found. <strong>Development and SEO</strong> under one roof.
       </p>
         <div class="hero-btns">
-          <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>
+          <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-need="magic-card">
+            <!-- A card, not the paper plane this button used to carry: it said "send a
+                 message" then and says "order a card" now. -->
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+              <rect x="2" y="5" width="20" height="14" rx="3"/>
+              <circle cx="8" cy="12" r="2.2"/>
+              <path d="M14 10.5h5M14 14h3"/>
             </svg>
-            <span data-i18n="heroBtnCall">Send a message</span>
+            <span data-i18n="heroBtnCard">Order a card</span>
           </a>
           <a href="#projects" class="btn btn-secondary">
-            <span data-i18n="heroBtnProjects">See Projects</span>
+            <span data-i18n="heroBtnWork">Work with us</span>
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
@@ -1609,33 +1669,29 @@
       </div>
 
       <!-- ── The right-hand column ──────────────────────────────────────────────
-           What stood here was the studio's own logo, 320px of it, carrying the wordmark
-           "OnlyMaxon Ltd" — 250px below a nav bar that already says OnlyMaxon. The same
-           name twice, and between them it pushed both buttons off the first screen.
-           A business-card site instead: the thing being sold, on the screen it is sold
-           for. It is one of the three mocks from the section further down, reusing its
-           keys, so it is localised for free and cannot drift from them. The eyebrow
-           underneath is the same "Example ·" label those carry — a mock business has to
-           say it is a mock everywhere it appears, not only where there is room. -->
-      <div class="hero-visual" aria-hidden="true">
+           What stood here was a mock of a business-card site, and before that 320px of the
+           studio's own logo under a nav bar that already says OnlyMaxon. Now it is the
+           product: the black matte card, drawn in CSS rather than photographed, so it costs
+           no bytes and stays sharp on every screen.
+           It is not a mock. "Max · Onlymaxon · cards.onlymaxon.com/max" is a real card that
+           answers today — which is why there is no "Example ·" label on it, unlike the
+           phones further down the page. -->
+      <div class="hero-visual">
         <div>
-          <div class="vk-phone vk-cyan">
-            <div class="vk-screen">
-              <div class="vk-ava" data-i18n="vk3Ava">D</div>
-              <div class="vk-name" data-i18n="vk3Name">Daniel</div>
-              <div class="vk-role" data-i18n="vk3Role">PHOTOGRAPHER · LONDON</div>
-              <div class="vk-rating">★★★★★ <span data-i18n="vk3Rate">4.9 · 64 reviews</span></div>
-              <div class="vk-srv"><span data-i18n="vk3S1">Portrait session</span><b data-i18n="vk3P1">€90</b></div>
-              <div class="vk-srv"><span data-i18n="vk3S2">Family shoot</span><b data-i18n="vk3P2">€140</b></div>
-              <div class="vk-srv"><span data-i18n="vk3S3">Wedding</span><b data-i18n="vk3P3">€450</b></div>
-              <div class="vk-hours">🕒 <span data-i18n="vk3Hours">Mon–Fri · 09:00–18:00</span></div>
-              <div class="vk-btns">
-                <div class="vk-cta">📞 <span data-i18n="vkCall">Call</span></div>
-                <div class="vk-cta vk-cta2" data-i18n="vkBook">Book</div>
+          <div class="mcard" aria-hidden="true">
+            <div class="mcard-head">
+              <div class="mcard-ava">M</div>
+              <div>
+                <p class="mcard-name">Max</p>
+                <p class="mcard-role">Onlymaxon</p>
               </div>
             </div>
+            <div class="mcard-foot">
+              <span class="mcard-rule"></span>
+              <p class="mcard-url">cards.onlymaxon.com/max</p>
+            </div>
           </div>
-          <p class="hero-visual-cap" data-i18n="vkEyebrow">Example · business-card site</p>
+          <p class="hero-visual-cap" data-i18n="heroCardCap">Magic Card · one tap</p>
         </div>
       </div>
 
@@ -2223,6 +2279,7 @@
            filterable whichever of the five languages the visitor wrote in. -->
       <select name="need" required>
         <option value="" disabled selected data-i18n="needPlaceholder">What do you need?</option>
+        <option value="magic-card" data-i18n="need0">Magic Card — NFC business card</option>
         <option value="business-card" data-i18n="need1">Business-card website</option>
         <option value="booking" data-i18n="need2">Website with online booking</option>
         <option value="shop" data-i18n="need3">Online shop</option>
@@ -2321,8 +2378,19 @@
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
+  /* A button that says "order a card" opens the form with the card already chosen. The
+     select is still a select — somebody who came for a website and pressed the wrong button
+     can change it — but nobody has to answer a question they already answered by pressing. */
   document.querySelectorAll('[data-modal-open]').forEach(el =>
-    el.addEventListener('click', e => { e.preventDefault(); openModal(); }));
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      const want = el.dataset.need;
+      if (want) {
+        const sel = modalForm.querySelector('select[name="need"]');
+        if (sel) sel.value = want;
+      }
+      openModal();
+    }));
   document.getElementById('modalClose').addEventListener('click', closeModal);
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   window.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });

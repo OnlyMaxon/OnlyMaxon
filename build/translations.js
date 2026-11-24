@@ -40,7 +40,11 @@ const translations = {
     // the on-screen copy has no reason to.
     metaDesc:      { en: "OnlyMaxon builds websites and mobile apps and gets them found on Google — development and SEO under one roof. Based in Warsaw, working worldwide.", pl: "OnlyMaxon buduje strony i aplikacje mobilne i sprawia, że Google je znajduje — development i SEO pod jednym dachem. Warszawa, pracujemy na całym świecie.", ru: "OnlyMaxon делает сайты и мобильные приложения и выводит их в Google — разработка и SEO под одной крышей. Варшава, работаем по всему миру.", tr: "OnlyMaxon web siteleri ve mobil uygulamalar yapar ve onları Google’da bulunur kılar — geliştirme ve SEO tek çatı altında. Varşova, tüm dünyada çalışıyoruz.", es: "OnlyMaxon crea webs y apps móviles y hace que Google las encuentre — desarrollo y SEO bajo un mismo techo. Varsovia, trabajamos en todo el mundo." },
     heroBtnCall:     { en: "Send a message", pl: "Napisz do nas",  ru: "Написать нам", tr: "Mesaj gönder", es: "Enviar mensaje" },
-    heroBtnProjects: { en: "See Projects", pl: "Zobacz projekty", ru: "Смотреть проекты", tr: "Projeleri gör", es: "Ver proyectos" },
+    heroBtnCard:     { en: "Order a card", pl: "Zamów wizytówkę", ru: "Заказать карточку", tr: "Kart sipariş et", es: "Pedir una tarjeta" },
+    heroBtnWork:     { en: "Work with us", pl: "Współpracuj z nami", ru: "Сотрудничать с нами", tr: "Bizimle çalış", es: "Trabaja con nosotros" },
+    /* Under the card in the hero. A label, not a claim — the three words are the whole
+       product: a card, one tap, your page. */
+    heroCardCap:     { en: "Magic Card · one tap", pl: "Magic Card · jedno zbliżenie", ru: "Magic Card · одно касание", tr: "Magic Card · tek dokunuş", es: "Magic Card · un toque" },
     heroStatProducts:{ en: "Products Built", pl: "Zbudowanych produktów", ru: "Продуктов создано", tr: "Yapılan ürün", es: "Productos creados" },
     // "MVP Timeline" was the last piece of founder-speak left above the fold — the person
     // buying a booking site has never used the word. The range now matches proc3Time, and
@@ -289,6 +293,7 @@ const translations = {
     // The qualifier. Mirrors the price cards, so someone who has read the pricing can
     // answer it without thinking — and the reply is prepared before the first call.
     needPlaceholder: { en: "What do you need?", pl: "Czego potrzebujesz?", ru: "Что тебе нужно?", tr: "Neye ihtiyacın var?", es: "¿Qué necesitas?" },
+    need0: { en: "Magic Card — NFC business card", pl: "Magic Card — wizytówka NFC", ru: "Magic Card — NFC-визитка", tr: "Magic Card — NFC kartvizit", es: "Magic Card — tarjeta NFC" },
     need1: { en: "Business-card website", pl: "Strona wizytówka", ru: "Сайт-визитка", tr: "Kartvizit web sitesi", es: "Web de presentación" },
     need2: { en: "Website with online booking", pl: "Strona z rezerwacją online", ru: "Сайт с онлайн-записью", tr: "Online rezervasyonlu site", es: "Web con reservas online" },
     need3: { en: "Online shop", pl: "Sklep internetowy", ru: "Интернет-магазин", tr: "Online mağaza", es: "Tienda online" },

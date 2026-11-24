@@ -248,13 +248,56 @@
         grid-template-columns: 1fr; gap: 0;
         max-width: 820px; text-align: center;
       }
-      .hero-visual { display: none; }
       .hero-btns, .hero-stats { justify-content: center; }
       .hero-sub { margin-left: auto; margin-right: auto; }
     }
     .hero-visual-cap {
-      font-size: 11px; color: var(--text-m); text-align: center; margin-top: 16px;
+      font-size: 11px; color: var(--text-m); text-align: center; margin-top: 18px;
       text-transform: uppercase; letter-spacing: 1.4px;
+    }
+    .mcard {
+      width: 352px; max-width: 100%; aspect-ratio: 1.62 / 1;
+      border-radius: 20px; padding: 26px 26px 22px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      background: linear-gradient(157deg, #0E131A 0%, #070A0E 52%, #0C1118 100%);
+      border: 1px solid rgba(255,255,255,0.09);
+      box-shadow: 0 34px 70px -24px rgba(0,0,0,0.85);
+      position: relative; overflow: hidden;
+      transform: perspective(1000px) rotateX(7deg) rotateY(-10deg);
+      animation: mcard-float 8s ease-in-out infinite;
+    }
+    .mcard::before {
+      content: ''; position: absolute; inset: 0 0 auto 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    }
+    @keyframes mcard-float {
+      0%, 100% { transform: perspective(1000px) rotateX(7deg) rotateY(-10deg) translateY(0); }
+      50%      { transform: perspective(1000px) rotateX(5deg) rotateY(-8deg) translateY(-12px); }
+    }
+    .mcard-head { display: flex; align-items: center; gap: 14px; }
+    .mcard-ava {
+      width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(34,211,238,0.07); border: 1px solid rgba(34,211,238,0.22);
+      color: #22D3EE; font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; font-weight: 700;
+    }
+    .mcard-name {
+      font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 600;
+      color: #EAF2F6; line-height: 1.2;
+    }
+    .mcard-role {
+      font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
+      color: #8699A4; margin-top: 3px;
+    }
+    .mcard-rule { display: block; width: 30px; height: 2px; background: #22D3EE; border-radius: 2px; }
+    .mcard-url { font-size: 11.5px; color: #8699A4; margin-top: 10px; }
+    @media (max-width: 900px) {
+      .hero-visual { display: flex; order: -1; margin-bottom: 34px; }
+      .mcard { width: 306px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .mcard { animation: none; }
     }
     .hero-title {
       font-size: clamp(34px, 4.4vw, 54px);
@@ -1190,14 +1233,16 @@
       <h1 class="hero-title"><span>Ты отлично делаешь своё дело.</span><span class="gradient-text">Сделаем так, чтобы тебя находили.</span></h1>
       <p class="hero-sub">Делаем сайты и приложения — и делаем так, чтобы их находили. <strong>Разработка и SEO</strong> под одной крышей.</p>
         <div class="hero-btns">
-          <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open>
+          <a href="mailto:hello@onlymaxon.com" class="btn btn-primary" data-modal-open data-need="magic-card">
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+              <rect x="2" y="5" width="20" height="14" rx="3"/>
+              <circle cx="8" cy="12" r="2.2"/>
+              <path d="M14 10.5h5M14 14h3"/>
             </svg>
-            <span>Написать нам</span>
+            <span>Заказать карточку</span>
           </a>
           <a href="#projects" class="btn btn-secondary">
-            <span>Смотреть проекты</span>
+            <span>Сотрудничать с нами</span>
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
@@ -1221,25 +1266,22 @@
           </div>
         </div>
       </div>
-      <div class="hero-visual" aria-hidden="true">
+      <div class="hero-visual">
         <div>
-          <div class="vk-phone vk-cyan">
-            <div class="vk-screen">
-              <div class="vk-ava">Д</div>
-              <div class="vk-name">Даниил</div>
-              <div class="vk-role">ФОТОГРАФ · Нью-Йорк</div>
-              <div class="vk-rating">★★★★★ <span>4,9 · 64 отзыва</span></div>
-              <div class="vk-srv"><span>Портретная съёмка</span><b>90 €</b></div>
-              <div class="vk-srv"><span>Семейная съёмка</span><b>140 €</b></div>
-              <div class="vk-srv"><span>Свадьба</span><b>450 €</b></div>
-              <div class="vk-hours">🕒 <span>Пн–Пт · 09:00–18:00</span></div>
-              <div class="vk-btns">
-                <div class="vk-cta">📞 <span>Позвонить</span></div>
-                <div class="vk-cta vk-cta2">Записаться</div>
+          <div class="mcard" aria-hidden="true">
+            <div class="mcard-head">
+              <div class="mcard-ava">M</div>
+              <div>
+                <p class="mcard-name">Max</p>
+                <p class="mcard-role">Onlymaxon</p>
               </div>
             </div>
+            <div class="mcard-foot">
+              <span class="mcard-rule"></span>
+              <p class="mcard-url">cards.onlymaxon.com/max</p>
+            </div>
           </div>
-          <p class="hero-visual-cap">Пример · сайт-визитка</p>
+          <p class="hero-visual-cap">Magic Card · одно касание</p>
         </div>
       </div>
     </div>
@@ -1838,6 +1880,7 @@
       <input type="email" name="email" required placeholder="Твой e-mail">
       <select name="need" required>
         <option value="" disabled selected>Что тебе нужно?</option>
+        <option value="magic-card">Magic Card — NFC-визитка</option>
         <option value="business-card">Сайт-визитка</option>
         <option value="booking">Сайт с онлайн-записью</option>
         <option value="shop">Интернет-магазин</option>
@@ -1918,7 +1961,15 @@
     document.body.style.overflow = '';
   }
   document.querySelectorAll('[data-modal-open]').forEach(el =>
-    el.addEventListener('click', e => { e.preventDefault(); openModal(); }));
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      const want = el.dataset.need;
+      if (want) {
+        const sel = modalForm.querySelector('select[name="need"]');
+        if (sel) sel.value = want;
+      }
+      openModal();
+    }));
   document.getElementById('modalClose').addEventListener('click', closeModal);
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   window.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
